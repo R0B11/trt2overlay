@@ -3,6 +3,7 @@
     --lightGray: #C2C2C2;
     --red: #ed144a;
     --yellow: #fff692;
+    --mapDifficultyYellow: #ffe292;
     --lightYellow: #ffe696;
 }
 
@@ -131,4 +132,46 @@
     background-color: white;
     font-family: 'Lexend'; font-size: 20px;
     padding: 3px 15.5px;
+}
+
+/* Map Details */
+#mapDetails { 
+    position: absolute; top: 17.5px; right: 16px;
+    font-family: 'Lexend';
+}
+#currentPick {
+    text-align: center;
+    width: 161.5px; height: 25.5px;
+    line-height: 25.5px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    background-color: white;
+}
+.mapDetailInformation { position: absolute; right: 0;}
+#mapArtistAndName {
+    top: 28px;
+    width: max-content;
+    color: white;
+    font-size: 23px;    
+    letter-spacing: 2px;
+}
+#mapDifficulty {
+    top: 58px;
+    color: var(--mapDifficultyYellow);
+    font-size: 16px;
+    letter-spacing: 1.5px;
+}
+#mapSetCreator {
+    top: 78px;
+    color: var(--blue);
+    font-size: 21px;
+}
+#mapModSlot {
+    top: 115px;
+    background-color: var(--red);
+    color: white;
+    width: 80px; height: 32px;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: center;
 }
