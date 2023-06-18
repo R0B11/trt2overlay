@@ -1,7 +1,9 @@
 :root {
-    --playerRankYellow: #fff692;
     --blue: #16b3f8;
+    --lightGray: #C2C2C2;
     --red: #ed144a;
+    --yellow: #fff692;
+    --lightYellow: #ffe696;
 }
 
 #main {
@@ -18,7 +20,7 @@
 
 /* Player Details */
 .playerRank{
-    color: var(--playerRankYellow);
+    color: var(--yellow);
     font-family: 'Lexend'; font-size: 36px;
     letter-spacing: 4px;
 }
@@ -90,16 +92,43 @@
     width: 1182px; height: 205px;
     border-width: 2px 0px 0px 0px;
     border-style: solid;
-    border-color: var(--playerRankYellow);
+    border-color: var(--yellow);
 }
 
 /* Map Stats */
 #mapStats { 
     position: absolute; top: 18px; left: 19px;
-    width: 300px;
+    width: 400px;
 }
 .topLineStatBox {
-    width: 68px; height: 61px;
-    background-color: rgba(0,0,0,0.5);
+    width: 67px; height: 61px;
     display: inline-block;
+    margin-right: 2px;
+}
+.mapStatsTexts {
+    width: inherit; 
+    font-family: 'Lexend'; 
+    text-align: center;
+}
+.mapStatsTitle {
+    height: 22px;
+    line-height: 22px;
+    font-size: 18px;
+    background-color: white;
+}
+.mapStatsNumber {
+    height: 39px;
+    line-height: 39px;
+    font-size: 28px;
+    background-color: var(--lightYellow)
+}
+#BPMStat { 
+    width: 85px; 
+    background-color: var(--lightGray);
+}
+#SRStat {
+    position: absolute; top: 73px;
+    background-color: white;
+    font-family: 'Lexend'; font-size: 20px;
+    padding: 3px 15.5px;
 }
