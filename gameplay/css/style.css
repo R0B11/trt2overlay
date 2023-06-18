@@ -89,11 +89,16 @@
 /* Cover */
 .positionAbsoluteInMiddle { position: absolute; left: 50%; transform: translateX(-50%); }
 #bottomSection {
-     bottom: 0; 
+    bottom: 0; 
     width: 1182px; height: 205px;
-    border-width: 2px 0px 0px 0px;
-    border-style: solid;
-    border-color: var(--yellow);
+    border: 2px 0px 0px 0px solid var(--yellow);
+    background-image: url("https://assets.ppy.sh/beatmaps/1843748/covers/cover.jpg");
+    background-size:cover; background-position: 50%;
+}
+#bottomSectionOverlay {
+    position: absolute; top: 0; left: 0;
+    background-color: rgba(0,0,0,0.65);
+    width: inherit; height: inherit;
 }
 
 /* Map Stats */
