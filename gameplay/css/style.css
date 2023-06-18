@@ -12,7 +12,6 @@
     width: 1920px; height: 1080px;
     background-image: url("../static/gameplay.png"); background-size: cover;
 }
-
 /* Top Section */
 /* Player Detail Sections */
 .playerLocation { position: absolute; top: 13px; }
@@ -88,8 +87,9 @@
 
 /* Bottom Section */
 /* Cover */
+.positionAbsoluteInMiddle { position: absolute; left: 50%; transform: translateX(-50%); }
 #bottomSection {
-    position: absolute; bottom: 0; left: 50%; transform:translateX(-50%);
+     bottom: 0; 
     width: 1182px; height: 205px;
     border-width: 2px 0px 0px 0px;
     border-style: solid;
@@ -132,6 +132,61 @@
     background-color: white;
     font-family: 'Lexend'; font-size: 20px;
     padding: 3px 15.5px;
+}
+
+/* Map Scores */ 
+#mapScoreDifference {
+    top: 20px;
+    color: white;
+    font-family: 'IBM Plex Mono', monospace; font-size: 24px;
+}
+.playerMapScore {
+    position: absolute; top: 146px; transform: translateX(-50%);
+    font-size: 31px;
+    font-family: 'IBM Plex Mono', monospace; 
+    color: white;
+    letter-spacing: 5px;
+}
+#redMapScore { left: 383px; }
+#blueMapScore { right: 166px; }
+
+/* Ellipse */
+#equalEllipseContainer {
+    bottom: 0;
+    width: 936px; height: 130px;
+}
+#equalEllipse {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-45deg);
+    border-top-color: var(--red);
+    border-left-color: var(--red);
+    border-right-color: var(--blue);
+    border-bottom-color: var(--blue);
+    border-style: solid;
+    border-width: 936px;
+    border-radius:50%;
+}
+/* Sword */
+#bottomSwordBackShadow {
+    top: 97px;
+    width: 71.5px; height: 43px;
+}
+#bottomSword {
+    top: 101px;
+    width: 56.5px; height: 31.5px;
+}
+/* Score Text */
+#scoreText { 
+    top: 155px; 
+    width: 100px; height: 28.5px; 
+}
+#bottomScoreOutside { position: absolute; width: 100px; height: 28.5px; }
+#bottomScoreOutsideText {
+    position: absolute;
+    width: inherit;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 28.5px;
+    letter-spacing: 1px;
 }
 
 /* Map Details */

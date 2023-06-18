@@ -55,7 +55,7 @@
 			</section>
 		</section>
 		<!-- Bottom Section -->
-		<section id="bottomSection">
+		<section class="positionAbsoluteInMiddle" id="bottomSection">
 			<!-- Map Stats (top left) -->
 			<section id="mapStats">
 				<div class="topLineStatBox" id="ARStat">
@@ -76,7 +76,20 @@
 				</div>
 				<div id="SRStat">5.67*</div>
 			</section>
-			<!-- Map Details (top right) -->
+			<section id="mapScores">
+				<div class="positionAbsoluteInMiddle" id="mapScoreDifference">0</div>
+				<div class="positionAbsoluteInMiddle" id="equalEllipseContainer"><div id="equalEllipse"></div></div>
+				<div class="playerMapScore" id="redMapScore">1,000,000</div>
+				<div class="playerMapScore" id="blueMapScore">1,000,000</div>
+				<div id="bottomMiddleSwords">
+					<img class="positionAbsoluteInMiddle" id="bottomSwordBackShadow" src="static/bottomSwordBackShadow.png">
+					<img class="positionAbsoluteInMiddle" id="bottomSword" src="static/bottomSword.png">
+				</div>
+				<div class="positionAbsoluteInMiddle" id="scoreText">
+					<img id="bottomScoreOutside" src="static/bottomScoreOutside.png">
+					<div id="bottomScoreOutsideText">SCORE</div>
+				</div>
+			</section>
 			<section id="mapDetails">
 				<div id="currentPick">CURRENT PICK</div>
 				<div class="mapDetailInformation" id="mapArtistAndName"><span id="mapArtist">Coldplay</span> - <span id="mapName">Higher Power</span></div>
