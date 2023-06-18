@@ -1,0 +1,105 @@
+:root {
+    --playerRankYellow: #fff692;
+    --blue: #16b3f8;
+    --red: #ed144a;
+}
+
+#main {
+    position: absolute; top: 0; left: 0;
+    width: 1920px; height: 1080px;
+    background-image: url("../static/gameplay.png"); background-size: cover;
+}
+
+/* Top Section */
+/* Player Detail Sections */
+.playerLocation { position: absolute; top: 13px; }
+#playerLeft { left: 308px; }
+#playerRight { right: 308px; }
+
+/* Player Details */
+.playerRank{
+    color: var(--playerRankYellow);
+    font-family: 'Lexend'; font-size: 36px;
+    letter-spacing: 4px;
+}
+#playerRightRank {
+    position: absolute; right: 0; 
+}
+
+/* Player Name */
+.playerName {
+    width: 400px;
+    position: absolute; top: 45px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 24px;
+    color: white;
+    letter-spacing: 4px;
+}
+#playerLeftName { left: 0; }
+#playerRightName { right: 0; text-align: right; }
+
+/* Map Pick Text */
+.playerMapPickText {
+    width: 130px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 20px;
+    position: absolute; top: 17px;
+    letter-spacing: 1.2px;
+}
+#playerLeftMapPickText { 
+    color: var(--red); 
+    left: 127px;
+}
+#playerRightMapPickText { 
+    color: var(--blue); 
+    right: 127px; 
+    text-align: right; 
+}
+
+/* Match Scores Maps */
+.playerMatchScore {
+    position: absolute; top: 88px; 
+    width: 400px;
+    display: flex;   
+}
+#playerLeftMatchScore { left: 6px; }
+#playerRightMatchScore {
+    right: -8px;
+    flex-direction: row-reverse
+}
+/* Match Score Containers */
+.playerMatchScoreSword {
+    width: 34px;
+    margin-right: 14.7px;
+}
+
+/* Commentators */
+#commentators {
+    font-family: 'Lexend';
+    color: white;
+}
+.commentatorName {
+    position: absolute; top: 127px;
+    letter-spacing: 1px;
+}
+#commentatorName1 { right: 1100px; }
+#commentatorName2 { left: 1100px; }
+
+/* Bottom Section */
+/* Cover */
+#bottomSection {
+    position: absolute; bottom: 0; left: 50%; transform:translateX(-50%);
+    width: 1182px; height: 205px;
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: var(--playerRankYellow);
+}
+
+/* Map Stats */
+#mapStats { 
+    position: absolute; top: 18px; left: 19px;
+    width: 300px;
+}
+.topLineStatBox {
+    width: 68px; height: 61px;
+    background-color: rgba(0,0,0,0.5);
+    display: inline-block;
+}

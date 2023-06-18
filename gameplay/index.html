@@ -3,14 +3,67 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link href="css/style.css" rel="stylesheet">
 	<script src="deps/countUp.js"></script>
 	<script src="deps/reconnecting-websocket.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<!-- Google Font Downloads -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&family=Lexend:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div id="main">
+		<!-- top Section -->
+		<section id="topSection">
+			<!-- Player Details Red Side-->
+			<section class="playerLocation" id="playerLeft">
+				<div class="playerRank" id="playerLeftRank">#0</div>
+				<div class="playerName" id="playerLeftName">[PLAYER NAME]</div>
+				<div class="playerMapPickText" id="playerLeftMapPickText">MAP PICK</div>
+				<div class="playerMatchScore" id="playerLeftMatchScore">
+					<img class="playerMatchScoreSword" src="static/whiteSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+					<img class="playerMatchScoreSword" src="static/redSword.png">
+				</div>
+			</section>
+			<!-- Commentators -->
+			<section id="commentators">
+				<div class="commentatorName" id="commentatorName1">WILL STETSON</div>
+				<div class="commentatorName" id="commentatorName2">HAPPYSTICK</div>
+			</section>
+			<!-- Player Details Blue Side -->
+			<section class="playerLocation" id="playerRight">
+				<div class="playerRank" id="playerRightRank">#0</div>
+				<div class="playerName" id="playerRightName">[PLAYER NAME]</div>
+				<div class="playerMapPickText" id="playerRightMapPickText">MAP PICK</div>
+				<div class="playerMatchScore" id="playerRightMatchScore">
+					<img class="playerMatchScoreSword" src="static/whiteSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+					<img class="playerMatchScoreSword" src="static/blueSword.png">
+				</div>
+			</section>
+		</section>
+		<section id="bottomSection">
+			<section id="mapStats">
+				<div class="topLineStatBox" id="ARStat"></div>
+				<div class="topLineStatBox" id="CSStat"></div>
+				<div class="topLineStatBox" id="ODStat"></div>
+				<div class="topLineStatBox" id="BPMStat"></div>
+			</section>
+		</section>
 	</div>
+
 	<script src="index.js"></script>
 </body>
 
