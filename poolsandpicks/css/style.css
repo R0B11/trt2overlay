@@ -83,3 +83,20 @@
 #redFirstBanText { color: var(--redPlayerCardColour); }
 #blueFirstPickText { color: var(--bluePlayerCardColour); }
 #blueFirstBanText { color: var(--grayPickBanTextColour); }
+
+/* Match Score Section */
+.matchScoreSection {
+    position: absolute;
+    width: 510px; height: 62px;
+}
+#matchScoreRed { top: 253px; }
+#matchScoreBlue { bottom: 252.5px; }
+.matchScoreContainer {
+    width: 434px; height: inherit;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 17%, 97% 0%);
+}
+.matchScores {
+    position: absolute; top: 15px; left: 33px;
+    display: flex;
+}
+.matchScoreSword { width: 28px; height: 30px; margin-right: 24px; }
