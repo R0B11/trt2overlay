@@ -1,0 +1,65 @@
+:root {
+    --winnerProfileYellow: #ffe292;
+    --winnerProfileDarkGray: #121212;
+}
+
+#main {
+    position: absolute; top: 0; left: 0;
+    width: 1920px; height: 1080px;
+    background-image: url("../static/roundtableWinnerBluePNG.png");
+    background-size: cover;
+}
+
+/* Winner Profile Picture */
+#winnerProfilePictureSection {
+    position: absolute; top: 304px;left: 288px;
+}
+#winnerProfilePicture {
+    border-radius: 50%;
+    height: 450px;
+}
+/* Winner Profile Picture Box */
+#winnerProfilePictureBox {
+    position: absolute; top: 36px; left: 330px;
+    background-color: var(--winnerProfileYellow);
+    width: 228px; height: 42px;
+    border-radius: 4px;
+    clip-path: polygon(0% 0%, 0% 50%, 10% 100%, 100% 100%, 100% 50%,90% 0%);
+}
+#winnerProfilePictureText {
+    line-height: 42px;
+    font-family: 'Gemunu Libre', sans-serif; font-size: 22px;
+    color: var(--winnerProfileDarkGray);
+    float: right;
+    margin-right: 24px;
+    letter-spacing: 4.8px;
+}
+/* Winner Profile Picture Box Lines*/
+.winnerProfileBoxLine {
+    position: absolute; 
+    height: 6px;
+    background-color: var(--winnerProfileDarkGray);
+}
+#winnerProfilePictureBoxLine1 {
+    top: 30px; left: 330px;
+    width: 55px;
+    border-radius: 4px 0px 0px 4px;
+    clip-path: polygon(0% 0%, 0% 100%,100% 100%,80% 0%);
+}
+#winnerProfilePictureBoxLine2 {
+    top: 30px; left: 325px;
+    width: 10px; height: 30px;
+    border-radius: 7px 0 0 4px;
+}
+#winnerProfilePictureBoxLine3 {
+    top: 67px; left: 322px;
+    width: 36px;
+    border-radius: 7px 0 4px 4px;
+    transform: rotate(43deg);
+}
+#winnerProfilePictureBoxLine4 {
+    top: 78px; left: 349px; 
+    width: 77px;
+    border-radius: 4px 0px 0px 4px;
+    clip-path: polygon(0% 0%, 0% 100%,100% 100%,94% 0%);
+}
