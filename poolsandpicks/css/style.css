@@ -1,0 +1,85 @@
+:root {
+    --redPlayerCardColour: #F11248;
+    --bluePlayerCardColour: #15B5FF;
+    --grayPickBanTextColour: #909090;
+}
+
+#main {
+    position: absolute; top: 0; left: 0;
+    width: 1920px; height: 1080px;
+    background-image: url("../static/picksBansPNG.png");
+    background-size: cover;
+}
+
+.playerCardStartLeft { position: absolute; left: 190px; }
+
+/* Player Cards */
+.playerCard {
+    position: absolute; 
+    width: 533px; height: 179px;
+}
+#playerCardRed {
+    top: 54px;
+    border-radius: 0 30px 6px 0;
+}
+#playerCardBlue {
+    bottom: 51px;
+    border-radius: 0 6px 30px 0;
+}
+
+/* Player Profile Pictures*/
+.playerCardProfilePicture {
+    position: absolute; top: 15px; left: 18px;
+    width: 144px; height: 144px;
+    border-radius: 100%;
+}
+
+/* Player Names */
+.playerCardPlayerName {
+    top: 21px;
+    font-size: 25px; font-family: 'Lexend', sans-serif;
+}
+#playerCardPlayerNameRed { color: var(--redPlayerCardColour); }
+#playerCardPlayerNameBlue { color: var(--bluePlayerCardColour); }
+
+/* Player Quootes */
+.playerCardPlayerQuote {
+    font-family: 'Lexend', sans-serif; font-size: 19px;
+    top: 52px;
+    letter-spacing: 0.3px;
+}
+
+/* Player Country */
+.playerCardPlayerCountryText {
+    top: 87px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+}
+.playerCardPlayerCountryFlag {
+    position: absolute; top: 117px;
+    background-color: black;
+    width: 65px; height: 33px;
+    border-radius: 7px;
+}
+
+/* Player Rank */
+.playerCardPlayerRankText {
+    position: absolute; top: 87px; left: 314px;
+    font-family: 'Lexend', sans-serif; font-size: 15px;
+}
+.playerCardPlayerRank {
+    position: absolute; top: 109px; left: 314px;
+    font-family: 'Lexend', sans-serif; font-size: 35px;
+}
+
+/* Pick Ban Order */
+.pickBanOrderText {
+    position: absolute; top: 25px; right: 22px;
+    font-family: 'Lexend', sans-serif; font-size: 15px;
+    text-align: center;
+}
+.firstPickText { margin-bottom: 3px; }
+#redFirstPickText { color: var(--grayPickBanTextColour); }
+#redFirstBanText { color: var(--redPlayerCardColour); }
+#blueFirstPickText { color: var(--bluePlayerCardColour); }
+#blueFirstBanText { color: var(--grayPickBanTextColour); }
