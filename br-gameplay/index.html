@@ -6,6 +6,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="deps/countUp.js"></script>
+	<script src="deps/reconnecting-websocket.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <!-- Google Font Downloads -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +20,18 @@
         <!-- Top Section-->
         <section id="topSection">
             <!-- Background -->
-            <!-- <section id="topBackground">
+            <section id="topBackground">
                 <div id="topBackgroundOverlay"></div>
-            </section> -->
+            </section>
             <!-- Map Stats Left -->
             <section id="mapStatsLeft">
                 <div class="topLineStatBox" id="ARStat">
                     <div class="mapStatsTexts mapStatsTitle">AR</div>
-                    <div class="mapStatsTexts mapStatsNumber">10.7</div>
+                    <div class="mapStatsTexts mapStatsNumber" id="mapStatNumberAR">10.7</div>
                 </div>
                 <div class="topLineStatBox" id="CSStat">
                     <div class="mapStatsTexts mapStatsTitle">OD</div>
-                    <div class="mapStatsTexts mapStatsNumber">10.7</div>
+                    <div class="mapStatsTexts mapStatsNumber" id="mapStatNumberOD">10.7</div>
                 </div>
                 <div id="SRStat">5.67*</div>
             </section>
@@ -42,11 +46,11 @@
             <section id="mapStatsRight">
                 <div class="topLineStatBox" id="ODStat">
                     <div class="mapStatsTexts mapStatsTitle">CS</div>
-                    <div class="mapStatsTexts mapStatsNumber">10.7</div>
+                    <div class="mapStatsTexts mapStatsNumber" id="mapStatNumberCS">10.7</div>
                 </div>
                 <div class="topLineStatBox" id="BPMStat">
                     <div class="mapStatsTexts mapStatsTitle">BPM</div>
-                    <div class="mapStatsTexts mapStatsNumber" id="bpmStatNumber">200</div>
+                    <div class="mapStatsTexts mapStatsNumber" id="mapStatNumberBPM">200</div>
                 </div>
                 <div class="mapDetailInformation" id="mapModSlot">HR3</div>
             </section>
@@ -62,5 +66,7 @@
 			</section>
         </section>
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>

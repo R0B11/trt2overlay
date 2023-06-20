@@ -65,7 +65,7 @@
     width: 85px; 
     background-color: var(--lightGray);
 }
-#bpmStatNumber { background-color: var(--lightGray); }
+#mapStatNumberBPM { background-color: var(--lightGray); }
 #SRStat {
     position: absolute; top: 73px;
     background-color: white;
