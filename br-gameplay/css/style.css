@@ -1,0 +1,63 @@
+:root {
+    --lightGray: #C2C2C2;
+    --lightYellow: #ffe696;
+    --red: #ed144a;
+}
+
+#main {
+    position: absolute; top: 0; left: 0;
+    width: 1920px; height: 1080px;
+    background-image: url("../static/brGameplayPNG.png"); background-size: cover;
+}
+
+/* Map Stats */
+#mapStatsLeft { 
+    position: absolute; top: 21px; left: 837px;
+    width: 160px;
+}
+#mapStatsRight {
+    position: absolute; top: 21px; right: 362px;
+    width: 160px;
+}
+.topLineStatBox {
+    width: 67px; height: 61px;
+    display: inline-block;
+    margin-right: 2px;
+}
+.mapStatsTexts {
+    width: inherit; 
+    font-family: 'Lexend'; 
+    text-align: center;
+}
+.mapStatsTitle {
+    height: 22px;
+    line-height: 22px;
+    font-size: 18px;
+    background-color: white;
+}
+.mapStatsNumber {
+    height: 39px;
+    line-height: 39px;
+    font-size: 28px;
+    background-color: var(--lightYellow)
+}
+#BPMStat { 
+    width: 85px; 
+    background-color: var(--lightGray);
+}
+#bpmStatNumber { background-color: var(--lightGray); }
+#SRStat {
+    position: absolute; top: 73px;
+    background-color: white;
+    font-family: 'Lexend'; font-size: 20px;
+    padding: 3px 15.5px;
+}
+#mapModSlot {
+    position: absolute; top: 73px; right: 0;
+    width: 80px; height: 32px;
+    background-color: var(--red);
+    color: white;
+    font-family: 'Lexend'; font-size: 24px;
+    line-height: 31px;
+    text-align: center;
+}
