@@ -4,6 +4,7 @@
     --lighterYellow: #ffe292;
     --blue: #15b5ff;
     --red: #ed144a;
+    --darkGray: #121212;
 }
 
 #main {
@@ -113,3 +114,20 @@
     letter-spacing: 2px;
     width: max-content;
 }
+
+/* Commentators */
+#commentators { font-family: 'Lexend'; }
+#commentatorText {
+    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+    font-size: 17px;
+    letter-spacing: 3px;
+    background-color: var(--lightYellow);
+    color: var(--darkGray);
+    padding: 2px 1px 3px 4px;
+}
+.commentatorName {
+    position: absolute; bottom: 8px;
+    color: white;
+}
+#commentatorName1 { right: 1100px; }
+#commentatorName2 { left: 1100px; }
