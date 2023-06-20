@@ -36,6 +36,17 @@ let currentSongCreator
 let currentSongID
 let poolMapFound = false
 
+// Calculate AR and OD
+let calculateARandOD = (baseNumber, mod) => {
+    let newNumber = 0;
+    if (mod.toLowerCase().includes("hr")) newNumber = baseNumber *= 1.4
+    else if (mod.toLowerCase().includes("dt")) {
+        if (baseNumber <= 5) newNumber = (1800-((1800 - baseNumber)*2/3))/120
+        else newNumber = ((1200-((1200-(baseNumber-5)*150)*2/3))/150)+5
+    } else newNumber = baseNumber
+    return newNumber
+}
+
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
     mapStatNumberAR: new CountUp('mapStatNumberAR', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
@@ -53,20 +64,24 @@ socket.onmessage = event => {
         poolMapFound = false
 
         // Call API for the SR
-        // SRRequest = new XMLHttpRequest()
-        // SRRequest.open("GET", `https://localhost:44395//api/maps/${currentSongID}`)
-        // SRRequest.onload = function() {
-        //     if (this.status == 200) {
-        //         poolMapFound = true
-        //         currentSR = "" // Enter data here
-        //         currentMapMod = "" // Enter data here
-        //         mapModSlot.css("display","block")
-        //     } else {
-        //         currentMapMod = ""
-        //         mapModSlot.css("display","none")
-        //     }
-        // }
-        // SRRequest.send()
+        SRRequest = new XMLHttpRequest()
+        SRRequest.open("GET", `https://localhost:44395//api/maps/${currentSongID}`)
+        SRRequest.onload = function() {
+            if (this.status == 200) {
+                poolMapFound = true
+                currentSR = "" // Enter data here
+                currentBaseAR = ""
+                currentBaseOD = ""
+                currentBaseCS = ""
+                currentBaseBPM = ""
+                currentMapMod = "" // Enter data here
+                mapModSlot.css("display","block")
+            } else {
+                currentMapMod = ""
+                mapModSlot.css("display","none")
+            }
+        }
+        SRRequest.send()
     }
     // SR
     if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
@@ -76,50 +91,30 @@ socket.onmessage = event => {
     // AR
     if (!poolMapFound && currentBaseAR != data.menu.bm.stats.AR) {
         currentBaseAR = data.menu.bm.stats.AR
-        if (currentMapMod.toLowerCase().includes("hr")) {
-            currentBaseAR *= 1.4
-        } else if (currentMapMod.toLowerCase().includes("dt")) {
-            if (currentBaseAR <= 5) currentAR = (1800-((1800 - currentBaseAR)*2/3))/120
-            else currentAR = ((1200-((1200-(currentBaseAR-5)*150)*2/3))/150)+5
-        } else {
-            currentAR = currentBaseAR
-        }
+        currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
 
         animation.mapStatNumberAR.update(currentAR)
     }
     // OD
     if (!poolMapFound && currentBaseOD != data.menu.bm.stats.OD) {
         currentBaseOD = data.menu.bm.stats.OD
-        if (currentMapMod.toLowerCase().includes("hr")) {
-            currentBaseOD *= 1.4
-        } else if (currentMapMod.toLowerCase().includes("dt")) {
-            if (currentBaseOD <= 5) currentOD = (1800-((1800 - currentBaseOD)*2/3))/120
-            else currentOD = ((1200-((1200-(currentBaseOD-5)*150)*2/3))/150)+5
-        } else {
-            currentOD = currentBaseOD
-        }
+        currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
 
         animation.mapStatNumberOD.update(currentOD)
     }
     // CS
     if (!poolMapFound && currentBaseCS != data.menu.bm.stats.CS) {
         currentBaseCS = data.menu.bm.stats.CS
-        if (currentMapMod.toLowerCase().includes("hr")) {
-            currentBaseCS *= 1.3
-        } else {
-            currentCS = currentBaseCS
-        }
+        if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
+        else currentCS = currentBaseCS
 
         animation.mapStatNumberCS.update(currentCS)
     }
     // BPM
     if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
         currentBaseBPM = data.menu.bm.stats.BPM.min
-        if (currentMapMod.toLowerCase().includes("dt")) {
-            currentBaseBPM *= 1.5
-        } else {
-            currentBPM = currentBaseBPM
-        }
+        if (currentMapMod.toLowerCase().includes("dt")) currentBaseBPM *= 1.5
+        else currentBPM = currentBaseBPM
 
         animation.mapStatNumberBPM.update(currentBPM)
     }
