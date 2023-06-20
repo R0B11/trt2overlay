@@ -36,7 +36,7 @@
     width: 145px;
 }
 #mapStatsRight {
-    position: absolute; top: 21px; right: 362px;
+    position: absolute; top: 21px; right: 367px;
     width: 160px;
 }
 .topLineStatBox {
@@ -93,15 +93,33 @@
     background-color: white;
     padding: 0.5px 12px;
 }
-#currentSongArtistandName {
+#currentSongArtistandNameWrapper {
     position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
+    width: 375px; height: 29px;
+    overflow-x: hidden;
+    display: inline-block;
+    white-space: nowrap;
     color: white;
     font-size: 23px;
-    width: max-content;
     letter-spacing: 3px;
+    text-align: center;
+}
+#currentSongArtistandName {
+    width:max-content;
+    display:inline;
+}
+#currentSongArtistandNameWrap {
+    transform: translate(-375px);
+    animation: currentSongArtistandNameWrap 15s linear infinite;
+}
+@keyframes currentSongArtistandNameWrap {
+    0% {transform: translate(0px);}
+    11% {transform: translate(0px);}
+    80% { transform: translate(calc(-100% + 375px)); }
+    100% { transform: translate(calc(-100% + 375px)); }
 }
 #currentMapDifficulty {
-    position: absolute; top: 65px; left: 50%; transform: translateX(-50%);
+    position: absolute; top: 68px; left: 50%; transform: translateX(-50%);
     color: var(--lighterYellow);
     font-size: 17px;
     letter-spacing: 1.2px;
