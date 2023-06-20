@@ -5,6 +5,19 @@
     --blue: #15b5ff;
     --red: #ed144a;
     --darkGray: #121212;
+
+    --player1Color: #f11247;
+    --player2Color: #2cf112;
+    --player3Color: #f1d912;
+    --player4Color: #f1127b;
+    --player5Color: #125bf1;
+    --player6Color: #f16612;
+    --player7Color: #12eef1;
+    --player8Color: #9512f1;
+
+    --numberOnePlaceColour: #f1d912;
+    --numberTwoPlaceColour: #89f5ff;
+    --numberThreePlaceColour: #ff9b42;
 }
 
 #main {
@@ -47,6 +60,7 @@
 .mapStatsTexts {
     width: inherit; 
     font-family: 'Lexend'; 
+    font-weight: 600; 
     text-align: center;
 }
 .mapStatsTitle {
@@ -69,7 +83,7 @@
 #SRStat {
     position: absolute; top: 73px;
     background-color: white;
-    font-family: 'Lexend'; font-size: 20px;
+    font-family: 'Lexend'; font-size: 20px; font-weight: 600; 
     padding: 3px 15.5px;
 }
 #mapModSlot {
@@ -77,7 +91,7 @@
     width: 80px; height: 32px;
     background-color: var(--red);
     color: white;
-    font-family: 'Lexend'; font-size: 24px;
+    font-family: 'Lexend'; font-size: 24px; font-weight: 600; 
     line-height: 31px;
     text-align: center;
 }
@@ -85,7 +99,7 @@
 /* Current Map */
 #currentMap {
     position: absolute; left: 982px; top: 21px; width: 403px;
-    font-family: 'Lexend';
+    font-family: 'Lexend'; font-weight: 600; 
 }
 #currentMapText {
     position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
@@ -134,7 +148,7 @@
 }
 
 /* Commentators */
-#commentators { font-family: 'Lexend'; }
+#commentators { font-family: 'Lexend'; font-weight: 600; }
 #commentatorText {
     position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%);
     font-size: 17px;
@@ -150,3 +164,57 @@
 }
 #commentatorName1 { right: 1100px; }
 #commentatorName2 { left: 1100px; }
+
+/* Player Containers and Scores */
+.sidePlayersContainer {
+    position: absolute; bottom: 0;
+    width: 260px; height: 206px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#leftSidePlayers { left: 0; }
+#rightSidePlayers { right: 0; }
+.playerContainer {
+    margin-left: 15px; 
+    flex-grow: 1;
+}
+.playerContainerRight {  margin-right: 15px; }
+.playerWrapper { 
+    position: relative; top: 50%; transform: translateY(-50%);
+    height: 45px;
+}
+.playerName { 
+    font-family: 'Lexend';
+    font-weight: 800;
+    font-size: 17px;
+    width: 160px;
+    height: 20px;
+}
+.playerScore { 
+    font-family: 'Lexend';
+    font-weight: 400;
+    font-size: 17px;
+    color: white;
+    letter-spacing: 1px;
+    width: 160px;
+} 
+.playerRankLeft { 
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    position: absolute;
+    transform: translateY(-120%);
+    left: 168px;
+    color: white;
+}
+.playerRankRight { 
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    position: relative;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: white;
+}
+.playerDetailsRight { text-align: right; }
+.floatRight { float: right; }
