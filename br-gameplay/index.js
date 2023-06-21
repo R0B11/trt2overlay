@@ -124,6 +124,7 @@ socket.onmessage = event => {
     if (currentSongID != data.menu.bm.id) {
         currentSongID = data.menu.bm.id
         poolMapFound = false
+        mapModSlot.css("display","none")
 
         // Call API for the SR
         SRRequest = new XMLHttpRequest()
@@ -140,7 +141,6 @@ socket.onmessage = event => {
                 mapModSlot.css("display","block")
             } else {
                 currentMapMod = ""
-                mapModSlot.css("display","none")
             }
         }
         SRRequest.send()
@@ -552,5 +552,4 @@ function changeCommentatorNames() {
 
     if (commentatorNameInput2.val().trim().toLowerCase() == "empty") commentatorName2.innerText = ""
     else if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
-
 }

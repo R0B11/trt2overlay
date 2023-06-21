@@ -109,20 +109,22 @@
 }
 #currentSongArtistandNameWrapper {
     position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
-    width: 375px; height: 29px;
-    overflow: hidden;
     display: inline-block;
     white-space: nowrap;
+    overflow: hidden;
+    width: 375px; height: 29px;
     font-size: 23px;
     letter-spacing: 3px;
+    text-align: center;
 }
 #currentSongArtistandName {
     color: white;
-    display:inline;
+    display:inline-block;
+	width:max-content;
 }
 .currentSongArtistandNameWrap {
-    transform: translate(-375px);
-    animation: currentSongArtistandNameWrap 12s linear infinite;
+    transform: translateX(-375px);
+    animation: currentSongArtistandNameWrap 15s linear infinite;
 }
 @keyframes currentSongArtistandNameWrap {
     0% {transform: translateX(0px);}
@@ -309,7 +311,7 @@
 .left { color: var(--red); }
 .right { color: var(--blue); }
 
-/* ::-webkit-scrollbar {  display: none; } */
+::-webkit-scrollbar {  display: none; }
 
 /* Control Panel */
 #controlPanel {
