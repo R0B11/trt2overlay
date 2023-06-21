@@ -90,6 +90,11 @@ let chatLen = 0;
 let chatColour;
 let scoreProgress = document.getElementById("scoreProgress")
 
+// Commentator Names
+let commentatorNameInput1 = $("#commentatorNameInput1")
+let commentatorNameInput2 = $("#commentatorNameInput2")
+let commentatorName1 = document.getElementById("commentatorName1")
+let commentatorName2 = document.getElementById("commentatorName2")
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
@@ -190,7 +195,7 @@ socket.onmessage = event => {
         // Set Creator Name
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
             currentSongSetCreator = data.menu.bm.metadata.mapper
-            currentMapSetCreator.innerText = currentSongSetCreator
+            currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
         }
     }
 
@@ -539,4 +544,10 @@ socket.onmessage = event => {
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
         }
     }
+}
+
+function changeCommentatorNames() {
+    console.log(commentatorNameInput1.val().trim())
+    if (commentatorNameInput1.val().trim() != "") commentatorName1.innerText = commentatorNameInput1.val().trim().toUpperCase()
+    if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
 }

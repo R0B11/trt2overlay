@@ -309,4 +309,49 @@
 .left { color: var(--red); }
 .right { color: var(--blue); }
 
-::-webkit-scrollbar {  display: none; }
+/* ::-webkit-scrollbar {  display: none; } */
+
+/* Control Panel */
+#controlPanel {
+    position: absolute; left: 1920px; top: 0;
+    width: 300px; height: 1080px;
+    background-color: var(--darkGray);
+}
+.controlPanelItems { position: absolute; left: 50%; transform: translateX(-50%); }
+#controlPanelTitle {
+    position: absolute; top: 20px;
+    font-family: Lexend; font-weight: 800; font-size: 24px;
+    width: inherit;
+    text-align: center;
+    color: white;
+}
+#controlPanelCommentatorText {
+    position: absolute; top: 60px;
+    font-family: Lexend; font-weight: 800; font-size: 20px;
+    width: inherit;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+#commentatorNameInput1 { top: 120px; }
+#commentatorNameInput2 { top: 160px; }
+.controlPanelInput {
+    border-radius: 20px;
+    text-align: center;
+    font-family: Lexend; font-weight: 400; font-size: 20px;
+    width: 200px;
+}
+#changeCommentatorNames {
+    background-color: transparent;
+    border: 5px solid white; border-radius: 25px;
+    color: white;
+    top: 210px;
+    font-family: Lexend; font-weight: 400; font-size: 18px;
+    width: 200px;
+    padding: 5px 20px;
+}
+#changeCommentatorNames:active {
+    background-color: white;
+    border: 5px solid white;
+    color: black;
+}
