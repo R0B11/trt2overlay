@@ -96,6 +96,10 @@ let commentatorNameInput2 = $("#commentatorNameInput2")
 let commentatorName1 = document.getElementById("commentatorName1")
 let commentatorName2 = document.getElementById("commentatorName2")
 
+// IPC State
+let ipcState
+let resetScores
+
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
@@ -225,30 +229,30 @@ socket.onmessage = event => {
         player3.userID = userID3
         player3.username = data.tourney.ipcClients[3].spectating.name
     }
-    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-        userID4 = data.tourney.ipcClients[4].spectating.userID
-        arrayOfIDs[4] = userID4
-        player4.userID = userID4
-        player4.username = data.tourney.ipcClients[4].spectating.name
-    }
-    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-        userID5 = data.tourney.ipcClients[5].spectating.userID
-        arrayOfIDs[5] = userID5
-        player5.userID = userID5
-        player5.username = data.tourney.ipcClients[5].spectating.name
-    }
-    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-        userID6 = data.tourney.ipcClients[6].spectating.userID
-        arrayOfIDs[6] = userID6
-        player6.userID = userID6
-        player6.username = data.tourney.ipcClients[6].spectating.name
-    }
-    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-        userID7 = data.tourney.ipcClients[7].spectating.userID
-        arrayOfIDs[7] = userID7
-        player7.userID = userID7
-        player7.username = data.tourney.ipcClients[7].spectating.name
-    }
+    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+    //     userID4 = data.tourney.ipcClients[4].spectating.userID
+    //     arrayOfIDs[4] = userID4
+    //     player4.userID = userID4
+    //     player4.username = data.tourney.ipcClients[4].spectating.name
+    // }
+    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+    //     userID5 = data.tourney.ipcClients[5].spectating.userID
+    //     arrayOfIDs[5] = userID5
+    //     player5.userID = userID5
+    //     player5.username = data.tourney.ipcClients[5].spectating.name
+    // }
+    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+    //     userID6 = data.tourney.ipcClients[6].spectating.userID
+    //     arrayOfIDs[6] = userID6
+    //     player6.userID = userID6
+    //     player6.username = data.tourney.ipcClients[6].spectating.name
+    // }
+    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+    //     userID7 = data.tourney.ipcClients[7].spectating.userID
+    //     arrayOfIDs[7] = userID7
+    //     player7.userID = userID7
+    //     player7.username = data.tourney.ipcClients[7].spectating.name
+    // }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers
@@ -544,6 +548,31 @@ socket.onmessage = event => {
 			chatLen = data.tourney.manager.chat.length;
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
         }
+    }
+
+    // IPC State
+    if (ipcState != data.tourney.manager.ipcState) ipcState = data.tourney.manager.ipcState
+    if (ipcState == 1) {
+        if (!resetScores) {
+            // Reset Scores
+            for (let i = 0; i < currentPlayers.length; i++) {
+                for (let j = 0; j < data.tourney.ipcClients.length; j++) {
+                    if (currentPlayers[i].userID == data.tourney.ipcClients[j].spectating.userID) {
+                        currentPlayers[i].score = 0
+                        playerScoreAnimation[`player${i}Score`].update(currentPlayers[i].score)
+
+                        rankElement = currentPlayers[i].rankElement
+                        rankElement.innerText = ""
+                        break
+                    }
+                }
+            }
+            resetScores = true
+        }
+    } else if (ipcState == 3) {
+
+    } else if (ipcState == 4) {
+        resetScores = false
     }
 }
 
