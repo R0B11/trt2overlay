@@ -205,6 +205,7 @@
 #scoreProgress {
     position: absolute; bottom: 0; left: 300px;
     width: 1350px;  height: 205px;
+    transition: 500ms ease-in-out;
 }
 /* Bars */
 #lowerBars {
@@ -266,3 +267,46 @@
     width: 43.5px; height: 31px;
     transition: 0.2s ease-in-out;
 }
+
+/* Chat */
+#chatDisplay {
+    position: absolute; bottom: 42px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 145px;
+    background-color: rgba(0,0,0,0.5);
+    overflow-x: hidden; overflow-y: scroll;
+    padding: 5px 12px;
+    transition: ease-in-out 500ms;
+    font-family: 'Lexend'; font-weight: 600px;
+    transition: 500ms ease-in-out;
+}
+.messageWrapper {
+	display: flex;
+	text-align: left;
+}
+.messageTime {
+	width: 10%;
+	color: silver;
+	padding-right: 10px;
+    text-align: center;
+}
+.wholeMessage {
+	display: flex;
+}
+.messageUser {
+	color: white;
+	white-space: nowrap;
+    font-weight: 800px;
+}
+.messageText {
+    color: white;
+	white-space: normal;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+/* Colours Taken From https://github.com/VictimCrasher/static/tree/master/WaveTournament */
+.unknown { color: yellow; }
+.bot { color: #FF66AA; }
+.left { color: var(--red); }
+.right { color: var(--blue); }
+
+::-webkit-scrollbar {  display: none; }

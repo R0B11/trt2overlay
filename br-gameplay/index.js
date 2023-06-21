@@ -84,6 +84,12 @@ let bottomScoreMax = document.getElementById("bottomScoreMax")
 let bottomCrownOverlay = $("#bottomCrownOverlay")
 let bottomCrown = $("#bottomCrown")
 
+// Chat
+let chatDisplay = document.getElementById("chatDisplay");
+let chatLen = 0;
+let chatColour;
+let scoreProgress = document.getElementById("scoreProgress")
+
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
@@ -173,7 +179,6 @@ socket.onmessage = event => {
             currentSongName = data.menu.bm.metadata.title
             currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
             
-            console.log(currentSongArtistandName.width() )
             if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
             else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
         }
@@ -420,7 +425,16 @@ socket.onmessage = event => {
     }
 
     // Score Visibility
-    if (currentScoreVisibility != data.tourney.manager.bools.scoreVisible) currentScoreVisibility = data.tourney.manager.bools.scoreVisible
+    if (currentScoreVisibility != data.tourney.manager.bools.scoreVisible) {
+        currentScoreVisibility = data.tourney.manager.bools.scoreVisible
+        if (currentScoreVisibility) {
+            chatDisplay.style.opacity = 0;
+            scoreProgress.style.opacity = 1;
+        } else {
+            chatDisplay.style.opacity = 1;
+            scoreProgress.style.opacity = 0;
+        }
+    }
     if (currentScoreVisibility) {
         // Set and update all scores for all players
         for (let i = 0; i < currentPlayers.length; i++) {
@@ -471,6 +485,58 @@ socket.onmessage = event => {
             barElement = sortedPlayers[i].barElement
             barElement.style.width = `${1171 * (sortedPlayers[i].score / maxScore)}px`
             barElement.style.zIndex = i
+        }
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Chat ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
+    if (!currentScoreVisibility) {
+        // Only happens if there are no new chats messages, or the chat length is the same
+        if (chatLen !== data.tourney.manager.chat.length) {
+            if (chatLen == 0 || (chatLen > 0 && chatLen > data.tourney.manager.chat.length)) {
+                // Reset everything for a new chat.
+				chatDisplay.innerHTML = "";
+				chatLen = 0;
+            }
+            
+            for (var i = chatLen; i < data.tourney.manager.chat.length; i++) {
+                chatColour = data.tourney.manager.chat[i].team;
+
+                let messageWrapper = document.createElement("div");
+                messageWrapper.setAttribute('class', 'messageWrapper');
+
+				let messageTime = document.createElement('div');
+				messageTime.setAttribute('class', 'messageTime');
+                messageTime.innerText = data.tourney.manager.chat[i].time;
+
+                let wholeMessage = document.createElement("div");
+                wholeMessage.setAttribute('class', 'wholeMessage');
+
+				let messageUser = document.createElement('div');
+				messageUser.setAttribute('class', 'messageUser');
+                messageUser.innerText = data.tourney.manager.chat[i].name + ":\xa0";
+
+                let messageText = document.createElement('div');
+				messageText.setAttribute('class', 'messageText');
+                messageText.innerText = data.tourney.manager.chat[i].messageBody;
+
+                messageUser.style.color = "yellow"
+                for (var i = 0; i < currentPlayers.length; i++) {
+                    if (data.tourney.manager.chat[i].name == currentPlayers[i].username) {
+                        messageUser.style.color = `var(--player${i}Color)`
+                        break
+                    }
+                }
+                if (chatColour == "bot") messageUser.style.color = "#FF66AA"
+
+                messageWrapper.append(messageTime);
+                messageWrapper.append(wholeMessage);
+                wholeMessage.append(messageUser);
+                wholeMessage.append(messageText);
+                chatDisplay.append(messageWrapper);
+            }
+			chatLen = data.tourney.manager.chat.length;
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
         }
     }
 }
