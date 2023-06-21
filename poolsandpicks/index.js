@@ -9,10 +9,10 @@ function generateTiles(banNum, bestOf) {
             // Create outer div
             if (i == 1){
 
-                lengthTrackerRed *= 1.75;
+                lengthTrackerRed *= 1.6;
 
                 var redOuterDiv = $('<div/>', {
-                    id: `redCard${i}`,
+                    id: `redBan${i}`,
                     class: 'mapCardRed',
                 }).css({
                     'left': `${lengthTrackerRed}px`,
@@ -22,7 +22,7 @@ function generateTiles(banNum, bestOf) {
             }
             else {
                 var redOuterDiv = $('<div/>', {
-                    id: `redCard${i}`,
+                    id: `redBan${i}`,
                     class: 'mapCardRed',
                 }).css({
                     'left': `${lengthTrackerRed}px`,
@@ -53,13 +53,12 @@ function generateTiles(banNum, bestOf) {
 
             // Create outer div
             var blueOuterDiv = $('<div/>', {
-                id: `blueCard${i}`,
+                id: `blueBan${i}`,
                 class: 'mapCardBlue',
             }).css({
                 'left': `${lengthTrackerBlue}px`,
                 'background-image': "url('./static/blue-ban-tile.png')"
             });
-
 
             $('<div/>', {
                 id: 'mapCardContent',
@@ -84,7 +83,7 @@ function generateTiles(banNum, bestOf) {
         else {
             // Red Side
             var redOuterDiv = $('<div/>', {
-                id: `redCard${i}`,
+                id: `redPick${i}`,
                 class: 'mapCardRed',
             }).css({
                 'left': `${lengthTrackerRed}px`
@@ -111,14 +110,26 @@ function generateTiles(banNum, bestOf) {
             $('#picksBans').append(redOuterDiv);
 
             // Blue Side 
-            var blueOuterDiv = $('<div/>', {
-                id: `blueCard${i}`,
-                class: 'mapCardBlue',
-            }).css({
-                'left': `${lengthTrackerBlue}px`
-            });
+            if (i == 2){
+                lengthTrackerBlue *= 1.25
 
+                var blueOuterDiv = $('<div/>', {
+                    id: `bluePick${i}`,
+                    class: 'mapCardBlue',
+                }).css({
+                    'left': `${lengthTrackerBlue}px`
+                });
+            }
 
+            else {
+                var blueOuterDiv = $('<div/>', {
+                    id: `bluePick${i}`,
+                    class: 'mapCardBlue',
+                }).css({
+                    'left': `${lengthTrackerBlue}px`
+                });
+            }
+            
             $('<div/>', {
                 id: 'mapCardContent',
                 class: 'tile-picking',
