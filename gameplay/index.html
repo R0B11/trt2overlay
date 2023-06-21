@@ -35,8 +35,8 @@
 			</section>
 			<!-- Commentators -->
 			<section id="commentators">
-				<div class="commentatorName" id="commentatorName1">WILL STETSON</div>
-				<div class="commentatorName" id="commentatorName2">HAPPYSTICK</div>
+				<div class="commentatorName" id="commentatorName1"></div>
+				<div class="commentatorName" id="commentatorName2"></div>
 			</section>
 			<!-- Player Details Blue Side -->
 			<section class="playerLocation" id="playerRight">
@@ -100,6 +100,13 @@
 			</section>
 		</section>
 	</div>
+	<div id="controlPanel">
+        <div class="controlPanelItems" id="controlPanelTitle">Control Panel</div>
+        <div id="controlPanelCommentatorText">Enter the commentator<br>names here - enter<br>'empty' to remove the <br>commentator</div>
+        <input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput1">
+        <input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput2">
+        <button class="controlPanelItems" id="changeCommentatorNames" onclick="changeCommentatorNames()">Change Commentator Names</button>
+    </div>
 
 	<script src="index.js"></script>
 </body>
