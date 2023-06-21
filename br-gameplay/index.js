@@ -28,7 +28,7 @@ let currentMapMod = ""
 // Map Details
 let currentSongArtistandName = $("#currentSongArtistandName")
 let currentMapDifficulty = $("#currentMapDifficulty")
-let currentMapSetCreator = $("currentMapSetCreator")
+let currentMapSetCreator = document.getElementById("currentMapSetCreator")
 let currentSongArtist
 let currentSongName
 let currentSongDifficulty
@@ -189,8 +189,8 @@ socket.onmessage = event => {
         }
         // Set Creator Name
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
-            currentSongSetCreator =  data.menu.bm.metadata.mapper
-            currentMapSetCreator.text(currentSongSetCreator)
+            currentSongSetCreator = data.menu.bm.metadata.mapper
+            currentMapSetCreator.innerText = currentSongSetCreator
         }
     }
 
@@ -521,7 +521,7 @@ socket.onmessage = event => {
                 messageText.innerText = data.tourney.manager.chat[i].messageBody;
 
                 messageUser.style.color = "yellow"
-                for (var i = 0; i < currentPlayers.length; i++) {
+                for (let i = 0; i < currentPlayers.length; i++) {
                     if (data.tourney.manager.chat[i].name == currentPlayers[i].username) {
                         messageUser.style.color = `var(--player${i}Color)`
                         break
