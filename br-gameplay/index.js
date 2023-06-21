@@ -547,7 +547,10 @@ socket.onmessage = event => {
 }
 
 function changeCommentatorNames() {
-    console.log(commentatorNameInput1.val().trim())
-    if (commentatorNameInput1.val().trim() != "") commentatorName1.innerText = commentatorNameInput1.val().trim().toUpperCase()
-    if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
+    if (commentatorNameInput1.val().trim().toLowerCase() == "empty") commentatorName1.innerText = ""
+    else if (commentatorNameInput1.val().trim() != "") commentatorName1.innerText = commentatorNameInput1.val().trim().toUpperCase()
+
+    if (commentatorNameInput2.val().trim().toLowerCase() == "empty") commentatorName2.innerText = ""
+    else if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
+
 }

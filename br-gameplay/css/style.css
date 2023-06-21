@@ -333,8 +333,8 @@
     color: white;
     font-weight: 600;
 }
-#commentatorNameInput1 { top: 120px; }
-#commentatorNameInput2 { top: 160px; }
+#commentatorNameInput1 { top: 170px; }
+#commentatorNameInput2 { top: 210px; }
 .controlPanelInput {
     border-radius: 20px;
     text-align: center;
@@ -345,7 +345,7 @@
     background-color: transparent;
     border: 5px solid white; border-radius: 25px;
     color: white;
-    top: 210px;
+    top: 260px;
     font-family: Lexend; font-weight: 400; font-size: 18px;
     width: 200px;
     padding: 5px 20px;
