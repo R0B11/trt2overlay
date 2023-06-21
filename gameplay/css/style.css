@@ -207,13 +207,30 @@
     letter-spacing: 1.5px;
     background-color: white;
 }
-.mapDetailInformation { position: absolute; right: 0;}
-#mapArtistAndName {
+.mapDetailInformation { position: absolute; right: 0; }
+#mapArtistAndNameWrapper {
     top: 28px;
-    width: max-content;
-    color: white;
-    font-size: 23px;    
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 425px; height: 26px;
+    font-size: 23px;
     letter-spacing: 2px;
+    text-align: left;
+}
+#mapArtistAndName {
+    color: white;
+    display: inline-block;
+	width: max-content;
+}
+.mapArtistAndNameWrap {
+    animation: mapArtistAndNameWrap 15s linear infinite;
+}
+@keyframes mapArtistAndNameWrap {
+    0% {transform: translateX(0px);}
+    11% {transform: translateX(0px);}
+    80% { transform: translateX(calc(-100% + 425px)); }
+    100% { transform: translateX(calc(-100% + 425px)); }
 }
 #mapDifficulty {
     top: 58px;

@@ -24,6 +24,15 @@ let currentSR
 let currentCS 
 let currentBPM
 let currentMapMod = ""
+
+// Map Details
+let mapArtistAndName = $("#mapArtistAndName")
+let mapDifficulty = $("#mapDifficulty")
+let mapSetCreator = $("#mapSetCreator")
+let currentSongArtist
+let currentSongName
+let currentSongDifficulty
+let currentSongSetCreator
 let currentSongID
 let poolMapFound = false
 
@@ -112,6 +121,25 @@ socket.onmessage = event => {
             if (currentMapMod.toLowerCase().includes("dt")) currentBaseBPM *= 1.5
             else currentBPM = currentBaseBPM
             animation.mapStatsBPM.update(currentBPM)
+        }
+        // Song Title and Artist
+        if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
+            currentSongArtist = data.menu.bm.metadata.artist
+            currentSongName = data.menu.bm.metadata.title
+            mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
+            
+            if (mapArtistAndName.width() >= 425) mapArtistAndName.addClass("mapArtistAndNameWrap")
+            else mapArtistAndName.removeClass("mapArtistAndNameWrap")
+        }
+        // Diff Name
+        if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
+            currentSongDifficulty = data.menu.bm.metadata.difficulty
+            mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+        }
+        // Set Creator Name
+        if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
+            currentSongSetCreator = data.menu.bm.metadata.mapper
+            mapSetCreator.text(currentSongSetCreator.toUpperCase())
         }
     }
 }
