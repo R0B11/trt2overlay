@@ -110,27 +110,25 @@
 #currentSongArtistandNameWrapper {
     position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
     width: 375px; height: 29px;
-    overflow-x: hidden;
+    overflow: hidden;
     display: inline-block;
     white-space: nowrap;
-    color: white;
     font-size: 23px;
     letter-spacing: 3px;
-    text-align: center;
 }
 #currentSongArtistandName {
-    width:max-content;
+    color: white;
     display:inline;
 }
-#currentSongArtistandNameWrap {
+.currentSongArtistandNameWrap {
     transform: translate(-375px);
-    animation: currentSongArtistandNameWrap 15s linear infinite;
+    animation: currentSongArtistandNameWrap 12s linear infinite;
 }
 @keyframes currentSongArtistandNameWrap {
-    0% {transform: translate(0px);}
-    11% {transform: translate(0px);}
-    80% { transform: translate(calc(-100% + 375px)); }
-    100% { transform: translate(calc(-100% + 375px)); }
+    0% {transform: translateX(0px);}
+    11% {transform: translateX(0px);}
+    80% { transform: translateX(calc(-100% + 375px)); }
+    100% { transform: translateX(calc(-100% + 375px)); }
 }
 #currentMapDifficulty {
     position: absolute; top: 68px; left: 50%; transform: translateX(-50%);
@@ -185,36 +183,86 @@
     height: 45px;
 }
 .playerName { 
-    font-family: 'Lexend';
-    font-weight: 800;
-    font-size: 17px;
-    width: 160px;
-    height: 20px;
+    font-family: 'Lexend'; font-weight: 800; font-size: 17px;
+    width: 160px; height: 20px;
 }
 .playerScore { 
-    font-family: 'Lexend';
-    font-weight: 400;
-    font-size: 17px;
+    font-family: 'Lexend'; font-weight: 400; font-size: 17px;
     color: white;
     letter-spacing: 1px;
     width: 160px;
-} 
-.playerRankLeft { 
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 24px;
-    position: absolute;
-    transform: translateY(-120%);
-    left: 168px;
+}
+.playerRank {
+    font-family: 'IBM Plex Mono', monospace; font-size: 24px;
     color: white;
 }
-.playerRankRight { 
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 24px;
-    position: relative;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    color: white;
-}
+.playerRankLeft { position: absolute; left: 168px; transform: translateY(-120%);  }
+.playerRankRight { position: relative; top: 50%; left: 10px; transform: translateY(-50%); }
 .playerDetailsRight { text-align: right; }
 .floatRight { float: right; }
+
+/* Score Progress */
+#scoreProgress {
+    position: absolute; bottom: 0; left: 300px;
+    width: 1350px;  height: 205px;
+}
+/* Bars */
+#lowerBars {
+    position: absolute; left: 74px; bottom: 69px;
+    width: 1171px; height: 13px;
+}
+.playerBar {
+    position: absolute; top: 0; left: 0;
+    height: inherit;
+    transition: 200ms ease-in-out;
+}
+.grayBar {
+    width: inherit;
+    background-color: gray;
+}
+/* Profile */
+.avatar {
+    position: absolute; top: 17px; left: 33px;
+    width: 83px; height: 92px;
+    transition: 200ms ease-in-out;
+}
+.profilePicture {
+    position: absolute; top: 0; left: 0;
+    width: 78px; height: 78px;
+    border: 3px solid;
+    background-color: black;
+    background-size: cover;
+}
+.profilePictureBottomRightBorder {
+    position: absolute; right: -18px; bottom: -7px;
+    width: 0px; height: 0px;
+    border: 18px solid;
+    transform: rotate(45deg)
+}
+.triangle {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) rotate(45deg);
+    width: 18px; height: 18px;
+}
+/* Bottom Scores */
+#bottomScoreZero {
+    position: absolute; top: 141px; left: 74px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 32px;
+    color: white;
+}
+#bottomScoreMax {
+    position: absolute; top: 143px; left: 1245px; transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace; font-size: 25px;
+    color: var(--lighterYellow);
+    letter-spacing: 1.5px;
+}
+/* Crown */
+#bottomCrown {
+    position: absolute; top: 120px; left: 1263px;
+    width: 32px; height: 19px;
+    transition: 0.2s ease-in-out;
+}
+#bottomCrownOverlay {
+    position: absolute; top: 114px; left: 1257.55px; 
+    width: 43.5px; height: 31px;
+    transition: 0.2s ease-in-out;
+}

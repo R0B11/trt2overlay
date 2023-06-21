@@ -47,14 +47,14 @@ let userID6 = 0
 let userID7 = 0
 let arrayOfIDs = [userID0, userID1, userID2, userID3, userID4, userID5, userID6, userID7]
 // Player Objects
-let player0 = { userID: userID0, username: "", domElement: "", score: 0, rank: "0th" }
-let player1 = { userID: userID1, username: "", domElement: "", score: 0, rank: "0th" }
-let player2 = { userID: userID2, username: "", domElement: "", score: 0, rank: "0th" }
-let player3 = { userID: userID3, username: "", domElement: "", score: 0, rank: "0th" }
-let player4 = { userID: userID4, username: "", domElement: "", score: 0, rank: "0th" }
-let player5 = { userID: userID5, username: "", domElement: "", score: 0, rank: "0th" }
-let player6 = { userID: userID6, username: "", domElement: "", score: 0, rank: "0th" }
-let player7 = { userID: userID7, username: "", domElement: "", score: 0, rank: "0th" }
+let player0 = { userID: userID0, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player1 = { userID: userID1, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player2 = { userID: userID2, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player3 = { userID: userID3, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player4 = { userID: userID4, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player5 = { userID: userID5, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player6 = { userID: userID6, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
+let player7 = { userID: userID7, username: "", scoreElement: "", avatarElement: "", barElement: "", score: 0, rank: "0th" }
 let arrayOfPlayers = [player0, player1, player2, player3, player4, player5, player6, player7]
 
 // Score Visibility
@@ -75,7 +75,14 @@ let sortedPlayers = []
 // Player Sections
 let leftSidePlayers = $("#leftSidePlayers")
 let rightSidePlayers = $("#rightSidePlayers")
+let upperAvatars = $("#upperAvatars")
+let lowerBars = $("#lowerBars")
 let loadFirstTime = true
+
+// Max Score
+let bottomScoreMax = document.getElementById("bottomScoreMax")
+let bottomCrownOverlay = $("#bottomCrownOverlay")
+let bottomCrown = $("#bottomCrown")
 
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
@@ -94,6 +101,7 @@ let animation = {
     mapStatNumberOD: new CountUp('mapStatNumberOD', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatNumberCS: new CountUp('mapStatNumberCS', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatNumberBPM: new CountUp('mapStatNumberBPM', 0, 0, 0, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    bottomScoreMax: new CountUp('bottomScoreMax', 0, 0, 0, .2,  {useEasing: true, useGrouping: true, separator: ",", decimal: "." })
 }
 
 let playerScoreAnimation = {}
@@ -164,7 +172,8 @@ socket.onmessage = event => {
             currentSongArtist = data.menu.bm.metadata.artist
             currentSongName = data.menu.bm.metadata.title
             currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
-
+            
+            console.log(currentSongArtistandName.width() )
             if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
             else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
         }
@@ -205,30 +214,30 @@ socket.onmessage = event => {
         player3.userID = userID3
         player3.username = data.tourney.ipcClients[3].spectating.name
     }
-    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-        userID4 = data.tourney.ipcClients[4].spectating.userID
-        arrayOfIDs[4] = userID4
-        player4.userID = userID4
-        player4.username = data.tourney.ipcClients[4].spectating.name
-    }
-    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-        userID5 = data.tourney.ipcClients[5].spectating.userID
-        arrayOfIDs[5] = userID5
-        player5.userID = userID5
-        player5.username = data.tourney.ipcClients[5].spectating.name
-    }
-    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-        userID6 = data.tourney.ipcClients[6].spectating.userID
-        arrayOfIDs[6] = userID6
-        player6.userID = userID6
-        player6.username = data.tourney.ipcClients[6].spectating.name
-    }
-    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-        userID7 = data.tourney.ipcClients[7].spectating.userID
-        arrayOfIDs[7] = userID7
-        player7.userID = userID7
-        player7.username = data.tourney.ipcClients[7].spectating.name
-    }
+    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+    //     userID4 = data.tourney.ipcClients[4].spectating.userID
+    //     arrayOfIDs[4] = userID4
+    //     player4.userID = userID4
+    //     player4.username = data.tourney.ipcClients[4].spectating.name
+    // }
+    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+    //     userID5 = data.tourney.ipcClients[5].spectating.userID
+    //     arrayOfIDs[5] = userID5
+    //     player5.userID = userID5
+    //     player5.username = data.tourney.ipcClients[5].spectating.name
+    // }
+    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+    //     userID6 = data.tourney.ipcClients[6].spectating.userID
+    //     arrayOfIDs[6] = userID6
+    //     player6.userID = userID6
+    //     player6.username = data.tourney.ipcClients[6].spectating.name
+    // }
+    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+    //     userID7 = data.tourney.ipcClients[7].spectating.userID
+    //     arrayOfIDs[7] = userID7
+    //     player7.userID = userID7
+    //     player7.username = data.tourney.ipcClients[7].spectating.name
+    // }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers
@@ -253,6 +262,7 @@ socket.onmessage = event => {
             playerWrapperDiv.classList.add("playerWrapper")
             playerNameDiv.classList.add("playerName")
             playerScoreDiv.classList.add("playerScore")
+            playerRankDiv.classList.add("playerRank")
             playerRankDiv.classList.add("playerRankLeft")
 
             playerContainerDiv.setAttribute("id",`player${i}Container`)
@@ -286,6 +296,7 @@ socket.onmessage = event => {
             playerScoreDiv.classList.add("playerScore")
             playerScoreDiv.classList.add("playerDetailsRight")
             playerScoreDiv.classList.add("floatRight")
+            playerRankDiv.classList.add("playerRank")
             playerRankDiv.classList.add("playerRankRight")
 
             playerContainerDiv.setAttribute("id",`player${i}Container`)
@@ -333,7 +344,8 @@ socket.onmessage = event => {
         loadFirstTime = false
         // Clear DOM element, score, and rank for all players
         for (let i = 0; i < arrayOfPlayers.length; i++) {
-            arrayOfPlayers[i].domElement = ""
+            arrayOfPlayers[i].avatarElement = ""
+            arrayOfPlayers[i].scoreElement = ""
             arrayOfPlayers[i].score = 0
             arrayOfPlayers[i].rank = "0th"
         }
@@ -342,15 +354,13 @@ socket.onmessage = event => {
         let i
         let leftSidePlayers1 = document.getElementById("leftSidePlayers")
         let rightSidePlayers1 = document.getElementById("rightSidePlayers")
-        console.log(rightSidePlayers1.children[0])
-        console.log(rightSidePlayers1.childElementCount)
         for (i = 0; i < leftSidePlayers1.childElementCount; i++) {
             let name = leftSidePlayers1.children[i].children[0].children[0]
             let score = leftSidePlayers1.children[i].children[0].children[1]
             name.innerText = currentPlayers[i].username.toUpperCase()
             name.style.color = `var(--player${i + 1}Color)`
             score.innerText = currentPlayers[i].score
-            currentPlayers[i].domElement = document.getElementById(`player${i}Container`)
+            currentPlayers[i].scoreElement = document.getElementById(`player${i}Container`)
         }
         for (let j = 0; j < rightSidePlayers1.childElementCount; j++) {
             let name = rightSidePlayers1.children[j].children[0].children[0]
@@ -358,8 +368,54 @@ socket.onmessage = event => {
             name.innerText = currentPlayers[i].username.toUpperCase()
             name.style.color = `var(--player${i + 1}Color)`
             score.innerText = currentPlayers[i].score
-            currentPlayers[i].domElement = document.getElementById(`player${i}Container`)
+            currentPlayers[i].scoreElement = document.getElementById(`player${i}Container`)
             i++
+        }
+
+        // Adding player markers and player bars
+        upperAvatars.html("")
+        lowerBars.html("")
+        i = 0
+        for (i; i < currentPlayers.length; i++) {
+            
+            let avatarDiv = document.createElement("div")
+            let triangleDiv = document.createElement("div")
+            let profilePictureDiv = document.createElement("div")
+            let profilePictureBottomRightBorderDiv = document.createElement("div")
+
+            avatarDiv.classList.add("avatar")
+            triangleDiv.classList.add("triangle")
+            profilePictureDiv.classList.add("profilePicture")
+            profilePictureBottomRightBorderDiv.classList.add("profilePictureBottomRightBorder")
+
+            profilePictureDiv.style.borderColor = `var(--player${i + 1}Color)`
+            profilePictureDiv.style.backgroundImage = `url("https://a.ppy.sh/${currentPlayers[i].userID}")`
+            profilePictureBottomRightBorderDiv.style.borderColor = `transparent transparent transparent var(--player${i + 1}Color)`
+            triangleDiv.style.backgroundColor = `var(--player${i + 1}Color)`
+
+            avatarDiv.append(triangleDiv)
+            avatarDiv.append(profilePictureDiv)
+            avatarDiv.append(profilePictureBottomRightBorderDiv)
+            
+            currentPlayers[i].avatarElement = avatarDiv
+            console.log(avatarDiv)
+            upperAvatars.append(avatarDiv)
+        }
+
+        // Adding gray bar back
+        let grayBarDiv = document.createElement("div")
+        grayBarDiv.classList.add("grayBar")
+        grayBarDiv.classList.add("playerBar")
+        lowerBars.append(grayBarDiv)
+
+        // Add player bars
+        for (let i = 0; i < currentPlayers.length; i++) {
+            let barDiv = document.createElement("div")
+            barDiv.classList.add("playerBar")
+            barDiv.style.backgroundColor = `var(--player${i + 1}Color)`
+            barDiv.style.width = "0px"
+            currentPlayers[i].barElement = barDiv
+            lowerBars.append(barDiv)
         }
     }
 
@@ -379,25 +435,42 @@ socket.onmessage = event => {
 
         // Sort players
         sortedPlayers = currentPlayers.sort((a, b) => b.score - a.score)
-        
 
-        // Place ranking next to name
+        // Calculate max score and change elements
+        let maxScore = 50000;
+        if (sortedPlayers.length > 0) maxScore = Math.max(50000, sortedPlayers[0].score)
+        animation.bottomScoreMax.update(maxScore)
+        // Crowns
+        let widthChange = (bottomScoreMax.getBoundingClientRect().width - 99) / 2
+        bottomCrownOverlay.css("left",`${widthChange + 1257.55}px`)
+        bottomCrown.css("left",`${widthChange + 1263}px`)
+        
         for (let i = 0; i < sortedPlayers.length; i++) {
-            currentElement = sortedPlayers[i].domElement.lastChild.lastChild
-            currentElementInnerText = currentElement.innerText
+            // Place ranking next to name
+            rankElement = sortedPlayers[i].scoreElement.lastChild.lastChild
             if (i == 0) {
-                currentElement.innerText = "1st"
-                currentElement.style.color = "var(--numberOnePlaceColour)"
+                rankElement.innerText = "1st"
+                rankElement.style.color = "var(--numberOnePlaceColour)"
             } else if (i == 1) {
-                currentElement.innerText = "2nd"
-                currentElement.style.color = "var(--numberTwoPlaceColour)"
+                rankElement.innerText = "2nd"
+                rankElement.style.color = "var(--numberTwoPlaceColour)"
             } else if (i == 2) {
-                currentElement.innerText = "3rd"
-                currentElement.style.color = "var(--numberThreePlaceColour)"
+                rankElement.innerText = "3rd"
+                rankElement.style.color = "var(--numberThreePlaceColour)"
             } else {
-                currentElement.innerText = `${i + 1}th`
-                currentElement.style.color = "white"
+                rankElement.innerText = `${i + 1}th`
+                rankElement.style.color = "white"
             }
+
+            // Move Avatar Element and change z-index
+            avatarElement = sortedPlayers[i].avatarElement
+            avatarElement.style.left = `${33 + 1171 * (sortedPlayers[i].score / maxScore)}px`
+            avatarElement.style.zIndex = `${8 - i}`
+
+            // Score Bar Width 
+            barElement = sortedPlayers[i].barElement
+            barElement.style.width = `${1171 * (sortedPlayers[i].score / maxScore)}px`
+            barElement.style.zIndex = i
         }
     }
 }
