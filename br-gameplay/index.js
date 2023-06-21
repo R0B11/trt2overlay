@@ -224,30 +224,30 @@ socket.onmessage = event => {
         player3.userID = userID3
         player3.username = data.tourney.ipcClients[3].spectating.name
     }
-    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-    //     userID4 = data.tourney.ipcClients[4].spectating.userID
-    //     arrayOfIDs[4] = userID4
-    //     player4.userID = userID4
-    //     player4.username = data.tourney.ipcClients[4].spectating.name
-    // }
-    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-    //     userID5 = data.tourney.ipcClients[5].spectating.userID
-    //     arrayOfIDs[5] = userID5
-    //     player5.userID = userID5
-    //     player5.username = data.tourney.ipcClients[5].spectating.name
-    // }
-    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-    //     userID6 = data.tourney.ipcClients[6].spectating.userID
-    //     arrayOfIDs[6] = userID6
-    //     player6.userID = userID6
-    //     player6.username = data.tourney.ipcClients[6].spectating.name
-    // }
-    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-    //     userID7 = data.tourney.ipcClients[7].spectating.userID
-    //     arrayOfIDs[7] = userID7
-    //     player7.userID = userID7
-    //     player7.username = data.tourney.ipcClients[7].spectating.name
-    // }
+    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+        userID4 = data.tourney.ipcClients[4].spectating.userID
+        arrayOfIDs[4] = userID4
+        player4.userID = userID4
+        player4.username = data.tourney.ipcClients[4].spectating.name
+    }
+    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+        userID5 = data.tourney.ipcClients[5].spectating.userID
+        arrayOfIDs[5] = userID5
+        player5.userID = userID5
+        player5.username = data.tourney.ipcClients[5].spectating.name
+    }
+    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+        userID6 = data.tourney.ipcClients[6].spectating.userID
+        arrayOfIDs[6] = userID6
+        player6.userID = userID6
+        player6.username = data.tourney.ipcClients[6].spectating.name
+    }
+    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+        userID7 = data.tourney.ipcClients[7].spectating.userID
+        arrayOfIDs[7] = userID7
+        player7.userID = userID7
+        player7.username = data.tourney.ipcClients[7].spectating.name
+    }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers
