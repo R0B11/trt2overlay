@@ -16,6 +16,8 @@
     --purple: #8815f4;
     --grey: #959595;
     --yellow: #ffd75f;
+
+    --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%);
 }
 
 body,
@@ -28,7 +30,7 @@ html {
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/picksBansPNG1.png");
+    background-image: url("../static/picksBansPNG.png");
     background-size: cover;
 }
 
@@ -130,12 +132,31 @@ html {
     top: 80px;
 }
 
+#redSide {
+    position: absolute; height: 460px; width: 1385px;
+    top: 0px; left: 0px;
+}
 
-#mapCard {
+#blueSide {
+    position: absolute; height: 460px; width: 1385px;
+    bottom: 0px; left: 0px;
+}
+
+.mapCardBlue {
     position: absolute;
     background-image: url("../static/tile-box-blue.png");
-    left: 550px;
+    left: 20px;
     bottom: 89px;
+    width: 85px;
+    height: 330px;
+    background-size: cover;
+}
+
+.mapCardRed {
+    position: absolute;
+    background-image: url("../static/tile-box-red.png");
+    left: 20px;
+    top: 89px;
     width: 85px;
     height: 330px;
     background-size: cover;
@@ -143,13 +164,13 @@ html {
 
 #mapCardContent {
     position: absolute;
-    background-image: url("../static/test-map.png");
+    background-image:;
     background-position: center;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 1;
     width: 81px;
     height: 326px;
-    clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%);
+    /* clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%); */
     z-index: 0;
     margin: 2px;
 }
@@ -185,7 +206,7 @@ html {
   height: 87px;
   width: 66px;
   margin: 10px;
-  opacity: 1;
+  opacity: 0;
 }
 
 .map-slot-content {
