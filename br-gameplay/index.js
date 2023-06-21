@@ -95,6 +95,7 @@ let commentatorNameInput1 = $("#commentatorNameInput1")
 let commentatorNameInput2 = $("#commentatorNameInput2")
 let commentatorName1 = document.getElementById("commentatorName1")
 let commentatorName2 = document.getElementById("commentatorName2")
+
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
@@ -126,7 +127,7 @@ socket.onmessage = event => {
         poolMapFound = false
         mapModSlot.css("display","none")
 
-        // Call API for the SR
+        // Call API for all stats
         SRRequest = new XMLHttpRequest()
         SRRequest.open("GET", `https://localhost:44395//api/maps/${currentSongID}`)
         SRRequest.onload = function() {
