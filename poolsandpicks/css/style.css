@@ -1,7 +1,32 @@
+@keyframes dotty {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: ''; }
+}
+
 :root {
     --redPlayerCardColour: #F11248;
     --bluePlayerCardColour: #15B5FF;
     --grayPickBanTextColour: #909090;
+
+    --blue: #16b3f8;
+    --red: #ed144a;
+    --purple: #8815f4;
+    --grey: #959595;
+    --yellow: #ffd75f;
+
+    --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%);
+    --two-bans-width: 350px;
+    --one-ban-width: 175px;
+}
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
 }
 
 #main {
@@ -99,4 +124,121 @@
     position: absolute; top: 15px; left: 33px;
     display: flex;
 }
-.matchScoreSword { width: 35x; height: 35px; margin-right: 16px; }
+.matchScoreSword { width: 28px; height: 30px; margin-right: 24px; }
+
+/* ---------- Pick Area ---------- */
+
+#redPicksBans {
+    position: absolute; height: 460px; width: 1385px;
+    right: 0px;
+    top: 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#bluePicksBans {
+    position: absolute; height: 460px; width: 1385px;
+    right: 0px;
+    bottom: 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#blueBanArea {
+    justify-content: center;
+}
+
+#redBanArea {
+    justify-content: space-between;
+}
+
+.banArea {
+    height: 460px;
+    width: var(--two-bans-width);
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+
+.pickArea {
+    height: 460px;
+    width: 880px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: transparent;
+}
+
+.mapCard {
+    position: relative;
+    width: 85px;
+    height: 330px;
+    background-size: cover;
+    margin: 0 20px;
+}
+
+.pickCardBlue { background-image: url("../static/tile-box-blue.png");}
+
+.banCardBlue { background-image: url("../static/blue-ban-tile.png");}
+
+.pickCardRed { background-image: url("../static/tile-box-red.png");}
+
+.banCardRed { background-image: url("../static/red-ban-tile.png");}
+
+.mapCardContent {
+    position: absolute;
+    background-image:;
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+    width: 81px;
+    height: 326px;
+    /* clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%); */
+    z-index: 0;
+    margin: 2px;
+}
+
+.tile-picking {
+  position: absolute;
+  top: 40px;
+  width: 75px;
+  height: 240px;
+  background-color: transparent;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  margin: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: white;
+  font-size: 22px;
+  letter-spacing: -5px;
+}
+
+.tile-picking::after {
+    display: inline-block;
+    animation: dotty steps(1,end) 1s infinite;
+    content: '';
+}
+
+#map-slot-block {
+  clip-path: polygon(0% 45%, 59% 0%, 100% 0%, 100% 100%, 0% 100%);
+  background-color: var(--blue);
+  position: absolute;
+  height: 87px;
+  width: 66px;
+  margin: 10px;
+  opacity: 0;
+}
+
+.map-slot-content {
+  position: absolute;
+  text-align: center;
+  width: 100%; 
+  bottom: 5%;  
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 23px;
+  color: white;
+  letter-spacing: 2px;
+}
