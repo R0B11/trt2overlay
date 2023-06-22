@@ -158,7 +158,7 @@ function generateTiles(banNum, bestOf) {
 */
 
 function generateTiles(firstPick, firstBan, banNum, bestOf) {
-    for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
+    for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
             // Red Side
@@ -322,4 +322,4 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
 }
 
 
-generateTiles("red", "blue", 2, 13);
+generateTiles("blue", "red", 2, 13);

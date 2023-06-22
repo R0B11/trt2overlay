@@ -174,7 +174,7 @@ html {
     width: 85px;
     height: 330px;
     background-size: cover;
-    margin: 0 25px;
+    margin: 0 20px;
 }
 
 .pickCardBlue { background-image: url("../static/tile-box-blue.png");}
