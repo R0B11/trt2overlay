@@ -18,6 +18,8 @@
     --yellow: #ffd75f;
 
     --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%);
+    --two-bans-width: 350px;
+    --one-ban-width: 175px;
 }
 
 body,
@@ -126,43 +128,64 @@ html {
 
 /* ---------- Pick Area ---------- */
 
-#picksBans {
-    position: absolute; height: 920px; width: 1385px;
+#redPicksBans {
+    position: absolute; height: 460px; width: 1385px;
     right: 0px;
     top: 80px;
+    display: flex;
+    justify-content: flex-start;
 }
 
-#redSide {
+#bluePicksBans {
     position: absolute; height: 460px; width: 1385px;
-    top: 0px; left: 0px;
+    right: 0px;
+    bottom: 80px;
+    display: flex;
+    justify-content: flex-start;
 }
 
-#blueSide {
-    position: absolute; height: 460px; width: 1385px;
-    bottom: 0px; left: 0px;
+#blueBanArea {
+    justify-content: center;
 }
 
-.mapCardBlue {
-    position: absolute;
-    background-image: url("../static/tile-box-blue.png");
-    left: 20px;
-    bottom: 89px;
+#redBanArea {
+    justify-content: space-between;
+}
+
+.banArea {
+    height: 460px;
+    width: var(--two-bans-width);
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+
+.pickArea {
+    height: 460px;
+    width: 880px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: transparent;
+}
+
+.mapCard {
+    position: relative;
     width: 85px;
     height: 330px;
     background-size: cover;
+    margin: 0 25px;
 }
 
-.mapCardRed {
-    position: absolute;
-    background-image: url("../static/tile-box-red.png");
-    left: 20px;
-    top: 89px;
-    width: 85px;
-    height: 330px;
-    background-size: cover;
-}
+.pickCardBlue { background-image: url("../static/tile-box-blue.png");}
 
-#mapCardContent {
+.banCardBlue { background-image: url("../static/blue-ban-tile.png");}
+
+.pickCardRed { background-image: url("../static/tile-box-red.png");}
+
+.banCardRed { background-image: url("../static/red-ban-tile.png");}
+
+.mapCardContent {
     position: absolute;
     background-image:;
     background-position: center;
