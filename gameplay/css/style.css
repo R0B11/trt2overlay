@@ -216,7 +216,7 @@
     width: 425px; height: 26px;
     font-size: 23px;
     letter-spacing: 2px;
-    text-align: left;
+    text-align: right;
 }
 #mapArtistAndName {
     color: white;
@@ -237,6 +237,8 @@
     color: var(--mapDifficultyYellow);
     font-size: 16px;
     letter-spacing: 1.5px;
+    width: 375px;
+    text-align: right;
 }
 #mapSetCreator {
     top: 78px;
