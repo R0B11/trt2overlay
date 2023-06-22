@@ -4,7 +4,9 @@
     --red: #ed144a;
     --yellow: #fff692;
     --mapDifficultyYellow: #ffe292;
+    --commentatorYellow: #FFE393;
     --lightYellow: #ffe696;
+    --reallyDarkGray: #202020;
 }
 
 #main {
@@ -73,6 +75,14 @@
     margin-right: 14.7px;
 }
 
+/* Round Name */
+#roundName {
+    color: var(--reallyDarkGray);
+    position: absolute; top: 64px; left: 50%; transform: translateX(-50%);
+    font-family: 'Lexend';
+    letter-spacing: 3px;
+}
+
 /* Commentators */
 #commentators {
     font-family: 'Lexend';
@@ -84,6 +94,14 @@
 }
 #commentatorName1 { right: 1100px; }
 #commentatorName2 { left: 1100px; }
+#commentatorText {
+    position: absolute; top: 124px; left: 50%; transform: translateX(-50%);
+    color: var(--reallyDarkGray);
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: var(--commentatorYellow);
+    padding: 3px 31px 3px 33px;
+}
 
 /* Bottom Section */
 /* Cover */
@@ -144,6 +162,13 @@
     top: 20px;
     color: white;
     font-family: 'IBM Plex Mono', monospace; font-size: 24px;
+}
+#mapScoreDifferenceArrow {
+    top: 43px;
+    width: 0;height: 0;
+    border: 11px solid;
+    border-color: transparent white white transparent;
+    transform: translateX(-50%) rotate(45deg);
 }
 .playerMapScore {
     position: absolute; top: 146px; transform: translateX(-50%);
@@ -269,7 +294,11 @@
     text-align: center;
     color: white;
 }
-#controlPanelCommentatorText {
+/* Commentators */
+#controlPanelCommentators {
+    width: inherit;
+}
+.controlPanelText {
     position: absolute; top: 60px;
     font-family: Lexend; font-weight: 800; font-size: 20px;
     width: inherit;
@@ -299,3 +328,28 @@
     border: 5px solid white;
     color: black;
 }
+/* Round setting*/
+#controlPanelRoundSetting {
+    position: absolute; top: 320px;
+    width: inherit;
+}
+.sideRoundSetting {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    width: inherit; text-align: center;
+}
+#topRoundSetting { top: 120px; }
+.controlPanelRoundButton {
+    font-family: Lexend; font-weight: 400; font-size: 18px;
+    background-color: transparent;
+    border-radius: 20px; 
+    color: white;
+    border: 5px solid white;
+}
+.controlPanelRoundButton:active {
+    color: black;
+    background-color: white;
+}
+#controlPanelRoundSetting button { width: 80px; height: 80px; }
+#bottomRoundSetting { top: 210px; }
+#bottomRoundSetting button { width: 120px; }
+#controlPanelGrandFinalsButton { position: relative; top: -10px; }

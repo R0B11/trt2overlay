@@ -33,9 +33,12 @@
 					<img class="playerMatchScoreSword" src="static/redStar.png">
 				</div>
 			</section>
+			<!-- Round Name -->
+			<div id="roundName"></div>
 			<!-- Commentators -->
 			<section id="commentators">
 				<div class="commentatorName" id="commentatorName1"></div>
+				<div id="commentatorText">COMMENTATORS</div>
 				<div class="commentatorName" id="commentatorName2"></div>
 			</section>
 			<!-- Player Details Blue Side -->
@@ -79,6 +82,7 @@
 			</section>
 			<section id="mapScores">
 				<div class="positionAbsoluteInMiddle" id="mapScoreDifference">0</div>
+				<div class="positionAbsoluteInMiddle" id="mapScoreDifferenceArrow"></div>
 				<div class="positionAbsoluteInMiddle" id="equalEllipseContainer"><div id="equalEllipse"></div></div>
 				<div class="playerMapScore" id="redMapScore">1,000,000</div>
 				<div class="playerMapScore" id="blueMapScore">1,000,000</div>
@@ -100,12 +104,30 @@
 			</section>
 		</section>
 	</div>
+	<!-- Control Panel -->
 	<div id="controlPanel">
         <div class="controlPanelItems" id="controlPanelTitle">Control Panel</div>
-        <div id="controlPanelCommentatorText">Enter the commentator<br>names here - enter<br>'empty' to remove the <br>commentator</div>
-        <input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput1">
-        <input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput2">
-        <button class="controlPanelItems" id="changeCommentatorNames" onclick="changeCommentatorNames()">Change Commentator Names</button>
+		<!-- Commentators -->
+		<section id="controlPanelCommentators">
+			<div class="controlPanelText">Enter the commentator<br>names here - enter<br>'empty' to remove the <br>commentator</div>
+			<input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput1">
+			<input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput2">
+			<button class="controlPanelItems" id="changeCommentatorNames" onclick="changeCommentatorNames()">Change Commentator Names</button>
+		</section>
+		<!-- Round Setting -->
+		<section id="controlPanelRoundSetting">
+			<div class="controlPanelText">Choose the current found of the tournament:</div>
+			<div class="sideRoundSetting" id="topRoundSetting">
+				<button class="controlPanelRoundButton" onclick="changeRoundInformation('ROUND OF 16')">RO16</button>
+				<button class="controlPanelRoundButton" onclick="changeRoundInformation('QUARTERFINALS')">QF</button>
+				<button class="controlPanelRoundButton" onclick="changeRoundInformation('SEMIFINALS')">SF</button>
+			</div>
+			<div class="sideRoundSetting" id="bottomRoundSetting">
+				<button class="controlPanelRoundButton" onclick="changeRoundInformation('FINALS')">Finals</button>
+				<button class="controlPanelRoundButton" onclick="changeRoundInformation('GRAND FINALS')" id="controlPanelGrandFinalsButton">Grand Finals</button>
+			</div>
+
+		</section>
     </div>
 
 	<script src="index.js"></script>

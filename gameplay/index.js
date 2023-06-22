@@ -42,6 +42,9 @@ let commentatorNameInput2 = $("#commentatorNameInput2")
 let commentatorName1 = document.getElementById("commentatorName1")
 let commentatorName2 = document.getElementById("commentatorName2")
 
+// Round Name
+let roundName = $("#roundName")
+
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
     mapStatsAR: new CountUp('mapStatsAR', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
@@ -151,3 +154,5 @@ function changeCommentatorNames() {
     if (commentatorNameInput2.val().trim().toLowerCase() == "empty") commentatorName2.innerText = ""
     else if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
 }
+
+const changeRoundInformation = (roundText) => roundName.text(roundText)
