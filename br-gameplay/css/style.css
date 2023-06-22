@@ -45,7 +45,7 @@
 
 /* Map Stats */
 #mapStatsLeft { 
-    position: absolute; top: 21px; left: 837px;
+    position: absolute; top: 21px; left: 1246px;;
     width: 145px;
 }
 #mapStatsRight {
@@ -79,7 +79,6 @@
     width: 85px; 
     background-color: var(--lightGray);
 }
-#mapStatNumberBPM { background-color: var(--lightGray); }
 #SRStat {
     position: absolute; top: 73px;
     background-color: white;
@@ -98,7 +97,7 @@
 
 /* Current Map */
 #currentMap {
-    position: absolute; left: 982px; top: 21px; width: 403px;
+    position: absolute; left: 825px; top: 21px; width: 403px;
     font-family: 'Lexend'; font-weight: 600; 
 }
 #currentMapText {
@@ -311,7 +310,7 @@
 .left { color: var(--red); }
 .right { color: var(--blue); }
 
-::-webkit-scrollbar {  display: none; }
+/* ::-webkit-scrollbar {  display: none; } */
 
 /* Control Panel */
 #controlPanel {
