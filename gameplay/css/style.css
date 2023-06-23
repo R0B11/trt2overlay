@@ -123,6 +123,8 @@
 #mapStats { 
     position: absolute; top: 18px; left: 19px;
     width: 400px;
+    opacity: 1; 
+    transition: 500ms ease-in-out;
 }
 .topLineStatBox {
     width: 67px; height: 61px;
@@ -158,6 +160,10 @@
 }
 
 /* Map Scores */ 
+#mapScores {
+    opacity: 1;
+    transition: 500ms ease-in-out;
+}
 #mapScoreDifference {
     top: 20px;
     color: white;
@@ -223,6 +229,8 @@
 #mapDetails { 
     position: absolute; top: 17.5px; right: 16px;
     font-family: 'Lexend';
+    opacity: 1; 
+    transition: 500ms ease-in-out;
 }
 #currentPick {
     text-align: center;
@@ -279,6 +287,50 @@
     line-height: 31px;
     text-align: center;
 }
+
+/* Chat Display */
+#chatDisplay {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: inherit; height: inherit;
+    background-color: rgba(0,0,0,0.7);
+    font-family: Lexend; font-size: 18px;
+    overflow-x: hidden; overflow-y: scroll;
+    transition: ease-in-out 500ms;
+}
+.messageWrapper {
+    margin: 1.5px 5px 1.5px 5px;
+	display: flex;
+	text-align: left;
+}
+.messageTime {
+	width: 5%;
+	color: silver;
+	padding-right: 10px;
+    text-align: center;
+}
+.wholeMessage {
+	width: 92%;
+	display: flex;
+}
+.messageUser {
+	color: white;
+	white-space: nowrap;
+	width: max-content;
+}
+.messageText {
+    color: white;
+	white-space: normal;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+/* Colours Taken From https://github.com/VictimCrasher/static/tree/master/WaveTournament */
+.unknown { color: yellow; }
+.bot { color: #FF66AA; }
+.left { color: var(--red); }
+.right { color: var(--blue); }
+::-webkit-scrollbar { display: none; }
+
 
 /* Control Panel */
 #controlPanel {

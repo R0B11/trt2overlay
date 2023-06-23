@@ -45,6 +45,16 @@ let commentatorName2 = document.getElementById("commentatorName2")
 // Round Name
 let roundName = $("#roundName")
 
+// Chat 
+let scoreVisibility = false
+let chatDisplay = $("#chatDisplay");
+let chatLen = 0;
+let chatColour;
+// Chat Controls
+let mapStats = $("#mapStats")
+let mapScores = $("#mapScores")
+let mapDetails = $("#mapDetails")
+
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
     mapStatsAR: new CountUp('mapStatsAR', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
@@ -143,6 +153,64 @@ socket.onmessage = event => {
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
             currentSongSetCreator = data.menu.bm.metadata.mapper
             mapSetCreator.text(currentSongSetCreator.toUpperCase())
+        }
+    }
+
+    if (scoreVisibility != data.tourney.manager.bools.scoreVisibile) {
+        scoreVisibility = data.tourney.manager.bools.scoreVisibile
+        if (scoreVisibility) {
+            chatDisplay.css("opacity", 0)
+            mapStats.css("opacity", 1)
+            mapScores.css("opacity", 1)
+            mapDetails.css("opacity", 1)
+        } else {
+            chatDisplay.css("opacity", 1)
+            mapStats.css("opacity", 0)
+            mapScores.css("opacity", 0)
+            mapDetails.css("opacity", 0)
+        }
+    }
+    // Chat messages
+    if (!scoreVisibility) {
+        // Only happens if there are no new chats messages, or the chat length is the same
+        if (chatLen !== data.tourney.manager.chat.length) {
+            if (chatLen == 0 || (chatLen > 0 && chatLen > data.tourney.manager.chat.length)) {
+                // Reset everything for a new chat.
+				chatDisplay.innerHTML = "";
+				chatLen = 0;
+            }
+            
+            for (var i = chatLen; i < data.tourney.manager.chat.length; i++) {
+                chatColour = data.tourney.manager.chat[i].team;
+
+                let messageWrapper = document.createElement("div");
+                messageWrapper.setAttribute('class', 'messageWrapper');
+
+				let messageTime = document.createElement('div');
+				messageTime.setAttribute('class', 'messageTime');
+                messageTime.innerText = data.tourney.manager.chat[i].time;
+
+                let wholeMessage = document.createElement("div");
+                wholeMessage.setAttribute('class', 'wholeMessage');
+
+				let messageUser = document.createElement('div');
+				messageUser.setAttribute('class', 'messageUser');
+                messageUser.innerText = data.tourney.manager.chat[i].name + ":\xa0";
+
+                let messageText = document.createElement('div');
+				messageText.setAttribute('class', 'messageText');
+                messageText.innerText = data.tourney.manager.chat[i].messageBody;
+
+                messageUser.classList.add(chatColour);
+
+                messageWrapper.append(messageTime);
+                messageWrapper.append(wholeMessage);
+                wholeMessage.append(messageUser);
+                wholeMessage.append(messageText);
+                chatDisplay.append(messageWrapper);
+            }
+			chatLen = data.tourney.manager.chat.length;
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
         }
     }
 }
