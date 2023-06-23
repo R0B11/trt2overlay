@@ -245,7 +245,7 @@ socket.onmessage = event => {
     }
 }
 
-function changeCommentatorNames() {
+const changeCommentatorNames = () => {
     if (commentatorNameInput1.val().trim().toLowerCase() == "empty") commentatorName1.innerText = ""
     else if (commentatorNameInput1.val().trim() != "") commentatorName1.innerText = commentatorNameInput1.val().trim().toUpperCase()
 
@@ -254,3 +254,17 @@ function changeCommentatorNames() {
 }
 
 const changeRoundInformation = (roundText) => roundName.text(roundText)
+
+// Cookie to Win Screen
+const setCookieToWinScreen = (id, name, team, round) => {
+    let cookieValue = `winscreenWinnerID=${id}; path=/`
+    document.cookie = cookieValue
+    cookieValue = `winscreenWinnerName=${name}; path=/`
+    document.cookie = cookieValue
+    cookieValue = `winscreenWinnerTeam=${team}; path=/`
+    document.cookie = cookieValue
+    cookieValue = ` winscreenRoundName=${round}; path=/`
+    document.cookie = cookieValue
+}
+
+setCookieToWinScreen(12455868, "Fairy Bread", "red", "Grand Finals")
