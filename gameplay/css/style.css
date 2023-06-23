@@ -124,6 +124,8 @@
 #mapStats { 
     position: absolute; top: 18px; left: 19px;
     width: 400px;
+    opacity: 1; 
+    transition: 500ms ease-in-out;
 }
 .topLineStatBox {
     width: 67px; height: 61px;
@@ -159,6 +161,10 @@
 }
 
 /* Map Scores */ 
+#mapScores {
+    opacity: 1;
+    transition: 500ms ease-in-out;
+}
 #mapScoreDifference {
     top: 20px;
     color: white;
@@ -172,14 +178,14 @@
     transform: translateX(-50%) rotate(45deg);
 }
 .playerMapScore {
-    position: absolute; top: 146px; transform: translateX(-50%);
+    position: absolute; top: 146px; 
     font-size: 31px;
     font-family: 'IBM Plex Mono', monospace; 
     color: white;
     letter-spacing: 5px;
 }
-#redMapScore { left: 383px; }
-#blueMapScore { right: 166px; }
+#redMapScore { left: 383px; transform: translateX(-50%); }
+#blueMapScore { right: 383px; transform: translateX(50%); }
 
 /* Ellipse */
 #equalEllipseContainer {
@@ -195,6 +201,7 @@
     border-style: solid;
     border-width: 936px;
     border-radius:50%;
+    transition: 200ms ease-in-out;
 }
 /* Sword */
 #bottomSwordBackShadow {
@@ -224,6 +231,8 @@
 #mapDetails { 
     position: absolute; top: 17.5px; right: 16px;
     font-family: 'Lexend';
+    opacity: 1; 
+    transition: 500ms ease-in-out;
 }
 #currentPick {
     text-align: center;
@@ -280,6 +289,65 @@
     line-height: 31px;
     text-align: center;
 }
+
+/* Chat Display */
+#chatDisplay {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: inherit; height: inherit;
+    background-color: rgba(0,0,0,0.7);
+    font-family: Lexend; font-size: 18px;
+    overflow-x: hidden; overflow-y: scroll;
+    transition: ease-in-out 500ms;
+}
+.messageWrapper {
+    margin: 1.5px 5px 1.5px 5px;
+	display: flex;
+	text-align: left;
+}
+.messageTime {
+	width: 5%;
+	color: silver;
+	padding-right: 10px;
+    text-align: center;
+}
+.wholeMessage {
+	width: 92%;
+	display: flex;
+}
+.messageUser {
+	color: white;
+	white-space: nowrap;
+	width: max-content;
+}
+.messageText {
+    color: white;
+	white-space: normal;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+/* Colours Taken From https://github.com/VictimCrasher/static/tree/master/WaveTournament */
+.unknown { color: yellow; }
+.bot { color: #FF66AA; }
+.left { color: var(--red); }
+.right { color: var(--blue); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 0px; display: none; }
+::-webkit-scrollbar-track {
+    margin-top: 25px;
+    margin-bottom: 25px;
+	visibility: 0;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(0,0,0,0);
+	border-radius: 10px;
+}
+.text{
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Control Panel */
 #controlPanel {

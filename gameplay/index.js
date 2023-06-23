@@ -44,6 +44,25 @@ let currentSongSetCreator
 let currentSongID
 let poolMapFound = false
 
+// Chat 
+let scoreVisibility = false
+let chatDisplay = document.getElementById("chatDisplay");
+let chatLen = 0;
+let chatColour;
+// Chat Controls
+let mapStats = document.getElementById("mapStats");
+let mapScores = document.getElementById("mapScores");
+let mapDetails = document.getElementById("mapDetails");
+
+// Scores
+let redMapScore = $("#redMapScore")
+let blueMapScore = $("#blueMapScore")
+let mapScoreDifference = $("#mapScoreDifference")
+let equalEllipse = $("#equalEllipse")
+let currentMapScoreRed
+let currentMapScoreBlue
+let currentMapScoreDifference
+
 // Commentator Names
 let commentatorNameInput1 = $("#commentatorNameInput1")
 let commentatorNameInput2 = $("#commentatorNameInput2")
@@ -59,6 +78,9 @@ let animation = {
     mapStatsOD: new CountUp('mapStatsOD', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatsCS: new CountUp('mapStatsCS', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatsBPM: new CountUp('mapStatsBPM', 0, 0, 0, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    redMapScore: new CountUp('redMapScore', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    blueMapScore: new CountUp('blueMapScore', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    mapScoreDifference: new CountUp('mapScoreDifference', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
 }
 
 // Calculate AR and OD
@@ -153,8 +175,7 @@ socket.onmessage = event => {
             mapSetCreator.text(currentSongSetCreator.toUpperCase())
         }
     }
-
-    // Star Visibility
+      // Star Visibility
     if (starVisibility != data.tourney.manager.bools.starVisible) {
         starVisibility = data.tourney.manager.bools.starVisible
         if (starVisibility) {
@@ -204,9 +225,85 @@ socket.onmessage = event => {
             playerRightMatchScore.append(imgStar)
         }
     }
+  
+      if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
+
+    // Scores
+    if (scoreVisibility) {
+        chatDisplay.style.opacity = 0
+        mapStats.style.opacity = 1
+        mapScores.style.opacity = 1
+        mapDetails.style.opacity = 1
+
+        currentMapScoreRed = data.tourney.manager.gameplay.score.left
+        currentMapScoreBlue = data.tourney.manager.gameplay.score.right
+        currentMapScoreDifference = Math.abs(currentMapScoreRed - currentMapScoreBlue)
+
+        animation.redMapScore.update(currentMapScoreRed)
+        animation.blueMapScore.update(currentMapScoreBlue)
+        animation.mapScoreDifference.update(currentMapScoreDifference)
+
+        let rotation = -45
+        let rotationCalculation = Math.pow(Math.abs(currentMapScoreDifference / 400000), 0.5) * 0.8
+        if (rotationCalculation > 0.8) rotationCalculation = 0.8
+        rotationDegrees = -rotationCalculation * 30
+
+        if (currentMapScoreRed >= currentMapScoreBlue) { rotation -= rotationDegrees }
+        else rotation += rotationDegrees
+
+        equalEllipse.css("transform", `translateX(-50%) rotate(${rotation}deg)`)
+    }
+    // Chat messages
+    if (!scoreVisibility) {
+        chatDisplay.style.opacity = 1
+        mapStats.style.opacity = 0
+        mapScores.style.opacity = 0
+        mapDetails.style.opacity = 0
+
+        // Only happens if there are no new chats messages, or the chat length is the same
+        if (chatLen !== data.tourney.manager.chat.length) {
+            if (chatLen == 0 || (chatLen > 0 && chatLen > data.tourney.manager.chat.length)) {
+                // Reset everything for a new chat.
+				chatDisplay.innerHTML = "";
+				chatLen = 0;
+            }
+            
+            for (var i = chatLen; i < data.tourney.manager.chat.length; i++) {
+                chatColour = data.tourney.manager.chat[i].team;
+
+                let messageWrapper = document.createElement("div");
+                messageWrapper.setAttribute('class', 'messageWrapper');
+
+				let messageTime = document.createElement('div');
+				messageTime.setAttribute('class', 'messageTime');
+                messageTime.innerText = data.tourney.manager.chat[i].time;
+
+                let wholeMessage = document.createElement("div");
+                wholeMessage.setAttribute('class', 'wholeMessage');
+
+				let messageUser = document.createElement('div');
+				messageUser.setAttribute('class', 'messageUser');
+                messageUser.innerText = data.tourney.manager.chat[i].name + ":\xa0";
+
+                let messageText = document.createElement('div');
+				messageText.setAttribute('class', 'messageText');
+                messageText.innerText = data.tourney.manager.chat[i].messageBody;
+
+                messageUser.classList.add(chatColour);
+
+                messageWrapper.append(messageTime);
+                messageWrapper.append(wholeMessage);
+                wholeMessage.append(messageUser);
+                wholeMessage.append(messageText);
+                chatDisplay.append(messageWrapper);
+            }
+			chatLen = data.tourney.manager.chat.length;
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+    }
 }
 
-function changeCommentatorNames() {
+const changeCommentatorNames = () => {
     if (commentatorNameInput1.val().trim().toLowerCase() == "empty") commentatorName1.innerText = ""
     else if (commentatorNameInput1.val().trim() != "") commentatorName1.innerText = commentatorNameInput1.val().trim().toUpperCase()
 
@@ -215,3 +312,17 @@ function changeCommentatorNames() {
 }
 
 const changeRoundInformation = (roundText) => roundName.text(roundText)
+
+// Cookie to Win Screen
+const setCookieToWinScreen = (id, name, team, round) => {
+    let cookieValue = `winscreenWinnerID=${id}; path=/`
+    document.cookie = cookieValue
+    cookieValue = `winscreenWinnerName=${name}; path=/`
+    document.cookie = cookieValue
+    cookieValue = `winscreenWinnerTeam=${team}; path=/`
+    document.cookie = cookieValue
+    cookieValue = ` winscreenRoundName=${round}; path=/`
+    document.cookie = cookieValue
+}
+
+setCookieToWinScreen(12455868, "Fairy Bread", "red", "Grand Finals")
