@@ -1,3 +1,65 @@
+// Connecting to server
+let socket = new ReconnectingWebSocket("ws://" + location.host + "/ws")
+socket.onopen = () => console.log("Successfully Connected")
+socket.onclose = event => {
+    console.log("Socket Closed Connection: ", event)
+    socket.send("Client Closed!")
+};
+socket.onerror = error => console.log("Socket Error: ", error)
+
+// Match scores
+matchScoresRed = $("#matchScoresRed")
+matchScoresBlue = $("#matchScoresBlue")
+let currentBestOf
+let currentMatchScoreRed
+let currentMatchScoreBlue
+let starVisibility
+
+socket.onmessage = event => {
+    let data = JSON.parse(event.data)
+    console.log(data)
+
+    // Star Generation
+    if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
+        currentMatchScoreRed != data.tourney.manager.stars.left ||
+        currentMatchScoreBlue != data.tourney.manager.stars.right) {
+            
+        currentBestOf = Math.ceil(data.tourney.manager.bestOF / 2)
+        currentMatchScoreRed = data.tourney.manager.stars.left
+        currentMatchScoreBlue = data.tourney.manager.stars.right
+        matchScoresRed.html("")
+        matchScoresBlue.html("")
+        // Left Stars
+        let i = 0
+        for (i; i < currentMatchScoreRed; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            matchScoresRed.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/redStar.png")
+            matchScoresRed.append(imgStar)
+        }
+        // Right Stars
+        i = 0;
+        for (i; i < currentMatchScoreBlue; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            matchScoresBlue.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/blueStar.png")
+            matchScoresBlue.append(imgStar)
+        }
+    }
+}
+
 /*
 function generateTiles(banNum, bestOf) {
     var lengthTrackerRed = 10;
