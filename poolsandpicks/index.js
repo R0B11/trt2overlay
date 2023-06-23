@@ -1,180 +1,13 @@
-/*
-function generateTiles(banNum, bestOf) {
-    var lengthTrackerRed = 10;
-    var lengthTrackerBlue = 50;
-
-    for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
-        // Checking if a ban card needs to be made
-        if (i < banNum) {
-            // Red Side
-            // Create outer div
-            if (i == 1){
-
-                lengthTrackerRed *= 1.6;
-
-                var redOuterDiv = $('<div/>', {
-                    id: `redBan${i}`,
-                    class: 'mapCardRed',
-                }).css({
-                    'left': `${lengthTrackerRed}px`,
-                    'background-image': "url('./static/red-ban-tile.png')"
-                });
-                
-            }
-            else {
-                var redOuterDiv = $('<div/>', {
-                    id: `redBan${i}`,
-                    class: 'mapCardRed',
-                }).css({
-                    'left': `${lengthTrackerRed}px`,
-                    'background-image': "url('./static/red-ban-tile.png')"
-                });
-            };
-
-            $('<div/>', {
-                id: 'mapCardContent',
-                class: 'tile-picking',
-                text: 'BANNING'
-            }).appendTo(redOuterDiv);
-
-            var mapslotBlock = $('<div/>', {
-                id: 'map-slot-block'
-            });
-
-            $('<div/>', {
-                class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
-
-            redOuterDiv.append(mapslotBlock);
-
-            // Append outer div to body or other container
-            $('#redBanArea').append(redOuterDiv);
-
-            // Blue Side
-
-            // Create outer div
-            var blueOuterDiv = $('<div/>', {
-                id: `blueBan${i}`,
-                class: 'mapCardBlue',
-            }).css({
-                'left': `${lengthTrackerBlue}px`,
-                'background-image': "url('./static/blue-ban-tile.png')"
-            });
-
-            $('<div/>', {
-                id: 'mapCardContent',
-                class: 'tile-picking',
-                text: 'BANNING'
-            }).appendTo(blueOuterDiv);
-
-            var mapslotBlock = $('<div/>', {
-                id: 'map-slot-block'
-            });
-
-            $('<div/>', {
-                class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
-
-            blueOuterDiv.append(mapslotBlock);
-
-            // Append outer div to body
-            $('#blueBanArea').append(blueOuterDiv);
-        }
-        // If a ban card does not need to be made anymore, pick cards will be generated
-        else {
-            // Red Side
-            var redOuterDiv = $('<div/>', {
-                id: `redPick${i}`,
-                class: 'mapCardRed',
-            }).css({
-                'left': `${lengthTrackerRed}px`
-            });
-
-
-            $('<div/>', {
-                id: 'mapCardContent',
-                class: 'tile-picking',
-                text: 'PICKING'
-            }).appendTo(redOuterDiv);
-
-            var mapslotBlock = $('<div/>', {
-                id: 'map-slot-block'
-            });
-
-            $('<div/>', {
-                class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
-
-            redOuterDiv.append(mapslotBlock);
-
-            // Append outer div to body
-            $('#redPickArea').append(redOuterDiv);
-
-            // Blue Side 
-            if (i == 2){
-                lengthTrackerBlue *= 1.25
-
-                var blueOuterDiv = $('<div/>', {
-                    id: `bluePick${i}`,
-                    class: 'mapCardBlue',
-                }).css({
-                    'left': `${lengthTrackerBlue}px`
-                });
-            }
-
-            else {
-                var blueOuterDiv = $('<div/>', {
-                    id: `bluePick${i}`,
-                    class: 'mapCardBlue',
-                }).css({
-                    'left': `${lengthTrackerBlue}px`
-                });
-            }
-            
-            $('<div/>', {
-                id: 'mapCardContent',
-                class: 'tile-picking',
-                text: 'PICKING'
-            }).appendTo(blueOuterDiv);
-
-            var mapslotBlock = $('<div/>', {
-                id: 'map-slot-block'
-            });
-
-            $('<div/>', {
-                class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
-
-            blueOuterDiv.append(mapslotBlock);
-
-            // Append outer div to body
-            $('#bluePickArea').append(blueOuterDiv);
-        }
-
-        lengthTrackerRed+= 140;
-        lengthTrackerBlue+= 140;
-    }
-}
-*/
-
 function generateTiles(firstPick, firstBan, banNum, bestOf) {
     for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
             // Red Side
-            // Create outer div
-            if (i == 1){
-                var redOuterDiv = $('<div/>', {
-                    id: `redBan${i}`,
-                    class: 'mapCard banCardRed',
-                })
-            }
-            else {
-                var redOuterDiv = $('<div/>', {
-                    id: `redBan${i}`,
-                    class: 'mapCard banCardRed',
-                })
-            };
+            // Create and combine all elements before adding it to the div
+            var redOuterDiv = $('<div/>', {
+                id: `redBan${i+1}`,
+                class: 'mapCard banCardRed',
+            })
 
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
@@ -191,14 +24,13 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
 
             redOuterDiv.append(mapslotBlock);
 
-            // Append outer div to body or other container
+            // Append outer div to body
             $('#redBanArea').append(redOuterDiv);
 
             // Blue Side
-
-            // Create outer div
+            // Create and combine all elements before adding it to the div
             var blueOuterDiv = $('<div/>', {
-                id: `blueBan${i}`,
+                id: `blueBan${i+1}`,
                 class: 'mapCard banCardBlue',
             })
             $('<div/>', {
@@ -222,11 +54,12 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
         // If a ban card does not need to be made anymore, pick cards will be generated
         else {
             // Red Side
+            // Create and combine all elements before adding it to the div
             var redOuterDiv = $('<div/>', {
-                id: `redPick${i}`,
+                id: `redPick${i-1}`,
                 class: 'mapCard pickCardRed',
+                style: 'opacity: 0'
             })
-
 
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
@@ -247,19 +80,12 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             $('#redPickArea').append(redOuterDiv);
 
             // Blue Side 
-            if (i == 2){
-                var blueOuterDiv = $('<div/>', {
-                    id: `bluePick${i}`,
-                    class: 'mapCard pickCardBlue',
-                })
-            }
-
-            else {
-                var blueOuterDiv = $('<div/>', {
-                    id: `bluePick${i}`,
-                    class: 'mapCard pickCardBlue',
-                })
-            }
+            // Create and combine all elements before adding it to the div
+            var blueOuterDiv = $('<div/>', {
+                id: `bluePick${i-1}`,
+                class: 'mapCard pickCardBlue',
+                style: 'opacity: 0'
+            })
             
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
@@ -281,7 +107,9 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
         }
     }
 
+    // Placing the correct ban card first based on first ban
     if ( firstBan == 'blue' ){
+        // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {
             $("#blueBanArea").css({
                 "width": "175px",
@@ -292,14 +120,22 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 "justify-content": "center"
             });
             $(".banCardRed").css("left","40px");
+            // Hide Bans until they need to be shown
+            $("#redBan1").css("opacity","0");
         }
+        // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
             $("#blueBanArea").css("justify-content","space-between");
             $("#redBanArea").css("justify-content","center");
+            // Hide Bans until they need to be shown
+            $("#redBan1").css("opacity","0");
+            $("#redBan2").css("opacity","0");
+            $("#blueBan2").css("opacity","0");
         }
     }
-
+    // Do the same, but red bans first
     else if ( firstBan == 'red' ){
+        // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {  
             $("#blueBanArea").css({
                 "width": "175px",
@@ -310,16 +146,32 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 "justify-content": "center"
             });
             $(".banCardBlue").css("left","40px");
+            // Hide Bans until they need to be shown
+            $("#blueBan1").css("opacity","0");
         }
+        // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
             $("#redBanArea").css("justify-content","space-between");
             $("#blueBanArea").css("justify-content","center");
+            // Hide Bans until they need to be shown
+            $("#blueBan1").css("opacity","0");
+            $("#blueBan2").css("opacity","0");
+            $("#redBan2").css("opacity","0");
         } 
     }
-
+    // Used to even out the space left by a lower amount of picks
+    if (bestOf < 13) {
+        $(".pickArea").css("justify-content", "space-between");
+    }
+    // Placing the first pick properly in the timeline
     if (firstPick == "blue") { $(`.pickCardRed`).css("left","50px"); }
     else if (firstPick == "red") { $(`.pickCardBlue`).css("left","50px"); }
 }
 
+let matchActionStatus = 1;
 
-generateTiles("blue", "red", 2, 13);
+function buttonge(){
+
+}
+
+generateTiles("red", "blue", 1, 11);

@@ -32,7 +32,7 @@ html {
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/picksBansPNG.png");
+    background-image: url("../static/picksBansPNG2.png");
     background-size: cover;
 }
 
@@ -128,6 +128,19 @@ html {
 
 /* ---------- Pick Area ---------- */
 
+/* White Line Seperator */
+
+.whiteLine {
+    position: absolute;
+    left: 0px;
+    top: 536px;
+    width: 1910px;
+    height: 8px;
+    background-color: white;
+}
+
+/* Red Pick Area */
+
 #redPicksBans {
     position: absolute; height: 460px; width: 1385px;
     right: 0px;
@@ -135,6 +148,8 @@ html {
     display: flex;
     justify-content: flex-start;
 }
+
+/* Blue Pick Area */
 
 #bluePicksBans {
     position: absolute; height: 460px; width: 1385px;
@@ -144,13 +159,19 @@ html {
     justify-content: flex-start;
 }
 
+/* Blue Ban Area */
+
 #blueBanArea {
     justify-content: center;
 }
 
+/* Red Ban Area */
+
 #redBanArea {
     justify-content: space-between;
 }
+
+/* Styling for ban and pick boxes */
 
 .banArea {
     height: 460px;
@@ -162,12 +183,14 @@ html {
 
 .pickArea {
     height: 460px;
-    width: 880px;
+    width: 1000px;
     display: flex;
     justify-content: left;
     align-items: center;
     background-color: transparent;
 }
+
+/* Styling for individual cards */
 
 .mapCard {
     position: relative;
@@ -216,11 +239,15 @@ html {
   letter-spacing: -5px;
 }
 
+/* Animation for the ellipses  */
+
 .tile-picking::after {
     display: inline-block;
     animation: dotty steps(1,end) 1s infinite;
     content: '';
 }
+
+/* Map Slot Styling */
 
 #map-slot-block {
   clip-path: polygon(0% 45%, 59% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -241,4 +268,28 @@ html {
   font-size: 23px;
   color: white;
   letter-spacing: 2px;
+}
+
+/* Tiebreaker */
+
+#tiebreakerCard {
+    position: absolute;
+    right: 5px;
+    top: 375px;
+    width: 85px;
+    height: 330px;
+    background-size: cover;
+    background-image: url('../static/tiebreaker-tile.png');
+}
+
+.tiebreakerText {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    letter-spacing: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
