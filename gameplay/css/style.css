@@ -177,14 +177,14 @@
     transform: translateX(-50%) rotate(45deg);
 }
 .playerMapScore {
-    position: absolute; top: 146px; transform: translateX(-50%);
+    position: absolute; top: 146px; 
     font-size: 31px;
     font-family: 'IBM Plex Mono', monospace; 
     color: white;
     letter-spacing: 5px;
 }
-#redMapScore { left: 383px; }
-#blueMapScore { right: 166px; }
+#redMapScore { left: 383px; transform: translateX(-50%); }
+#blueMapScore { right: 383px; transform: translateX(50%); }
 
 /* Ellipse */
 #equalEllipseContainer {
@@ -200,6 +200,7 @@
     border-style: solid;
     border-width: 936px;
     border-radius:50%;
+    transition: 200ms ease-in-out;
 }
 /* Sword */
 #bottomSwordBackShadow {
@@ -329,7 +330,22 @@
 .bot { color: #FF66AA; }
 .left { color: var(--red); }
 .right { color: var(--blue); }
-::-webkit-scrollbar { display: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 0px; display: none; }
+::-webkit-scrollbar-track {
+    margin-top: 25px;
+    margin-bottom: 25px;
+	visibility: 0;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(0,0,0,0);
+	border-radius: 10px;
+}
+.text{
+    display: flex;
+    justify-content: center;
+}
 
 
 /* Control Panel */

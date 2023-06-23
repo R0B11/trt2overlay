@@ -36,6 +36,25 @@ let currentSongSetCreator
 let currentSongID
 let poolMapFound = false
 
+// Chat 
+let scoreVisibility = false
+let chatDisplay = document.getElementById("chatDisplay");
+let chatLen = 0;
+let chatColour;
+// Chat Controls
+let mapStats = document.getElementById("mapStats");
+let mapScores = document.getElementById("mapScores");
+let mapDetails = document.getElementById("mapDetails");
+
+// Scores
+let redMapScore = $("#redMapScore")
+let blueMapScore = $("#blueMapScore")
+let mapScoreDifference = $("#mapScoreDifference")
+let equalEllipse = $("#equalEllipse")
+let currentMapScoreRed
+let currentMapScoreBlue
+let currentMapScoreDifference
+
 // Commentator Names
 let commentatorNameInput1 = $("#commentatorNameInput1")
 let commentatorNameInput2 = $("#commentatorNameInput2")
@@ -45,22 +64,15 @@ let commentatorName2 = document.getElementById("commentatorName2")
 // Round Name
 let roundName = $("#roundName")
 
-// Chat 
-let scoreVisibility = false
-let chatDisplay = $("#chatDisplay");
-let chatLen = 0;
-let chatColour;
-// Chat Controls
-let mapStats = $("#mapStats")
-let mapScores = $("#mapScores")
-let mapDetails = $("#mapDetails")
-
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
     mapStatsAR: new CountUp('mapStatsAR', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatsOD: new CountUp('mapStatsOD', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatsCS: new CountUp('mapStatsCS', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     mapStatsBPM: new CountUp('mapStatsBPM', 0, 0, 0, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    redMapScore: new CountUp('redMapScore', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    blueMapScore: new CountUp('blueMapScore', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    mapScoreDifference: new CountUp('mapScoreDifference', 0, 0, 0, .2, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
 }
 
 // Calculate AR and OD
@@ -156,22 +168,40 @@ socket.onmessage = event => {
         }
     }
 
-    if (scoreVisibility != data.tourney.manager.bools.scoreVisibile) {
-        scoreVisibility = data.tourney.manager.bools.scoreVisibile
-        if (scoreVisibility) {
-            chatDisplay.css("opacity", 0)
-            mapStats.css("opacity", 1)
-            mapScores.css("opacity", 1)
-            mapDetails.css("opacity", 1)
-        } else {
-            chatDisplay.css("opacity", 1)
-            mapStats.css("opacity", 0)
-            mapScores.css("opacity", 0)
-            mapDetails.css("opacity", 0)
-        }
+    if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
+
+    // Scores
+    if (scoreVisibility) {
+        chatDisplay.style.opacity = 0
+        mapStats.style.opacity = 1
+        mapScores.style.opacity = 1
+        mapDetails.style.opacity = 1
+
+        currentMapScoreRed = data.tourney.manager.gameplay.score.left
+        currentMapScoreBlue = data.tourney.manager.gameplay.score.right
+        currentMapScoreDifference = Math.abs(currentMapScoreRed - currentMapScoreBlue)
+
+        animation.redMapScore.update(currentMapScoreRed)
+        animation.blueMapScore.update(currentMapScoreBlue)
+        animation.mapScoreDifference.update(currentMapScoreDifference)
+
+        let rotation = -45
+        let rotationCalculation = Math.pow(Math.abs(currentMapScoreDifference / 400000), 0.5) * 0.8
+        if (rotationCalculation > 0.8) rotationCalculation = 0.8
+        rotationDegrees = -rotationCalculation * 30
+
+        if (currentMapScoreRed >= currentMapScoreBlue) { rotation -= rotationDegrees }
+        else rotation += rotationDegrees
+
+        equalEllipse.css("transform", `translateX(-50%) rotate(${rotation}deg)`)
     }
     // Chat messages
     if (!scoreVisibility) {
+        chatDisplay.style.opacity = 1
+        mapStats.style.opacity = 0
+        mapScores.style.opacity = 0
+        mapDetails.style.opacity = 0
+
         // Only happens if there are no new chats messages, or the chat length is the same
         if (chatLen !== data.tourney.manager.chat.length) {
             if (chatLen == 0 || (chatLen > 0 && chatLen > data.tourney.manager.chat.length)) {
