@@ -124,7 +124,7 @@ html {
     position: absolute; top: 15px; left: 33px;
     display: flex;
 }
-.matchScoreSword { width: 28px; height: 30px; margin-right: 24px; }
+.matchScoreSword { width: 32px; height: 32px; margin-right: 20px; }
 
 /* ---------- Pick Area ---------- */
 
@@ -210,7 +210,6 @@ html {
 
 .mapCardContent {
     position: absolute;
-    background-image:;
     background-position: center;
     background-size: cover;
     opacity: 1;

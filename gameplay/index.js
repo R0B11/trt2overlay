@@ -25,6 +25,14 @@ let currentCS
 let currentBPM
 let currentMapMod = ""
 
+// Stars
+let playerLeftMatchScore = $("#playerLeftMatchScore")
+let playerRightMatchScore = $("#playerRightMatchScore")
+let currentBestOf
+let currentMatchScoreRed
+let currentMatchScoreBlue
+let starVisibility
+
 // Map Details
 let mapArtistAndName = $("#mapArtistAndName")
 let mapDifficulty = $("#mapDifficulty")
@@ -167,8 +175,58 @@ socket.onmessage = event => {
             mapSetCreator.text(currentSongSetCreator.toUpperCase())
         }
     }
-
-    if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
+      // Star Visibility
+    if (starVisibility != data.tourney.manager.bools.starVisible) {
+        starVisibility = data.tourney.manager.bools.starVisible
+        if (starVisibility) {
+            playerLeftMatchScore.css("opacity", 1)
+            playerRightMatchScore.css("opacity", 1)
+        } else {
+            playerLeftMatchScore.css("opacity", 0)
+            playerRightMatchScore.css("opacity", 0)
+        }
+    }
+    // Star Generation
+    if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
+        currentMatchScoreRed != data.tourney.manager.stars.left ||
+        currentMatchScoreBlue != data.tourney.manager.stars.right) {
+            
+        currentBestOf = Math.ceil(data.tourney.manager.bestOF / 2)
+        currentMatchScoreRed = data.tourney.manager.stars.left
+        currentMatchScoreBlue = data.tourney.manager.stars.right
+        playerLeftMatchScore.html("")
+        playerRightMatchScore.html("")
+        // Left Stars
+        let i = 0
+        for (i; i < currentMatchScoreRed; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("playerMatchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            playerLeftMatchScore.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("playerMatchScoreSword")
+            imgStar.setAttribute("src", "static/redStar.png")
+            playerLeftMatchScore.append(imgStar)
+        }
+        // Right Stars
+        i = 0;
+        for (i; i < currentMatchScoreBlue; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("playerMatchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            playerRightMatchScore.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("playerMatchScoreSword")
+            imgStar.setAttribute("src", "static/blueStar.png")
+            playerRightMatchScore.append(imgStar)
+        }
+    }
+  
+      if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
 
     // Scores
     if (scoreVisibility) {

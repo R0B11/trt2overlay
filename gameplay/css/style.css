@@ -62,7 +62,8 @@
 .playerMatchScore {
     position: absolute; top: 88px; 
     width: 400px;
-    display: flex;   
+    display: flex;
+    transition: 500ms ease-in-out;   
 }
 #playerLeftMatchScore { left: 6px; }
 #playerRightMatchScore {
