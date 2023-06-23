@@ -1,3 +1,11 @@
+let pickOrder = "blue";
+let banOrder = "red"
+let banNum = 2;
+let bestOf = 13;
+
+
+
+
 function generateTiles(firstPick, firstBan, banNum, bestOf) {
     for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
@@ -56,7 +64,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             // Red Side
             // Create and combine all elements before adding it to the div
             var redOuterDiv = $('<div/>', {
-                id: `redPick${i-1}`,
+                id: `redPick${i+1}`,
                 class: 'mapCard pickCardRed',
                 style: 'opacity: 0'
             })
@@ -82,7 +90,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             // Blue Side 
             // Create and combine all elements before adding it to the div
             var blueOuterDiv = $('<div/>', {
-                id: `bluePick${i-1}`,
+                id: `bluePick${i+1}`,
                 class: 'mapCard pickCardBlue',
                 style: 'opacity: 0'
             })
@@ -171,7 +179,93 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
 let matchActionStatus = 1;
 
 function buttonge(){
-
+    // Replace data in current tile
+    // Check ban num
+    if (bestOf == 13){
+        switch (matchActionStatus) {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                
+                break;
+            case 8:
+                
+                break;
+            case 9:
+                
+                break;    
+            default:
+                break;
+        }
+    }
+    else if (bestOf == 11) {
+        switch (matchActionStatus) {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                
+                break;   
+            default:
+                break;
+        }
+    }
+    else {
+        switch (matchActionStatus) {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break; 
+            default:
+                break;
+        }
+    };
+    
 }
 
-generateTiles("red", "blue", 1, 11);
+generateTiles(pickOrder, banOrder, banNum, bestOf);
