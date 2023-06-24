@@ -94,17 +94,18 @@
 	</div>
 	<!-- Control Panel -->
 	<div id="controlPanel">
-        <div class="controlPanelItems" id="controlPanelTitle">Control Panel</div>
 		<!-- Commentators -->
 		<section id="controlPanelCommentators">
-			<div class="controlPanelText">Enter the commentator<br>names here - enter<br>'empty' to remove the <br>commentator</div>
+			<div class="controlPanelText">Enter the commentator<br>names here - enter 'empty' to remove the commentator</div>
 			<input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput1">
 			<input class="controlPanelItems controlPanelInput" type="text" id="commentatorNameInput2">
 			<button class="controlPanelItems" id="changeCommentatorNames" onclick="changeCommentatorNames()">Change Commentator Names</button>
 		</section>
+		<!-- Divider 1 -->
+		<div class="controlPanelDivider" id="controlPanelDivider1"></div>
 		<!-- Round Setting -->
 		<section id="controlPanelRoundSetting">
-			<div class="controlPanelText">Choose the current found of the tournament:</div>
+			<div class="controlPanelText" id="controlPanelCurrentRoundText">Choose the current round<br> of the tournament:</div>
 			<div class="sideRoundSetting" id="topRoundSetting">
 				<button class="controlPanelRoundButton" onclick="changeRoundInformation('ROUND OF 16')">RO16</button>
 				<button class="controlPanelRoundButton" onclick="changeRoundInformation('QUARTERFINALS')">QF</button>
@@ -115,6 +116,8 @@
 				<button class="controlPanelRoundButton" onclick="changeRoundInformation('GRAND FINALS')" id="controlPanelGrandFinalsButton">Grand Finals</button>
 			</div>
 		</section>
+		<!-- Divider 2 -->
+		<div class="controlPanelDivider" id="controlPanelDivider2"></div>
     </div>
 
 	<script src="index.js"></script>
