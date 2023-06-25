@@ -26,93 +26,69 @@
 #playersLeft { left: 50px; }
 #playersRight { right: 50px; }
 /* Player Element */
-.leftSidePlayer {
+.sidePlayer {
     width: 411px; height: 65px;
     background-color: var(--borderGray);
     border-radius: 3px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 9% 100%, 0% 45%);
 }
-.rightSidePlayer {
-    width: 411px; height: 65px;
-    background-color: var(--borderGray);
-    border-radius: 3px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 91% 100%, 0% 100%);
-}
+.leftSidePlayer { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 9% 100%, 0% 45%); }
+.rightSidePlayer { clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 91% 100%, 0% 100%); }
 /* Overlay Element */
-.leftSidePlayerOverlay {
+.sidePlayerOverlay {
     position: relative; top: 3px; left: 3px;
     width: 406px; height: 60px;
     background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.5% 100%, 0% 43%);
 }
-.rightSidePlayerOverlay {
-    position: relative; top: 3px; left: 3px;
-    width: 406px; height: 60px;
-    background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 0% 100%, 91.5% 100%, 100% 43%, 100% 0%);
-}
+.leftSidePlayerOverlay { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.5% 100%, 0% 43%); }
+.rightSidePlayerOverlay { clip-path: polygon(0% 0%, 0% 100%, 91.5% 100%, 100% 43%, 100% 0%); }
 /* Seed Element */
-.leftSidePlayerSeeding {
-    position: relative; top: -51px; left: 9px;
+.sidePlayerSeeding {
+    position: relative; top: -51px; 
     background-color: var(--elementGray);
     color: var(--textGray);
     width: 91px; height: 48px;
-    clip-path: polygon(0% 0%, 68% 0%, 100% 57%, 100% 100%, 36% 100%, 0% 33%);
     text-align: center;
     font-family: 'IBM Plex Mono', monospace; font-size: 32px;
-    line-height: 49px;
+    line-height: 48px;
+}
+.leftSidePlayerSeeding {
+    left: 9px;
+    clip-path: polygon(0% 0%, 68% 0%, 100% 57%, 100% 100%, 36% 100%, 0% 33%);
 }
 .rightSidePlayerSeeding {
-    position: relative; top: -51px; left: 314px;
-    background-color: var(--elementGray);
-    color: var(--textGray);
-    width: 91px; height: 48px;
+    left: 314px;
     clip-path: polygon(100% 0%,36% 0%, 0% 57%, 0% 100%, 64% 100%, 100% 33%);
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace; font-size: 32px;
-    line-height: 49px;
 }
 /* Country */
-.leftSidePlayerFlag {
-    position: relative; top: -91px; left: 122px;
+.sidePlayerFlag {
+    position: relative; top: -91px; 
     background-color: var(--elementGray);
     width: 44px; height: 29px;
     border-radius: 6px;
 }
-.rightSidePlayerFlag {
-    position: relative; top: -91px; left: 248px;
-    background-color: var(--elementGray);
-    width: 44px; height: 29px;
-    border-radius: 6px;
-}
+.leftSidePlayerFlag { left: 122px; }
+.rightSidePlayerFlag { left: 248px; }
 /* Player Name */
-.leftSidePlayerName {
-    position: relative; top: -114.5px; left: 188px;
+.sidePlayerName {
+    position: relative; top: -114.5px; 
     color: var(--textGray);
     font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 15.3px;
     letter-spacing: 1.5px;
 }
-.rightSidePlayerName {
-    position: relative; top: -114.5px; left: 63px;
+.leftSidePlayerName { left: 188px; }
+.rightSidePlayerName { 
+    left: 63px;
     width: 163px; text-align: right;
-    color: var(--textGray);
-    font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 15.3px;
-    letter-spacing: 1.5px;
 }
 /* Profile Picture */
-.leftSideProfilePicture {
-    position: relative; left: 347px; top: -154px;
+.sideProfilePicture {
+    position: relative; 
     width: 60px; height: 60px;
     background-color: var(--elementGray);
     border-left: 2px solid var(--borderGray);
 }
-.rightSideProfilePicture {
-    position: relative; left: 3px; top: -153px;
-    width: 60px; height: 60px;
-    background-color: var(--elementGray);
-    border-right: 2px solid var(--borderGray);
-}
-
+.leftSideProfilePicture { left: 347px; top: -154px; }
+.rightSideProfilePicture { left: 3px; top: -153px; }
 
 /* Now Playing Section */
 #nowPlayingSection {
@@ -126,5 +102,4 @@
 #nowPlayingSongArtist {
     position: absolute; right: 247px;
     color: white;
-    letter-spacing: -.2px;
 }
