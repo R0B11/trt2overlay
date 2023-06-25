@@ -1,5 +1,5 @@
 let pickOrder = "blue";
-let banOrder = "red"
+let banOrder = "blue"
 let banNum = 2;
 let bestOf = 13;
 
@@ -26,9 +26,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 id: 'map-slot-block'
             });
 
-            $('<div/>', {
+            var mapBlockText = $('<div/>', {
                 class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
+            });
+
+            $('<span/>',{
+                text: '',
+                id: 'mapslottext',
+            }).appendTo(mapBlockText);
+
+            mapslotBlock.append(mapBlockText);
 
             redOuterDiv.append(mapslotBlock);
 
@@ -50,9 +57,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 id: 'map-slot-block'
             });
 
-            $('<div/>', {
+            var mapBlockText = $('<div/>', {
                 class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
+            });
+
+            $('<span/>',{
+                text: '',
+                id: 'mapslottext',
+            }).appendTo(mapBlockText);
+
+            mapslotBlock.append(mapBlockText);
 
             blueOuterDiv.append(mapslotBlock);
 
@@ -66,7 +80,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             var redOuterDiv = $('<div/>', {
                 id: `redPick${i+1}`,
                 class: 'mapCard pickCardRed',
-                style: 'opacity: 0'
+                style: 'opacity: 1'
             })
 
             $('<div/>', {
@@ -78,9 +92,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 id: 'map-slot-block'
             });
 
-            $('<div/>', {
+            var mapBlockText = $('<div/>', {
                 class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
+            });
+
+            $('<span/>',{
+                text: '',
+                id: 'mapslottext',
+            }).appendTo(mapBlockText);
+
+            mapslotBlock.append(mapBlockText);
 
             redOuterDiv.append(mapslotBlock);
 
@@ -92,7 +113,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             var blueOuterDiv = $('<div/>', {
                 id: `bluePick${i+1}`,
                 class: 'mapCard pickCardBlue',
-                style: 'opacity: 0'
+                style: 'opacity: 1'
             })
             
             $('<div/>', {
@@ -104,9 +125,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
                 id: 'map-slot-block'
             });
 
-            $('<div/>', {
+            var mapBlockText = $('<div/>', {
                 class: 'map-slot-content',
-            }).appendTo(mapslotBlock);
+            });
+
+            $('<span/>',{
+                text: '',
+                id: 'mapslottext',
+            }).appendTo(mapBlockText);
+
+            mapslotBlock.append(mapBlockText);
 
             blueOuterDiv.append(mapslotBlock);
 
@@ -129,16 +157,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             });
             $(".banCardRed").css("left","40px");
             // Hide Bans until they need to be shown
-            $("#redBan1").css("opacity","0");
+            // $("#redBan1").css("opacity","0");
         }
         // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
             $("#blueBanArea").css("justify-content","space-between");
             $("#redBanArea").css("justify-content","center");
             // Hide Bans until they need to be shown
-            $("#redBan1").css("opacity","0");
-            $("#redBan2").css("opacity","0");
-            $("#blueBan2").css("opacity","0");
+            // $("#redBan1").css("opacity","0");
+            // $("#redBan2").css("opacity","0");
+            // $("#blueBan2").css("opacity","0");
         }
     }
     // Do the same, but red bans first
@@ -155,16 +183,16 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
             });
             $(".banCardBlue").css("left","40px");
             // Hide Bans until they need to be shown
-            $("#blueBan1").css("opacity","0");
+            // $("#blueBan1").css("opacity","0");
         }
         // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
             $("#redBanArea").css("justify-content","space-between");
             $("#blueBanArea").css("justify-content","center");
             // Hide Bans until they need to be shown
-            $("#blueBan1").css("opacity","0");
-            $("#blueBan2").css("opacity","0");
-            $("#redBan2").css("opacity","0");
+            // $("#blueBan1").css("opacity","0");
+            // $("#blueBan2").css("opacity","0");
+            // $("#redBan2").css("opacity","0");
         } 
     }
     // Used to even out the space left by a lower amount of picks
@@ -181,91 +209,106 @@ let matchActionStatus = 1;
 function buttonge(){
     // Replace data in current tile
     // Check ban num
-    if (bestOf == 13){
-        switch (matchActionStatus) {
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-                
-                break;
-            case 5:
-                
-                break;
-            case 6:
-                
-                break;
-            case 7:
-                
-                break;
-            case 8:
-                
-                break;
-            case 9:
-                
-                break;    
-            default:
-                break;
-        }
-    }
-    else if (bestOf == 11) {
-        switch (matchActionStatus) {
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-                
-                break;
-            case 5:
-                
-                break;
-            case 6:
-                
-                break;
-            case 7:
-                
-                break;   
-            default:
-                break;
-        }
-    }
-    else {
-        switch (matchActionStatus) {
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-                
-                break;
-            case 5:
-                
-                break;
-            case 6:
-                
-                break; 
-            default:
-                break;
-        }
-    };
-    
+    switch (bestOf){
+        case 13:
+            switch (matchActionStatus) {
+                case 1:
+                    switch (banOrder){
+                        case "blue":
+                            $("#blueBan1 .mapCardContent").css({
+                                "background-image": `url('./static/test-map-2.jpg')`,
+                                "clip-path": 'var(--map-clip-path)',
+                            }).html("").toggleClass("tile-picking");
+                            $("#blueBan1 #map-slot-block").css("opacity", "1").toggleClass("map-slot-content").html("FM1");
+                            break;
+                        case "red":
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+                case 6:
+                    
+                    break;
+                case 7:
+                    
+                    break;
+                case 8:
+                    
+                    break;
+                case 9:
+                    
+                    break;    
+                default:
+                    break;
+            }
+            break;
+        case 11:
+            switch (matchActionStatus) {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+                case 6:
+                    
+                    break;
+                case 7:
+                    
+                    break;   
+                default:
+                    break;
+            }
+            break;
+        case 9:
+            switch (matchActionStatus) {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+                case 6:
+                    
+                    break; 
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }    
 }
 
 generateTiles(pickOrder, banOrder, banNum, bestOf);

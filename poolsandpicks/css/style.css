@@ -17,7 +17,7 @@
     --grey: #959595;
     --yellow: #ffd75f;
 
-    --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 87%,45% 100%, 0% 100%);
+    --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 86%,45% 100%, 0% 100%);
     --two-bans-width: 350px;
     --one-ban-width: 175px;
 }
@@ -260,14 +260,20 @@ html {
 }
 
 .map-slot-content {
-  position: absolute;
-  text-align: center;
+  /* text-align: center;
+  bottom: 5%;
   width: 100%; 
-  bottom: 5%;  
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 23px;
+  color: white;
+  letter-spacing: 2px; */
+  position: relative;
+  text-align: center;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 23px;
   color: white;
   letter-spacing: 2px;
+  transform: translateY(10px);
 }
 
 /* Tiebreaker */
