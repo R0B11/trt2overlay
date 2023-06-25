@@ -82,13 +82,17 @@
 }
 /* Profile Picture */
 .sideProfilePicture {
-    position: relative; 
+    position: relative;  top: -153px;
     width: 60px; height: 60px;
     background-color: var(--elementGray);
+}
+.leftSideProfilePicture { 
+    left: 347px;
     border-left: 2px solid var(--borderGray);
 }
-.leftSideProfilePicture { left: 347px; top: -154px; }
-.rightSideProfilePicture { left: 3px; top: -153px; }
+.rightSideProfilePicture { left: 3px; 
+    border-right: 2px solid var(--borderGray);
+}
 
 /* Now Playing Section */
 #nowPlayingSection {
@@ -102,4 +106,78 @@
 #nowPlayingSongArtist {
     position: absolute; right: 247px;
     color: white;
+}
+
+/* Middle Section */
+#playersMiddle {
+    position: absolute; width: 1920px; top: 585px; text-align: center;
+}
+/* Middle Player Border*/
+.middlePlayer {
+    display: inline-block;
+    margin: 0px 40px;
+    background-color: var(--borderGray);
+    width: 365px; height: 58px;
+    border-radius: 2px;
+}
+.leftMiddlePlayer { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%); }
+.rightMiddlePlayer { clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 92% 100%, 0% 100%); }
+/* Middle Player Overlay */
+.middlePlayerOverlay {
+    background-color: var(--backgroundGray);
+    position: relative; left: 2px; top: 2px;
+    width: 361px; height: 54px;
+}
+/* Middle Player Seeding */
+.middlePlayerSeeding {
+    position: relative; top: -47px;
+    width: 82px; height: 44px;
+    background-color: var(--elementGray);
+    line-height: 44px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 28px;
+    color: var(--textGray);
+}
+.leftMiddlePlayerSeeding { 
+    left: 6px;
+    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 32% 100%, 0% 42%); 
+}
+.rightMiddlePlayerSeeding { 
+    left: 277px;
+    clip-path: polygon(100% 0%, 32% 0%, 0% 58%, 0% 100%, 70% 100%, 100% 42%);
+}
+/* Middle Player Flag */
+.middlePlayerFlag {
+    position: relative; top: -84px;
+    width: 40px; height: 27px;
+    border-radius: 5px;
+    background-color: var(--elementGray);
+}
+.leftMiddlePlayerFlag { left: 107px; }
+.rightMiddlePlayerFlag { left: 218px; }
+/* Middle Player Name */
+.middlePlayerName {
+    position: relative; top: -106px;
+    text-align: left;
+    font-family: Lexend; font-weight: 800; font-size: 14px;
+    letter-spacing: 1.2px;
+    color: var(--textGray);
+}
+.leftMiddlePlayerName { left: 166px; }
+.rightMiddlePlayerName {
+    width: 200px;
+    text-align: right;
+}
+/* Middle Player Profile Picture */
+.middleProfilePicture {
+    position: relative; top: -141px; 
+    width: 54px; height: 54px;
+    background-color: var(--elementGray);
+}
+.leftMiddleProfilePicture {
+    left: 307px;
+    border-left: 2px solid var(--borderGray);
+}
+.rightMiddleProfilePicture {
+    left: 2px;
+    border-right: 2px solid var(--borderGray);
 }
