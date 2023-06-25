@@ -181,3 +181,22 @@
     left: 2px;
     border-right: 2px solid var(--borderGray);
 }
+
+/* Middle Section */
+#playersWinner {
+    position: absolute; top: 319px; width: 1920px; text-align: center;
+}
+.winnerPlayer {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    display: inline-block;
+    background-color: var(--borderRed);
+    width: 365px; height: 58px;
+    border-radius: 2px;
+    margin: 0;
+}
+.winnerPlayerSeeding { 
+    background-color: var(--borderRed);
+    color: white;
+}
+.winnerPlayerName { color: var(--textGold); }
+.winnerPlayerProfilePicture { border-color: var(--borderRed); }
