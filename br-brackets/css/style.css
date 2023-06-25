@@ -193,7 +193,7 @@
     border-right: 2px solid var(--borderGray);
 }
 
-/* Middle Section */
+/* Winner Section */
 #playersWinner {
     position: absolute; top: 319px; width: 1920px; text-align: center;
 }
@@ -211,3 +211,17 @@
 }
 .winnerPlayerName { color: var(--textGold); }
 .winnerPlayerProfilePicture { border-color: var(--borderRed); }
+
+/* Winner Text */
+#winnerText {
+    position: absolute; top: 290px;
+    width: 1920px;
+    text-align: center;
+}
+.winnerText {
+    font-family: Lexend; font-weight: 800; font-size: 17px;
+    margin: 0px 89px;
+    color: white;
+    display: inline-block;
+    letter-spacing: 2px;
+}
