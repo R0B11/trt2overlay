@@ -1,0 +1,89 @@
+:root {
+    --borderGray: rgba(102,102,102,1);
+    --backgroundGray: rgba(18,18,18,1);
+    --elementGray: rgba(57,57,57,1);
+    --textGray: rgba(166,166,166,1);
+
+    --borderRed: rgba(241,18,72,1);
+    --textGold: rgba(255,226,146,1);
+}
+
+#main {
+    position: absolute; top: 0; left: 0;
+    background-size: cover;
+    background-image: url("../static/BRBracketPNG.png");
+    width: 1920px; height: 1080px; 
+}
+
+/* Side Players */
+.playerSideSections {
+    position: absolute; top: 280px; 
+    width: 412px; height: 684px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#playersLeft { left: 50px; }
+#playersRight { right: 50px; }
+/* Player Element */
+.leftSidePlayer {
+    width: 411px; height: 65px;
+    background-color: var(--borderGray);
+    border-radius: 3px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 9% 100%, 0% 45%);
+}
+/* Overlay Element */
+.leftSidePlayerOverlay {
+    position: relative; top: 3px; left: 3px;
+    width: 406px; height: 60px;
+    background-color: var(--backgroundGray);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.5% 100%, 0% 43%);
+}
+/* Seed Element */
+.leftSidePlayerSeeding {
+    position: relative; top: -51px; left: 9px;
+    background-color: var(--elementGray);
+    color: var(--textGray);
+    width: 91px; height: 48px;
+    clip-path: polygon(0% 0%, 68% 0%, 100% 57%, 100% 100%, 36% 100%, 0% 33%);
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 32px;
+    line-height: 49px;
+}
+/* Country */
+.leftSidePlayerFlag {
+    position: relative; top: -91px; left: 122px;
+    background-color: var(--elementGray);
+    width: 44px; height: 29px;
+    border-radius: 6px;
+}
+/* Player Name */
+.leftSidePlayerName {
+    position: relative; top: -114.5px; left: 188px;
+    color: var(--textGray);
+    font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 15.3px;
+    letter-spacing: 1.5px;
+}
+/* Profile Picture */
+.leftSideProfilePicture {
+    position: relative; left: 347px; top: -154px;
+    width: 60px; height: 60px;
+    background-color: var(--elementGray);
+    border-left: 2px solid var(--borderGray);
+}
+
+
+/* Now Playing Section */
+#nowPlayingSection {
+    position: absolute; bottom: 0;
+    width: inherit; height: 78px;
+    font-family: 'Lexend', sans-serif; font-size: 24px;
+    font-weight: 600;
+    line-height: 78px;
+}
+#nowPlayingText { position: absolute; right: 28px; }
+#nowPlayingSongArtist {
+    position: absolute; right: 247px;
+    color: white;
+    letter-spacing: -.2px;
+}
