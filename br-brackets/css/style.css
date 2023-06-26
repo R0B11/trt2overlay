@@ -119,7 +119,7 @@
 
 /* Middle Section */
 #playersMiddle {
-    position: absolute; width: 1920px; top: 585px; text-align: center;
+    position: absolute; width: 1920px; top: 593px; text-align: center;
 }
 /* Middle Player Border*/
 .middlePlayer {
@@ -224,4 +224,15 @@
     color: white;
     display: inline-block;
     letter-spacing: 2px;
+}
+
+/* Winner Screen SVGs */
+.sideLineSVGs { position: absolute; top: 280px; }
+#leftLines { left: 460px; }
+#rightLines { right: 460px; }
+#middleLines {
+    position: absolute;
+    left: 50%;
+    top: 377px;
+    transform: translate(-50%);
 }
