@@ -96,7 +96,6 @@ let calculateARandOD = (baseNumber, mod) => {
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
 
     if (currentSongID != data.menu.bm.id) {
         currentSongID = data.menu.bm.id
