@@ -7,6 +7,8 @@
 
     --borderRed: rgba(241,18,72,1);
     --textGold: rgba(255,226,146,1);
+
+    --bottomRed: rgba(241,18,72,1);
 }
 
 #main {
@@ -110,8 +112,14 @@
     font-family: 'Lexend', sans-serif; font-size: 24px;
     font-weight: 600;
     line-height: 78px;
+    background-color: var(--bottomRed);
 }
 #nowPlayingText { position: absolute; right: 28px; }
+#nowPlayingDivider { 
+    position: absolute; right: 223px;
+    line-height: 73px;
+    color: white;
+}
 #nowPlayingSongArtist {
     position: absolute; right: 247px;
     color: white;
