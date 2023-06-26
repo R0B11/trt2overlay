@@ -17,6 +17,10 @@ let nowPlayingSongArtist = $("#nowPlayingSongArtist")
 let currentSongName
 let currentArtistName
 
+// Winner Videos
+let blueWinnerVideo = $("#blueWinnerVideo")
+let redWinnerVideo = $("#redWinnerVideo")
+
 // Cookie Setting for win screen
 window.setInterval(() => {
     let cookieName = "winscreenWinnerID"
@@ -32,6 +36,18 @@ window.setInterval(() => {
     cookieName = "winscreenWinnerName"
     match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
     if (match) winnerName.text(match[1])
+    // Background Video
+    cookieName = "winscreenWinnerTeam"
+    match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match) {
+        if (match[1] == "red") {
+            blueWinnerVideo.css("display","none")
+            redWinnerVideo.css("display","block")
+        } else if (match[1] == "blue") {
+            blueWinnerVideo.css("display","block")
+            redWinnerVideo.css("display","none")
+        }
+    }
 }, 500)
 
 socket.onmessage = event => {

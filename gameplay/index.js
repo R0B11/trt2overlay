@@ -325,4 +325,4 @@ const setCookieToWinScreen = (id, name, team, round) => {
     document.cookie = cookieValue
 }
 
-setCookieToWinScreen(12455868, "Fairy Bread", "red", "Grand Finals")
+setCookieToWinScreen(12455868, "maliszewski", "blue", "Finals")

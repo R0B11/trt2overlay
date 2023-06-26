@@ -279,6 +279,8 @@
     top: 78px;
     color: var(--blue);
     font-size: 21px;
+    width: 250px;
+    text-align: right;
 }
 #mapModSlot {
     top: 115px;

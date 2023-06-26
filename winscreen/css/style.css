@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Torus Pro';
-    src: url("../fonts/toruspro-semibold.otf");
+    src: url("../fonts/toruspro-bold.otf");
 }
 
 :root {
@@ -8,13 +8,26 @@
     --winnerProfileDarkGray: #121212;
 }
 
+/* Background Videos */
+.winnerVideos { position: absolute; top: 0; left: 0;}
+
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/roundtableWinnerBluePNG.png");
-    background-size: cover;
 }
-
+/* Surrounding Circles*/
+#profileBoxSurroundingCircle {
+    position: absolute; top: 283px; left: 266px; 
+    width: 493px; height: 493px;
+    background-color: white;
+    border-radius: 50%;
+}
+#profileBoxSurroundingCircleInner {
+    position: absolute; top: 297px; left: 280px; 
+    width: 465px; height: 465px;
+    background-color: var(--winnerProfileDarkGray);  
+    border-radius: 50%;
+}
 /* Winner Profile Picture */
 #winnerProfilePictureSection {
     position: absolute; top: 304px;left: 288px;
@@ -49,7 +62,7 @@
     top: 30px; left: 330px;
     width: 55px;
     border-radius: 4px 0px 0px 4px;
-    clip-path: polygon(0% 0%, 0% 100%,100% 100%,80% 0%);
+    clip-path: polygon(0% 0%, 0% 100%,100% 100%,81% 0%);
 }
 #winnerProfilePictureBoxLine2 {
     top: 30px; left: 325px;
@@ -64,21 +77,28 @@
 }
 #winnerProfilePictureBoxLine4 {
     top: 78px; left: 349px; 
-    width: 77px;
+    width: 78px;
     border-radius: 4px 0px 0px 4px;
     clip-path: polygon(0% 0%, 0% 100%,100% 100%,94% 0%);
 }
 
 /* Round Name */
 #roundName {
-    position: absolute; top: 311px; left: 1114px;
+    position: absolute; top: 362px; left: 1114px;
     font-family: 'Torus Pro'; font-size: 31px;
+    color: white;
+}
+
+/* Winner Text */
+#winnerText {
+    position: absolute; top: 450px; left: 1113px;
+    font-family: 'Torus Pro'; font-size: 117px;
     color: white;
 }
 
 /* Winner Name */
 #winnerName {
-    position: absolute; top: 656px; left: 1113px;
+    position: absolute; top: 613px; left: 1113px;
     font-family: 'Torus Pro'; font-size: 60px;
     background-color: white;
     color: black;    
@@ -91,6 +111,11 @@
     width: inherit; height: 78px;
     font-family: 'Lexend', sans-serif; font-size: 24px;
     line-height: 78px;
+}
+#nowPlayingDivider { 
+    position: absolute; right: 227px;
+    line-height: 73px;
+    color: white;
 }
 #nowPlayingText { 
     position: absolute; right: 32px;
