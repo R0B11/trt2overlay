@@ -43,6 +43,7 @@ let messageBoxRightText = ""
 // SVGs
 let leftLines = document.getElementById("leftLines")
 let rightLines = document.getElementById("rightLines")
+let middleLines = document.getElementById("middleLines")
 
 // Middle players
 let leftMiddlePlayer = document.getElementById("leftMiddlePlayer")
@@ -158,7 +159,7 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
         rightMiddlePlayer.children[2].style.backgroundImage = backgroundImageFlag
         rightMiddlePlayer.children[3].innerText = this.children[3].innerText
         rightMiddlePlayer.children[3].style.color = "white"
-        rightMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
+        rightMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture        
     })
 }
 
@@ -189,6 +190,16 @@ leftMiddlePlayer.addEventListener("click", function() {
         profileOverlay.classList.add("flagAndProfilePictureOverlay")
         rightMiddlePlayer.children[4].append(profileOverlay)
     }
+
+    // Set SVGs
+    middleLines.innerHTML = ""
+    let middleLine = '<line x1="42.5" y1="0" x2="42.5" y2="247" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+    let leftLine = '<line x1="0" y1="246" x2="42.5" y2="246" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+    let rightLine = '<line x1="55" y1="246" x2="85" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
+
+    middleLines.innerHTML += middleLine
+    middleLines.innerHTML += leftLine
+    middleLines.innerHTML += rightLine
 })
 rightMiddlePlayer.addEventListener("click", function() {
     // Add right side as winner
@@ -216,6 +227,16 @@ rightMiddlePlayer.addEventListener("click", function() {
         profileOverlay.classList.add("flagAndProfilePictureOverlay")
         leftMiddlePlayer.children[4].append(profileOverlay)
     }
+
+    // Set SVGs
+    middleLines.innerHTML = ""
+    let middleLine = '<line x1="42.5" y1="0" x2="42.5" y2="247" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+    let leftLine = '<line x1="0" y1="246" x2="30" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
+    let rightLine = '<line x1="42.5" y1="246" x2="85" y2="246" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+
+    middleLines.innerHTML += middleLine
+    middleLines.innerHTML += leftLine
+    middleLines.innerHTML += rightLine
 })
 
 controlPanelLeftSideSelect.on("change", () => {
