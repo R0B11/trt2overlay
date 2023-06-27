@@ -49,6 +49,11 @@ let middleLines = document.getElementById("middleLines")
 let leftMiddlePlayer = document.getElementById("leftMiddlePlayer")
 let rightMiddlePlayer = document.getElementById("rightMiddlePlayer")
 
+// Winner
+let winnerPlayerLeft = document.getElementById("winnerPlayerLeft")
+let winnerPlayerRight = document.getElementById("winnerPlayerRight")
+let winnerTextFromLeft = document.getElementById("winnerTextFromLeft")
+let winnerTextFromRight = document.getElementById("winnerTextFromRight")
 // Add side event listeners
 // Left Side
 for (let i = 0; i < playersLeft.childElementCount; i++) {
@@ -104,6 +109,8 @@ for (let i = 0; i < playersLeft.childElementCount; i++) {
         leftMiddlePlayer.children[3].innerText = this.children[3].innerText
         leftMiddlePlayer.children[3].style.color = "white"
         leftMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
+
+        // Set details for winner
     })
 }
 // Right Side
@@ -195,11 +202,23 @@ leftMiddlePlayer.addEventListener("click", function() {
     middleLines.innerHTML = ""
     let middleLine = '<line x1="42.5" y1="0" x2="42.5" y2="247" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
     let leftLine = '<line x1="0" y1="246" x2="42.5" y2="246" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
-    let rightLine = '<line x1="55" y1="246" x2="85" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
+    let rightLine = '<line x1="60" y1="246" x2="85" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
 
     middleLines.innerHTML += middleLine
     middleLines.innerHTML += leftLine
     middleLines.innerHTML += rightLine
+
+    // Set Winner Information
+    winnerPlayerLeft.style.display = "block"
+    winnerTextFromLeft.style.opacity = "1"
+    winnerPlayerRight.style.display = "none"
+    winnerTextFromRight.style.opacity = "0"
+    let backgroundImageFlag = getComputedStyle(this.children[2]).backgroundImage
+    let backgroundImageProfilePicture = getComputedStyle(this.children[4]).backgroundImage
+    winnerPlayerLeft.children[1].innerText = this.children[1].innerText
+    winnerPlayerLeft.children[2].style.backgroundImage = backgroundImageFlag
+    winnerPlayerLeft.children[3].innerText = this.children[3].innerText
+    winnerPlayerLeft.children[4].style.backgroundImage = backgroundImageProfilePicture
 })
 rightMiddlePlayer.addEventListener("click", function() {
     // Add right side as winner
@@ -231,12 +250,24 @@ rightMiddlePlayer.addEventListener("click", function() {
     // Set SVGs
     middleLines.innerHTML = ""
     let middleLine = '<line x1="42.5" y1="0" x2="42.5" y2="247" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
-    let leftLine = '<line x1="0" y1="246" x2="30" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
+    let leftLine = '<line x1="0" y1="246" x2="25" y2="246" stroke="rgba(102,102,105,1)" stroke-width="3"></line>'
     let rightLine = '<line x1="42.5" y1="246" x2="85" y2="246" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
 
     middleLines.innerHTML += middleLine
     middleLines.innerHTML += leftLine
     middleLines.innerHTML += rightLine
+
+    // Set Winner Information
+    winnerPlayerLeft.style.display = "none"
+    winnerTextFromLeft.style.opacity = "0"
+    winnerPlayerRight.style.display = "block"
+    winnerTextFromRight.style.opacity = "1"
+    let backgroundImageFlag = getComputedStyle(this.children[2]).backgroundImage
+    let backgroundImageProfilePicture = getComputedStyle(this.children[4]).backgroundImage
+    winnerPlayerRight.children[1].innerText = this.children[1].innerText
+    winnerPlayerRight.children[2].style.backgroundImage = backgroundImageFlag
+    winnerPlayerRight.children[3].innerText = this.children[3].innerText
+    winnerPlayerRight.children[4].style.backgroundImage = backgroundImageProfilePicture
 })
 
 controlPanelLeftSideSelect.on("change", () => {

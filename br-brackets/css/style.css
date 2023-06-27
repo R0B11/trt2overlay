@@ -215,6 +215,7 @@
     width: 365px; height: 58px;
     border-radius: 2px;
     margin: 0;
+    display: none;
 }
 .winnerPlayerSeeding { 
     background-color: var(--borderRed);
@@ -235,6 +236,7 @@
     color: white;
     display: inline-block;
     letter-spacing: 2px;
+    opacity: 0;
 }
 
 /* Winner Screen SVGs */
