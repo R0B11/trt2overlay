@@ -33,11 +33,82 @@ let previousPlayersRight = []
 let currentPlayersLeft = []
 let currentPlayersRight = []
 
+// Player Controls
 let playersLeft = document.getElementById("playersLeft")
 let playersRight = document.getElementById("playersRight")
 let messageBox = $("#messageBox")
 let messageBoxLeftText = ""
 let messageBoxRightText = ""
+
+// SVGs
+let leftLines = document.getElementById("leftLines")
+let rightLines = document.getElementById("rightLines")
+
+// Add event listeners
+// Left Side
+for (let i = 0; i < playersLeft.childElementCount; i++) {
+    playersLeft.children[i].addEventListener("click", function() {
+        // Reset everything
+        for (let j = 0; j < playersLeft.childElementCount; j++) {
+            playersLeft.children[j].style.backgroundColor = "var(--borderGray)"
+            playersLeft.children[j].children[1].style.backgroundColor = "var(--elementGrayOverlay)"
+            playersLeft.children[j].children[1].style.color = "var(--textGray)"
+            if (playersLeft.children[j].children[2].childElementCount == 0) {
+                let flagOverlay = document.createElement("div")
+                flagOverlay.classList.add("flagOverlay")
+                flagOverlay.classList.add("flagAndProfilePictureOverlay")
+                playersLeft.children[j].children[2].append(flagOverlay)
+            }
+            playersLeft.children[j].children[3].style.color = "var(--textGray)"
+            playersLeft.children[j].children[4].style.borderColor = "var(--borderGray)"
+            if (playersLeft.children[j].children[4].childElementCount == 0) {
+                let profileOverlay = document.createElement("div")
+                profileOverlay.classList.add("flagAndProfilePictureOverlay")
+                playersLeft.children[j].children[4].append(profileOverlay)
+            }
+        }
+        // Add own elements
+        this.style.backgroundColor = "var(--borderRed)"
+        this.children[1].style.backgroundColor = "var(--borderRed)"
+        this.children[1].style.color = "white";
+        this.children[2].innerHTML = ""
+        this.children[3].style.color = "var(--textGold)"
+        this.children[4].innerHTML = ""
+        this.children[4].style.borderColor = "var(--borderRed)"
+    })
+}
+// Right Side
+for (let i = 0; i < playersRight.childElementCount; i++) {
+    playersRight.children[i].addEventListener("click", function() {
+        // Reset everything
+        for (let j = 0; j < playersRight.childElementCount; j++) {
+            playersRight.children[j].style.backgroundColor = "var(--borderGray)"
+            playersRight.children[j].children[1].style.backgroundColor = "var(--elementGrayOverlay)"
+            playersRight.children[j].children[1].style.color = "var(--textGray)"
+            if (playersRight.children[j].children[2].childElementCount == 0) {
+                let flagOverlay = document.createElement("div")
+                flagOverlay.classList.add("flagOverlay")
+                flagOverlay.classList.add("flagAndProfilePictureOverlay")
+                playersRight.children[j].children[2].append(flagOverlay)
+            }
+            playersRight.children[j].children[3].style.color = "var(--textGray)"
+            playersRight.children[j].children[4].style.borderColor = "var(--borderGray)"
+            if (playersRight.children[j].children[4].childElementCount == 0) {
+                let profileOverlay = document.createElement("div")
+                profileOverlay.classList.add("flagAndProfilePictureOverlay")
+                playersRight.children[j].children[4].append(profileOverlay)
+            }
+        }
+        // Add own elements
+        this.style.backgroundColor = "var(--borderRed)"
+        this.children[1].style.backgroundColor = "var(--borderRed)"
+        this.children[1].style.color = "white";
+        this.children[2].innerHTML = ""
+        this.children[3].style.color = "var(--textGold)"
+        this.children[4].innerHTML = ""
+        this.children[4].style.borderColor = "var(--borderRed)"
+    })
+}
 
 controlPanelLeftSideSelect.on("change", () => {
     let side = controlPanelLeftSideSelect.val()

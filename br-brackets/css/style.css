@@ -128,7 +128,9 @@
 
 /* Middle Section */
 #playersMiddle {
-    position: absolute; width: 1920px; top: 593px; text-align: center;
+    position: absolute; top: 593px; left: 50%; transform: translateX(-50%);
+    width: 920px;
+    text-align: center;
 }
 /* Middle Player Border*/
 .middlePlayer {
