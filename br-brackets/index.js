@@ -48,7 +48,7 @@ let rightLines = document.getElementById("rightLines")
 let leftMiddlePlayer = document.getElementById("leftMiddlePlayer")
 let rightMiddlePlayer = document.getElementById("rightMiddlePlayer")
 
-// Add event listeners
+// Add side event listeners
 // Left Side
 for (let i = 0; i < playersLeft.childElementCount; i++) {
     playersLeft.children[i].addEventListener("click", function() {
@@ -161,6 +161,62 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
         rightMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
     })
 }
+
+// Middle players add event listener
+leftMiddlePlayer.addEventListener("click", function() {
+    // Add left side as winner
+    this.style.backgroundColor = "var(--borderRed)"
+    this.children[1].style.backgroundColor = "var(--borderRed)"
+    this.children[1].style.color = "white";
+    this.children[2].innerHTML = ""
+    this.children[3].style.color = "var(--textGold)"
+    this.children[4].innerHTML = ""
+    this.children[4].style.borderColor = "var(--borderRed)"
+    // Right side is not winner
+    rightMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+    rightMiddlePlayer.children[1].style.backgroundColor = "var(--elementGrayOverlay)"
+    rightMiddlePlayer.children[1].style.color = "var(--textGray)"
+    if (rightMiddlePlayer.children[2].childElementCount == 0) {
+        let flagOverlay = document.createElement("div")
+        flagOverlay.classList.add("flagOverlay")
+        flagOverlay.classList.add("flagAndProfilePictureOverlay")
+        rightMiddlePlayer.children[2].append(flagOverlay)
+    }
+    rightMiddlePlayer.children[3].style.color = "var(--textGray)"
+    rightMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+    if (rightMiddlePlayer.children[4].childElementCount == 0) {
+        let profileOverlay = document.createElement("div")
+        profileOverlay.classList.add("flagAndProfilePictureOverlay")
+        rightMiddlePlayer.children[4].append(profileOverlay)
+    }
+})
+rightMiddlePlayer.addEventListener("click", function() {
+    // Add right side as winner
+    this.style.backgroundColor = "var(--borderRed)"
+    this.children[1].style.backgroundColor = "var(--borderRed)"
+    this.children[1].style.color = "white";
+    this.children[2].innerHTML = ""
+    this.children[3].style.color = "var(--textGold)"
+    this.children[4].innerHTML = ""
+    this.children[4].style.borderColor = "var(--borderRed)"
+    // Left side is not winner
+    leftMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+    leftMiddlePlayer.children[1].style.backgroundColor = "var(--elementGrayOverlay)"
+    leftMiddlePlayer.children[1].style.color = "var(--textGray)"
+    if (leftMiddlePlayer.children[2].childElementCount == 0) {
+        let flagOverlay = document.createElement("div")
+        flagOverlay.classList.add("flagOverlay")
+        flagOverlay.classList.add("flagAndProfilePictureOverlay")
+        leftMiddlePlayer.children[2].append(flagOverlay)
+    }
+    leftMiddlePlayer.children[3].style.color = "var(--textGray)"
+    leftMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+    if (leftMiddlePlayer.children[4].childElementCount == 0) {
+        let profileOverlay = document.createElement("div")
+        profileOverlay.classList.add("flagAndProfilePictureOverlay")
+        leftMiddlePlayer.children[4].append(profileOverlay)
+    }
+})
 
 controlPanelLeftSideSelect.on("change", () => {
     let side = controlPanelLeftSideSelect.val()
