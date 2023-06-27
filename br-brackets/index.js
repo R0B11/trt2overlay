@@ -44,6 +44,10 @@ let messageBoxRightText = ""
 let leftLines = document.getElementById("leftLines")
 let rightLines = document.getElementById("rightLines")
 
+// Middle players
+let leftMiddlePlayer = document.getElementById("leftMiddlePlayer")
+let rightMiddlePlayer = document.getElementById("rightMiddlePlayer")
+
 // Add event listeners
 // Left Side
 for (let i = 0; i < playersLeft.childElementCount; i++) {
@@ -89,6 +93,16 @@ for (let i = 0; i < playersLeft.childElementCount; i++) {
         leftLines.innerHTML += inLine
         leftLines.innerHTML += outLine
         leftLines.innerHTML += middleLine
+
+        // Set details for middle match
+        let backgroundImageFlag = getComputedStyle(this.children[2]).backgroundImage
+        let backgroundImageProfilePicture = getComputedStyle(this.children[4]).backgroundImage
+        leftMiddlePlayer.children[1].style.color = "white"
+        leftMiddlePlayer.children[1].innerText = this.children[1].innerText
+        leftMiddlePlayer.children[2].style.backgroundImage = backgroundImageFlag
+        leftMiddlePlayer.children[3].innerText = this.children[3].innerText
+        leftMiddlePlayer.children[3].style.color = "white"
+        leftMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
     })
 }
 // Right Side
@@ -135,6 +149,16 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
         rightLines.innerHTML += inLine
         rightLines.innerHTML += outLine
         rightLines.innerHTML += middleLine
+        
+        // Set details for middle match
+        let backgroundImageFlag = getComputedStyle(this.children[2]).backgroundImage
+        let backgroundImageProfilePicture = getComputedStyle(this.children[4]).backgroundImage
+        rightMiddlePlayer.children[1].style.color = "white"
+        rightMiddlePlayer.children[1].innerText = this.children[1].innerText
+        rightMiddlePlayer.children[2].style.backgroundImage = backgroundImageFlag
+        rightMiddlePlayer.children[3].innerText = this.children[3].innerText
+        rightMiddlePlayer.children[3].style.color = "white"
+        rightMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
     })
 }
 

@@ -190,7 +190,7 @@
 }
 /* Middle Player Profile Picture */
 .middleProfilePicture {
-    position: relative; top: -139px; 
+    position: relative; top: -142px; 
     width: 54px; height: 54px;
     background-color: var(--elementGray);
     background-size: cover;
