@@ -102,6 +102,7 @@
 .flagAndProfilePictureOverlay {
     position: relative; top: 0; left: 0;
     width: 100%; height: 100%;
+    border-radius: 7px;
     background-color: var(--elementGrayOverlay);
 }
 
@@ -187,7 +188,7 @@
 }
 /* Middle Player Profile Picture */
 .middleProfilePicture {
-    position: relative; top: -141px; 
+    position: relative; top: -139px; 
     width: 54px; height: 54px;
     background-color: var(--elementGray);
     background-size: cover;
@@ -243,4 +244,101 @@
     left: 50%;
     top: 377px;
     transform: translate(-50%);
+}
+
+/* Control Panel */
+#controlPanel {
+    position: absolute; left: 0; top: 1080px;
+    width: 1920px; height: 300px;
+    background-color: #121212;
+    color: white;
+    font-size: 32px;
+}
+/* Left Side */
+#controlPanelLeftSide { position: absolute; width: 300px; }
+.controlPanelLeftSide {
+    position: relative; left: 50%; transform: translateX(-50%);
+    text-align: center;
+}
+#controlPanelLeftSideSelect { background-color: transparent; }
+#controlPanelLeftSideSelect option {
+    padding: 6px;
+    width: 200px;
+    color: white;
+    font-size: 20px;
+}
+#controlPanelLeftSideSelect option:checked { color: black; }
+#controlPanelLeftSideSelect::-webkit-scrollbar { display: none; }
+/* Controls */
+.controlPanelSideControl {
+    position: absolute; left: 300px;
+    width: 1000px; height: inherit;
+}
+.controlPanelLeftRightControl {
+    position: absolute; left: 30%; transform: translateX(-50%);
+    text-align: center;
+}
+#controlPanelLeftRightControlCheckboxes {
+    position: absolute; left: 50%; transform: translateX(-50%); top: 100px;
+    width: inherit;
+    display: flex;
+    flex-wrap: wrap;
+}
+.controlPanelLeftRightControlCheckbox {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+    grid-template-columns: 1em auto;
+    display: flex;
+    gap: 0.5em;
+    width: 250px;
+    margin: 5px 0px;
+}
+.controlPanelLeftRightControlCheckbox input[type="checkbox"] {
+    appearance: none;
+    background-color: transparent;
+    margin: 0;
+    font: inherit;
+    color: white;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid white;
+    border-radius: 0.15em;
+    display: grid;
+    place-content: center;
+}
+.controlPanelLeftRightControlCheckbox input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em; height: 0.65em;
+    transform: scale(0);
+    transition: 0.2s transform ease-in-out;
+    box-shadow: inset 1em 1em lightBlue;
+}
+.controlPanelLeftRightControlCheckbox input[type="checkbox"]:checked::before { transform: scale(1) }
+#controlPanelLeftRightControlButton {
+    position: absolute; top: 35px; left: 575px;
+    background-color: transparent;
+    color: white;
+    border: 5px solid white;
+    padding: 5px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+#controlPanelLeftRightControlButton:active {
+    background-color: white;
+    color: black;
+}
+/* Message Box */
+#messageBox {
+    position: absolute;
+    left: 1;
+    left: 1100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 200px;
+    border: 5px solid white;
+    text-align: center;
+    padding: 20px;
 }
