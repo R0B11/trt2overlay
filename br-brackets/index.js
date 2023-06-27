@@ -75,6 +75,20 @@ for (let i = 0; i < playersLeft.childElementCount; i++) {
         this.children[3].style.color = "var(--textGold)"
         this.children[4].innerHTML = ""
         this.children[4].style.borderColor = "var(--borderRed)"
+
+        // SVG Lines
+        // Get x number for left hand side
+        leftLines.innerHTML = ""
+        let currentNumber = parseInt(this.id.charAt(this.id.length - 1)) - 1
+        let leftLineYPosition = 65 * currentNumber + 32.5 + (164 / 7 * currentNumber)
+        // Create all elements
+        let inLine = '<line x1="47.5" y1="342.5" x2="95" y2="342.5" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+        let outLine = `<line x1="0" y1="${leftLineYPosition}" x2="47.5" y2="${leftLineYPosition}" stroke="rgba(255,226,146,1)" stroke-width="3"></line>`
+        let middleLine = `<line x1="47.5" y1="${leftLineYPosition}" x2="47.5" y2="342.5" stroke="rgba(255,226,146,1)" stroke-width="3"></line>`
+        // Append all elements
+        leftLines.innerHTML += inLine
+        leftLines.innerHTML += outLine
+        leftLines.innerHTML += middleLine
     })
 }
 // Right Side
@@ -107,6 +121,20 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
         this.children[3].style.color = "var(--textGold)"
         this.children[4].innerHTML = ""
         this.children[4].style.borderColor = "var(--borderRed)"
+
+        // SVG Lines
+        // Get x number for left hand side
+        rightLines.innerHTML = ""
+        let currentNumber = parseInt(this.id.charAt(this.id.length - 1)) - 1
+        let leftLineYPosition = 65 * currentNumber + 32.5 + (164 / 7 * currentNumber)
+        // Create all elements
+        let inLine = '<line x1="0" y1="342.5" x2="47.5" y2="342.5" stroke="rgba(255,226,146,1)" stroke-width="3"></line>'
+        let outLine = `<line x1="47.5" y1="${leftLineYPosition}" x2="95" y2="${leftLineYPosition}" stroke="rgba(255,226,146,1)" stroke-width="3"></line>`
+        let middleLine = `<line x1="47.5" y1="${leftLineYPosition}" x2="47.5" y2="342.5" stroke="rgba(255,226,146,1)" stroke-width="3"></line>`
+        // Append all elements
+        rightLines.innerHTML += inLine
+        rightLines.innerHTML += outLine
+        rightLines.innerHTML += middleLine
     })
 }
 
