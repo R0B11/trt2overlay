@@ -48,7 +48,7 @@
 .sidePlayerSeeding {
     position: relative; top: -51px; 
     background-color: var(--elementGray);
-    color: var(--textGray);
+    color: white;
     width: 91px; height: 48px;
     text-align: center;
     font-family: 'IBM Plex Mono', monospace; font-size: 32px;
@@ -75,7 +75,7 @@
 /* Player Name */
 .sidePlayerName {
     position: relative; top: -114.5px; 
-    color: var(--textGray);
+    color: white;
     font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 15.3px;
     letter-spacing: 1.5px;
 }
@@ -99,10 +99,10 @@
     left: 3px; 
     border-right: 2px solid var(--borderGray);
 }
+.flagOverlay { border-radius: 7px; }
 .flagAndProfilePictureOverlay {
     position: relative; top: 0; left: 0;
     width: 100%; height: 100%;
-    border-radius: 7px;
     background-color: var(--elementGrayOverlay);
 }
 
