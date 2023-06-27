@@ -206,7 +206,9 @@
 
 /* Winner Section */
 #playersWinner {
-    position: absolute; top: 319px; width: 1920px; text-align: center;
+    position: absolute; top: 319px; left: 50%; transform: translateX(-50%);
+    width: 900px; 
+    text-align: center;
 }
 .winnerPlayer {
     position: absolute; left: 50%; transform: translateX(-50%);
@@ -226,8 +228,8 @@
 
 /* Winner Text */
 #winnerText {
-    position: absolute; top: 290px;
-    width: 1920px;
+    position: absolute; top: 290px; left: 50%; transform: translateX(-50%);
+    width: 900px;
     text-align: center;
 }
 .winnerText {
@@ -276,15 +278,15 @@
 /* Controls */
 .controlPanelSideControl {
     position: absolute; left: 300px;
-    width: 1000px; height: inherit;
+    width: 1620px; height: inherit;
 }
 .controlPanelLeftRightControl {
-    position: absolute; left: 30%; transform: translateX(-50%);
+    position: absolute; left: 18%; transform: translateX(-50%);
     text-align: center;
 }
 #controlPanelLeftRightControlCheckboxes {
-    position: absolute; left: 50%; transform: translateX(-50%); top: 100px;
-    width: inherit;
+    position: absolute; left: 0; top: 100px;
+    width: 1000px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -325,7 +327,7 @@
     background-color: transparent;
     color: white;
     border: 5px solid white;
-    padding: 5px 30px;
+    padding: 5px 150px;
     border-radius: 20px;
     font-size: 16px;
 }
@@ -335,14 +337,27 @@
 }
 /* Message Box */
 #messageBox {
-    position: absolute;
-    left: 1;
-    left: 1100px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 200px;
-    height: 200px;
+    position: absolute; left: 970px; top: 50%; transform: translateY(-50%);
+    width: 200px; height: 200px;
     border: 5px solid white;
     text-align: center;
     padding: 20px;
+}
+
+/* Set Winner */
+#controlPAnelLeftRightControlSetWinner {
+    width: 401px;
+    position: absolute; right: 0;
+}
+#controlPAnelLeftRightControlSetWinnerButton {
+    position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+    padding: 15px 100px;
+    font-size: 26px;
+    color: white;
+    background-color: transparent;
+    border: 5px solid white; border-radius: 50px;
+}
+#controlPAnelLeftRightControlSetWinnerButton:active {
+    color: black;
+    background-color: white;
 }

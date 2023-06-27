@@ -24,6 +24,7 @@ socket.onmessage = event => {
 // Control Panel
 let controlPanelLeftSideSelect = $("#controlPanelLeftSideSelect")
 let controlPanelLeftRightControlButton = $("#controlPanelLeftRightControlButton")
+let controlPAnelLeftRightControlSetWinnerButton = $("#controlPAnelLeftRightControlSetWinnerButton")
 let controlPanelLeftRightControl = $("#controlPanelLeftRightControl")
 let controlPanelMiddleControl = $("#controlPanelMiddleControl")
 let controlPanelLeftRightControlCheckboxes = document.getElementById("controlPanelLeftRightControlCheckboxes")
@@ -58,6 +59,7 @@ let winnerTextFromRight = document.getElementById("winnerTextFromRight")
 // Left Side
 for (let i = 0; i < playersLeft.childElementCount; i++) {
     playersLeft.children[i].addEventListener("click", function() {
+        if (this.children[3].innerText == "PLAYER") return
         // Reset everything
         for (let j = 0; j < playersLeft.childElementCount; j++) {
             playersLeft.children[j].style.backgroundColor = "var(--borderGray)"
@@ -116,6 +118,7 @@ for (let i = 0; i < playersLeft.childElementCount; i++) {
 // Right Side
 for (let i = 0; i < playersRight.childElementCount; i++) {
     playersRight.children[i].addEventListener("click", function() {
+        if (this.children[3].innerText == "PLAYER") return
         // Reset everything
         for (let j = 0; j < playersRight.childElementCount; j++) {
             playersRight.children[j].style.backgroundColor = "var(--borderGray)"
@@ -172,6 +175,8 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
 
 // Middle players add event listener
 leftMiddlePlayer.addEventListener("click", function() {
+    if (this.children[3].innerText == "PLAYER") return
+    if (rightMiddlePlayer.children[3].innerText == "PLAYER") return
     // Add left side as winner
     this.style.backgroundColor = "var(--borderRed)"
     this.children[1].style.backgroundColor = "var(--borderRed)"
@@ -221,6 +226,8 @@ leftMiddlePlayer.addEventListener("click", function() {
     winnerPlayerLeft.children[4].style.backgroundImage = backgroundImageProfilePicture
 })
 rightMiddlePlayer.addEventListener("click", function() {
+    if (this.children[3].innerText == "PLAYER") return
+    if (leftMiddlePlayer.children[3].innerText == "PLAYER") return
     // Add right side as winner
     this.style.backgroundColor = "var(--borderRed)"
     this.children[1].style.backgroundColor = "var(--borderRed)"
@@ -279,6 +286,7 @@ controlPanelLeftSideSelect.on("change", () => {
         controlPanelMiddleControl.css("display","none")
         controlPanelLeftRightControl.css("display","block")
         controlPanelLeftRightControlButton.attr("onclick",`controlPanelPlayerControlSides("${side}")`)
+        controlPAnelLeftRightControlSetWinnerButton.attr("onclick",`controlPanelPlayerResetWinner("${side}")`)
         
         // Reset all checked marks
         $("input:checkbox[name=player]").each(function() { $(this).prop("checked",false) });
@@ -421,12 +429,102 @@ const controlPanelPlayerControlSides = (side) => {
     }
 }
 
+const controlPanelPlayerResetWinner = (side) => {
+    // Reset lines
+    if (side == "left") {
+        leftLines.innerHTML = ""
+        middleLines.innerHTML = ""
+        
+        // Reset left
+        for (let i = 0; i < playersLeft.childElementCount; i++) {
+            playersLeft.children[i].style.backgroundColor = "var(--borderGray)"
+            playersLeft.children[i].children[1].style.backgroundColor = "var(--elementGray)"
+            playersLeft.children[i].children[1].style.color = "white"
+            playersLeft.children[i].children[2].innerHTML = ""
+            playersLeft.children[i].children[3].style.color = "white"
+            playersLeft.children[i].children[4].style.borderColor = "var(--borderGray)"
+            playersLeft.children[i].children[4].innerHTML = ""
+        }
+        
+        // Reset middle left
+        leftMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+        leftMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+        leftMiddlePlayer.children[1].style.color = "var(--textGray)"
+        leftMiddlePlayer.children[1].innerText = ""
+        leftMiddlePlayer.children[2].innerHTML = ""
+        leftMiddlePlayer.children[2].style.backgroundImage = "none"
+        leftMiddlePlayer.children[3].style.color = "var(--textGray)"
+        leftMiddlePlayer.children[3].innerText = "PLAYER"
+        leftMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+        leftMiddlePlayer.children[4].innerHTML = ""
+        leftMiddlePlayer.children[4].style.backgroundImage = "none"
+
+        // Reset middle right
+        rightMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+        rightMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+        rightMiddlePlayer.children[1].style.color = "var(--textGray)"
+        rightMiddlePlayer.children[2].innerHTML = ""
+        rightMiddlePlayer.children[3].style.color = "var(--textGray)"
+        rightMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+        rightMiddlePlayer.children[4].innerHTML = ""
+
+        // Reset winner
+        winnerPlayerLeft.style.display = "none"
+        winnerPlayerRight.style.display = "none"
+        winnerTextFromLeft.style.opacity = 0
+        winnerTextFromRight.style.opacity = 0
+
+    } else if (side == "right") {
+        rightLines.innerHTML = ""
+        middleLines.innerHTML = ""
+    
+        // Reset right
+        for (let i = 0; i < playersRight.childElementCount; i++) {
+            playersRight.children[i].style.backgroundColor = "var(--borderGray)"
+            playersRight.children[i].children[1].style.backgroundColor = "var(--elementGray)"
+            playersRight.children[i].children[1].style.color = "white"
+            playersRight.children[i].children[2].innerHTML = ""
+            playersRight.children[i].children[3].style.color = "white"
+            playersRight.children[i].children[4].style.borderColor = "var(--borderGray)"
+            playersRight.children[i].children[4].innerHTML = ""
+        }
+        
+        // Reset middle right
+        rightMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+        rightMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+        rightMiddlePlayer.children[1].style.color = "var(--textGray)"
+        rightMiddlePlayer.children[1].innerText = ""
+        rightMiddlePlayer.children[2].innerHTML = ""
+        rightMiddlePlayer.children[2].style.backgroundImage = "none"
+        rightMiddlePlayer.children[3].style.color = "var(--textGray)"
+        rightMiddlePlayer.children[3].innerText = "PLAYER"
+        rightMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+        rightMiddlePlayer.children[4].innerHTML = ""
+        rightMiddlePlayer.children[4].style.backgroundImage = "none"
+
+        // Reset middle left
+        leftMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+        leftMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+        leftMiddlePlayer.children[1].style.color = "var(--textGray)"
+        leftMiddlePlayer.children[2].innerHTML = ""
+        leftMiddlePlayer.children[3].style.color = "var(--textGray)"
+        leftMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+        leftMiddlePlayer.children[4].innerHTML = ""
+
+        // Reset winner
+        winnerPlayerLeft.style.display = "none"
+        winnerPlayerRight.style.display = "none"
+        winnerTextFromLeft.style.opacity = 0
+        winnerTextFromRight.style.opacity = 0
+    }
+} 
+
 const AUFlagURL = "static/flags/AU.png"
 const CAFlagURl = "static/flags/CA.png"
 const CNFlagURL = "static/flags/CN.png"
 const HKFlagURL = "static/flags/HK.png"
 const PLFlagURL = "static/flags/PL.png"
-const SKFlagURL = "static/flags/SK.png"
+const KRFlagURL = "static/flags/KR.png"
 const UKFlagURL = "static/flags/UK.png"
 const USFlagURL = "static/flags/US.png"
 
@@ -445,6 +543,6 @@ const playerArray = [
     {playerID: "3717598", playerName: "Xootynator", playerFlag: CAFlagURl},
     {playerID: "6304246", playerName: "RyuK", playerFlag: CAFlagURl},
     {playerID: "5033077", playerName: "Zylice", playerFlag: CAFlagURl},
-    {playerID: "9224078", playerName: "FlyingTuna", playerFlag: SKFlagURL},
+    {playerID: "9224078", playerName: "FlyingTuna", playerFlag: KRFlagURL},
     {playerID: "5182050", playerName: "Bubbleman", playerFlag: UKFlagURL}
 ]
