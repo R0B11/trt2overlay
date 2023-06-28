@@ -112,7 +112,7 @@ for (let i = 0; i < playersLeft.childElementCount; i++) {
         leftMiddlePlayer.children[3].style.color = "white"
         leftMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture
 
-        // Set details for winner
+        controlPanelShowSelectionOfWinnerMiddleSection()
     })
 }
 // Right Side
@@ -170,6 +170,8 @@ for (let i = 0; i < playersRight.childElementCount; i++) {
         rightMiddlePlayer.children[3].innerText = this.children[3].innerText
         rightMiddlePlayer.children[3].style.color = "white"
         rightMiddlePlayer.children[4].style.backgroundImage = backgroundImageProfilePicture        
+
+        controlPanelShowSelectionOfWinnerMiddleSection()
     })
 }
 
@@ -298,7 +300,6 @@ controlPanelLeftSideSelect.on("change", () => {
         for (let i = 0 ; i < playersLeft.childElementCount; i++) {
             if (playersLeft.children[i].children[3].innerText.trim() != "PLAYER") {
                 for (let j = 0; j < currentPlayersLeft.length; j++) {
-                    console.log(currentPlayersLeft[j].playerName.toUpperCase(), playersLeft.children[i].children[3].innerText.trim())
                     if (playersLeft.children[i].children[3].innerText.trim() == currentPlayersLeft[j].playerName.toUpperCase()) {
                         selectPlayerLeft.innerHTML += `<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="${currentPlayersLeft[j].playerID}">${currentPlayersLeft[j].playerName}</label>`
                         break
@@ -315,20 +316,21 @@ controlPanelLeftSideSelect.on("change", () => {
         let rightSideButton = `<button id="controlPanelMiddleControlSelectPlayerLeft" onclick="controlPanelMiddleControlSelectPlayer('right')">Submit</button>`
 
         selectPlayerRight.innerHTML = ""
-        selectPlayerRight.innerHTML += leftSideHTML
+        selectPlayerRight.innerHTML += rightSideHTML
         for (let i = 0 ; i < playersRight.childElementCount; i++) {
             if (playersRight.children[i].children[3].innerText.trim() != "PLAYER") {
                 for (let j = 0; j < currentPlayersRight.length; j++) {
-                    console.log(currentPlayersRight[j].playerName.toUpperCase(), playersRight.children[i].children[3].innerText.trim())
                     if (playersRight.children[i].children[3].innerText.trim() == currentPlayersRight[j].playerName.toUpperCase()) {
-                        selectPlayerRight.innerHTML += `<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="${currentPlayersRight[j].playerID}">${currentPlayersRight[j].playerName}</label>`
+                        selectPlayerRight.innerHTML += `<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="${currentPlayersRight[j].playerID}">${currentPlayersRight[j].playerName}</label>`
                         break
                     }
                 }
             }
         }
-        selectPlayerRight.innerHTML += labelNoOne
-        selectPlayerRight.innerHTML += leftSideButton
+        selectPlayerRight.innerHTML += rightLabelNoOne
+        selectPlayerRight.innerHTML += rightSideButton
+
+        controlPanelShowSelectionOfWinnerMiddleSection()
     } else {
         controlPanelMiddleControl.css("display","none")
         controlPanelLeftRightControl.css("display","block")
@@ -390,9 +392,7 @@ const controlPanelPlayerControlSides = (side) => {
         }
         for (let i = 0; i < playersLeft.childElementCount; i++) {
             for (let j = 0; j < removeElements.length; j++) {
-                console.log(playersLeft.children[i].children[3].innerText, removeElements[j].playerName.toUpperCase())
                 if (playersLeft.children[i].children[3].innerText == removeElements[j].playerName.toUpperCase()) {
-                    console.log("how many times do we reach this condition")
                     playersLeft.children[i].children[2].style.backgroundImage = "none"
                     playersLeft.children[i].children[3].innerText = "PLAYER"
                     playersLeft.children[i].children[4].style.backgroundImage = "none"
@@ -442,9 +442,7 @@ const controlPanelPlayerControlSides = (side) => {
         }
         for (let i = 0; i < playersRight.childElementCount; i++) {
             for (let j = 0; j < removeElements.length; j++) {
-                console.log(playersRight.children[i].children[3].innerText, removeElements[j].playerName.toUpperCase())
                 if (playersRight.children[i].children[3].innerText == removeElements[j].playerName.toUpperCase()) {
-                    console.log("how many times do we reach this condition")
                     playersRight.children[i].children[2].style.backgroundImage = "none"
                     playersRight.children[i].children[3].innerText = "PLAYER"
                     playersRight.children[i].children[4].style.backgroundImage = "none"
@@ -473,6 +471,46 @@ const controlPanelPlayerControlSides = (side) => {
         messageBox.text(messageBoxRightText)
         messageBox.css("color","green")
     }
+}
+
+let selectWinner = document.getElementById("selectWinner")
+
+const controlPanelShowSelectionOfWinnerMiddleSection = () => {
+    let controlPanelMiddleControlSectionText = '<div class="controlPanelMiddleControlSectionText">Select the winner of the match: </div>'
+    let noOne = '<label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="">No One</label>'
+    let submitButton = '<button id="controlPanelMiddleControlSelectPlayerMiddle" onclick="controlPanelMiddleControlMiddleWinner()">Submit</button>'
+
+    selectWinner.innerHTML = ""
+    selectWinner.innerHTML += controlPanelMiddleControlSectionText
+
+    // Left Player
+    let leftPlayerName = leftMiddlePlayer.children[3].innerText
+    let leftPlayerID
+    for (var i = 0; i < currentPlayersLeft.length; i++) {
+        if (leftPlayerName == currentPlayersLeft[i].playerName.toUpperCase()) {
+            leftPlayerID = currentPlayersLeft[i].playerID
+            leftPlayerName = currentPlayersLeft[i].playerName
+            break
+        }
+    }
+    let leftPlayerLabel = `<label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="${leftPlayerID}">Left - ${leftPlayerName}</label>`
+
+    // Right Player
+    let rightPlayerName = rightMiddlePlayer.children[3].innerText
+    let rightPlayerID
+    for (var i = 0; i < currentPlayersRight.length; i++) {
+        if (rightPlayerName == currentPlayersRight[i].playerName.toUpperCase()) {
+            rightPlayerID = currentPlayersRight[i].playerID
+            rightPlayerName = currentPlayersRight[i].playerName
+            break
+        }
+    }
+    let rightPlayerLabel = `<label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="${rightPlayerID}">Right - ${rightPlayerName}</label>`
+
+    selectWinner.innerHTML += leftPlayerLabel
+    selectWinner.innerHTML += rightPlayerLabel
+    selectWinner.innerHTML += noOne
+    selectWinner.innerHTML += submitButton
 }
 
 const controlPanelPlayerResetWinner = (side) => {
@@ -564,6 +602,117 @@ const controlPanelPlayerResetWinner = (side) => {
         winnerTextFromRight.style.opacity = 0
     }
 } 
+
+const controlPanelMiddleControlSelectPlayer = (side) => {
+    if (side == "left") {
+        // Get value of selection
+        let playerLeftInMiddleControl = $("[name=playerLeft]:checked").val()
+        if (playerLeftInMiddleControl == "") {
+            controlPanelPlayerResetWinner('left')
+            return
+        }
+
+        // Find ID and get name from that
+        let playerLeftInMiddleControlName = ""
+        for (let i = 0; i < currentPlayersLeft.length; i++) {
+            if (playerLeftInMiddleControl == currentPlayersLeft[i].playerID) {
+                playerLeftInMiddleControlName = currentPlayersLeft[i].playerName
+            }
+        }
+        if (playerLeftInMiddleControlName == "") {
+            controlPanelPlayerResetWinner('left')
+            return
+        }
+
+        // Click on event
+        for (let i = 0; i < playersLeft.childElementCount; i++) {
+            if (playerLeftInMiddleControlName.toUpperCase() == playersLeft.children[i].children[3].innerText) {
+                playersLeft.children[i].click()
+                break;
+            }
+        }
+    } else if (side == "right") {
+        // Get value of selection
+        let playerRightInMiddleControl = $("[name=playerRight]:checked").val()
+        if (playerRightInMiddleControl == "") {
+            controlPanelPlayerResetWinner('right')
+            return
+        }
+        // Find ID and get name from that
+        let playerRightInMiddleControlName = ""
+        for (let i = 0; i < currentPlayersRight.length; i++) {
+            if (playerRightInMiddleControl == currentPlayersRight[i].playerID) {
+                playerRightInMiddleControlName = currentPlayersRight[i].playerName
+            }
+        }
+        if (playerRightInMiddleControlName == "") {
+            controlPanelPlayerResetWinner('right')
+            return
+        }
+
+        // Click on event
+        for (let i = 0; i < playersRight.childElementCount; i++) {
+            if (playerRightInMiddleControlName.toUpperCase() == playersRight.children[i].children[3].innerText) {
+                playersRight.children[i].click()
+                break;
+            }
+        }
+    }
+
+    controlPanelShowSelectionOfWinnerMiddleSection()
+}
+
+const resetMiddle = () => {
+    // Reset Winner
+    middleLines.innerHTML = ""
+    winnerPlayerLeft.style.display = "none"
+    winnerPlayerRight.style.display = "none"
+    winnerTextFromLeft.style.opacity = 0
+    winnerTextFromRight.style.opacity = 0
+    // Reset Middle Styling
+    // Reset middle left
+    leftMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+    leftMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+    leftMiddlePlayer.children[1].style.color = "var(--textGray)"
+    leftMiddlePlayer.children[2].innerHTML = ""
+    leftMiddlePlayer.children[3].style.color = "var(--textGray)"
+    leftMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+    leftMiddlePlayer.children[4].innerHTML = ""
+    // Reset middle right
+    rightMiddlePlayer.style.backgroundColor = "var(--borderGray)"
+    rightMiddlePlayer.children[1].style.backgroundColor = "var(--elementGray)"
+    rightMiddlePlayer.children[1].style.color = "var(--textGray)"
+    rightMiddlePlayer.children[2].innerHTML = ""
+    rightMiddlePlayer.children[3].style.color = "var(--textGray)"
+    rightMiddlePlayer.children[4].style.borderColor = "var(--borderGray)"
+    rightMiddlePlayer.children[4].innerHTML = ""
+}
+
+const controlPanelMiddleControlMiddleWinner = () => {
+    let playerMiddleWinner = $("[name=playerMiddle]:checked").val()
+    if (playerMiddleWinner == "") {
+        resetMiddle()
+        return
+    }
+    if (leftMiddlePlayer.children[3].innerText == "PLAYER" || rightMiddlePlayer.children[3].innerText == "PLAYER" ) {
+        resetMiddle()
+        return
+    }
+
+    let playerMiddleName = ""
+    for (let i = 0; i < playerArray.length; i++) {
+        if (playerMiddleWinner == playerArray[i].playerID) {
+            playerMiddleName = playerArray[i].playerName
+        }
+    }
+    if (playerMiddleName == "") {
+        resetMiddle()
+        return
+    }
+
+    if (leftMiddlePlayer.children[3].innerText == playerMiddleName.toUpperCase()) leftMiddlePlayer.click()
+    else if (rightMiddlePlayer.children[3].innerText == playerMiddleName.toUpperCase()) rightMiddlePlayer.click()
+}
 
 const AUFlagURL = "static/flags/AU.png"
 const CAFlagURl = "static/flags/CA.png"

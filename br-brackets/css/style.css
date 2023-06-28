@@ -410,3 +410,21 @@
 /* Right side winner */
 #selectPlayerRight { position: absolute; top: 0; left: 540px; }
 .controlPanelMiddleControlSectionText { text-align: center;}
+/* Middle winner */
+#selectWinner { position: absolute; top: 0; left: 1080px; }
+.controlPanelMiddleControlCheckbox { 
+    justify-content: center;
+    width: 479px; 
+    margin: 15px 0px;
+}
+#controlPanelMiddleControlSelectPlayerMiddle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 250px; height: 40px;
+    border: 5px solid white; border-radius: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 17px;
+}

@@ -227,29 +227,21 @@
 
             <div class="controlPanelMiddleControlSection" id="selectPlayerLeft">
                 <div class="controlPanelMiddleControlSectionText">Select the player from the left<br>hand side: </div>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="12408961">maliszewski</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="2165650">mcy4</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="2558286">Rafis</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="7813296">Rektygon</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="6114695">Ciru</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="4733121">Kariyu</label>
                 <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="">No One</label>
                 <button id="controlPanelMiddleControlSelectPlayerLeft" onclick="controlPanelMiddleControlSelectPlayer('left')">Submit</button>
             </div>
             <div class="controlPanelMiddleControlSection" id="selectPlayerRight">
                 <div class="controlPanelMiddleControlSectionText">Select the player from the right<br>hand side: </div>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="12408961">maliszewski</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="2165650">mcy4</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="2558286">Rafis</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="7813296">Rektygon</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="6114695">Ciru</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="4733121">Kariyu</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="5791401">lolol234</label>
-                <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="4175698">Sytho</label>
                 <label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="">No One</label>
                 <button id="controlPanelMiddleControlSelectPlayerLeft" onclick="controlPanelMiddleControlSelectPlayer('right')">Submit</button>
             </div>
-            <div class="controlPanelMiddleControlSection" id="selectWinner"></div>
+            <div class="controlPanelMiddleControlSection" id="selectWinner">
+                <div class="controlPanelMiddleControlSectionText">Select the winner of the match: </div>
+                <label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="">Left - maliszewski</label>
+                <label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="">Right - FlyingTuna</label>
+                <label class="controlPanelLeftRightControlCheckbox controlPanelMiddleControlCheckbox"><input type="radio" name="playerMiddle" value="">No One</label>
+                <button id="controlPanelMiddleControlSelectPlayerMiddle" onclick="controlPanelMiddleControlMiddleWinner()">Submit</button>
+            </div>
         </section>
     </div>
     <script src="index.js"></script>
