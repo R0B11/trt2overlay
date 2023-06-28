@@ -361,3 +361,52 @@
     color: black;
     background-color: white;
 }
+/* Middle Controls*/
+#controlPanelMiddleControl {
+    position: absolute; left: 350px;
+    width: 1570px; height: inherit;
+    display: flex;
+    flex-direction: row;
+}
+.controlPanelMiddleControlSection { width: calc(1620px / 3); height: inherit; margin: 0;}
+.controlPanelLeftRightControlCheckbox input[type="radio"] {
+    appearance: none;
+    background-color: transparent;
+    margin: 0;
+    font: inherit;
+    color: white;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid white;
+    display: grid;
+    place-content: center;
+    border-radius: 1.15em;
+}
+.controlPanelLeftRightControlCheckbox input[type="radio"]::before {
+    content: "";
+    width: 0.65em; height: 0.65em;
+    transform: scale(0);
+    transition: 0.2s transform ease-in-out;
+    box-shadow: inset 1em 1em lightBlue;
+    border-radius: 1.15em;
+}
+.controlPanelLeftRightControlCheckbox input[type="radio"]:checked::before { transform: scale(1) }
+#selectPlayerLeft, #selectPlayerRight {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#controlPanelMiddleControlSelectPlayerLeft {
+    width: 250px; height: 40px;
+    border: 5px solid white; border-radius: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 17px;
+}
+#controlPanelMiddleControlSelectPlayerLeft:active {
+    background-color: white;
+    color: black;
+}
+/* Right side winner */
+#selectPlayerRight { position: absolute; top: 0; left: 540px; }
+.controlPanelMiddleControlSectionText { text-align: center;}

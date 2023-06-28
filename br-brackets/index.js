@@ -277,11 +277,58 @@ rightMiddlePlayer.addEventListener("click", function() {
     winnerPlayerRight.children[4].style.backgroundImage = backgroundImageProfilePicture
 })
 
+
+// Middle 1v1
+let selectPlayerLeft = document.getElementById("selectPlayerLeft")
+let selectPlayerRight = document.getElementById("selectPlayerRight")
+
 controlPanelLeftSideSelect.on("change", () => {
     let side = controlPanelLeftSideSelect.val()
     if (side == "middle") {
         controlPanelMiddleControl.css("display","block")
         controlPanelLeftRightControl.css("display","none")
+
+        // Generate left side
+        let leftSideHTML = `<div class="controlPanelMiddleControlSectionText">Select the player from the left<br>hand side: </div>`
+        let labelNoOne = '<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="">No One</label>'
+        let leftSideButton = `<button id="controlPanelMiddleControlSelectPlayerLeft" onclick="controlPanelMiddleControlSelectPlayer('left')">Submit</button>`
+
+        selectPlayerLeft.innerHTML = ""
+        selectPlayerLeft.innerHTML += leftSideHTML
+        for (let i = 0 ; i < playersLeft.childElementCount; i++) {
+            if (playersLeft.children[i].children[3].innerText.trim() != "PLAYER") {
+                for (let j = 0; j < currentPlayersLeft.length; j++) {
+                    console.log(currentPlayersLeft[j].playerName.toUpperCase(), playersLeft.children[i].children[3].innerText.trim())
+                    if (playersLeft.children[i].children[3].innerText.trim() == currentPlayersLeft[j].playerName.toUpperCase()) {
+                        selectPlayerLeft.innerHTML += `<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="${currentPlayersLeft[j].playerID}">${currentPlayersLeft[j].playerName}</label>`
+                        break
+                    }
+                }
+            }
+        }
+        selectPlayerLeft.innerHTML += labelNoOne
+        selectPlayerLeft.innerHTML += leftSideButton
+
+        // Generate right side
+        let rightSideHTML = `<div class="controlPanelMiddleControlSectionText">Select the player from the right<br>hand side: </div>`
+        let rightLabelNoOne = '<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerRight" value="">No One</label>'
+        let rightSideButton = `<button id="controlPanelMiddleControlSelectPlayerLeft" onclick="controlPanelMiddleControlSelectPlayer('right')">Submit</button>`
+
+        selectPlayerRight.innerHTML = ""
+        selectPlayerRight.innerHTML += leftSideHTML
+        for (let i = 0 ; i < playersRight.childElementCount; i++) {
+            if (playersRight.children[i].children[3].innerText.trim() != "PLAYER") {
+                for (let j = 0; j < currentPlayersRight.length; j++) {
+                    console.log(currentPlayersRight[j].playerName.toUpperCase(), playersRight.children[i].children[3].innerText.trim())
+                    if (playersRight.children[i].children[3].innerText.trim() == currentPlayersRight[j].playerName.toUpperCase()) {
+                        selectPlayerRight.innerHTML += `<label class="controlPanelLeftRightControlCheckbox"><input type="radio" name="playerLeft" value="${currentPlayersRight[j].playerID}">${currentPlayersRight[j].playerName}</label>`
+                        break
+                    }
+                }
+            }
+        }
+        selectPlayerRight.innerHTML += labelNoOne
+        selectPlayerRight.innerHTML += leftSideButton
     } else {
         controlPanelMiddleControl.css("display","none")
         controlPanelLeftRightControl.css("display","block")
@@ -318,7 +365,6 @@ controlPanelLeftSideSelect.on("change", () => {
             else if (messageBoxRightText == "Success!") messageBox.css("color","green")
         }
     }
-
 })
 
 const controlPanelPlayerControlSides = (side) => {
