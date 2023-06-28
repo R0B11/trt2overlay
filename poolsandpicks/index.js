@@ -1,4 +1,4 @@
-let pickOrder = "blue";
+let pickOrder = "red";
 let banOrder = "blue"
 let banNum = 2;
 let bestOf = 13;
@@ -218,8 +218,10 @@ function buttonge(){
                             $("#blueBan1 .mapCardContent").css({
                                 "background-image": `url('./static/test-map-2.jpg')`,
                                 "clip-path": 'var(--map-clip-path)',
+                                "opacity": 0.4,
                             }).html("").toggleClass("tile-picking");
-                            $("#blueBan1 #map-slot-block").css("opacity", "1").toggleClass("map-slot-content").html("FM1");
+                            $("#blueBan1 #map-slot-block").css("opacity", "1").toggleClass("map-slot-content");
+                            $("#blueBan1 #mapslottext").html("FM1");
                             break;
                         case "red":
                             break;
