@@ -92,7 +92,7 @@
     background-size: cover;
 }
 .leftSideProfilePicture { 
-    left: 347px;
+    left: 348px;
     border-left: 2px solid var(--borderGray);
 }
 .rightSideProfilePicture { 
@@ -190,7 +190,7 @@
 }
 /* Middle Player Profile Picture */
 .middleProfilePicture {
-    position: relative; top: -142px; 
+    position: relative; top: -141px; 
     width: 54px; height: 54px;
     background-color: var(--elementGray);
     background-size: cover;
