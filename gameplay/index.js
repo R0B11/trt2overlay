@@ -79,6 +79,7 @@ let commentatorName2 = document.getElementById("commentatorName2")
 
 // Round Name
 let roundName = $("#roundName")
+let currentRoundName
 
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
@@ -245,6 +246,10 @@ socket.onmessage = event => {
             imgStar.setAttribute("src", "static/blueStar.png")
             playerRightMatchScore.append(imgStar)
         }
+
+        // If win, submit to winscreen
+        if (currentMatchScoreRed == currentBestOf) setCookieToWinScreen(currentPlayerID0, playerLeftName.innerText, "red", currentRoundName)
+        else if (currentMatchScoreRed == currentBestOf) setCookieToWinScreen(currentPlayerID1, playerRightName.innerText, "red", currentRoundName)
     }
   
       if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
@@ -332,7 +337,10 @@ const changeCommentatorNames = () => {
     else if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
 }
 
-const changeRoundInformation = (roundText) => roundName.text(roundText)
+const changeRoundInformation = (roundText) => {
+    roundName.text(roundText)
+    currentRoundName = roundText
+}
 
 // Cookie to Win Screen
 const setCookieToWinScreen = (id, name, team, round) => {
@@ -345,5 +353,3 @@ const setCookieToWinScreen = (id, name, team, round) => {
     cookieValue = ` winscreenRoundName=${round}; path=/`
     document.cookie = cookieValue
 }
-
-setCookieToWinScreen(12455868, "maliszewski", "blue", "Finals")
