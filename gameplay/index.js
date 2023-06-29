@@ -7,6 +7,14 @@ socket.onclose = event => {
 };
 socket.onerror = error => console.log("Socket Error: ", error)
 
+// Player Details
+let playerLeftName = $("#playerLeftName")
+let playerLeftRank = $("#playerLeftRank")
+let playerRightName = $("#playerRightName")
+let playerRightRank = $("#playerRightRank")
+let currentPlayerID0
+let currentPlayerID1
+
 // Map Stats
 let mapStatsAR = $("#mapStatsAR")
 let mapStatsOD = $("#mapStatsOD")
@@ -96,7 +104,21 @@ let calculateARandOD = (baseNumber, mod) => {
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
+    console.log(data)
 
+    // Player Details
+    if (currentPlayerID0 != data.tourney.ipcClients[0].userID) {
+        currentPlayerID0 = data.tourney.ipcClients[0].userID
+        playerLeftName.text(data.tourney.ipcClients[0].name)
+        playerLeftRank.text(`#${data.tourney.ipcClients[0].globalRank}`)
+    }
+    if (currentPlayerID1 != data.tourney.ipcClients[1].userID) {
+        currentPlayerID1 = data.tourney.ipcClients[1].userID
+        playerRightName.text(data.tourney.ipcClients[1].name)
+        playerRightRank.text(`#${data.tourney.ipcClients[1].globalRank}`)
+    }
+
+    // Song Details
     if (currentSongID != data.menu.bm.id) {
         currentSongID = data.menu.bm.id
         poolMapFound = false
@@ -174,7 +196,7 @@ socket.onmessage = event => {
             mapSetCreator.text(currentSongSetCreator.toUpperCase())
         }
     }
-      // Star Visibility
+    // Star Visibility
     if (starVisibility != data.tourney.manager.bools.starVisible) {
         starVisibility = data.tourney.manager.bools.starVisible
         if (starVisibility) {
