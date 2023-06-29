@@ -6,10 +6,42 @@ let bestOf;
 let banCount = 0;
 let pickCount = 0;
 
+const teams = {
+    'redTeam': {
+        'bans': [],
+        'score': 0
+    },
+    'blueTeam': {
+        'bans': [],
+        'score': 0
+    }
+};
 
-function roundSize(bans, roundsize){
-    banNum = bans;
-    bestOf = roundsize;
+function setRound(round){
+    switch (round) {
+        case "R16":
+            banNum = 1;
+            bestOf = 9;
+            break;
+        case "QF":
+            banNum = 1;
+            bestOf = 9;
+            break;
+        case "SF":
+            banNum = 2;
+            bestOf = 13;
+            break;
+        case "F":
+            banNum = 2;
+            bestOf = 13;
+            break;
+        case "GF":
+            banNum = 2;
+            bestOf = 13;
+            break;           
+        default:
+            break;
+    }
 }
 
 function banOrder(ban){
@@ -37,13 +69,13 @@ function pickOrder(pick){
 }
 
 function generateTiles(pick, ban, banNum, bestOf) {
-    for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
+    for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
             // Red Side
             // Create and combine all elements before adding it to the div
             var redOuterDiv = $('<div/>', {
-                id: `redBan${i+1}`,
+                id: `redBan${i}`,
                 class: 'mapCard banCardRed',
             })
 
@@ -75,7 +107,7 @@ function generateTiles(pick, ban, banNum, bestOf) {
             // Blue Side
             // Create and combine all elements before adding it to the div
             var blueOuterDiv = $('<div/>', {
-                id: `blueBan${i+1}`,
+                id: `blueBan${i}`,
                 class: 'mapCard banCardBlue',
             })
             $('<div/>', {
@@ -108,7 +140,7 @@ function generateTiles(pick, ban, banNum, bestOf) {
             // Red Side
             // Create and combine all elements before adding it to the div
             var redOuterDiv = $('<div/>', {
-                id: `redPick${i+1}`,
+                id: `redPick${i}`,
                 class: 'mapCard pickCardRed',
                 style: 'opacity: 1'
             })
@@ -141,7 +173,7 @@ function generateTiles(pick, ban, banNum, bestOf) {
             // Blue Side 
             // Create and combine all elements before adding it to the div
             var blueOuterDiv = $('<div/>', {
-                id: `bluePick${i+1}`,
+                id: `bluePick${i}`,
                 class: 'mapCard pickCardBlue',
                 style: 'opacity: 1'
             })
@@ -225,13 +257,32 @@ function generateTiles(pick, ban, banNum, bestOf) {
             // $("#redBan2").css("opacity","0");
         } 
     }
-    // Used to even out the space left by a lower amount of picks
+    // Lower amount of picks no longer look like complete garbage
     if (bestOf < 13) {
-        $(".pickArea").css("justify-content", "space-between");
+        // Make the pick area smaller so you can center everything
+        $(".pickArea").css("width", "800px");
+        if (firstBan == "blue"){
+            $("#redBanArea").css("justify-content", "flex-end");
+            $("#blueBanArea").css("justify-content", "flex-start");
+        }
+        else {
+            $("#blueBanArea").css("justify-content", "flex-end");
+            $("#redBanArea").css("justify-content", "flex-start");
+        };
+        $("#redPicksBans").css("justify-content", "center");
+        $("#bluePicksBans").css("justify-content", "center");
+        // Better margins for less picks
+        if (pick == "blue") { $(`.pickCardRed`).css("left","65px"); }
+        else if (pick == "red") { $(`.pickCardBlue`).css("left","65px"); }
     }
-    // Placing the first pick properly in the timeline
-    if (pick == "blue") { $(`.pickCardRed`).css("left","50px"); }
-    else if (pick == "red") { $(`.pickCardBlue`).css("left","50px"); }
+    else {
+        $(".pickCardBlue").css("left", "0px");
+        $(".pickCardRed").css("left", "0px");
+        // Placing the first pick properly in the timeline
+        if (pick == "blue") { $(`.pickCardRed`).css("left","55px"); }
+        else if (pick == "red") { $(`.pickCardBlue`).css("left","55px"); }
+    }
+    
 }
 
 /*
@@ -258,6 +309,8 @@ function buttonge(){
                             break;
 */
 
+// TODO: Add map bg addition functionality 
+
 function mapBan(team, map){
 
 }
@@ -268,5 +321,5 @@ function mapPick(team, map){
 
 pickOrder("red");
 banOrder("blue");
-roundSize(2, 13);
+setRound("F")
 generateTiles(firstPick, firstBan, banNum, bestOf);

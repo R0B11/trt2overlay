@@ -197,14 +197,14 @@ html {
     width: 85px;
     height: 330px;
     background-size: cover;
-    margin: 0 20px;
+    margin: 0 25px;
 }
 
-.pickCardBlue { background-image: url("../static/tile-box-blue.png");}
+.pickCardBlue { background-image: url("../static/tile-box-blue.png"); left: 30px;}
 
 .banCardBlue { background-image: url("../static/blue-ban-tile.png");}
 
-.pickCardRed { background-image: url("../static/tile-box-red.png");}
+.pickCardRed { background-image: url("../static/tile-box-red.png"); left: 30px;}
 
 .banCardRed { background-image: url("../static/red-ban-tile.png");}
 
