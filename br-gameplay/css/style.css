@@ -20,10 +20,11 @@
     --numberThreePlaceColour: #ff9b42;
 }
 
+video { position: absolute; left: 0; top: 0; }
+
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/brGameplayPNG.png"); background-size: cover;
 }
 
 /* Top Section */
@@ -36,6 +37,7 @@
     background-position: 50%;
     background-size: cover;
     background-image: url("https://assets.ppy.sh/beatmaps/1843748/covers/cover.jpg");
+    z-index: -1;
 }
 #topBackgroundOverlay {
     position: absolute; top: 0; left: 0;
@@ -97,14 +99,8 @@
 
 /* Current Map */
 #currentMap {
-    position: absolute; left: 825px; top: 21px; width: 403px;
+    position: absolute; left: 756px; top: 21px; width: 403px;
     font-family: 'Lexend'; font-weight: 600; 
-}
-#currentMapText {
-    position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
-    font-size: 20px;
-    background-color: white;
-    padding: 0.5px 12px;
 }
 #currentSongArtistandNameWrapper {
     position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
@@ -148,14 +144,6 @@
 
 /* Commentators */
 #commentators { font-family: 'Lexend'; font-weight: 600; }
-#commentatorText {
-    position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%);
-    font-size: 17px;
-    letter-spacing: 3px;
-    background-color: var(--lightYellow);
-    color: var(--darkGray);
-    padding: 6px 6px 6px 9px;
-}
 .commentatorName {
     position: absolute; bottom: 8px;
     color: white;
