@@ -1,0 +1,36 @@
+#main {
+    position: absolute; left: 0; top: 0;
+    width: 1920px; height: 1080px;
+}
+.bracketWhole {
+    position: absolute; left: 0; top: 0;
+    width: inherit; height: inherit;
+    background-size: cover;
+    transition: 750ms ease-in-out;
+}
+#upperBracket { background-image: url("../static/roundtableBracketPNG.png");  }
+#lowerBracket { 
+    background-image: url("../static/roundtableLoserBracketPNG.png"); 
+    opacity: 0;
+}
+
+/* Control Panel */
+#controlPanel {
+    position: absolute; left: 0; top: 1080px;
+    width: 1920px; height: 200px;
+    background-color: #121212;
+    display: flex;
+}
+.controlPanelButton {
+    width: 150px; height: 150px; margin: 25px;
+    width: 150px; height: 150px;
+    margin: 25px;
+    color: white;
+    background-color: transparent;
+    font-size: 20px;
+    border: 5px solid white; border-radius: 20px;
+}
+.controlPanelButton:active {
+    color: black;
+    background-color: white;
+}

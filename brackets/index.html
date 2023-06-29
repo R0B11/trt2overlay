@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="deps/reconnecting-websocket.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="main">
+        <section class="bracketWhole" id="upperBracket"></section>
+        <section class="bracketWhole" id="lowerBracket"></section>
+    </div>
+    <div id="controlPanel">
+        <button class="controlPanelButton" onclick="toWinnerBracket()">To Winner Bracket</button>
+        <button class="controlPanelButton" onclick="toLoserBracket()">To Loser Bracket</button>
+        <button class="controlPanelButton" onclick="pullResultsFromDatabase()">Pull Results From Database</button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
