@@ -32,15 +32,16 @@
     display: flex; flex-direction: column;  justify-content: space-between;
 }
 #lowerBracketRound1 { top: 317px; left: 49px; }
-#lowerBracketRound2 { top: 277px; left: 406px; }
+#lowerBracketRound2 { top: 280px; left: 406px; }
 
 /* Lower Bracket Round Lines */
 .lowerBracketRounds1And2Lines {
     position: absolute; 
     width: 44px; height: 608px;
+    display: flex; flex-direction: column; justify-content: space-between;
 }
 #lowerBracketRound1Lines { top: 317px; left: 365px; }
-#lowerBracketRound2Lines { top: 277px; left: 722px; }
+#lowerBracketRound2Lines { top: 280px; left: 722px; }
 
 /* Lower Bracket Round 1 Matches */
 .lowerBracketRound1Match { 
