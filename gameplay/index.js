@@ -158,7 +158,7 @@ socket.onmessage = event => {
             animation.mapStatsAR.update(currentAR)
         }
         // OD
-        if ( currentBaseOD != data.menu.bm.stats.OD) {
+        if (currentBaseOD != data.menu.bm.stats.OD) {
             currentBaseOD = data.menu.bm.stats.OD
             currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
             animation.mapStatsOD.update(currentOD)
