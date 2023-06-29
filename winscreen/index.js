@@ -52,7 +52,6 @@ window.setInterval(() => {
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
 
     if (currentSongName != data.menu.bm.metadata.title || currentArtistName != data.menu.bm.metadata.artist) {
         currentSongName = data.menu.bm.metadata.title

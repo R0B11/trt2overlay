@@ -14,6 +14,28 @@
     opacity: 0;
 }
 
+/* Now Playing Section */
+#nowPlayingSection {
+    position: absolute; bottom: 0;
+    width: inherit; height: 78px;
+    font-family: 'Lexend', sans-serif; font-size: 24px;
+    line-height: 78px;
+}
+#nowPlayingDivider { 
+    position: absolute; right: 227px;
+    line-height: 73px;
+    color: white;
+}
+#nowPlayingText { 
+    position: absolute; right: 32px;
+    letter-spacing: -.3px;
+}
+#nowPlayingSongArtist {
+    position: absolute; right: 252px;
+    color: white;
+    letter-spacing: -.2px;
+}
+
 /* Control Panel */
 #controlPanel {
     position: absolute; left: 0; top: 1080px;

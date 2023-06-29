@@ -9,11 +9,22 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link href="css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
         <section class="bracketWhole" id="upperBracket"></section>
-        <section class="bracketWhole" id="lowerBracket"></section>
+        <section class="bracketWhole" id="lowerBracket">
+            <!-- Now Playing Section -->
+            <section id="nowPlayingSection">
+                <div id="nowPlayingSongArtist"></div>
+                <div id="nowPlayingDivider">|</div>
+                <div id="nowPlayingText">NOW PLAYING</div>
+            </section>
+        </section>
+
     </div>
     <div id="controlPanel">
         <button class="controlPanelButton" onclick="toWinnerBracket()">To Winner Bracket</button>
