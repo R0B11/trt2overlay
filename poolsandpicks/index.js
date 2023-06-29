@@ -1,12 +1,42 @@
-let pickOrder = "red";
-let banOrder = "blue"
-let banNum = 2;
-let bestOf = 13;
+let firstPick;
+let firstBan;
+let banNum;
+let bestOf;
+
+let banCount = 0;
+let pickCount = 0;
 
 
+function roundSize(bans, roundsize){
+    banNum = bans;
+    bestOf = roundsize;
+}
 
+function banOrder(ban){
+    firstBan = ban;
+    if (ban == "blue") {
+        $("#redFirstBanText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstBanText").css("color","var(--bluePlayerCardColour)");
+    }
+    else {
+        $("#blueFirstBanText").css("color","var(--grayPickBanTextColour)");
+        $("#redFirstBanText").css("color","var(--redPlayerCardColour)");
+    }
+}
 
-function generateTiles(firstPick, firstBan, banNum, bestOf) {
+function pickOrder(pick){
+    firstPick = pick;
+    if (pick == "blue") {
+        $("#redFirstPickText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstPickText").css("color","var(--bluePlayerCardColour)");
+    }
+    else {
+        $("#blueFirstPickText").css("color","var(--grayPickBanTextColour)");
+        $("#redFirstPickText").css("color","var(--redPlayerCardColour)");
+    }    
+}
+
+function generateTiles(pick, ban, banNum, bestOf) {
     for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
@@ -144,7 +174,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
     }
 
     // Placing the correct ban card first based on first ban
-    if ( firstBan == 'blue' ){
+    if ( ban == 'blue' ){
         // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {
             $("#blueBanArea").css({
@@ -170,7 +200,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
         }
     }
     // Do the same, but red bans first
-    else if ( firstBan == 'red' ){
+    else if ( ban == 'red' ){
         // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {  
             $("#blueBanArea").css({
@@ -200,12 +230,11 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
         $(".pickArea").css("justify-content", "space-between");
     }
     // Placing the first pick properly in the timeline
-    if (firstPick == "blue") { $(`.pickCardRed`).css("left","50px"); }
-    else if (firstPick == "red") { $(`.pickCardBlue`).css("left","50px"); }
+    if (pick == "blue") { $(`.pickCardRed`).css("left","50px"); }
+    else if (pick == "red") { $(`.pickCardBlue`).css("left","50px"); }
 }
 
-let matchActionStatus = 1;
-
+/*
 function buttonge(){
     // Replace data in current tile
     // Check ban num
@@ -227,90 +256,17 @@ function buttonge(){
                             break;
                         default:
                             break;
-                    }
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-                    
-                    break;
-                case 4:
-                    
-                    break;
-                case 5:
-                    
-                    break;
-                case 6:
-                    
-                    break;
-                case 7:
-                    
-                    break;
-                case 8:
-                    
-                    break;
-                case 9:
-                    
-                    break;    
-                default:
-                    break;
-            }
-            break;
-        case 11:
-            switch (matchActionStatus) {
-                case 1:
-                    
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-                    
-                    break;
-                case 4:
-                    
-                    break;
-                case 5:
-                    
-                    break;
-                case 6:
-                    
-                    break;
-                case 7:
-                    
-                    break;   
-                default:
-                    break;
-            }
-            break;
-        case 9:
-            switch (matchActionStatus) {
-                case 1:
-                    
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-                    
-                    break;
-                case 4:
-                    
-                    break;
-                case 5:
-                    
-                    break;
-                case 6:
-                    
-                    break; 
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
-    }    
+*/
+
+function mapBan(team, map){
+
 }
 
-generateTiles(pickOrder, banOrder, banNum, bestOf);
+function mapPick(team, map){
+
+}
+
+pickOrder("red");
+banOrder("blue");
+roundSize(2, 13);
+generateTiles(firstPick, firstBan, banNum, bestOf);

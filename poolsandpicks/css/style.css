@@ -32,7 +32,7 @@ html {
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/picksBansPNG1.png");
+    background-image: url("../static/picksBansPNG2.png");
     background-size: cover;
 }
 
@@ -105,8 +105,8 @@ html {
 }
 .firstPickText { margin-bottom: 3px; }
 #redFirstPickText { color: var(--grayPickBanTextColour); }
-#redFirstBanText { color: var(--redPlayerCardColour); }
-#blueFirstPickText { color: var(--bluePlayerCardColour); }
+#redFirstBanText { color: var(--grayPickBanTextColour); }
+#blueFirstPickText { color: var(--grayPickBanTextColour); }
 #blueFirstBanText { color: var(--grayPickBanTextColour); }
 
 /* Match Score Section */
@@ -286,7 +286,7 @@ html {
 
 #tiebreakerCard {
     position: absolute;
-    right: 5px;
+    right: 10px;
     top: 375px;
     width: 85px;
     height: 330px;
