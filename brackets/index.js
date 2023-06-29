@@ -34,6 +34,4 @@ const toLoserBracket = () => {
     upperBracket.css("opacity", 0)
     lowerBracket.css("opacity", 1)
 }
-const pullResultsFromDatabase = () => {
-
-}
+const pullResultsFromDatabase = () => {}

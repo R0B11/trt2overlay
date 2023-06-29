@@ -1,3 +1,14 @@
+:root {
+    --borderGray: rgba(102,102,102,1);
+    --backgroundGray: rgba(18,18,18,1);
+    --elementGray: rgba(57,57,57,1);
+    --elementGrayOverlay: rgba(57,57,57,0.5);
+    --textGray: rgba(166,166,166,1);
+
+    --borderRed: rgba(241,18,72,1);
+    --textGold: rgba(255,226,146,1);
+}
+
 #main {
     position: absolute; left: 0; top: 0;
     width: 1920px; height: 1080px;
@@ -14,11 +25,74 @@
     opacity: 0;
 }
 
+/* Lower Bracket Rounds */
+.lowerBracketRounds1And2 {
+    position: absolute; 
+    /* background-color: rgba(255,255,255,0.5); */
+    width: 316px; height: 608px;
+}
+#lowerBracketRound1 { top: 317px; left: 49px; }
+#lowerBracketRound2 { top: 277px; left: 406px; }
+
+/* Lower Bracket Round Lines */
+.lowerBracketRounds1And2Lines {
+    position: absolute; 
+    /* background-color: rgba(255,0,255,0.5); */
+    width: 44px; height: 608px;
+}
+#lowerBracketRound1Lines { top: 317px; left: 365px; }
+#lowerBracketRound2Lines { top: 277px; left: 722px; }
+
+/* Lower Bracket Players */
+.lowerBracketPlayer {
+    background-color: rgba(102,102,102,0.5);
+    width: inherit; height: 51px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.15% 100%, 0% 50%);
+    border-radius: 3px;
+}
+.lowerBracketPlayerOverlay {
+    position: relative; top: 2px; left: 2px;
+    background-color: rgba(18,18,18,0.5);
+    width: 312px; height: 47px;
+    border-radius: 2px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 48%);
+}
+.lowerBracketPlayerScore {
+    position: relative; top: -40.4px; left: 6.4px;
+    background-color: rgba(57,57,57,0.5);
+    width: 71.3px; height: 38px;
+    clip-path: polygon(0% 0%, 68.6% 0%, 100% 59%, 100% 100%, 31.3% 100%, 0% 41%);
+}
+.lowerBracketPlayerFlag {
+    position: relative; top: -72.6px; left: 93px;
+    background-color: rgba(57,57,57,0.5);
+    width: 34.3px; height: 24px;
+    border-radius: 5px;
+}
+.flagOverlay { border-radius: 5px; }
+.flagAndProfilePictureOverlay {
+    position: relative; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--elementGrayOverlay);
+}
+.lowerBracketPlayerName {
+    position: relative; top: -92px; left: 144px;
+    color: white;
+    font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 12px;
+    letter-spacing: 1px;
+}
+.lowerBracketPlayerProfilePicture {
+    position: relative; top: -121.5px; left: 265.5px;
+    background-color: rgba(57,57,57,0.5);
+    width: 46.5px; height: 46.5px;
+    border-left: 2px solid var(--borderGray);
+}
+
 /* Now Playing Section */
 #nowPlayingSection {
     position: absolute; bottom: 0;
     width: inherit; height: 78px;
-    font-family: 'Lexend', sans-serif; font-size: 24px;
+    font-family: 'Lexend', sans-serif; font-size: 24px; font-weight: 700;
     line-height: 78px;
 }
 #nowPlayingDivider { 
