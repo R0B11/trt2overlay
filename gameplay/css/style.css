@@ -9,10 +9,12 @@
     --reallyDarkGray: #202020;
 }
 
+/* Video */
+video { position: absolute; top: 0; left: 0; }
+
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/gameplay.png"); background-size: cover;
 }
 /* Top Section */
 /* Player Detail Sections */
@@ -107,11 +109,14 @@
 /* Bottom Section */
 /* Cover */
 .positionAbsoluteInMiddle { position: absolute; left: 50%; transform: translateX(-50%); }
-#bottomSection {
+#bottomSection, #bottomBackground {
     bottom: 0; 
     width: 1182px; height: 205px;
     border: 2px 0px 0px 0px solid var(--yellow);
-    background-image: url("https://assets.ppy.sh/beatmaps/1843748/covers/cover.jpg");
+}
+#bottomBackground {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    z-index: -1;
     background-size:cover; background-position: 50%;
 }
 #bottomSectionOverlay {

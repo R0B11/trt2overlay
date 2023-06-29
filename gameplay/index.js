@@ -52,6 +52,10 @@ let currentSongSetCreator
 let currentSongID
 let poolMapFound = false
 
+// Map Background
+let bottomBackground = $("#bottomBackground")
+let currentSongSetID
+
 // Chat 
 let scoreVisibility = false
 let chatDisplay = document.getElementById("chatDisplay");
@@ -132,11 +136,6 @@ socket.onmessage = event => {
             if (this.status == 200) {
                 poolMapFound = true
                 currentSR = "" // Enter data here
-                currentBaseAR = "" // Enter data here
-                currentBaseOD = "" // Enter data here
-                currentBaseCS = "" // Enter data here
-                currentBaseBPM = "" // Enter data here
-                currentMapMod = "" // Enter data here
                 mapModSlot.css("display","block")
             } else {
                 currentMapMod = ""
@@ -144,59 +143,62 @@ socket.onmessage = event => {
         }
         SRRequest.send()
     }
-    // If map is not in the mappool
-    if (!poolMapFound) {
-        // SR
-        if (currentSR != data.menu.bm.stats.SR) {
-            currentSR = data.menu.bm.stats.SR
-            animation.SRStat.update(currentSR)
-        }
-        // AR
-        if (currentBaseAR != data.menu.bm.stats.AR) {
-            currentBaseAR = data.menu.bm.stats.AR
-            currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
-            animation.mapStatsAR.update(currentAR)
-        }
-        // OD
-        if (currentBaseOD != data.menu.bm.stats.OD) {
-            currentBaseOD = data.menu.bm.stats.OD
-            currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
-            animation.mapStatsOD.update(currentOD)
-        }
-        // CS
-        if (currentBaseCS != data.menu.bm.stats.CS) {
-            currentBaseCS = data.menu.bm.stats.CS
-            if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
-            else currentCS = currentBaseCS
-            animation.mapStatsCS.update(currentCS)
-        }
-        // BPM
-        if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
-            currentBaseBPM = data.menu.bm.stats.BPM.min
-            if (currentMapMod.toLowerCase().includes("dt")) currentBaseBPM *= 1.5
-            else currentBPM = currentBaseBPM
-            animation.mapStatsBPM.update(currentBPM)
-        }
-        // Song Title and Artist
-        if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
-            currentSongArtist = data.menu.bm.metadata.artist
-            currentSongName = data.menu.bm.metadata.title
-            mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
-            
-            if (mapArtistAndName.width() >= 425) mapArtistAndName.addClass("mapArtistAndNameWrap")
-            else mapArtistAndName.removeClass("mapArtistAndNameWrap")
-        }
-        // Diff Name
-        if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
-            currentSongDifficulty = data.menu.bm.metadata.difficulty
-            mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
-        }
-        // Set Creator Name
-        if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
-            currentSongSetCreator = data.menu.bm.metadata.mapper
-            mapSetCreator.text(currentSongSetCreator.toUpperCase())
-        }
+    // SR
+    if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
+        currentSR = data.menu.bm.stats.SR
+        animation.SRStat.update(currentSR)
     }
+    // AR
+    if (currentBaseAR != data.menu.bm.stats.AR) {
+        currentBaseAR = data.menu.bm.stats.AR
+        currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
+        animation.mapStatsAR.update(currentAR)
+    }
+    // OD
+    if (currentBaseOD != data.menu.bm.stats.OD) {
+        currentBaseOD = data.menu.bm.stats.OD
+        currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
+        animation.mapStatsOD.update(currentOD)
+    }
+    // CS
+    if (currentBaseCS != data.menu.bm.stats.CS) {
+        currentBaseCS = data.menu.bm.stats.CS
+        if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
+        else currentCS = currentBaseCS
+        animation.mapStatsCS.update(currentCS)
+    }
+    // BPM
+    if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
+        currentBaseBPM = data.menu.bm.stats.BPM.min
+        if (currentMapMod.toLowerCase().includes("dt")) currentBaseBPM *= 1.5
+        else currentBPM = currentBaseBPM
+        animation.mapStatsBPM.update(currentBPM)
+    }
+    // Song Title and Artist
+    if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
+        currentSongArtist = data.menu.bm.metadata.artist
+        currentSongName = data.menu.bm.metadata.title
+        mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
+        
+        if (mapArtistAndName.width() >= 425) mapArtistAndName.addClass("mapArtistAndNameWrap")
+        else mapArtistAndName.removeClass("mapArtistAndNameWrap")
+    }
+    // Diff Name
+    if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
+        currentSongDifficulty = data.menu.bm.metadata.difficulty
+        mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+    }
+    // Set Creator Name
+    if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
+        currentSongSetCreator = data.menu.bm.metadata.mapper
+        mapSetCreator.text(currentSongSetCreator.toUpperCase())
+    }
+    // Set
+    if (currentSongSetID != data.menu.bm.set) {
+        currentSongSetID = data.menu.bm.set
+        bottomBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
+    }
+
     // Star Visibility
     if (starVisibility != data.tourney.manager.bools.starVisible) {
         starVisibility = data.tourney.manager.bools.starVisible
