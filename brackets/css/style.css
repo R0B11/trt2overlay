@@ -28,8 +28,8 @@
 /* Lower Bracket Rounds */
 .lowerBracketRounds1And2 {
     position: absolute; 
-    /* background-color: rgba(255,255,255,0.5); */
     width: 316px; height: 608px;
+    display: flex; flex-direction: column;  justify-content: space-between;
 }
 #lowerBracketRound1 { top: 317px; left: 49px; }
 #lowerBracketRound2 { top: 277px; left: 406px; }
@@ -37,35 +37,40 @@
 /* Lower Bracket Round Lines */
 .lowerBracketRounds1And2Lines {
     position: absolute; 
-    /* background-color: rgba(255,0,255,0.5); */
     width: 44px; height: 608px;
 }
 #lowerBracketRound1Lines { top: 317px; left: 365px; }
 #lowerBracketRound2Lines { top: 277px; left: 722px; }
 
+/* Lower Bracket Round 1 Matches */
+.lowerBracketRound1Match { 
+    height: 120px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+
 /* Lower Bracket Players */
 .lowerBracketPlayer {
-    background-color: rgba(102,102,102,0.5);
+    background-color: var(--borderGray);
     width: inherit; height: 51px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.15% 100%, 0% 50%);
     border-radius: 3px;
 }
 .lowerBracketPlayerOverlay {
     position: relative; top: 2px; left: 2px;
-    background-color: rgba(18,18,18,0.5);
+    background-color: var(--backgroundGray);
     width: 312px; height: 47px;
     border-radius: 2px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 48%);
 }
 .lowerBracketPlayerScore {
     position: relative; top: -40.4px; left: 6.4px;
-    background-color: rgba(57,57,57,0.5);
+    background-color: var(--elementGray);
     width: 71.3px; height: 38px;
     clip-path: polygon(0% 0%, 68.6% 0%, 100% 59%, 100% 100%, 31.3% 100%, 0% 41%);
 }
 .lowerBracketPlayerFlag {
     position: relative; top: -72.6px; left: 93px;
-    background-color: rgba(57,57,57,0.5);
+    background-color: var(--elementGray);
     width: 34.3px; height: 24px;
     border-radius: 5px;
 }
@@ -83,7 +88,7 @@
 }
 .lowerBracketPlayerProfilePicture {
     position: relative; top: -121.5px; left: 265.5px;
-    background-color: rgba(57,57,57,0.5);
+    background-color: var(--elementGray);
     width: 46.5px; height: 46.5px;
     border-left: 2px solid var(--borderGray);
 }
