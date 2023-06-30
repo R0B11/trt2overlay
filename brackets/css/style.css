@@ -26,13 +26,32 @@
 }
 
 /* Lower Bracket Rounds */
-.lowerBracketRounds1And2 {
+.lowerBracketRound {
     position: absolute; 
-    width: 316px; height: 608px;
+    width: 316px;
     display: flex; flex-direction: column;  justify-content: space-between;
 }
+.lowerBracketRounds1And2 { height: 608px; }
 #lowerBracketRound1 { top: 317px; left: 49px; }
 #lowerBracketRound2 { top: 280px; left: 406px; }
+#lowerBracketRound3 {
+    top: 364px; left: 760px;
+    height: 439px;
+}
+#lowerBracketRound4 {
+    top: 329px; left: 1118px;
+    height: 439px;
+}
+#lowerBracketRound5 {
+    top: 485px; left: 1475px;
+    height: 120px;
+}
+#lowerBracketRound6 {
+    position: absolute;
+    top: 204px; right: 36px;
+    width: 50px; height: 687px;
+}
+
 
 /* Lower Bracket Round Lines */
 .lowerBracketRounds1And2Lines {
@@ -60,6 +79,7 @@
     position: relative; top: 2px; left: 2px;
     background-color: var(--backgroundGray);
     width: 312px; height: 47px;
+    line-height: 47px;
     border-radius: 2px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 48%);
 }
@@ -92,6 +112,77 @@
     background-color: var(--elementGray);
     width: 46.5px; height: 46.5px;
     border-left: 2px solid var(--borderGray);
+}
+/* Lower Bracket Finals */
+#match29 {
+    display: flex; flex-direction: column;  justify-content: space-between;
+    height: inherit;
+}
+.lowerBracketFinalsPlayer {
+    width: inherit; height: 308px;
+    border-radius: 5px;
+    background-color: var(--borderGray);
+}
+#match29Player1 { clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8.7%, 52% 0%); }
+#match29Player2 { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 52% 100%, 0% 91.3%); }
+.lowerBracketFinalsPlayerOverlay {
+    position: relative; top: 2.9px; left: 3px;
+    background-color: var(--backgroundGray);
+    width: 45px; height: 303px;
+}
+#match29Player1Overlay { clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 53% 0%); }
+#match29Player2Overlay { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 54% 100%, 0% 92%); }
+.match29PlayerScore {
+    position: relative; left: 7px;
+    width: 37px; height: 69px;
+    line-height: 69px;
+    background-color: var(--elementGray);
+}
+#match29Player1Score {
+    top: -295.5px;
+    clip-path: polygon(100% 0%, 100% 69%,42% 100%, 0% 100%, 0% 32%, 60% 0%);
+}
+#match29Player2Score {
+    top: -69.5px;
+    clip-path: polygon(0% 0%, 0% 69%, 58% 100%, 100% 100%, 100% 32%, 40% 0%);
+}
+.match29PlayerFlag {
+    position: relative; left: 10px;
+    border-radius: 5px;
+    background-color: var(--elementGray);
+    width: 33.5px; height: 23px;
+}
+#match29Player1Flag { top: -274.5px; }
+#match29Player2Flag { top: -182px; }
+.match29PlayerName {
+    position: relative; 
+    left: 19px;
+    border-radius: 5px;
+    width: 10px; height: 128px;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    letter-spacing: -2px;
+    font-family: Lexend; font-size: 10px;
+    text-align: center;
+    color: white;
+    overflow-y: hidden;
+}
+.match29PlayerName::-webkit-scrollbar { display: none; }
+#match29Player1Name { top: -269.5px; }
+#match29Player2Name { top: -339px; }
+.match29PlayerProfilePicture {
+    position: relative; left: 2.75px;
+    width: 45.5px; height: 45.5px;
+    background-color: var(--elementGray);
+    border-top: 2px solid var(--borderGray);
+}
+#match29Player1ProfilePicture { 
+    top: -264.5px; 
+    border-top: 2px solid var(--borderGray);
+}
+#match29Player2ProfilePicture { 
+    top: -520.5px;  
+    border-bottom: 2px solid var(--borderGray);
 }
 
 /* Now Playing Section */
