@@ -1,9 +1,13 @@
 @keyframes dotty {
-    0%   { content: ''; }
-    25%  { content: '.'; }
-    50%  { content: '..'; }
-    75%  { content: '...'; }
-    100% { content: ''; }
+    0%   { content: '';  opacity: 0%}
+    10% { content: ''; opacity: 20%}
+    25%  { content: '.'; opacity: 50%}
+    40% { content: '..'; opacity: 80%}
+    50%  { content: '..'; opacity: 100%}
+    60% { content: '..'; opacity: 80%}
+    75%  { content: '...'; opacity: 50%}
+    90% { content: '...'; opacity: 20%}
+    100% { content: ''; opacity: 0%}
 }
 
 :root {
@@ -32,8 +36,9 @@ html {
 #main {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
-    background-image: url("../static/picksBansPNG2.png");
-    background-size: cover;
+    z-index: -1;
+    /* background-image: url("../static/picksBansPNG2.png");
+    background-size: cover; */
 }
 
 .playerCardStartLeft { position: absolute; left: 190px; }
@@ -61,7 +66,7 @@ html {
 
 /* Player Names */
 .playerCardPlayerName {
-    top: 21px;
+    top: 30px;
     font-size: 25px; font-family: 'Lexend', sans-serif;
 }
 #playerCardPlayerNameRed { color: var(--redPlayerCardColour); }
@@ -134,9 +139,10 @@ html {
     position: absolute;
     left: 0px;
     top: 536px;
-    width: 1910px;
+    width: 1780px;
     height: 8px;
     background-color: white;
+    background: linear-gradient(to right, rgb(254, 254, 254)20%,rgba(255,0,0,0));
 }
 
 /* Red Pick Area */
@@ -174,6 +180,8 @@ html {
 /* Styling for ban and pick boxes */
 
 .banArea {
+    position: relative;
+    right: 10px;
     height: 460px;
     width: var(--two-bans-width);
     display: flex;
@@ -243,7 +251,8 @@ html {
 
 .tile-picking::after {
     display: inline-block;
-    animation: dotty steps(1,end) 1s infinite;
+    animation: dotty 1s infinite;
+    transition: all 0.5s ease;
     content: '';
 }
 
@@ -255,14 +264,15 @@ html {
   position: absolute;
   height: 87px;
   width: 66px;
-  margin: 0 10px;
+  margin: 10px;
   opacity: 0;
 }
 
 #mapslottext {
-    position: absolute;
+    position: absolute; 
     margin: -22px;
     top: 63px;
+    text-shadow: 2px 2px 1px rgb(0,0,0, 0.5);
 }
 
 .map-slot-content {
@@ -286,7 +296,7 @@ html {
 
 #tiebreakerCard {
     position: absolute;
-    right: 10px;
+    right: 40px;
     top: 375px;
     width: 85px;
     height: 330px;
@@ -304,4 +314,14 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.circle{
+    position: absolute;
+    top: 70px;
+    left: 975px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--red);
 }

@@ -262,11 +262,11 @@ function generateTiles(pick, ban, banNum, bestOf) {
         // Make the pick area smaller so you can center everything
         $(".pickArea").css("width", "800px");
         if (firstBan == "blue"){
-            $("#redBanArea").css("justify-content", "flex-end");
+            $("#redBanArea").css("justify-content", "center");
             $("#blueBanArea").css("justify-content", "flex-start");
         }
         else {
-            $("#blueBanArea").css("justify-content", "flex-end");
+            $("#blueBanArea").css("justify-content", "center");
             $("#redBanArea").css("justify-content", "flex-start");
         };
         $("#redPicksBans").css("justify-content", "center");
@@ -274,6 +274,10 @@ function generateTiles(pick, ban, banNum, bestOf) {
         // Better margins for less picks
         if (pick == "blue") { $(`.pickCardRed`).css("left","65px"); }
         else if (pick == "red") { $(`.pickCardBlue`).css("left","65px"); }
+        // Change TB position
+        $("#tiebreakerCard").css("right", "120px");
+        // Adjust line as well
+        $(".whiteLine").css("width", "1700px");
     }
     else {
         $(".pickCardBlue").css("left", "0px");
@@ -285,41 +289,26 @@ function generateTiles(pick, ban, banNum, bestOf) {
     
 }
 
-/*
-function buttonge(){
-    // Replace data in current tile
-    // Check ban num
-    switch (bestOf){
-        case 13:
-            switch (matchActionStatus) {
-                case 1:
-                    switch (banOrder){
-                        case "blue":
-                            $("#blueBan1 .mapCardContent").css({
-                                "background-image": `url('./static/test-map-2.jpg')`,
-                                "clip-path": 'var(--map-clip-path)',
-                                "opacity": 0.4,
-                            }).html("").toggleClass("tile-picking");
-                            $("#blueBan1 #map-slot-block").css("opacity", "1").toggleClass("map-slot-content");
-                            $("#blueBan1 #mapslottext").html("FM1");
-                            break;
-                        case "red":
-                            break;
-                        default:
-                            break;
-*/
-
 // TODO: Add map bg addition functionality 
 
-function mapBan(team, map){
+function mapBan(){
+    $("#redBan0 .mapCardContent").html("").toggleClass("tile-picking").css({
+        "background-image": "url(./static/test-map.png)",
+        "clip-path": "var(--map-clip-path)",
+        "opacity": 0.4
+    });
+    $("#redBan0 #map-slot-block").css({
+        "opacity": 1,
+        "background-color": "var(--red)"
+    });
+    $("#redBan0 #map-slot-block #mapslottext").html("HR1");
+}
+
+function mapPick(){
 
 }
 
-function mapPick(team, map){
-
-}
-
-pickOrder("red");
+pickOrder("blue");
 banOrder("blue");
-setRound("F")
+setRound("QF");
 generateTiles(firstPick, firstBan, banNum, bestOf);
