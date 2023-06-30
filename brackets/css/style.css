@@ -48,7 +48,7 @@
 }
 #lowerBracketRound6 {
     position: absolute;
-    top: 204px; right: 36px;
+    top: 202px; right: 36px;
     width: 50px; height: 687px;
 }
 
@@ -70,6 +70,10 @@
     position: absolute; top: 329px; left: 1434px;
     display: flex; flex-direction: column; justify-content: space-between;
     height: 439px;
+}
+#lowerBracketRound5Lines {
+    position: absolute; top: 485px; left: 1791px;
+    height: 120px;
 }
 
 /* Lower Bracket Round 1 Matches */
