@@ -61,6 +61,11 @@
 }
 #lowerBracketRound1Lines { top: 317px; left: 365px; }
 #lowerBracketRound2Lines { top: 280px; left: 722px; }
+#lowerBracketRound3Lines {
+    position: absolute; top: 364px; left: 1076px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 439px;
+}
 
 /* Lower Bracket Round 1 Matches */
 .lowerBracketRound1Match { 
