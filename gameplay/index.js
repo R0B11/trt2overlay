@@ -85,6 +85,19 @@ let commentatorName2 = document.getElementById("commentatorName2")
 let roundName = $("#roundName")
 let currentRoundName
 
+// Current Pool
+let allMaps
+let currentPool = []
+let poolInformationRequest = new XMLHttpRequest()
+poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+poolInformationRequest.onreadystatechange = function() {
+    if (this.status == 404) return
+    if (this.readyState != 4) return
+    allMaps = JSON.parse(this.responseText)
+    console.log(allMaps)
+}
+poolInformationRequest.send()
+
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
     mapStatsAR: new CountUp('mapStatsAR', 0, 0, 1, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
@@ -129,19 +142,20 @@ socket.onmessage = event => {
         poolMapFound = false
         mapModSlot.css("display", "none")
 
-        // Call API for all stats
-        SRRequest = new XMLHttpRequest()
-        SRRequest.open("GET", `https://localhost:44395//api/maps/${currentSongID}`)
-        SRRequest.onload = function() {
-            if (this.status == 200) {
+        for (let i = 0; i < currentPool.length; i++) {
+            if (currentPool[i].osuMapId == currentSongID) {
                 poolMapFound = true
-                currentSR = "" // Enter data here
                 mapModSlot.css("display","block")
-            } else {
-                currentMapMod = ""
+                // mapModSlot.text(currentPool[i].)
+                currentSR = currentPool[i].postModSr
+                animation.SRStat.update(currentSR)
+
+                // Map Mod Slot Color
+                currentMapMod = currentPool[i].mod.toUpperCase().slice(0,2)
+
+                // Need to see metadata format before adding it in
             }
         }
-        SRRequest.send()
     }
     // SR
     if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
@@ -339,9 +353,14 @@ const changeCommentatorNames = () => {
     else if (commentatorNameInput2.val().trim() != "") commentatorName2.innerText = commentatorNameInput2.val().trim().toUpperCase()
 }
 
-const changeRoundInformation = (roundText) => {
+const changeRoundInformation = (roundAbbreviation, roundText) => {
     roundName.text(roundText)
-    currentRoundName = roundText
+    currentRoundName = roundAbbreviation
+
+    let cookieValue = `roundName=${roundAbbreviation}; path=/`
+    document.cookie = cookieValue
+
+    currentPool = allMaps.filter(map => map.round == roundAbbreviation)
 }
 
 // Cookie to Win Screen
