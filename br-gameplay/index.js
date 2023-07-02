@@ -104,6 +104,19 @@ let commentatorName2 = document.getElementById("commentatorName2")
 let ipcState
 let resetScores
 
+// Current Pool
+let allMaps
+let currentPool = []
+let poolInformationRequest = new XMLHttpRequest()
+poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+poolInformationRequest.onreadystatechange = function() {
+    if (this.status == 404) return
+    if (this.readyState != 4) return
+    allMaps = JSON.parse(this.responseText)
+    console.log(allMaps)
+}
+poolInformationRequest.send()
+
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
@@ -133,29 +146,34 @@ socket.onmessage = event => {
     if (currentSongID != data.menu.bm.id) {
         currentSongID = data.menu.bm.id
         poolMapFound = false
-        mapModSlot.css("display","none")
+        mapModSlot.css("display", "none")
 
-        // Call API for all stats
-        SRRequest = new XMLHttpRequest()
-        SRRequest.open("GET", `https://localhost:44395//api/maps/${currentSongID}`)
-        SRRequest.onload = function() {
-            if (this.status == 200) {
+        for (let i = 0; i < currentPool.length; i++) {
+            if (currentPool[i].osuMapId == currentSongID) {
                 poolMapFound = true
-                currentSR = "" // Enter data here
-                currentBaseAR = "" // Enter data here
-                currentBaseOD = "" // Enter data here
-                currentBaseCS = "" // Enter data here
-                currentBaseBPM = "" // Enter data here
-                currentMapMod = "" // Enter data here
                 mapModSlot.css("display","block")
-            } else {
-                currentMapMod = ""
+                // mapModSlot.text(currentPool[i].)
+                currentSR = currentPool[i].postModSr
+                animation.SRStat.update(currentSR)
+
+                // Map Mod Slot Color
+                currentMapMod = currentPool[i].mod.toUpperCase().slice(0,2)
+                switch (currentMapMod) {
+                    case "NM": mapModSlot.css("background-color","#919191")
+                    case "HD": mapModSlot.css("background-color","#ffc728")
+                    case "HR": mapModSlot.css("background-color","#f4154b")
+                    case "DT": mapModSlot.css("background-color","#b013f2")
+                    case "FM": mapModSlot.css("background-color","#17b7ff")
+                    case "TB": mapModSlot.css("background-color","#ff1df5")
+                }
+                
+                // Need to see metadata format before adding it in
             }
         }
-        SRRequest.send()
     }
+
     // SR
-    if (currentSR != data.menu.bm.stats.SR) {
+    if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
         currentSR = data.menu.bm.stats.SR
         animation.SRStat.update(currentSR)
     }
@@ -235,30 +253,30 @@ socket.onmessage = event => {
         player3.userID = userID3
         player3.username = data.tourney.ipcClients[3].spectating.name
     }
-    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-    //     userID4 = data.tourney.ipcClients[4].spectating.userID
-    //     arrayOfIDs[4] = userID4
-    //     player4.userID = userID4
-    //     player4.username = data.tourney.ipcClients[4].spectating.name
-    // }
-    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-    //     userID5 = data.tourney.ipcClients[5].spectating.userID
-    //     arrayOfIDs[5] = userID5
-    //     player5.userID = userID5
-    //     player5.username = data.tourney.ipcClients[5].spectating.name
-    // }
-    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-    //     userID6 = data.tourney.ipcClients[6].spectating.userID
-    //     arrayOfIDs[6] = userID6
-    //     player6.userID = userID6
-    //     player6.username = data.tourney.ipcClients[6].spectating.name
-    // }
-    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-    //     userID7 = data.tourney.ipcClients[7].spectating.userID
-    //     arrayOfIDs[7] = userID7
-    //     player7.userID = userID7
-    //     player7.username = data.tourney.ipcClients[7].spectating.name
-    // }
+    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+        userID4 = data.tourney.ipcClients[4].spectating.userID
+        arrayOfIDs[4] = userID4
+        player4.userID = userID4
+        player4.username = data.tourney.ipcClients[4].spectating.name
+    }
+    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+        userID5 = data.tourney.ipcClients[5].spectating.userID
+        arrayOfIDs[5] = userID5
+        player5.userID = userID5
+        player5.username = data.tourney.ipcClients[5].spectating.name
+    }
+    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+        userID6 = data.tourney.ipcClients[6].spectating.userID
+        arrayOfIDs[6] = userID6
+        player6.userID = userID6
+        player6.username = data.tourney.ipcClients[6].spectating.name
+    }
+    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+        userID7 = data.tourney.ipcClients[7].spectating.userID
+        arrayOfIDs[7] = userID7
+        player7.userID = userID7
+        player7.username = data.tourney.ipcClients[7].spectating.name
+    }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers
