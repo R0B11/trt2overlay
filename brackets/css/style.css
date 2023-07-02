@@ -46,6 +46,16 @@
     width: 389px; height: 147px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
+#winnerBracketRound5 {
+    position: absolute; top: 145px; right: 136px;
+    width: 56px; height: 790px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+#winnerBracketRound6 {
+    position: absolute; top: 145px; right: 40px;
+    width: 56px; height: 790px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
 
 /* Winner Bracket Round 1 */
 .winnerBracketRound1Matches {
@@ -63,6 +73,116 @@
 .winnerBracketRound4Matches {
     display: flex; flex-direction: column; justify-content: space-between;
     height: 147px;
+}
+.winnerBracketRound5Matches {
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 790px;
+}
+.winnerBracketRound6Matches {
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 790px;
+}
+
+/* Winner Bracket Round 5 Players */ 
+.winnerBracketRound5Upper {
+    background-color: var(--borderGray);
+    height: 353px;
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 50% 0%);
+}
+.winnerBracketRound5Lower {
+    background-color: var(--borderGray);
+    height: 353px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 92%);
+}
+.winnerBracketRound5UpperOverlay {
+    position: relative; top: 2px; left: 2px;
+    background-color: var(--backgroundGray);
+    width: 52px; height: 349px;
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 52% 0%);
+}
+.winnerBracketRound5LowerOverlay {
+    position: relative; top: 2px; left: 2px;
+    background-color: var(--backgroundGray);
+    width: 52px; height: 349px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 52% 100%, 0% 92%);
+}
+.winnerBracketRound5UpperScore {
+    position: relative; top: -342px; left: 7.5px;
+    width: 42.5px; height: 80.5px;
+    background-color: var(--elementGray);
+    clip-path: polygon(100% 0%, 100% 69%, 41% 100%, 0% 100%, 0% 31%, 59% 0%);
+    text-align: center;
+    color: white;
+    line-height: 80px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 26.6px;
+}
+.winnerBracketRound5LowerScore {
+    position: relative; top: -83px; left: 7.5px; 
+    width: 42.5px; height: 80.5px;
+    background-color: var(--elementGray);
+    clip-path: polygon(0% 0%, 0% 69%, 59% 100%, 100% 100%, 100% 31%, 41% 0%);
+    text-align: center;
+    color: white;
+    line-height: 80px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 26.6px;
+}
+.winnerBracketRound5UpperFlag {
+    position: relative; top: -319px; left: 10px;
+    width: 39px; height: 26.5px;
+    background-color: var(--elementGray);
+    border-radius: 6px;
+}
+.winnerBracketRound5LowerFlag {
+    position: relative; top: -212px; left: 10px;
+    width: 39px; height: 26.5px;
+    background-color: var(--elementGray);
+    border-radius: 6px;
+}
+.winnerBracketRound5UpperName {
+    position: relative;
+    top: -304px;
+    left: 22px;
+    border-radius: 5px;
+    width: 15px;
+    height: 140px;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    letter-spacing: -1.5px;
+    font-family: Lexend;
+    font-size: 11px;
+    text-align: center;
+    color: var(--textGray);
+    overflow: hidden;
+}
+.winnerBracketRound5LowerName {
+    position: relative;
+    top: -390px;
+    left: 22px;
+    border-radius: 5px;
+    width: 15px;
+    height: 140px;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    letter-spacing: -1.5px;
+    font-family: Lexend;
+    font-size: 11px;
+    text-align: center;
+    color: var(--textGray);
+    overflow: hidden;
+}
+.winnerBracketRound5UpperProfilePicture {
+    position: relative; top: -298.5px; left: 2.75px;
+    width: 52px; height: 52px;
+    background-color: var(--elementGray);
+    border-top: 2px solid var(--borderGray);
+}
+.winnerBracketRound5LowerProfilePicture { 
+    position: relative; left: 2.75px;
+    width: 52px; height: 52px;
+    background-color: var(--elementGray);
+    top: -593.5px;  
+    border-bottom: 2px solid var(--borderGray);
 }
 
 /* Winner Bracket Round 4 Players */ 
