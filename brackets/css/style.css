@@ -41,6 +41,11 @@
     width: 98px; height: 664px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
+#winnerBracketRound4Lines {
+    position: absolute; top: 469px; left: 1687px;
+    width: 96px; height: 147px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
 
 /* Winner Bracket Rounds */
 #winnerBracketRound1 {
