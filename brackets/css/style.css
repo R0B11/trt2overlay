@@ -53,7 +53,7 @@
 }
 .winnerBracketRound3Matches {
     display: flex; flex-direction: column; justify-content: space-between;
-    height: 123px;
+    height: 138px;
 }
 
 /* Winner Bracket Round 3 Players */
