@@ -89,7 +89,7 @@ let currentRoundName
 let allMaps
 let currentPool = []
 let poolInformationRequest = new XMLHttpRequest()
-poolInformationRequest.open("GET","")
+poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
 poolInformationRequest.onreadystatechange = function() {
     if (this.status == 404) return
     if (this.readyState != 4) return
@@ -160,7 +160,7 @@ socket.onmessage = event => {
                     case "FM": mapModSlot.css("background-color","#17b7ff")
                     case "TB": mapModSlot.css("background-color","#ff1df5")
                 }
-
+                
                 // Need to see metadata format before adding it in
             }
         }

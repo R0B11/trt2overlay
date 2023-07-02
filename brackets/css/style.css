@@ -31,14 +31,66 @@
     width: 256px; height: 1020px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
+#winnerBracketRound2 {
+    position: absolute; top: 88px; left: 417px;
+    width: 320px; height: 917px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
 
 /* Winner Bracket Round 1 */
 .winnerBracketRound1Matches {
     display: flex; flex-direction: column; justify-content: space-between;
     height: 97px;
 }
+.winnerBracketRound2Matches {
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 123px;
+}
 
-/* Winner Bracket Round 1 Players*/
+/* Winner Bracket Round 2 Players */
+.winnerBracketRound2 {
+    width: inherit; height: 52px;
+    background-color: var(--borderGray);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
+    border-radius: 4px;
+}
+.winnerBracketRound2Overlay {
+    position: relative; top: 2px; left: 2px;
+    width: 316px; height: 48px;
+    background-color: var(--backgroundGray);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
+    border-radius: 2px;
+}
+.winnerBracketRound2Score {
+    position: relative; top: -41.3px; left: 6px;
+    width: 74.1px; height: 39px;
+    background-color: var(--elementGray);
+    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
+    text-align: center;
+    color: white;
+    line-height: 30px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 19px;
+}
+.winnerBracketRound2Flag {
+    position: relative; top: -72.875px; left: 94.375px;
+    width: 33.75px; height: 23.75px;
+    background-color: var(--elementGray);
+    border-radius: 3.75px;
+}
+.winnerBracketRound2Name {
+    position: relative; top: -92.5px; left: 146.25px;
+    font-family: Lexend; font-weight: 800; font-size: 12.5px;
+    color: white;
+    letter-spacing: 0.75px;
+}
+.winnerBracketRound2ProfilePicture {
+    position: relative; top: -124.4px; left: 268.5px;
+    background-color: var(--elementGray);
+    width: 47.8px; height: 47.8px;
+    border-left: 2px solid var(--borderGray); border-radius: 0 2px 2px 0;
+}
+
+/* Winner Bracket Round 1 Players */
 .winnerBracketRound1 {
     width: inherit; height: 42px;
     background-color: var(--borderGray);
@@ -78,7 +130,7 @@
     position: relative; top: -97.6px; left: 214px;
     background-color: var(--elementGray);
     width: 38px; height: 38px;
-    border-left: 2px solid var(--borderGray);
+    border-left: 2px solid var(--borderGray); border-radius: 2px;
 }
 
 /* Lower Bracket Rounds */
