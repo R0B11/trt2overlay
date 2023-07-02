@@ -46,6 +46,11 @@
     width: 96px; height: 147px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
+#winnerBracketRound5Lines {
+    position: absolute; top: 500px; left: 1755px;
+    width: 125px; height: 84px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
 
 /* Winner Bracket Rounds */
 #winnerBracketRound1 {
@@ -69,12 +74,12 @@
     display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound5 {
-    position: absolute; top: 145px; right: 136px;
+    position: absolute; top: 147px; right: 136px;
     width: 56px; height: 790px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound6 {
-    position: absolute; top: 145px; right: 40px;
+    position: absolute; top: 147px; right: 40px;
     width: 56px; height: 790px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
