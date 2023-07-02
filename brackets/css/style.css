@@ -25,412 +25,286 @@
     opacity: 0;
 }
 
+/* For everything */
+.display-flex-column-space-between { display: flex; flex-direction: column; justify-content: space-between; }
+.roundDisplayType { position: absolute; }
+
 /* Winner Bracket Lines*/
 #winnerBracketRound1Lines {
-    position: absolute; top: 30px; left: 325px;
+    top: 30px; left: 325px;
     width: 92px; height: 1020px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound2Lines {
-    position: absolute; top: 83px; left: 737px;
+    top: 83px; left: 737px;
     width: 96px; height: 917px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound3Lines {
-    position: absolute; top: 210px; left: 1200px;
+    top: 210px; left: 1200px;
     width: 98px; height: 664px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound4Lines {
-    position: absolute; top: 469px; left: 1687px;
+    top: 469px; left: 1687px;
     width: 96px; height: 147px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound5Lines {
-    position: absolute; top: 500px; left: 1755px;
+    top: 500px; left: 1755px;
     width: 125px; height: 84px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 
 /* Winner Bracket Rounds */
 #winnerBracketRound1 {
-    position: absolute; top: 30px; left: 69px;
+    top: 30px; left: 69px;
     width: 256px; height: 1020px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound2 {
-    position: absolute; top: 83px; left: 417px;
+    top: 83px; left: 417px;
     width: 320px; height: 917px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound3 {
-    position: absolute; top: 210px; left: 833px;
+    top: 210px; left: 833px;
     width: 367px; height: 664px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound4 {
-    position: absolute; top: 469px; left: 1298px;
+    top: 469px; left: 1298px;
     width: 389px; height: 147px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound5 {
-    position: absolute; top: 147px; right: 136px;
+    top: 147px; right: 136px;
     width: 56px; height: 790px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 #winnerBracketRound6 {
-    position: absolute; top: 147px; right: 40px;
+    top: 147px; right: 40px;
     width: 56px; height: 790px;
-    display: flex; flex-direction: column; justify-content: space-between;
 }
 
-/* Winner Bracket Round 1 */
-.winnerBracketRound1Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 97px;
-}
-.winnerBracketRound2Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 123px;
-}
-.winnerBracketRound3Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 138px;
-}
-.winnerBracketRound4Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 147px;
-}
-.winnerBracketRound5Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 790px;
-}
-.winnerBracketRound6Matches {
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 790px;
-}
+/* Winner Bracket Round Matches */
+.winnerBracketRound1Matches { height: 97px; }
+.winnerBracketRound2Matches { height: 123px; }
+.winnerBracketRound3Matches { height: 138px; }
+.winnerBracketRound4Matches { height: 147px; }
+.winnerBracketRound5Matches { height: 790px; }
+.winnerBracketRound6Matches { height: 790px; }
 
-/* Winner Bracket Round 5 Players */ 
-.winnerBracketRound5Upper {
-    background-color: var(--borderGray);
-    height: 353px;
-    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 50% 0%);
+/* For all player cards */
+.flagAndProfilePictureOverlay {
+    position: relative; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--elementGrayOverlay);
 }
-.winnerBracketRound5Lower {
-    background-color: var(--borderGray);
-    height: 353px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 92%);
-}
-.winnerBracketRound5UpperOverlay {
-    position: relative; top: 2px; left: 2px;
-    background-color: var(--backgroundGray);
-    width: 52px; height: 349px;
-    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 52% 0%);
-}
-.winnerBracketRound5LowerOverlay {
-    position: relative; top: 2px; left: 2px;
-    background-color: var(--backgroundGray);
-    width: 52px; height: 349px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 52% 100%, 0% 92%);
-}
-.winnerBracketRound5UpperScore {
-    position: relative; top: -342px; left: 7.5px;
-    width: 42.5px; height: 80.5px;
+.playerCardElement {
+    position: relative; 
     background-color: var(--elementGray);
-    clip-path: polygon(100% 0%, 100% 69%, 41% 100%, 0% 100%, 0% 31%, 59% 0%);
+}
+
+/* Verical Player Card Names */
+.verticalLayoutPlayerName {
+    position: relative;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-family: Lexend; 
+    text-align: center;
+    color: var(--textGray);
+    overflow: hidden;
+}
+.verticalTopProfilePicture { border-top: 2px solid var(--borderGray); }
+.verticalBottomProfilePicture { border-bottom: 2px solid var(--borderGray); }
+
+/* Winner Bracket Round 5 And 6 Players */ 
+.winnerBracketRound5And6Container {
+    background-color: var(--borderGray);
+    height: 353px;
+}
+.winnerBracketRound5And6Upper { clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 50% 0%); }
+.winnerBracketRound5And6Lower { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 92%); }
+.winnerBracketRound5And6Overlay {
+    position: relative; top: 2px; left: 2px;
+    background-color: var(--backgroundGray);
+    width: 52px; height: 349px;
+}
+.winnerBracketRound5And6UpperOverlay { clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 8%, 52% 0%); }
+.winnerBracketRound5And6LowerOverlay { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 52% 100%, 0% 92%); }
+.winnerBracketRound5And6Score {
+    left: 7.5px; 
+    width: 42.5px; height: 80.5px;
     text-align: center;
     color: white;
     line-height: 80px;
     font-family: 'IBM Plex Mono', monospace; font-size: 26.6px;
 }
-.winnerBracketRound5LowerScore {
-    position: relative; top: -83px; left: 7.5px; 
-    width: 42.5px; height: 80.5px;
-    background-color: var(--elementGray);
+.winnerBracketRound5And6UpperScore {
+    top: -342px;
+    clip-path: polygon(100% 0%, 100% 69%, 41% 100%, 0% 100%, 0% 31%, 59% 0%);
+}
+.winnerBracketRound5And6LowerScore {
+    top: -83px; 
     clip-path: polygon(0% 0%, 0% 69%, 59% 100%, 100% 100%, 100% 31%, 41% 0%);
+}
+.winnerBracketRound5And6Flag {
+    left: 10px;
+    width: 39px; height: 26.5px;
+    border-radius: 6px;
+}
+.winnerBracketRound5And6UpperFlag { top: -319px; }
+.winnerBracketRound5And6LowerFlag { top: -212px;  }
+.winnerBracketRound5And6FlagOverlay { border-radius: 6px; }
+.winnerBracketRound5And6Name {
+    left: 22px;
+    width: 15px; height: 140px;
+    letter-spacing: -1.5px;
+    font-size: 11px;
+}
+.winnerBracketRound5And6UpperName { top: -304px; }
+.winnerBracketRound5And6LowerName { top: -390px; }
+.winnerBracketRound5And6ProfilePicture {
+    left: 2.75px;
+    width: 52px; height: 52px;
+}
+.winnerBracketRound5And6UpperProfilePicture { top: -298.5px; }
+.winnerBracketRound5And6LowerProfilePicture { top: -593.5px; }
+
+/* Horizontal Layout Players */
+.horizontalLayoutPlayer {
+    width: inherit; 
+    background-color: var(--borderGray);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
+    border-radius: 4px;
+}
+.horizontalLayoutPlayerOverlay {
+    position: relative; 
+    background-color: var(--backgroundGray);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
+}
+.horizontalLayoutScore {
+    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
     text-align: center;
     color: white;
-    line-height: 80px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 26.6px;
+    font-family: 'IBM Plex Mono', monospace; 
 }
-.winnerBracketRound5UpperFlag {
-    position: relative; top: -319px; left: 10px;
-    width: 39px; height: 26.5px;
-    background-color: var(--elementGray);
-    border-radius: 6px;
+.horizontalLayoutPlayerProfilePicture { border-left: 2px solid var(--borderGray); border-radius: 0 2px 2px 0; }
+
+/* Winner Bracket Rounds 1 to 4 Players*/
+.winnerBracketRound3To4Overlay {
+    top: 3px; left: 3px;
+    border-radius: 3px;
 }
-.winnerBracketRound5LowerFlag {
-    position: relative; top: -212px; left: 10px;
-    width: 39px; height: 26.5px;
-    background-color: var(--elementGray);
-    border-radius: 6px;
+.winnerBracketRound1To2AndLowerBracketPlayerOverlay {
+    top: 2px; left: 2px;    
+    border-radius: 2px;
 }
-.winnerBracketRound5FlagOverlay { border-radius: 6px; }
-.winnerBracketRound5FlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
-.winnerBracketRound5UpperName {
-    position: relative;
-    top: -304px;
-    left: 22px;
-    border-radius: 5px;
-    width: 15px;
-    height: 140px;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    letter-spacing: -1.5px;
-    font-family: Lexend;
-    font-size: 11px;
-    text-align: center;
+.winnerBracketRound1To4Name {
+    position: relative; 
+    font-family: Lexend; font-weight: 800;
     color: var(--textGray);
-    overflow: hidden;
-}
-.winnerBracketRound5LowerName {
-    position: relative;
-    top: -390px;
-    left: 22px;
-    border-radius: 5px;
-    width: 15px;
-    height: 140px;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    letter-spacing: -1.5px;
-    font-family: Lexend;
-    font-size: 11px;
-    text-align: center;
-    color: var(--textGray);
-    overflow: hidden;
-}
-.winnerBracketRound5UpperProfilePicture {
-    position: relative; top: -298.5px; left: 2.75px;
-    width: 52px; height: 52px;
-    background-color: var(--elementGray);
-    border-top: 2px solid var(--borderGray);
-}
-.winnerBracketRound5LowerProfilePicture { 
-    position: relative; left: 2.75px;
-    width: 52px; height: 52px;
-    background-color: var(--elementGray);
-    top: -593.5px;  
-    border-bottom: 2px solid var(--borderGray);
 }
 
 /* Winner Bracket Round 4 Players */ 
-.winnerBracketRound4 {
-    width: inherit; height: 62px;
-    background-color: var(--borderGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
-    border-radius: 4px;
-}
-.winnerBracketRound4Overlay {
-    position: relative; top: 3px; left: 3px;
-    width: 383px; height: 56px;
-    background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
-    border-radius: 3px;
-}
+.winnerBracketRound4 { height: 62px; }
+.winnerBracketRound4Overlay {  width: 383px; height: 56px; }
 .winnerBracketRound4Score {
-    position: relative; top: -47.8px; left: 8.36px;
+    top: -47.8px; left: 8.36px;
     width: 86.64px; height: 45.6px;
-    background-color: var(--elementGray);
-    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
-    text-align: center;
-    color: white;
     line-height: 45.6px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 28.5px;
+    font-size: 28.5px;
 }
 .winnerBracketRound4Flag {
-    position: relative; top: -86.28px; left: 114.76px;
+    top: -86.28px; left: 114.76px;
     width: 41px; height: 28.12px;
-    background-color: var(--elementGray);
     border-radius: 5px;
 }
 .winnerBracketRound4FlagOverlay { border-radius: 5px; }
-.winnerBracketRound4FlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .winnerBracketRound4Name {
-    position: relative; top: -109.5px; left: 177.84px;
-    font-family: Lexend; font-weight: 800; font-size: 15px;
-    color: var(--textGray);
+    top: -109.5px; left: 177.84px;
+    font-size: 15px;
     letter-spacing: 1.5px;
 }
 .winnerBracketRound4ProfilePicture {
-    position: relative; top: -145.4px; left: 328px;
-    background-color: var(--elementGray);
+    top: -145.4px; left: 328px;
     width: 56px; height: 56px;
-    border-left: 2px solid var(--borderGray); border-radius: 0 3px 3px 0;
 }
 
 /* Winner Bracket Round 3 Players */
-.winnerBracketRound3 {
-    width: inherit; height: 58px;
-    background-color: var(--borderGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
-    border-radius: 4px;
-}
-.winnerBracketRound3Overlay {
-    position: relative; top: 3px; left: 3px;
-    width: 361px; height: 52px;
-    background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
-    border-radius: 2px;
-}
+.winnerBracketRound3 { height: 58px; }
+.winnerBracketRound3Overlay { width: 361px; height: 52px; }
 .winnerBracketRound3Score {
-    position: relative; top: -44.574px; left: 7.865px;
+    top: -44.574px; left: 7.865px;
     width: 78.7px; height: 42.9px;
-    background-color: var(--elementGray);
-    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
-    text-align: center;
-    color: white;
     line-height: 42.9px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 26.6px;
+    font-size: 26.6px;
 }
 .winnerBracketRound3FlagOverlay { border-radius: 4.2px; }
-.winnerBracketRound3FlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .winnerBracketRound3Flag {
-    position: relative; top: -80.454px; left: 108px;
+    top: -80.454px; left: 108px;
     width: 38.6px; height: 27.2px;
-    background-color: var(--elementGray);
     border-radius: 4.2px;
 }
 .winnerBracketRound3Name {
-    position: relative; top: -102.1px; left: 167.3px;
+    top: -102.1px; left: 167.3px;
     font-family: Lexend; font-weight: 800; font-size: 14px;
-    color: var(--textGray);
     letter-spacing: 1px;
 }
 .winnerBracketRound3ProfilePicture {
-    position: relative; top: -136.69px; left: 309px;
-    background-color: var(--elementGray);
+    top: -136.69px; left: 309px;
     width: 52px; height: 52px;
-    border-left: 3px solid var(--borderGray); border-radius: 0 2px 2px 0;
 }
 
 /* Winner Bracket Round 2 Players */
-.winnerBracketRound2 {
-    width: inherit; height: 52px;
-    background-color: var(--borderGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
-    border-radius: 4px;
-}
-.winnerBracketRound2Overlay {
-    position: relative; top: 2px; left: 2px;
-    width: 316px; height: 48px;
-    background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
-    border-radius: 2px;
-}
+.winnerBracketRound2 { height: 52px; }
+.winnerBracketRound2Overlay { width: 316px; height: 48px; }
 .winnerBracketRound2Score {
-    position: relative; top: -41.3px; left: 6px;
+    top: -41.3px; left: 6px;
     width: 74.1px; height: 39px;
-    background-color: var(--elementGray);
-    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
-    text-align: center;
-    color: white;
     line-height: 39px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 23.75px;
+    font-size: 23.75px;
 }
 .winnerBracketRound2Flag {
-    position: relative; top: -72.875px; left: 94.375px;
+    top: -72.875px; left: 94.375px;
     width: 33.75px; height: 23.75px;
-    background-color: var(--elementGray);
     border-radius: 3.75px;
 }
 .winnerBracketRound2FlagOverlay { border-radius: 3.75px; }
-.winnerBracketRound2FlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .winnerBracketRound2Name {
-    position: relative; top: -92.5px; left: 146.25px;
+    top: -92.5px; left: 146.25px;
     font-family: Lexend; font-weight: 800; font-size: 12.5px;
-    color: var(--textGray);
     letter-spacing: 0.75px;
 }
 .winnerBracketRound2ProfilePicture {
-    position: relative; top: -124.4px; left: 268.5px;
-    background-color: var(--elementGray);
+    top: -124.4px; left: 268.5px;
     width: 47.8px; height: 47.8px;
-    border-left: 2px solid var(--borderGray); border-radius: 0 2px 2px 0;
 }
 
 /* Winner Bracket Round 1 Players */
-.winnerBracketRound1 {
-    width: inherit; height: 42px;
-    background-color: var(--borderGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 50%);
-    border-radius: 4px;
-}
-.winnerBracketRound1Overlay {
-    position: relative; top: 2px; left: 2px;
-    width: 252px; height: 38px;
-    background-color: var(--backgroundGray);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 45%);
-    border-radius: 2px;
-}
+.winnerBracketRound1 { height: 42px; }
+.winnerBracketRound1Overlay { width: 252px; height: 38px; }
 .winnerBracketRound1Score {
-    position: relative; top: -32.3px; left: 5.5px;
+    top: -32.3px; left: 5.5px;
     width: 57px; height: 30px;
-    background-color: var(--elementGray);
-    clip-path: polygon(0% 0%, 69% 0%, 100% 58%, 100% 100%, 31% 100%, 0% 42%);
-    text-align: center;
-    color: white;
     line-height: 30px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 19px;
+    font-size: 19px;
 }
 .winnerBracketRound1Flag {
-    position: relative; top: -58.3px; left: 75.5px;
+    top: -58.3px; left: 75.5px;
     width: 27px; height: 19px;
-    background-color: var(--elementGray);
     border-radius: 3px;
 }
 .winnerBracketRound1FlagOverlay { border-radius: 3px; }
-.winnerBracketRound1FlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .winnerBracketRound1Name {
-    position: relative; top: -74px; left: 117px;
+    top: -74px; left: 117px;
     font-family: Lexend; font-weight: 800; font-size: 10px;
-    color: var(--textGray);
     letter-spacing: 0.5px;
 }
 .winnerBracketRound1ProfilePicture {
-    position: relative; top: -97.6px; left: 214px;
-    background-color: var(--elementGray);
+    top: -97.6px; left: 214px;
     width: 38px; height: 38px;
-    border-left: 2px solid var(--borderGray); border-radius: 2px;
 }
 
 /* Lower Bracket Rounds */
-.lowerBracketRound {
-    position: absolute; 
-    width: 316px;
-    display: flex; flex-direction: column;  justify-content: space-between;
-}
+.lowerBracketRound { width: 316px; }
 .lowerBracketRounds1And2 { height: 608px; }
+.lowerBracketRounds3And4 { height: 439px; }
 #lowerBracketRound1 { top: 317px; left: 49px; }
 #lowerBracketRound2 { top: 280px; left: 406px; }
-#lowerBracketRound3 {
-    top: 364px; left: 760px;
-    height: 439px;
-}
-#lowerBracketRound4 {
-    top: 329px; left: 1118px;
-    height: 439px;
-}
+#lowerBracketRound3 { top: 364px; left: 760px; }
+#lowerBracketRound4 { top: 329px; left: 1118px; }
 #lowerBracketRound5 {
     top: 485px; left: 1475px;
     height: 120px;
@@ -442,23 +316,12 @@
 }
 
 /* Lower Bracket Round Lines */
-.lowerBracketRounds1And2Lines {
-    position: absolute; 
-    width: 44px; height: 608px;
-    display: flex; flex-direction: column; justify-content: space-between;
-}
+.lowerBracketRounds1And2Lines { width: 44px; height: 608px; }
 #lowerBracketRound1Lines { top: 317px; left: 365px; }
 #lowerBracketRound2Lines { top: 280px; left: 722px; }
-#lowerBracketRound3Lines {
-    position: absolute; top: 364px; left: 1076px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 439px;
-}
-#lowerBracketRound4Lines {
-    position: absolute; top: 329px; left: 1434px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 439px;
-}
+.lowerBracketRounds3And4Lines { height: 439px; }
+#lowerBracketRound3Lines { top: 364px; left: 1076px; }
+#lowerBracketRound4Lines { top: 329px; left: 1434px; }
 #lowerBracketRound5Lines {
     position: absolute; top: 485px; left: 1791px;
     height: 120px;
@@ -471,43 +334,20 @@
 }
 
 /* Lower Bracket Players */
-.lowerBracketPlayer {
-    background-color: var(--borderGray);
-    width: inherit; height: 51px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8.15% 100%, 0% 50%);
-    border-radius: 3px;
-}
-.lowerBracketPlayerOverlay {
-    position: relative; top: 2px; left: 2px;
-    background-color: var(--backgroundGray);
-    width: 312px; height: 47px;
-    line-height: 47px;
-    border-radius: 2px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%, 0% 48%);
-}
+.lowerBracketPlayer { height: 51px; }
+.lowerBracketPlayerOverlay { width: 312px; height: 47px; }
 .lowerBracketPlayerScore {
-    position: relative; top: -40.4px; left: 6.4px;
-    background-color: var(--elementGray);
+    top: -40.4px; left: 6.4px;
     width: 71.3px; height: 38px;
-    clip-path: polygon(0% 0%, 68.6% 0%, 100% 59%, 100% 100%, 31.3% 100%, 0% 41%);
-    color: white;
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace; font-size: 26px;
+    font-size: 26px;
     line-height: 38px;
-    
 }
 .lowerBracketPlayerFlag {
-    position: relative; top: -72.6px; left: 93px;
-    background-color: var(--elementGray);
+    top: -72.6px; left: 93px;
     width: 34.3px; height: 24px;
     border-radius: 5px;
 }
 .loserBracketFlagOverlay { border-radius: 5px; }
-.loserBracketFlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .lowerBracketPlayerName {
     position: relative; top: -92px; left: 144px;
     color: var(--textGray);
@@ -515,16 +355,11 @@
     letter-spacing: 1px;
 }
 .lowerBracketPlayerProfilePicture {
-    position: relative; top: -121.5px; left: 265.5px;
-    background-color: var(--elementGray);
+    top: -121.5px; left: 265.5px;
     width: 46.5px; height: 46.5px;
-    border-left: 2px solid var(--borderGray);
 }
 /* Lower Bracket Finals */
-#match29 {
-    display: flex; flex-direction: column;  justify-content: space-between;
-    height: inherit;
-}
+#match29 { height: inherit; }
 .lowerBracketFinalsPlayer {
     width: inherit; height: 308px;
     border-radius: 5px;
@@ -562,23 +397,11 @@
 #match29Player1Flag { top: -274.5px; }
 #match29Player2Flag { top: -182px; }
 .match29PlayerFlagOverlay { border-radius: 5px; }
-.match29PlayerFlagAndProfilePictureOverlay {
-    position: relative; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: var(--elementGrayOverlay);
-}
 .match29PlayerName {
-    position: relative; 
     left: 19px;
-    border-radius: 5px;
     width: 10px; height: 128px;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
     letter-spacing: -2px;
-    font-family: Lexend; font-size: 10px;
-    text-align: center;
-    color: var(--textGray);
-    overflow-y: hidden;
+    font-size: 10px;
 }
 .match29PlayerName::-webkit-scrollbar { display: none; }
 #match29Player1Name { top: -269.5px; }
@@ -589,14 +412,8 @@
     background-color: var(--elementGray);
     border-top: 2px solid var(--borderGray);
 }
-#match29Player1ProfilePicture { 
-    top: -264.5px; 
-    border-top: 2px solid var(--borderGray);
-}
-#match29Player2ProfilePicture { 
-    top: -520.5px;  
-    border-bottom: 2px solid var(--borderGray);
-}
+#match29Player1ProfilePicture { top: -264.5px; }
+#match29Player2ProfilePicture { top: -520.5px; }
 
 /* Now Playing Section */
 #nowPlayingSection {
