@@ -205,6 +205,15 @@ const resetBracket = function() {
             currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="13" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         }
     }
+    // Loser Bracket Round 3
+    for (let i = 0; i < lowerBracketRound3Lines.childElementCount; i++) {
+        let currentSVG = lowerBracketRound3Lines.children[i]
+        currentSVG.innerHTML = ""
+        currentSVG.innerHTML += '<line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="22" y1="24.5" x2="22" y2="95.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="21" y1="59" x2="44" y2="59" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
+    }
 }
 
 resetBracket()
