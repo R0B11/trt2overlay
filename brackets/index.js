@@ -54,6 +54,7 @@ let winnerBracketRound4Lines = document.getElementById("winnerBracketRound4Lines
 let winnerBracketRound5Lines = document.getElementById("winnerBracketRound5Lines")
 let lowerBracketRound1Lines = document.getElementById("lowerBracketRound1Lines")
 let lowerBracketRound2Lines = document.getElementById("lowerBracketRound2Lines")
+let lowerBracketRound3Lines = document.getElementById("lowerBracketRound3Lines")
 
 const resetBracket = function() {
     // Clear Each Tile
