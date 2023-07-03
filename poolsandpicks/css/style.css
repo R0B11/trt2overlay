@@ -325,3 +325,18 @@ html {
     border-radius: 50%;
     border: 3px solid var(--red);
 }
+
+/* ---------- Mappool Display ---------- */
+
+#mappoolDisplay {
+    
+}
+
+#mappoolContainer {
+    position: absolute;
+    top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 0;
+}
