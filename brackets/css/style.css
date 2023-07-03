@@ -94,6 +94,8 @@
 .playerCardElement {
     position: relative; 
     background-color: var(--elementGray);
+    background-position: 50%;
+    background-size: cover;
 }
 
 /* Verical Player Card Names */

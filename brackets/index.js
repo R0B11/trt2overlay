@@ -34,7 +34,6 @@ const toLoserBracket = () => {
     upperBracket.css("opacity", 0)
     lowerBracket.css("opacity", 1)
 }
-const pullResultsFromDatabase = () => {}
 
 // Reset Bracket
 let winnerBracketRound1 = document.getElementsByClassName("winnerBracketRound1")
@@ -249,3 +248,114 @@ const resetBracket = function() {
 }
 
 resetBracket()
+
+let matchObjects = [
+    {
+        "match": {
+          "id": 2,
+          "osuMatchId": null,
+          "type": "battle_royale",
+          "scheduleId": 0,
+          "winnerId": 3,
+          "timeStart": "2023-07-08T22:05:00",
+          "lastUpdated": "2023-07-08T22:05:00",
+          "bracketMatchId": 1,
+          "roundId": null
+        },
+        "matchPlayers": [
+          {
+            "id": 3,
+            "matchId": 2,
+            "playerId": 3717598,
+            "score": 5
+          },
+          {
+            "id": 4,
+            "matchId": 2,
+            "playerId": 4945688,
+            "score": 4
+          }
+        ],
+        "matchMaps": [
+          {
+            "id": 8,
+            "matchId": 2,
+            "playerId": 3,
+            "mapId": 5,
+            "action": "picked",
+            "orderInMatch": 69
+          }
+        ]
+      }
+]
+
+const AUFlagURL = "static/flags/AU.png"
+const CAFlagURl = "static/flags/CA.png"
+const CNFlagURL = "static/flags/CN.png"
+const HKFlagURL = "static/flags/HK.png"
+const PLFlagURL = "static/flags/PL.png"
+const KRFlagURL = "static/flags/KR.png"
+const UKFlagURL = "static/flags/UK.png"
+const USFlagURL = "static/flags/US.png"
+
+const playerArray = [
+    {playerID: "12408961", playerName: "maliszewski", playerFlag: PLFlagURL},
+    {playerID: "4945688", playerName: "rairiku", playerFlag: AUFlagURL},
+    {playerID: "2558286", playerName: "Rafis", playerFlag: PLFlagURL},
+    {playerID: "7813296", playerName: "Rektygon", playerFlag: USFlagURL},
+    {playerID: "6114695", playerName: "Ciru", playerFlag: USFlagURL},
+    {playerID: "4733121", playerName: "Kariyu", playerFlag: USFlagURL},
+    {playerID: "5791401", playerName: "lolol234", playerFlag: CNFlagURL},
+    {playerID: "4175698", playerName: "Sytho", playerFlag: USFlagURL},
+    {playerID: "4908650", playerName: "im a fancy lad", playerFlag: USFlagURL},
+    {playerID: "7562902", playerName: "mrekk", playerFlag: AUFlagURL},
+    {playerID: "9501251", playerName: "ChillierPear", playerFlag: USFlagURL},
+    {playerID: "3717598", playerName: "xootynator", playerFlag: CAFlagURl},
+    {playerID: "6304246", playerName: "RyuK", playerFlag: CAFlagURl},
+    {playerID: "5033077", playerName: "Zylice", playerFlag: CAFlagURl},
+    {playerID: "9224078", playerName: "FlyingTuna", playerFlag: KRFlagURL},
+    {playerID: "5182050", playerName: "Bubbleman", playerFlag: UKFlagURL}
+]
+
+const pullResultsFromDatabase = () => {
+    resetBracket()
+
+    matchObjects.sort((a,b) => a.bracketMatchId - b.bracketMatchId)
+
+    for (let i = 0; i < matchObjects.length; i++) {
+        console.log(matchObjects)
+        let currentMatch = document.getElementById(`match${matchObjects[i].match.bracketMatchId}`)
+
+        // Conditions
+        if (matchObjects[i].matchPlayers.length != 2) continue
+        let playerEmpty = false
+        for (let j = 0; j < matchObjects[i].matchPlayers.length; j++) if (!matchObjects[i].matchPlayers[j].playerId) playerEmpty = true
+        if (playerEmpty) continue
+        
+        for (let j = 0; j < playerArray.length; j++) {
+            if (playerArray[j].playerID == matchObjects[i].matchPlayers[0].playerId) {
+                // Write Player Names
+                currentMatch.children[0].children[3].innerText = playerArray[j].playerName.toUpperCase()
+                currentMatch.children[0].children[3].style.color = "white"
+                // Write Player Score
+                currentMatch.children[0].children[1].innerText = matchObjects[i].matchPlayers[0].score
+                currentMatch.children[0].children[1].style.color = "white"
+                // Write Player Flag
+                currentMatch.children[0].children[4].style.backgroundImage = `url("https://a.ppy.sh/${playerArray[j].playerID}")`
+                // Write Player Profile Picture
+                currentMatch.children[0].children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
+            } else if (playerArray[j].playerID == matchObjects[i].matchPlayers[1].playerId) {
+                // Write Player Names
+                currentMatch.children[1].children[3].innerText = playerArray[j].playerName.toUpperCase()
+                currentMatch.children[1].children[3].style.color = "white"
+                // Write Player Score
+                currentMatch.children[1].children[1].innerText = matchObjects[i].matchPlayers[1].score
+                currentMatch.children[1].children[1].style.color = "white"
+                // Write Player Flag
+                currentMatch.children[1].children[4].style.backgroundImage = `url("https://a.ppy.sh/${playerArray[j].playerID}")`
+                // Write Player Profile Picture
+                currentMatch.children[1].children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
+            }
+        }
+    }
+}

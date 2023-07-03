@@ -725,7 +725,7 @@ const USFlagURL = "static/flags/US.png"
 
 const playerArray = [
     {playerID: "12408961", playerName: "maliszewski", playerFlag: PLFlagURL},
-    {playerID: "2165650", playerName: "mcy4", playerFlag: HKFlagURL},
+    {playerID: "4945688", playerName: "rairiku", playerFlag: AUFlagURL},
     {playerID: "2558286", playerName: "Rafis", playerFlag: PLFlagURL},
     {playerID: "7813296", playerName: "Rektygon", playerFlag: USFlagURL},
     {playerID: "6114695", playerName: "Ciru", playerFlag: USFlagURL},
@@ -735,7 +735,7 @@ const playerArray = [
     {playerID: "4908650", playerName: "im a fancy lad", playerFlag: USFlagURL},
     {playerID: "7562902", playerName: "mrekk", playerFlag: AUFlagURL},
     {playerID: "9501251", playerName: "ChillierPear", playerFlag: USFlagURL},
-    {playerID: "3717598", playerName: "Xootynator", playerFlag: CAFlagURl},
+    {playerID: "3717598", playerName: "xootynator", playerFlag: CAFlagURl},
     {playerID: "6304246", playerName: "RyuK", playerFlag: CAFlagURl},
     {playerID: "5033077", playerName: "Zylice", playerFlag: CAFlagURl},
     {playerID: "9224078", playerName: "FlyingTuna", playerFlag: KRFlagURL},
