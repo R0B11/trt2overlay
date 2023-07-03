@@ -52,6 +52,7 @@ let winnerBracketRound2Lines = document.getElementById("winnerBracketRound2Lines
 let winnerBracketRound3Lines = document.getElementById("winnerBracketRound3Lines")
 let winnerBracketRound4Lines = document.getElementById("winnerBracketRound4Lines")
 let winnerBracketRound5Lines = document.getElementById("winnerBracketRound5Lines")
+let lowerBracketRound1Lines = document.getElementById("lowerBracketRound1Lines")
 
 const resetBracket = function() {
     // Clear Each Tile
@@ -171,6 +172,17 @@ const resetBracket = function() {
     winnerBracketRound5ResetLines.innerHTML = ""
     winnerBracketRound5ResetLines.innerHTML += '<line x1="0" x2="100" y1="63" y2="63" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound5ResetLines.innerHTML += '<line x1="100" x2="100" y1="63" y2="0" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    // Loser Bracket Round 1
+    for (let i = 0; i < lowerBracketRound1Lines.childElementCount; i++) {
+        let currentSVG = lowerBracketRound1Lines.children[i]
+        currentSVG.innerHTML = ""
+        currentSVG.innerHTML += '<line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="22" y1="24.5" x2="22" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="21" y1="59" x2="44" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="22" y1="94.5" x2="22" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    }
+
 }
 
 resetBracket()
