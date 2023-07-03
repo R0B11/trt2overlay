@@ -50,6 +50,7 @@ let playerTiles = [winnerBracketRound1, winnerBracketRound2, winnerBracketRound3
 let winnerBracketRound1Lines = document.getElementById("winnerBracketRound1Lines")
 let winnerBracketRound2Lines = document.getElementById("winnerBracketRound2Lines")
 let winnerBracketRound3Lines = document.getElementById("winnerBracketRound3Lines")
+let winnerBracketRound4Lines = document.getElementById("winnerBracketRound4Lines")
 
 const resetBracket = function() {
     // Clear Each Tile
@@ -154,7 +155,16 @@ const resetBracket = function() {
     winnerBracketRound3LowerSide.innerHTML += '<line x1="65" x2="100" y1="46" y2="46" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound3LowerSide.innerHTML += '<line x1="0" x2="33" y1="223" y2="223" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="32" y1="223" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    
+    // Winner Bracket Round 4
+    let currentSVG = winnerBracketRound4Lines.children[0]
+    currentSVG.innerHTML = ""
+    currentSVG.innerHTML += '<line x1="0" x2="20" y1="31" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="20" x2="20" y1="73.5" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="20" x2="68" y1="73.5" y2="73.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="67" x2="67" y1="73.5" y2="30" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="67" x2="67" y1="92.25" y2="117" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="0" x2="20" y1="116" y2="116" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    currentSVG.innerHTML += '<line x1="20" x2="20" y1="116" y2="73.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
 }
 
 resetBracket()
