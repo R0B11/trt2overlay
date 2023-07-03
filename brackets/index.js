@@ -55,6 +55,7 @@ let winnerBracketRound5Lines = document.getElementById("winnerBracketRound5Lines
 let lowerBracketRound1Lines = document.getElementById("lowerBracketRound1Lines")
 let lowerBracketRound2Lines = document.getElementById("lowerBracketRound2Lines")
 let lowerBracketRound3Lines = document.getElementById("lowerBracketRound3Lines")
+let lowerBracketRound4Lines = document.getElementById("lowerBracketRound4Lines")
 
 const resetBracket = function() {
     // Clear Each Tile
@@ -200,8 +201,8 @@ const resetBracket = function() {
             currentSVG.innerHTML += '<line x1="0" y1="25.5" x2="13" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
             currentSVG.innerHTML += '<line x1="12" y1="24.5" x2="12" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
             currentSVG.innerHTML += '<line x1="12" y1="59" x2="24" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-            currentSVG.innerHTML += '<line x1="24" y1="59" x2="24" y2="9" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-            currentSVG.innerHTML += '<line x1="24" y1="10" x2="40" y2="10" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+            currentSVG.innerHTML += '<line x1="24" y1="59" x2="24" y2="16" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+            currentSVG.innerHTML += '<line x1="24" y1="17" x2="40" y2="17" stroke="rgb(102,102,102)" stroke-width="3"></line>'
             currentSVG.innerHTML += '<line x1="12" y1="94.5" x2="12" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
             currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="13" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         }
@@ -210,11 +211,30 @@ const resetBracket = function() {
     for (let i = 0; i < lowerBracketRound3Lines.childElementCount; i++) {
         let currentSVG = lowerBracketRound3Lines.children[i]
         currentSVG.innerHTML = ""
-        currentSVG.innerHTML += '<line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
-        currentSVG.innerHTML += '<line x1="22" y1="24.5" x2="22" y2="95.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
-        currentSVG.innerHTML += '<line x1="21" y1="59" x2="44" y2="59" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
-        currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgba(102,102,102,1)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="22" y1="24.5" x2="22" y2="95.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="21" y1="59" x2="44" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     }
+    // Lower Bracket round 4
+    let lowerBracketRound4ResetUpperLines = lowerBracketRound4Lines.children[0]
+    lowerBracketRound4ResetUpperLines.innerHTML = ""
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="0" y1="25.5" x2="15" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="14" y1="24.5" x2="14" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="14" y1="59" x2="29" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="29" y1="58" x2="29" y2="183" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="28" y1="182" x2="44" y2="182" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="14" y1="94.5" x2="14" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="0" y1="94.5" x2="15" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    let lowerBracketRound4ResetLowerLines = lowerBracketRound4Lines.children[1]
+    lowerBracketRound4ResetLowerLines.innerHTML = ""
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="0" y1="194.5" x2="15" y2="194.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="14" y1="195.5" x2="14" y2="160" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="14" y1="160" x2="29" y2="160" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="28" y1="160" x2="28" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="27" y1="32" x2="44" y2="32" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="14" y1="125.5" x2="14" y2="160" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="0" y1="125.5" x2="15" y2="125.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
 }
 
 resetBracket()

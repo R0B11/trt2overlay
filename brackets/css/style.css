@@ -300,11 +300,10 @@
 /* Lower Bracket Rounds */
 .lowerBracketRound { width: 316px; }
 .lowerBracketRounds1And2 { height: 608px; }
-.lowerBracketRounds3And4 { height: 439px; }
 #lowerBracketRound1 { top: 317px; left: 49px; }
 #lowerBracketRound2 { top: 280px; left: 406px; }
-#lowerBracketRound3 { top: 364px; left: 760px; }
-#lowerBracketRound4 { top: 329px; left: 1118px; }
+#lowerBracketRound3 { top: 364px; left: 760px; height: 446px }
+#lowerBracketRound4 { top: 329px; left: 1118px; height: 439px; }
 #lowerBracketRound5 {
     top: 485px; left: 1475px;
     height: 120px;
