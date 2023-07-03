@@ -48,6 +48,8 @@ let lowerBracketFinalsPlayer = document.getElementsByClassName("lowerBracketFina
 let playerTiles = [winnerBracketRound1, winnerBracketRound2, winnerBracketRound3, winnerBracketRound4, winnerBracketRound5And6Container, lowerBracketPlayer, lowerBracketFinalsPlayer]
 
 let winnerBracketRound1Lines = document.getElementById("winnerBracketRound1Lines")
+let winnerBracketRound2Lines = document.getElementById("winnerBracketRound2Lines")
+let winnerBracketRound3Lines = document.getElementById("winnerBracketRound3Lines")
 
 const resetBracket = function() {
     // Clear Each Tile
@@ -68,7 +70,8 @@ const resetBracket = function() {
         }
     }
 
-    // Clear Lines - Winner Bracket Round 1
+    // Clear Lines
+    // Winner Bracket Round 1
     for (let i = 0; i < winnerBracketRound1Lines.childElementCount; i++) {
         let currentSVG = winnerBracketRound1Lines.children[i]
         currentSVG.innerHTML = ""
@@ -85,4 +88,73 @@ const resetBracket = function() {
             currentSVG.innerHTML += '<line x1="61" x2="95" y1="21" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         }
     }
+    // Winner Bracket Round 2
+    for (let i = 0; i < winnerBracketRound2Lines.childElementCount; i++) {
+        let currentSVG = winnerBracketRound2Lines.children[i]
+        currentSVG.innerHTML = ""
+        switch (i) {
+            case 0: {
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="26" y2="26" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="26" y2="62" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="66" y1="62" y2="62" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="65" y1="62" y2="157" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="100" y1="156" y2="156" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="97" y2="97" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML +='<line x1="32" x2="32" y1="97" y2="62" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                break
+            }
+            case 1: {
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="61" y2="61" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="61" y2="97" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="66" y1="97" y2="97" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="65" y1="97" y2="7" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="100" y1="7" y2="7" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="132" y2="132" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="132" y2="97" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                break
+            }
+            case 2: {
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="168.25" y2="168.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="168.25" y2="132.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="66" y1="132.25" y2="132.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="65" y1="132.25" y2="222.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="100" y1="222.25" y2="222.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="97.25" y2="97.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="97.25" y2="132.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                break
+            } 
+            case 3: {
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="132.25" y2="132.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="132.25" y2="167.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="66" y1="167.25" y2="167.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="65" y1="167.25" y2="72.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="65" x2="100" y1="73.25" y2="73.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="0" x2="33" y1="203.25" y2="203.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                currentSVG.innerHTML += '<line x1="32" x2="32" y1="203.25" y2="167.25" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                break
+            }
+        }
+    }
+    // Winner Bracket Round 3
+    let winnerBracketRound3UpperSide = winnerBracketRound3Lines.children[0]
+    winnerBracketRound3UpperSide.innerHTML = ""
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="0" x2="33" y1="29" y2="29" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="32" x2="32" y1="29" y2="69" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="32" x2="66" y1="69" y2="69" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="65" x2="65" y1="69" y2="289" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="65" x2="100" y1="288" y2="288" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="0" x2="33" y1="109" y2="109" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3UpperSide.innerHTML += '<line x1="32" x2="32" y1="109" y2="69" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    let winnerBracketRound3LowerSide = winnerBracketRound3Lines.children[1]
+    winnerBracketRound3LowerSide.innerHTML = ""
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="0" x2="33" y1="303" y2="303" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="32" y1="303" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="66" y1="263" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="65" x2="65" y1="263" y2="45" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="65" x2="100" y1="46" y2="46" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="0" x2="33" y1="223" y2="223" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="32" y1="223" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    
 }
+
+resetBracket()
