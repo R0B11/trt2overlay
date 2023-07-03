@@ -47,6 +47,8 @@ let lowerBracketFinalsPlayer = document.getElementsByClassName("lowerBracketFina
 
 let playerTiles = [winnerBracketRound1, winnerBracketRound2, winnerBracketRound3, winnerBracketRound4, winnerBracketRound5And6Container, lowerBracketPlayer, lowerBracketFinalsPlayer]
 
+let winnerBracketRound1Lines = document.getElementById("winnerBracketRound1Lines")
+
 const resetBracket = function() {
     // Clear Each Tile
     for (let i = 0; i < playerTiles.length; i++) {
@@ -63,6 +65,24 @@ const resetBracket = function() {
             playerTiles[i][j].children[4].style.backgroundColor = "var(--elementGray)"
             playerTiles[i][j].children[4].style.backgroundImage = "none"
             playerTiles[i][j].children[4].innerHTML = ""
+        }
+    }
+
+    // Clear Lines - Winner Bracket Round 1
+    for (let i = 0; i < winnerBracketRound1Lines.childElementCount; i++) {
+        let currentSVG = winnerBracketRound1Lines.children[i]
+        currentSVG.innerHTML = ""
+        currentSVG.innerHTML += '<line x1="0" x2="32" y1="21" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="31" x2="31" y1="21" y2="49" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="31" x2="61" y1="48" y2="48" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="0" x2="32" y1="76" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        currentSVG.innerHTML += '<line x1="31" x2="31" y1="48" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        if (i % 2 == 0) {
+            currentSVG.innerHTML += '<line x1="61" x2="61" y1="48" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+            currentSVG.innerHTML += '<line x1="61" x2="95" y1="76" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+        } else {
+            currentSVG.innerHTML += '<line x1="61" x2="61" y1="48" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+            currentSVG.innerHTML += '<line x1="61" x2="95" y1="21" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         }
     }
 }
