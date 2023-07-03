@@ -56,6 +56,8 @@ let lowerBracketRound1Lines = document.getElementById("lowerBracketRound1Lines")
 let lowerBracketRound2Lines = document.getElementById("lowerBracketRound2Lines")
 let lowerBracketRound3Lines = document.getElementById("lowerBracketRound3Lines")
 let lowerBracketRound4Lines = document.getElementById("lowerBracketRound4Lines")
+let lowerBracketRound5Lines = document.getElementById("lowerBracketRound5Lines")
+
 
 const resetBracket = function() {
     // Clear Each Tile
@@ -216,7 +218,7 @@ const resetBracket = function() {
         currentSVG.innerHTML += '<line x1="21" y1="59" x2="44" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     }
-    // Lower Bracket round 4
+    // Lower Bracket Round 4
     let lowerBracketRound4ResetUpperLines = lowerBracketRound4Lines.children[0]
     lowerBracketRound4ResetUpperLines.innerHTML = ""
     lowerBracketRound4ResetUpperLines.innerHTML += '<line x1="0" y1="25.5" x2="15" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
@@ -235,6 +237,15 @@ const resetBracket = function() {
     lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="27" y1="32" x2="44" y2="32" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="14" y1="125.5" x2="14" y2="160" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     lowerBracketRound4ResetLowerLines.innerHTML += '<line x1="0" y1="125.5" x2="15" y2="125.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    // Lower Bracket Round 5
+    let lowerBracketRound5ResetLines = lowerBracketRound5Lines.children[0]
+    lowerBracketRound5ResetLines.innerHTML = ""
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="22" y1="24.5" x2="22" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="21" y1="59" x2="70" y2="59" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="69" y1="58" x2="69" y2="95.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="21" y1="94.5" x2="21" y2="60" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+    lowerBracketRound5ResetLines.innerHTML += '<line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
 }
 
 resetBracket()
