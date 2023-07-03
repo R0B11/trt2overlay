@@ -582,9 +582,13 @@ const pullResultsFromDatabase = () => {
     matchObjects.sort((a,b) => a.bracketMatchId - b.bracketMatchId)
 
     for (let i = 0; i < matchObjects.length; i++) {
-        let currentMatch = document.getElementById(`match${matchObjects[i].match.bracketMatchId}`)
+        let bracketMatchID = matchObjects[i].match.bracketMatchId
+        let currentMatch = document.getElementById(`match${bracketMatchID}`)
         let player1 =  currentMatch.children[0]
         let player2 =  currentMatch.children[1]
+        console.log(bracketMatchID)
+        let linesMatch = document.getElementById(`linesMatch${bracketMatchID}`)
+        console.log(linesMatch)
 
         // Conditions
         if (matchObjects[i].matchPlayers.length != 2) continue
@@ -621,10 +625,17 @@ const pullResultsFromDatabase = () => {
 
         // Enter in winner
         let firstTo = 0
-        if (matchObjects[i].match.bracketMatchId <= 16) firstTo = 5
+        if (bracketMatchID <= 16) firstTo = 5
         else firstTo = 7
 
+        let playerWin = true
+        let player1Win = false
+        let player2Win = false
+
+        // Style winners
         if (player1.children[1].innerText == firstTo) {
+            playerWin = true
+            player1Win = true
             player1.style.backgroundColor = "var(--borderRed)"
             player1.children[1].style.backgroundColor = "var(--borderRed)"
             player1.children[3].style.color = "var(--textAndLineGold)"
@@ -634,6 +645,8 @@ const pullResultsFromDatabase = () => {
             player2.children[3].style.color = "var(--textGray)"
             player2.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
         } else if (player2.children[1].innerText == firstTo) {
+            playerWin = true
+            player2Win = true
             player2.style.backgroundColor = "var(--borderRed)"
             player2.children[1].style.backgroundColor = "var(--borderRed)"
             player2.children[3].style.color = "var(--textAndLineGold)"
@@ -642,6 +655,40 @@ const pullResultsFromDatabase = () => {
             player1.children[2].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
             player1.children[3].style.color = "var(--textGray)"
             player1.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
+        }
+
+        // Draw Lines
+        // Winner Bracket Round 1
+        if (bracketMatchID <= 8) {
+            if (player1Win) {
+                linesMatch.innerHTML = `
+                <line x1="0" x2="32" y1="21" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="31" x2="31" y1="21" y2="49" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="31" x2="61" y1="48" y2="48" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" x2="32" y1="76" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="31" x2="31" y1="60" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML = `
+                <line x1="0" x2="32" y1="21" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="31" x2="31" y1="21" y2="37" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="31" x2="61" y1="48" y2="48" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" x2="32" y1="76" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="31" x2="31" y1="48" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>>
+                `
+            }
+
+            if (playerWin && bracketMatchID % 2 == 0) {
+                linesMatch.innerHTML += `
+                <line x1="61" x2="61" y1="48" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="61" x2="95" y1="21" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line
+                `
+            } else if (playerWin) {
+                linesMatch.innerHTML += `
+                <line x1="61" x2="61" y1="48" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="61" x2="95" y1="76" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
         }
     }
 }
