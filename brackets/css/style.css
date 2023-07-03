@@ -90,6 +90,7 @@
     position: relative; top: 0; left: 0;
     width: 100%; height: 100%;
     background-color: var(--elementGrayOverlay);
+    border-radius: inherit;
 }
 .playerCardElement {
     position: relative; 
@@ -148,7 +149,6 @@
 }
 .winnerBracketRound5And6UpperFlag { top: -319px; }
 .winnerBracketRound5And6LowerFlag { top: -212px;  }
-.winnerBracketRound5And6FlagOverlay { border-radius: 6px; }
 .winnerBracketRound5And6Name {
     left: 22px;
     width: 15px; height: 140px;
@@ -213,7 +213,6 @@
     width: 41px; height: 28.12px;
     border-radius: 5px;
 }
-.winnerBracketRound4FlagOverlay { border-radius: 5px; }
 .winnerBracketRound4Name {
     top: -109.5px; left: 177.84px;
     font-size: 15px;
@@ -233,7 +232,6 @@
     line-height: 42.9px;
     font-size: 26.6px;
 }
-.winnerBracketRound3FlagOverlay { border-radius: 4.2px; }
 .winnerBracketRound3Flag {
     top: -80.454px; left: 108px;
     width: 38.6px; height: 27.2px;
@@ -263,7 +261,6 @@
     width: 33.75px; height: 23.75px;
     border-radius: 3.75px;
 }
-.winnerBracketRound2FlagOverlay { border-radius: 3.75px; }
 .winnerBracketRound2Name {
     top: -92.5px; left: 146.25px;
     font-family: Lexend; font-weight: 800; font-size: 12.5px;
@@ -288,7 +285,6 @@
     width: 27px; height: 19px;
     border-radius: 3px;
 }
-.winnerBracketRound1FlagOverlay { border-radius: 3px; }
 .winnerBracketRound1Name {
     top: -74px; left: 117px;
     font-family: Lexend; font-weight: 800; font-size: 10px;
@@ -348,7 +344,6 @@
     width: 34.3px; height: 24px;
     border-radius: 5px;
 }
-.loserBracketFlagOverlay { border-radius: 5px; }
 .lowerBracketPlayerName {
     position: relative; top: -92px; left: 144px;
     color: var(--textGray);
@@ -397,7 +392,6 @@
 }
 #match29Player1Flag { top: -274.5px; }
 #match29Player2Flag { top: -182px; }
-.match29PlayerFlagOverlay { border-radius: 5px; }
 .match29PlayerName {
     left: 19px;
     width: 10px; height: 128px;
