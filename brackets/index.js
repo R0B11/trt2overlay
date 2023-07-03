@@ -631,11 +631,16 @@ const pullResultsFromDatabase = () => {
         let playerWin = true
         let player1Win = false
         let player2Win = false
+        let winnerPlayerElement
+        let loserPlayerElement
 
         // Style winners
         if (player1.children[1].innerText == firstTo) {
             playerWin = true
             player1Win = true
+            winnerPlayerElement = player1
+            loserPlayerElement = player2
+
             player1.style.backgroundColor = "var(--borderRed)"
             player1.children[1].style.backgroundColor = "var(--borderRed)"
             player1.children[3].style.color = "var(--textAndLineGold)"
@@ -647,6 +652,9 @@ const pullResultsFromDatabase = () => {
         } else if (player2.children[1].innerText == firstTo) {
             playerWin = true
             player2Win = true
+            winnerPlayerElement = player2
+            loserPlayerElement = player1
+
             player2.style.backgroundColor = "var(--borderRed)"
             player2.children[1].style.backgroundColor = "var(--borderRed)"
             player2.children[3].style.color = "var(--textAndLineGold)"
@@ -657,9 +665,28 @@ const pullResultsFromDatabase = () => {
             player1.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
         }
 
-        // Draw Lines
+        // Draw Lines and set names on new tiles
         // Winner Bracket Round 1
         if (bracketMatchID <= 8) {
+            if (playerWin) {
+                let winnerMatch = document.getElementById(currentMatch.getAttribute("winnerTo"))
+                winnerMatch.children[1].innerText = 0
+                winnerMatch.children[2].innerHTML = ""
+                winnerMatch.children[2].style.backgroundImage = getComputedStyle(winnerPlayerElement.children[2]).getPropertyValue("background-image")
+                winnerMatch.children[3].color = "white"
+                winnerMatch.children[3].innerText = winnerPlayerElement.children[3].innerText
+                winnerMatch.children[4].innerHTML = ""
+                winnerMatch.children[4].style.backgroundImage = getComputedStyle(winnerPlayerElement.children[4]).getPropertyValue("background-image")
+
+                let loserMatch = document.getElementById(currentMatch.getAttribute("loserTo"))
+                loserMatch.children[1].innerText = 0
+                loserMatch.children[2].innerHTML = ""
+                loserMatch.children[2].style.backgroundImage = getComputedStyle(loserPlayerElement.children[2]).getPropertyValue("background-image")
+                loserMatch.children[3].color = "white"
+                loserMatch.children[3].innerText = loserPlayerElement.children[3].innerText
+                loserMatch.children[4].innerHTML = ""
+                loserMatch.children[4].style.backgroundImage = getComputedStyle(loserPlayerElement.children[4]).getPropertyValue("background-image")    
+            }
             if (player1Win) {
                 linesMatch.innerHTML = `
                 <line x1="0" x2="32" y1="21" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line>
