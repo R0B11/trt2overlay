@@ -182,7 +182,10 @@
     color: white;
     font-family: 'IBM Plex Mono', monospace; 
 }
-.horizontalLayoutPlayerProfilePicture { border-left: 2px solid var(--borderGray); border-radius: 0 2px 2px 0; }
+.horizontalLayoutPlayerProfilePicture { 
+    border-left: 2px solid var(--borderGray); border-radius: 0 2px 2px 0; 
+    background-size: cover;
+}
 
 /* Winner Bracket Rounds 1 to 4 Players*/
 .winnerBracketRound3To4Overlay {
@@ -351,6 +354,7 @@
     letter-spacing: 1px;
 }
 .lowerBracketPlayerProfilePicture {
+    position: relative;
     top: -121.5px; left: 265.5px;
     width: 46.5px; height: 46.5px;
 }

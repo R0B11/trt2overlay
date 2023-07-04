@@ -249,305 +249,6 @@ const resetBracket = function() {
 
 resetBracket()
 
-let matchObjects = [
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 1,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 12408961,
-            "score": 5
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 4945688,
-            "score": 4
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 2,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 2558286,
-            "score": 3
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 7813296,
-            "score": 5
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 3,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 6114695,
-            "score": 3
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 4733121,
-            "score": 5
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 4,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 5791401,
-            "score": 5
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 4175698,
-            "score": 2
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 5,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 4908650,
-            "score": 5
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 7562902,
-            "score": 2
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 6,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 9501251,
-            "score": 5
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 3717598,
-            "score": 2
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 7,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 6304246,
-            "score": 5
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 5033077,
-            "score": 2
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    },    
-    {
-        "match": {
-          "id": 2,
-          "osuMatchId": null,
-          "type": "battle_royale",
-          "scheduleId": 0,
-          "winnerId": 3,
-          "timeStart": "2023-07-08T22:05:00",
-          "lastUpdated": "2023-07-08T22:05:00",
-          "bracketMatchId": 8,
-          "roundId": null
-        },
-        "matchPlayers": [
-          {
-            "id": 3,
-            "matchId": 2,
-            "playerId": 9224078,
-            "score": 0
-          },
-          {
-            "id": 4,
-            "matchId": 2,
-            "playerId": 5182050,
-            "score": 5
-          }
-        ],
-        "matchMaps": [
-          {
-            "id": 8,
-            "matchId": 2,
-            "playerId": 3,
-            "mapId": 5,
-            "action": "picked",
-            "orderInMatch": 69
-          }
-        ]
-    }
-]
-
 const AUFlagURL = "static/flags/AU.png"
 const CAFlagURl = "static/flags/CA.png"
 const CNFlagURL = "static/flags/CN.png"
@@ -570,25 +271,69 @@ const playerArray = [
     {playerID: "7562902", playerName: "mrekk", playerFlag: AUFlagURL},
     {playerID: "9501251", playerName: "ChillierPear", playerFlag: USFlagURL}, 
     {playerID: "3717598", playerName: "xootynator", playerFlag: CAFlagURl},
-    {playerID: "6304246", playerName: "RyuK", playerFlag: CAFlagURl}, // WE ARE HERE
+    {playerID: "6304246", playerName: "RyuK", playerFlag: CAFlagURl},
     {playerID: "5033077", playerName: "Zylice", playerFlag: CAFlagURl},
     {playerID: "9224078", playerName: "FlyingTuna", playerFlag: KRFlagURL},
     {playerID: "5182050", playerName: "Bubbleman", playerFlag: UKFlagURL}
 ]
 
+// Player Table workaround
+let playerObjects
+let playersRequest = new XMLHttpRequest()
+playersRequest.open("GET", "http://localhost:5280/api/players/all",false)
+playersRequest.onload = function() {
+    if (this.status == 404) return
+    if (this.status == 200) playerObjects = JSON.parse(this.responseText)
+}
+playersRequest.send()
+
 const pullResultsFromDatabase = () => {
     resetBracket()
+    
+    // Pull Matches from API
+    let matchesRequest = new XMLHttpRequest()
+    matchesRequest.open("GET", "http://localhost:5280/api/matches/all",false)
+    matchesRequest.onload = function() {
+        if (this.status == 404) return
+        if (this.status == 200) matchObjects = JSON.parse(this.responseText)
+    }
+    matchesRequest.send()
+    matchObjects.sort((a,b) => a.match.bracketMatchId - b.match.bracketMatchId)
 
-    matchObjects.sort((a,b) => a.bracketMatchId - b.bracketMatchId)
+    for (let i = 0; i < matchObjects.length; i++)  {
+        // let matchPlayersRequest = new XMLHttpRequest()
+        // let matchPlayers = []
+        // matchPlayersRequest.open("GET", `http://localhost:5280/api/matches/${matchObjects[i].match.id}/players`,false)
+        // matchPlayersRequest.onload = function() {
+        //     if (this.status == 404) return
+        //     if (this.status == 200) matchPlayers = JSON.parse(this.responseText)
+        // }
+        // matchPlayersRequest.send()
 
-    for (let i = 0; i < matchObjects.length; i++) {
         let bracketMatchID = matchObjects[i].match.bracketMatchId
         let currentMatch = document.getElementById(`match${bracketMatchID}`)
-        let player1 =  currentMatch.children[0]
-        let player2 =  currentMatch.children[1]
-        console.log(bracketMatchID)
+
+        // Players Table workaround
+        let player1 = ""
+        let player2 = ""
+        let player1ID
+        let player2ID
+        let player1osuID
+        let player2osuID
+
+        for (let j = 0; j < playerObjects.length; j++) {
+            if (matchObjects[i].matchPlayers[0].id == playerObjects[j].id) {
+                player1 = currentMatch.children[0]
+                player1ID = playerObjects[j].id
+                player1osuID = playerObjects[j].osuPlayerId
+            } else if (matchObjects[i].matchPlayers[1].id == playerObjects[j].id) {
+              player2 = currentMatch.children[1]
+              player2ID = playerObjects[j].id
+              player2osuID = playerObjects[j].osuPlayerId
+            }
+        }
+
         let linesMatch = document.getElementById(`linesMatch${bracketMatchID}`)
-        console.log(linesMatch)
 
         // Conditions
         if (matchObjects[i].matchPlayers.length != 2) continue
@@ -596,9 +341,10 @@ const pullResultsFromDatabase = () => {
         for (let j = 0; j < matchObjects[i].matchPlayers.length; j++) if (!matchObjects[i].matchPlayers[j].playerId) playerEmpty = true
         if (playerEmpty) continue
         
-        // Enter in details for match
+        // Enter in details for match        
         for (let j = 0; j < playerArray.length; j++) {
-            if (playerArray[j].playerID == matchObjects[i].matchPlayers[0].playerId) {
+            if (playerArray[j].playerID == player1osuID) {
+
                 // Write Player Names
                 player1.children[3].innerText = playerArray[j].playerName.toUpperCase()
                 player1.children[3].style.color = "white"
@@ -609,7 +355,9 @@ const pullResultsFromDatabase = () => {
                 player1.children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
                 // Write Player Profile Picture
                 player1.children[4].style.backgroundImage = `url("https://a.ppy.sh/${playerArray[j].playerID}")`
-            } else if (playerArray[j].playerID == matchObjects[i].matchPlayers[1].playerId) {
+
+            } else if (playerArray[j].playerID == player2osuID) {
+
                 // Write Player Names
                 player2.children[3].innerText = playerArray[j].playerName.toUpperCase()
                 player2.children[3].style.color = "white"
@@ -620,22 +368,21 @@ const pullResultsFromDatabase = () => {
                 player2.children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
                 // Write Player Profile Picture
                 player2.children[4].style.backgroundImage = `url("https://a.ppy.sh/${playerArray[j].playerID}")`
+
             }
         }
 
         // Enter in winner
-        let firstTo = 0
-        if (bracketMatchID <= 16) firstTo = 5
-        else firstTo = 7
+        let winnerID = matchObjects[i].match.winnerId;
 
-        let playerWin = true
+        let playerWin = false
         let player1Win = false
         let player2Win = false
         let winnerPlayerElement
         let loserPlayerElement
 
         // Style winners
-        if (player1.children[1].innerText == firstTo) {
+        if (winnerID == player1ID) {
             playerWin = true
             player1Win = true
             winnerPlayerElement = player1
@@ -649,7 +396,7 @@ const pullResultsFromDatabase = () => {
             player2.children[2].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
             player2.children[3].style.color = "var(--textGray)"
             player2.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
-        } else if (player2.children[1].innerText == firstTo) {
+        } else if (winnerID == player2ID) {
             playerWin = true
             player2Win = true
             winnerPlayerElement = player2
@@ -664,7 +411,6 @@ const pullResultsFromDatabase = () => {
             player1.children[3].style.color = "var(--textGray)"
             player1.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
         }
-
         // Draw Lines and set names on new tiles
         // Winner Bracket Round 1
         if (bracketMatchID <= 8) {
@@ -677,7 +423,7 @@ const pullResultsFromDatabase = () => {
                 winnerMatch.children[3].innerText = winnerPlayerElement.children[3].innerText
                 winnerMatch.children[4].innerHTML = ""
                 winnerMatch.children[4].style.backgroundImage = getComputedStyle(winnerPlayerElement.children[4]).getPropertyValue("background-image")
-
+            
                 let loserMatch = document.getElementById(currentMatch.getAttribute("loserTo"))
                 loserMatch.children[1].innerText = 0
                 loserMatch.children[2].innerHTML = ""
@@ -704,7 +450,7 @@ const pullResultsFromDatabase = () => {
                 <line x1="31" x2="31" y1="48" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>>
                 `
             }
-
+          
             if (playerWin && bracketMatchID % 2 == 0) {
                 linesMatch.innerHTML += `
                 <line x1="61" x2="61" y1="48" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line>
