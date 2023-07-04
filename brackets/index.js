@@ -154,13 +154,7 @@ const resetBracket = function() {
     winnerBracketRound3UpperSide.innerHTML += '<line x1="32" x2="32" y1="109" y2="69" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     let winnerBracketRound3LowerSide = winnerBracketRound3Lines.children[1]
     winnerBracketRound3LowerSide.innerHTML = ""
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="0" x2="33" y1="303" y2="303" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="32" y1="303" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="66" y1="263" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="65" x2="65" y1="263" y2="45" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="65" x2="100" y1="46" y2="46" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="0" x2="33" y1="223" y2="223" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound3LowerSide.innerHTML += '<line x1="32" x2="32" y1="223" y2="263" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+
     // Winner Bracket Round 4
     let winnerBracketRound4ResetLines = winnerBracketRound4Lines.children[0]
     winnerBracketRound4ResetLines.innerHTML = ""
@@ -623,6 +617,53 @@ const pullResultsFromDatabase = () => {
                 <line x1="21" y1="59" x2="44" y2="59" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="22" y1="94.5" x2="22" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+        } else if (bracketMatchID == 23) {
+            if (playerWin) {
+                linesMatch.innerHTML = `
+                <line x1="32" x2="66" y1="69" y2="69" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="65" x2="65" y1="69" y2="289" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="65" x2="100" y1="288" y2="288" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+            if (player1Win) {
+                linesMatch.innerHTML += `
+                '<line x1="0" x2="33" y1="29" y2="29" stroke="rgb(255,226,146)" stroke-width="3"></line>'
+                '<line x1="32" x2="32" y1="29" y2="69" stroke="rgb(255,226,146)" stroke-width="3"></line>'
+                '<line x1="0" x2="33" y1="109" y2="109" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                '<line x1="32" x2="32" y1="109" y2="82" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML += `
+                '<line x1="0" x2="33" y1="29" y2="29" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                '<line x1="32" x2="32" y1="29" y2="56" stroke="rgb(102,102,102)" stroke-width="3"></line>'
+                '<line x1="0" x2="33" y1="109" y2="109" stroke="rgb(255,226,146)" stroke-width="3"></line>'
+                '<line x1="32" x2="32" y1="109" y2="69" stroke="rgb(255,226,146)" stroke-width="3"></line>'
+                `
+            }
+        } else if (bracketMatchID == 24) {
+            if (playerWin) {
+                linesMatch.innerHTML = `
+                <line x1="32" x2="66" y1="263" y2="263" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="65" x2="65" y1="263" y2="45" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="65" x2="100" y1="46" y2="46" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+
+            if (player1Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" x2="33" y1="223" y2="223" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="32" x2="32" y1="223" y2="263" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" x2="33" y1="303" y2="303" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="32" x2="32" y1="303" y2="276" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" x2="33" y1="223" y2="223" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="32" x2="32" y1="223" y2="250" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="0" x2="33" y1="303" y2="303" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="32" x2="32" y1="303" y2="263" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 `
             }
         }
