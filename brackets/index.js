@@ -208,7 +208,7 @@ const resetBracket = function() {
             currentSVG.innerHTML += '<line x1="0" y1="94.5" x2="13" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
         }
     }
-    // Loser Bracket Round 3
+    // Lower Bracket Round 3
     for (let i = 0; i < lowerBracketRound3Lines.childElementCount; i++) {
         let currentSVG = lowerBracketRound3Lines.children[i]
         currentSVG.innerHTML = ""
@@ -321,6 +321,12 @@ const pullResultsFromDatabase = () => {
         let player1osuID
         let player2osuID
 
+        // Conditions
+        if (matchObjects[i].matchPlayers.length != 2) continue
+        let playerEmpty = false
+        for (let j = 0; j < matchObjects[i].matchPlayers.length; j++) if (!matchObjects[i].matchPlayers[j].playerId) playerEmpty = true
+        if (playerEmpty) continue
+
         for (let j = 0; j < playerObjects.length; j++) {
             if (matchObjects[i].matchPlayers[0].playerId == playerObjects[j].id) {
                 player1 = currentMatch.children[0]
@@ -334,13 +340,6 @@ const pullResultsFromDatabase = () => {
         }
 
         let linesMatch = document.getElementById(`linesMatch${bracketMatchID}`)
-        console.log(bracketMatchID)
-
-        // Conditions
-        if (matchObjects[i].matchPlayers.length != 2) continue
-        let playerEmpty = false
-        for (let j = 0; j < matchObjects[i].matchPlayers.length; j++) if (!matchObjects[i].matchPlayers[j].playerId) playerEmpty = true
-        if (playerEmpty) continue
         
         // Enter in details for match        
         for (let j = 0; j < playerArray.length; j++) {
@@ -415,6 +414,7 @@ const pullResultsFromDatabase = () => {
         // Draw Lines and set names on new tiles
         // Winner Bracket Round 1
         if (playerWin) {
+            console.log(player1Win, player2Win)
             if (currentMatch.hasAttribute("winnerTo")) {
                 let winnerMatch = document.getElementById(currentMatch.getAttribute("winnerTo"))
                 winnerMatch.children[1].innerText = 0
@@ -438,20 +438,20 @@ const pullResultsFromDatabase = () => {
             }
         }
 
+        // TODO: Refactor for checking winner first.
         if (bracketMatchID <= 8) {
+            if (playerWin) linesMatch.innerHTML = `<line x1="31" x2="61" y1="48" y2="48" stroke="rgb(255,226,146)" stroke-width="3"></line>`
             if (player1Win) {
-                linesMatch.innerHTML = `
+                linesMatch.innerHTML += `
                 <line x1="0" x2="32" y1="21" y2="21" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="31" x2="31" y1="21" y2="49" stroke="rgb(255,226,146)" stroke-width="3"></line>
-                <line x1="31" x2="61" y1="48" y2="48" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="0" x2="32" y1="76" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>
                 <line x1="31" x2="31" y1="60" y2="76" stroke="rgb(102,102,102)" stroke-width="3"></line>
                 `
             } else if (player2Win) {
-                linesMatch.innerHTML = `
+                linesMatch.innerHTML += `
                 <line x1="0" x2="32" y1="21" y2="21" stroke="rgb(102,102,102)" stroke-width="3"></line>
                 <line x1="31" x2="31" y1="21" y2="37" stroke="rgb(102,102,102)" stroke-width="3"></line>
-                <line x1="31" x2="61" y1="48" y2="48" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="0" x2="32" y1="76" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="31" x2="31" y1="48" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>>
                 `
@@ -466,6 +466,23 @@ const pullResultsFromDatabase = () => {
                 linesMatch.innerHTML += `
                 <line x1="61" x2="61" y1="48" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="61" x2="95" y1="76" y2="76" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+        } else if (bracketMatchID <= 12) {
+            if (playerWin) linesMatch.innerHTML = '<line x1="21" y1="59" x2="44" y2="59" stroke="rgb(255,226,146)" stroke-width="3"></line>'
+            if (player1Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="22" y1="24.5" x2="22" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="22" y1="94.5" x2="22" y2="73" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="22" y1="24.5" x2="22" y2="47" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="22" y1="94.5" x2="22" y2="59" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 `
             }
         } else if (bracketMatchID == 13) {
@@ -559,6 +576,37 @@ const pullResultsFromDatabase = () => {
                 <line x1="0" x2="33" y1="203.25" y2="203.25" stroke="rgb(255,226,146)" stroke-width="3"></line>'
                 <line x1="32" x2="32" y1="203.25" y2="167.25" stroke="rgb(255,226,146)" stroke-width="3"></line>'
                 `
+            }
+        } else if (bracketMatchID <= 20) {
+            if (playerWin) {
+                linesMatch.innerHTML = `<line x1="12" y1="59" x2="24" y2="59" stroke="rgb(255,226,146)" stroke-width="3"></line>`
+                if (bracketMatchID % 2 == 0) {
+                    linesMatch.innerHTML += `
+                    <line x1="24" y1="58" x2="24" y2="111" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    <line x1="24" y1="110" x2="40" y2="110" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    `
+                } else {
+                    linesMatch.innerHTML += `
+                    <line x1="24" y1="59" x2="24" y2="16" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    <line x1="24" y1="17" x2="40" y2="17" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    `
+                }
+
+                if (player1Win) {
+                    linesMatch.innerHTML += `
+                    <line x1="0" y1="25.5" x2="13" y2="25.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    <line x1="12" y1="24.5" x2="12" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    <line x1="12" y1="94.5" x2="12" y2="73" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                    <line x1="0" y1="94.5" x2="13" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                    `
+                } else if (player2Win) {
+                    linesMatch.innerHTML += `
+                    <line x1="0" y1="25.5" x2="13" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                    <line x1="12" y1="24.5" x2="12" y2="47" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                    <line x1="12" y1="94.5" x2="12" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    <line x1="0" y1="94.5" x2="13" y2="94.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                    `
+                }
             }
         }
     }
