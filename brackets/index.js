@@ -718,6 +718,28 @@ const pullResultsFromDatabase = () => {
                 <line x1="14" y1="195.5" x2="14" y2="160" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 `
             }
+        } else if (bracketMatchID == 27) {
+            if (playerWin) {
+                linesMatch.innerHTML = `
+                <line x1="21" y1="59" x2="70" y2="59" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="69" y1="58" x2="69" y2="95.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+            if (player1Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="22" y1="24.5" x2="22" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="22" y1="94.5" x2="22" y2="73" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" y1="25.5" x2="23" y2="25.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="22" y1="24.5" x2="22" y2="47" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="22" y1="94.5" x2="22" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
         }
     }
 }

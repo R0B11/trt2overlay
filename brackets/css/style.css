@@ -378,6 +378,8 @@
     position: relative; left: 7px;
     width: 37px; height: 69px;
     line-height: 69px;
+    text-align: center;
+    font-family: 'IBM PLEX MONO'; font-size: 26px;
     background-color: var(--elementGray);
 }
 #match29Player1Score {
@@ -393,6 +395,8 @@
     border-radius: 5px;
     background-color: var(--elementGray);
     width: 33.5px; height: 23px;
+    background-position: 50%;
+    background-size: cover;
 }
 #match29Player1Flag { top: -274.5px; }
 #match29Player2Flag { top: -182px; }
@@ -410,6 +414,8 @@
     width: 45.5px; height: 45.5px;
     background-color: var(--elementGray);
     border-top: 2px solid var(--borderGray);
+    background-position: 50%;
+    background-size: cover;
 }
 #match29Player1ProfilePicture { top: -264.5px; }
 #match29Player2ProfilePicture { top: -520.5px; }
