@@ -168,12 +168,12 @@ const resetBracket = function() {
     winnerBracketRound4ResetLines.innerHTML += '<line x1="20" x2="20" y1="73.5" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound4ResetLines.innerHTML += '<line x1="20" x2="68" y1="73.5" y2="73.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound4ResetLines.innerHTML += '<line x1="67" x2="67" y1="73.5" y2="30" stroke="rgb(102,102,102)" stroke-width="3"></line>'
-    winnerBracketRound4ResetLines.innerHTML += '<line x1="67" x2="67" y1="92.25" y2="117" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound4ResetLines.innerHTML += '<line x1="0" x2="20" y1="116" y2="116" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound4ResetLines.innerHTML += '<line x1="20" x2="20" y1="116" y2="73.5" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     // Winner Bracket Round 5
     let winnerBracketRound5ResetLines = winnerBracketRound5Lines.children[0]
     winnerBracketRound5ResetLines.innerHTML = ""
+    winnerBracketRound5ResetLines.innerHTML += '<line x1="1" x2="1" y1="84" y2="63" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound5ResetLines.innerHTML += '<line x1="0" x2="100" y1="63" y2="63" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     winnerBracketRound5ResetLines.innerHTML += '<line x1="100" x2="100" y1="63" y2="0" stroke="rgb(102,102,102)" stroke-width="3"></line>'
     // Lower Bracket Round 1
@@ -412,10 +412,13 @@ const pullResultsFromDatabase = () => {
             player1.children[4].innerHTML = "<div class='flagAndProfilePictureOverlay'></div>"
         }
         // Draw Lines and set names on new tiles
-        // Winner Bracket Round 1
+        if (player1Win && bracketMatchID == 30) return
+        if (bracketMatchID == 30) console.log(playerWin)
         if (playerWin) {
+            console.log(currentMatch.hasAttribute("winnerTo"))
             if (currentMatch.hasAttribute("winnerTo")) {
                 let winnerMatch = document.getElementById(currentMatch.getAttribute("winnerTo"))
+                console.log(bracketMatchID)
                 winnerMatch.children[1].innerText = 0
                 winnerMatch.children[2].innerHTML = ""
                 winnerMatch.children[2].style.backgroundImage = getComputedStyle(winnerPlayerElement.children[2]).getPropertyValue("background-image")
@@ -738,6 +741,36 @@ const pullResultsFromDatabase = () => {
                 <line x1="22" y1="24.5" x2="22" y2="47" stroke="rgb(102,102,102)" stroke-width="3"></line>
                 <line x1="22" y1="94.5" x2="22" y2="60" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 <line x1="0" y1="94.5" x2="23" y2="94.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+        } else if (bracketMatchID == 28) {
+            if (playerWin) {
+                linesMatch.innerHTML = `
+                <line x1="20" x2="68" y1="73.5" y2="73.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="67" x2="67" y1="73.5" y2="30" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+            if (player1Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" x2="20" y1="31" y2="31" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="20" x2="20" y1="73.5" y2="31" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" x2="20" y1="116" y2="116" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="20" x2="20" y1="116" y2="86.5" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                `
+            } else if (player2Win) {
+                linesMatch.innerHTML += `
+                <line x1="0" x2="20" y1="31" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="20" x2="20" y1="60.5" y2="31" stroke="rgb(102,102,102)" stroke-width="3"></line>
+                <line x1="0" x2="20" y1="116" y2="116" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="20" x2="20" y1="116" y2="73.5" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                `
+            }
+        } else if (bracketMatchID == 30) {
+            if (player2Win) {
+                linesMatch.innerHTML += `
+                <line x1="1" x2="1" y1="84" y2="63" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="0" x2="100" y1="63" y2="63" stroke="rgb(255,226,146)" stroke-width="3"></line>
+                <line x1="100" x2="100" y1="63" y2="0" stroke="rgb(255,226,146)" stroke-width="3"></line>
                 `
             }
         }
