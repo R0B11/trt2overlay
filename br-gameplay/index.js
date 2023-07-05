@@ -106,25 +106,27 @@ let resetScores
 
 // Current Pool
 let allMaps
-let currentPool = []
 let poolInformationRequest = new XMLHttpRequest()
 poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
 poolInformationRequest.onreadystatechange = function() {
     if (this.status == 404) return
     if (this.readyState != 4) return
     allMaps = JSON.parse(this.responseText)
-    console.log(allMaps)
 }
 poolInformationRequest.send()
 
 // Calculate AR and OD
 let calculateARandOD = (baseNumber, mod) => {
     let newNumber = 0;
-    if (mod.toLowerCase().includes("hr")) newNumber = baseNumber *= 1.4
+    if (mod.toLowerCase().includes("hr")) {
+        newNumber = baseNumber *= 1.4
+        if (newNumber > 10) newNumber = 10
+    }
     else if (mod.toLowerCase().includes("dt")) {
         if (baseNumber <= 5) newNumber = (1800-((1800 - baseNumber)*2/3))/120
         else newNumber = ((1200-((1200-(baseNumber-5)*150)*2/3))/150)+5
     } else newNumber = baseNumber
+
     return newNumber
 }
 
@@ -148,17 +150,17 @@ socket.onmessage = event => {
         poolMapFound = false
         mapModSlot.css("display", "none")
 
-        for (let i = 0; i < currentPool.length; i++) {
-            if (currentPool[i].osuMapId == currentSongID) {
+        for (let i = 0; i < allMaps.length; i++) {
+            if (allMaps[i].osuMapId == currentSongID) {
                 poolMapFound = true
                 mapModSlot.css("display","block")
-                // mapModSlot.text(currentPool[i].)
-                currentSR = currentPool[i].postModSr
+                mapModSlot.text(allMaps[i].mod)
+                currentSR = allMaps[i].postModSr
                 animation.SRStat.update(currentSR)
 
                 // Map Mod Slot Color
                 currentMapMod = currentPool[i].mod.toUpperCase().slice(0,2)
-                switch (currentMapMod) {
+                switch (currentMapMod.toUpperCase()) {
                     case "NM": mapModSlot.css("background-color","#919191")
                     case "HD": mapModSlot.css("background-color","#ffc728")
                     case "HR": mapModSlot.css("background-color","#f4154b")
@@ -168,65 +170,97 @@ socket.onmessage = event => {
                 }
                 
                 // Need to see metadata format before adding it in
+                // AR
+                currentBaseAR = allMaps[i].metadata.diff_approach
+                animation.mapStatNumberAR.update(currentAR)
+                // OD
+                currentBaseOD = allMaps[i].metadata.diff_overall
+                animation.mapStatNumberOD.update(currentOD)
+                // CS
+                currentBaseCS = allMaps[i].metadata.diff_size
+                animation.mapStatNumberCS.update(currentCS)
+                // BPM
+                currentBaseBPM = allMaps[i].metadata.bpm
+                animation.mapStatNumberBPM.update(currentBPM)
+                // Song Title and Artist
+                currentSongArtist = allMaps[i].metadata.artist
+                currentSongName = allMaps[i].metadata.title
+                currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
+                
+                if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
+                else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
+                // Difficulty
+                currentSongDifficulty = allMaps[i].metadata.version
+                currentMapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+                // Set Creator
+                currentSongSetCreator = allMaps[i].metadata.creator
+                currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+                // Set / BG
+                currentSongSetID = allMaps[i].metadata.beatmapset_id
+                topBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
+                break
             }
         }
     }
 
-    // SR
-    if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
-        currentSR = data.menu.bm.stats.SR
-        animation.SRStat.update(currentSR)
+    if (!poolMapFound) {
+            // SR
+        if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
+            currentSR = data.menu.bm.stats.SR
+            animation.SRStat.update(currentSR)
+        }
+        // AR
+        if (currentBaseAR != data.menu.bm.stats.AR) {
+            currentBaseAR = data.menu.bm.stats.AR
+            currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
+            animation.mapStatNumberAR.update(currentAR)
+        }
+        // OD
+        if ( currentBaseOD != data.menu.bm.stats.OD) {
+            currentBaseOD = data.menu.bm.stats.OD
+            currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
+            animation.mapStatNumberOD.update(currentOD)
+        }
+        // CS
+        if (currentBaseCS != data.menu.bm.stats.CS) {
+            currentBaseCS = data.menu.bm.stats.CS
+            if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
+            else currentCS = currentBaseCS
+            animation.mapStatNumberCS.update(currentCS)
+        }
+        // BPM
+        if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
+            currentBaseBPM = data.menu.bm.stats.BPM.min
+            currentBPM = (currentMapMod.toLowerCase().includes("dt"))? currentBaseBPM *= 1.5 : currentBaseBPM
+            animation.mapStatNumberBPM.update(currentBPM)
+        }
+        // Song Title and Artist
+        if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
+            currentSongArtist = data.menu.bm.metadata.artist
+            currentSongName = data.menu.bm.metadata.title
+            currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
+
+            if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
+            else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
+        }
+        // Diff Name
+        if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
+            currentSongDifficulty = data.menu.bm.metadata.difficulty
+            currentMapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+        }
+        // Set Creator Name
+        if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
+            currentSongSetCreator = data.menu.bm.metadata.mapper
+            currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+        }
+        // Set / BG
+        if (currentSongSetID != data.menu.bm.set) {
+            currentSongSetID = data.menu.bm.set
+            topBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
+        }
     }
-    // AR
-    if (currentBaseAR != data.menu.bm.stats.AR) {
-        currentBaseAR = data.menu.bm.stats.AR
-        currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
-        animation.mapStatNumberAR.update(currentAR)
-    }
-    // OD
-    if ( currentBaseOD != data.menu.bm.stats.OD) {
-        currentBaseOD = data.menu.bm.stats.OD
-        currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
-        animation.mapStatNumberOD.update(currentOD)
-    }
-    // CS
-    if (currentBaseCS != data.menu.bm.stats.CS) {
-        currentBaseCS = data.menu.bm.stats.CS
-        if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
-        else currentCS = currentBaseCS
-        animation.mapStatNumberCS.update(currentCS)
-    }
-    // BPM
-    if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
-        currentBaseBPM = data.menu.bm.stats.BPM.min
-        if (currentMapMod.toLowerCase().includes("dt")) currentBaseBPM *= 1.5
-        else currentBPM = currentBaseBPM
-        animation.mapStatNumberBPM.update(currentBPM)
-    }
-    // Song Title and Artist
-    if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
-        currentSongArtist = data.menu.bm.metadata.artist
-        currentSongName = data.menu.bm.metadata.title
-        currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
-        
-        if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
-        else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
-    }
-    // Diff Name
-    if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
-        currentSongDifficulty = data.menu.bm.metadata.difficulty
-        currentMapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
-    }
-    // Set Creator Name
-    if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
-        currentSongSetCreator = data.menu.bm.metadata.mapper
-        currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
-    }
-    // Set / BG
-    if (currentSongSetID != data.menu.bm.set) {
-        currentSongSetID = data.menu.bm.set
-        topBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
-    }
+
+
 
     // Update all player details
     if (userID0 != data.tourney.ipcClients[0].spectating.userID) {
@@ -241,42 +275,42 @@ socket.onmessage = event => {
         player1.userID = userID1
         player1.username = data.tourney.ipcClients[1].spectating.name
     }
-    if (userID2 != data.tourney.ipcClients[2].spectating.userID) {
-        userID2 = data.tourney.ipcClients[2].spectating.userID
-        arrayOfIDs[2] = userID2
-        player2.userID = userID2
-        player2.username = data.tourney.ipcClients[2].spectating.name
-    }
-    if (userID3 != data.tourney.ipcClients[3].spectating.userID) {
-        userID3 = data.tourney.ipcClients[3].spectating.userID
-        arrayOfIDs[3] = userID3
-        player3.userID = userID3
-        player3.username = data.tourney.ipcClients[3].spectating.name
-    }
-    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-        userID4 = data.tourney.ipcClients[4].spectating.userID
-        arrayOfIDs[4] = userID4
-        player4.userID = userID4
-        player4.username = data.tourney.ipcClients[4].spectating.name
-    }
-    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-        userID5 = data.tourney.ipcClients[5].spectating.userID
-        arrayOfIDs[5] = userID5
-        player5.userID = userID5
-        player5.username = data.tourney.ipcClients[5].spectating.name
-    }
-    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-        userID6 = data.tourney.ipcClients[6].spectating.userID
-        arrayOfIDs[6] = userID6
-        player6.userID = userID6
-        player6.username = data.tourney.ipcClients[6].spectating.name
-    }
-    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-        userID7 = data.tourney.ipcClients[7].spectating.userID
-        arrayOfIDs[7] = userID7
-        player7.userID = userID7
-        player7.username = data.tourney.ipcClients[7].spectating.name
-    }
+    // if (userID2 != data.tourney.ipcClients[2].spectating.userID) {
+    //     userID2 = data.tourney.ipcClients[2].spectating.userID
+    //     arrayOfIDs[2] = userID2
+    //     player2.userID = userID2
+    //     player2.username = data.tourney.ipcClients[2].spectating.name
+    // }
+    // if (userID3 != data.tourney.ipcClients[3].spectating.userID) {
+    //     userID3 = data.tourney.ipcClients[3].spectating.userID
+    //     arrayOfIDs[3] = userID3
+    //     player3.userID = userID3
+    //     player3.username = data.tourney.ipcClients[3].spectating.name
+    // }
+    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+    //     userID4 = data.tourney.ipcClients[4].spectating.userID
+    //     arrayOfIDs[4] = userID4
+    //     player4.userID = userID4
+    //     player4.username = data.tourney.ipcClients[4].spectating.name
+    // }
+    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+    //     userID5 = data.tourney.ipcClients[5].spectating.userID
+    //     arrayOfIDs[5] = userID5
+    //     player5.userID = userID5
+    //     player5.username = data.tourney.ipcClients[5].spectating.name
+    // }
+    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+    //     userID6 = data.tourney.ipcClients[6].spectating.userID
+    //     arrayOfIDs[6] = userID6
+    //     player6.userID = userID6
+    //     player6.username = data.tourney.ipcClients[6].spectating.name
+    // }
+    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+    //     userID7 = data.tourney.ipcClients[7].spectating.userID
+    //     arrayOfIDs[7] = userID7
+    //     player7.userID = userID7
+    //     player7.username = data.tourney.ipcClients[7].spectating.name
+    // }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers
