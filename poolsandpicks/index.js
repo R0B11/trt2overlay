@@ -4,6 +4,8 @@ window.addEventListener('contextmenu', (e) => e.preventDefault());
 // let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
 let user = {};
 
+let currentRound
+
 // // NOW PLAYING
 // let mapContainer = document.getElementById('mapContainer');
 // let mapArtist = document.getElementById('mapName');
@@ -66,6 +68,12 @@ const teams = {
 //     console.log('Socket Error: ', error);
 // };
 
+window.setInterval(() => {
+    let cookieName = "roundName"
+    let match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match && currentRound != match[1]) setRound(match[1])
+}, 500)
+
 function removeTiles() {
     $(".mapCard").remove();
 }
@@ -77,13 +85,17 @@ function setRound(round){
             bestOf = 9;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
-        case "F": case "GF": case "BR-GF":
+        case "F": case "GF": case "BR1v1":
             banNum = 2;
             bestOf = 13;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break
         default:
             break;
+    }
+
+    if (currentRound != round) {
+        currentRound = round
     }
 }
 
