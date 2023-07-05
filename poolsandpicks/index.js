@@ -72,31 +72,16 @@ function removeTiles() {
 
 function setRound(round){
     switch (round) {
-        case "R16":
+        case "RO16": case "QF": case "SF":
             banNum = 1;
             bestOf = 9;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
-        case "QF":
-            banNum = 1;
-            bestOf = 9;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "SF":
+        case "F": case "GF": case "BR-GF":
             banNum = 2;
             bestOf = 13;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "F":
-            banNum = 2;
-            bestOf = 13;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "GF":
-            banNum = 2;
-            bestOf = 13;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;           
+            break
         default:
             break;
     }
