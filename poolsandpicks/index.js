@@ -35,6 +35,21 @@ let currentPlayerBlueName
 let currentPlayerBlueCountry
 let currentPlayerBlueRank
 
+function displayPlayerFlag(country, element) {
+    switch (country) {
+        case "Australia": element.attr("src","static/flags/AU.png"); break;
+        case "Canada": element.attr("src","static/flags/CA.png"); break;
+        case "China": element.attr("src","static/flags/CN.png"); break;
+        case "Hong Kong": element.attr("src","static/flags/HK.png"); break;
+        case "South Korea": element.attr("src","static/flags/KR.png"); break;
+        case "Poland": element.attr("src","static/flags/PL.png"); break;
+        case "United Kingdom": element.attr("src","static/flags/UK.png"); break;
+        case "Great Britain": element.attr("src","static/flags/UK.png"); break;
+        case "United States": element.attr("src","static/flags/US.png"); break;
+        default: element.attr("src","static/flags/blank.png"); break;
+    }
+}
+
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
     console.log(data)
@@ -62,6 +77,17 @@ socket.onmessage = event => {
         currentPlayerBlueName = data.tourney.ipcClients[1].spectating.name
         playerCardPlayerNameBlue.text(currentPlayerBlueName)
     }
+    // Player Flag
+    if (currentPlayerRedCountry != data.tourney.ipcClients[0].spectating.country) {
+        currentPlayerRedCountry = data.tourney.ipcClients[0].spectating.country
+        displayPlayerFlag(currentPlayerRedCountry, playerCardPlayerCountryFlagRed)
+    }
+    if (currentPlayerBlueCountry != data.tourney.ipcClients[1].spectating.country) {
+        currentPlayerBlueCountry = data.tourney.ipcClients[1].spectating.country
+        displayPlayerFlag(currentPlayerBlueCountry, playerCardPlayerCountryFlagBlue)
+    }
+
+
     // Star Generation
     if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
         currentMatchScoreRed != data.tourney.manager.stars.left ||
