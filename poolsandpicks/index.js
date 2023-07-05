@@ -607,6 +607,12 @@ function viewMappool () {
         right: '40px',
         opacity: '1'
     }, 1000, 'easeInOutQuart'); 
+    $(".whileLine").animate({
+        opacity: '0'
+    }, 1000, 'easeInOutQuart');
+    $("#tiebreakerCard").animate({
+        opacity: '0'
+    }, 1000, 'easeInOutQuart');
 
     
 }
@@ -624,6 +630,12 @@ function viewPicks () {
     // $("#pickBans").animate({
     //     opacity: '1'
     // }, 500, 'easeInOutQuart');
+    $(".whiteLine").animate({
+        opacity: '1'
+    }, 1000, 'easeInOutQuart');
+    $("#tiebreakerCard").animate({
+        opacity: '1'
+    }, 1000, 'easeInOutQuart');
     
 
 }
