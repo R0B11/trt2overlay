@@ -1,8 +1,145 @@
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 
 // START
-// let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
+let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
+
+socket.onopen = async () => console.log('Successfully Connected')
+socket.onclose = (event) => {
+    console.log('Socket Closed Connection: ', event);
+    socket.send('Client Closed!');
+}
+socket.onerror = (error) => console.log('Socket Error: ', error)
+
+// Match scores
+matchScoresRed = $("#matchScoresRed")
+matchScoresBlue = $("#matchScoresBlue")
+let currentBestOf
+let currentMatchScoreRed
+let currentMatchScoreBlue
+
+// Player Details
+let playerCardPlayerProfilePictureRed = $("#playerCardPlayerProfilePictureRed")
+let playerCardPlayerNameRed = $("#playerCardPlayerNameRed")
+let playerCardPlayerCountryFlagRed = $("#playerCardPlayerCountryFlagRed")
+let playerCardPlayerRankRed = $("#playerCardPlayerRankRed")
+let playerCardPlayerProfilePictureBlue = $("#playerCardPlayerProfilePictureBlue")
+let playerCardPlayerNameBlue = $("#playerCardPlayerNameBlue")
+let playerCardPlayerCountryFlagBlue = $("#playerCardPlayerCountryFlagBlue")
+let playerCardPlayerRankBlue = $("#playerCardPlayerRankBlue")
+let currentPlayerRedID
+let currentPlayerRedName
+let currentPlayerRedCountry
+let currentPlayerRedRank
+let currentPlayerBlueID
+let currentPlayerBlueName
+let currentPlayerBlueCountry
+let currentPlayerBlueRank
+
+function displayPlayerFlag(country, element) {
+    switch (country) {
+        case "Australia": element.attr("src","static/flags/AU.png"); break;
+        case "Canada": element.attr("src","static/flags/CA.png"); break;
+        case "China": element.attr("src","static/flags/CN.png"); break;
+        case "Hong Kong": element.attr("src","static/flags/HK.png"); break;
+        case "South Korea": element.attr("src","static/flags/KR.png"); break;
+        case "Poland": element.attr("src","static/flags/PL.png"); break;
+        case "United Kingdom": element.attr("src","static/flags/UK.png"); break;
+        case "Great Britain": element.attr("src","static/flags/UK.png"); break;
+        case "United States": element.attr("src","static/flags/US.png"); break;
+        default: element.attr("src","static/flags/blank.png"); break;
+    }
+}
+
+socket.onmessage = event => {
+    let data = JSON.parse(event.data)
+    console.log(data)
+
+    // Player Details Update
+    // Profile Picture
+    if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
+        currentPlayerRedID = data.tourney.ipcClients[0].spectating.userID
+        playerCardPlayerProfilePictureRed.attr("src",`https://a.ppy.sh/${currentPlayerRedID}`)
+        if (currentPlayerRedID == 0) playerCardPlayerProfilePictureRed.css("display", "none")
+        else playerCardPlayerProfilePictureRed.css("display", "block")
+    }
+    if (currentPlayerBlueID != data.tourney.ipcClients[1].spectating.userID) {
+        currentPlayerBlueID = data.tourney.ipcClients[1].spectating.userID
+        playerCardPlayerProfilePictureBlue.attr("src",`https://a.ppy.sh/${currentPlayerBlueID}`)
+        if (currentPlayerBlueID == 0) playerCardPlayerProfilePictureBlue.css("display", "none")
+        else playerCardPlayerProfilePictureBlue.css("display", "block")
+    }
+    // Player Name
+    if (currentPlayerRedName != data.tourney.ipcClients[0].spectating.name) {
+        currentPlayerRedName = data.tourney.ipcClients[0].spectating.name
+        playerCardPlayerNameRed.text(currentPlayerRedName)
+    }
+    if (currentPlayerBlueName != data.tourney.ipcClients[1].spectating.name) {
+        currentPlayerBlueName = data.tourney.ipcClients[1].spectating.name
+        playerCardPlayerNameBlue.text(currentPlayerBlueName)
+    }
+    // Player Flag
+    if (currentPlayerRedCountry != data.tourney.ipcClients[0].spectating.country) {
+        currentPlayerRedCountry = data.tourney.ipcClients[0].spectating.country
+        displayPlayerFlag(currentPlayerRedCountry, playerCardPlayerCountryFlagRed)
+    }
+    if (currentPlayerBlueCountry != data.tourney.ipcClients[1].spectating.country) {
+        currentPlayerBlueCountry = data.tourney.ipcClients[1].spectating.country
+        displayPlayerFlag(currentPlayerBlueCountry, playerCardPlayerCountryFlagBlue)
+    }
+    // Player Rank
+    if (currentPlayerRedRank != data.tourney.ipcClients[0].spectating.globalRank) {
+        currentPlayerRedRank = data.tourney.ipcClients[0].spectating.globalRank
+        playerCardPlayerRankRed.text(`#${currentPlayerRedRank}`)
+    }
+    if (currentPlayerBlueRank != data.tourney.ipcClients[1].spectating.globalRank) {
+        currentPlayerBlueRank = data.tourney.ipcClients[1].spectating.globalRank
+        playerCardPlayerRankBlue.text(`#${currentPlayerBlueRank}`)
+    }
+
+    // Star Generation
+    if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
+        currentMatchScoreRed != data.tourney.manager.stars.left ||
+        currentMatchScoreBlue != data.tourney.manager.stars.right) {
+            
+        currentBestOf = Math.ceil(data.tourney.manager.bestOF / 2)
+        currentMatchScoreRed = data.tourney.manager.stars.left
+        currentMatchScoreBlue = data.tourney.manager.stars.right
+        matchScoresRed.html("")
+        matchScoresBlue.html("")
+        // Left Stars
+        let i = 0
+        for (i; i < currentMatchScoreRed; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            matchScoresRed.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/redStar.png")
+            matchScoresRed.append(imgStar)
+        }
+        // Right Stars
+        i = 0;
+        for (i; i < currentMatchScoreBlue; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/whiteStar.png")
+            matchScoresBlue.append(imgStar)
+        }
+        for (i; i < currentBestOf; i++) {
+            let imgStar = document.createElement("img")
+            imgStar.classList.add("matchScoreSword")
+            imgStar.setAttribute("src", "static/blueStar.png")
+            matchScoresBlue.append(imgStar)
+        }
+    }
+}
+
 let user = {};
+
+let currentRound
 
 // // NOW PLAYING
 // let mapContainer = document.getElementById('mapContainer');
@@ -53,18 +190,11 @@ const teams = {
     }
 };
 
-// socket.onopen = async () => {
-//     console.log('Successfully Connected');
-// };
-
-// socket.onclose = (event) => {
-//     console.log('Socket Closed Connection: ', event);
-//     socket.send('Client Closed!');
-// };
-
-// socket.onerror = (error) => {
-//     console.log('Socket Error: ', error);
-// };
+window.setInterval(() => {
+    let cookieName = "roundName"
+    let match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match && currentRound != match[1]) setRound(match[1])
+}, 500)
 
 function removeTiles() {
     $(".mapCard").remove();
@@ -72,34 +202,25 @@ function removeTiles() {
 
 function setRound(round){
     switch (round) {
-        case "R16":
+        case "RO16": case "QF": case "SF":
             banNum = 1;
             bestOf = 9;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
-        case "QF":
-            banNum = 1;
-            bestOf = 9;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "SF":
+        case "F": case "GF": case "BR1v1":
             banNum = 2;
             bestOf = 13;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "F":
-            banNum = 2;
-            bestOf = 13;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "GF":
-            banNum = 2;
-            bestOf = 13;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;           
+            break
         default:
             break;
     }
+
+    if (currentRound != round) {
+        currentRound = round
+    }
+
+    document.cookie = `roundName=${round}; path=/`
 }
 
 function banOrder(ban){

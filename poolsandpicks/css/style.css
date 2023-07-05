@@ -91,7 +91,7 @@ html {
 .playerCardPlayerCountryFlag {
     position: absolute; top: 117px;
     background-color: black;
-    width: 65px; height: 33px;
+    width: 67px; height: 33px;
     border-radius: 7px;
 }
 
@@ -232,7 +232,7 @@ html {
 
 .mapCardContent {
     position: absolute;
-    background-image:;
+    /* background-image:; */
     background-position: center;
     background-size: cover;
     opacity: 1;
