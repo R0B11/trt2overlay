@@ -97,6 +97,8 @@ function setRound(round){
     if (currentRound != round) {
         currentRound = round
     }
+
+    document.cookie = `roundName=${round}; path=/`
 }
 
 function banOrder(ban){
