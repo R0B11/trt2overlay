@@ -11,6 +11,7 @@ socket.onerror = error => console.log("Socket Error: ", error)
 let nowPlayingSongArtist = $("#nowPlayingSongArtist")
 let currentSongName
 let currentArtistName
+let matchObjects
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
@@ -21,6 +22,8 @@ socket.onmessage = event => {
         nowPlayingSongArtist.text(`${currentArtistName.toUpperCase()} - ${currentSongName.toUpperCase()}`)
     }
 }
+
+let baseAddress = "http://localhost:5280"
 
 // Brackets
 let upperBracket = $("#upperBracket")
@@ -280,24 +283,31 @@ const playerArray = [
 // Player Table workaround
 let playerObjects
 let playersRequest = new XMLHttpRequest()
-playersRequest.open("GET", "https://trt2.btmc.live/api/players/all")
-playersRequest.onload = function() {
-    if (this.status == 404) return
-    if (this.status == 200) playerObjects = JSON.parse(this.responseText)
+async function sendPlayerRequest() {
+    playersRequest.open("GET", `${baseAddress}/api/players/all`)
+    playersRequest.onload = function() {
+        if (this.status == 404) return
+        if (this.status == 200) playerObjects = JSON.parse(this.responseText)
+    }
+    await playersRequest.send()
 }
-playersRequest.send()
+sendPlayerRequest()
 
-const pullResultsFromDatabase = () => {
+const pullResultsFromDatabase = async () => {
     resetBracket()
     
     // Pull Matches from API
-    let matchesRequest = new XMLHttpRequest()
-    matchesRequest.open("GET", "https://trt2.btmc.live/api/matches/all",false)
-    matchesRequest.onload = function() {
-        if (this.status == 404) return
-        if (this.status == 200) matchObjects = JSON.parse(this.responseText)
+    async function sendMatchRequest() {
+        let matchesRequest = new XMLHttpRequest()
+        matchesRequest.open("GET", `${baseAddress}/api/matches/all`, false)
+        matchesRequest.onload = function() {
+            if (this.status >= 400) return
+            if (this.status == 200) matchObjects = JSON.parse(this.responseText)
+        }
+        await matchesRequest.send()
     }
-    matchesRequest.send()
+    await sendMatchRequest()
+
     matchObjects.sort((a,b) => a.match.bracketMatchId - b.match.bracketMatchId)
 
     for (let i = 0; i < matchObjects.length; i++)  {
