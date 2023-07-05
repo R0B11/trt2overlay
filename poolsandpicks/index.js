@@ -17,9 +17,42 @@ let currentBestOf
 let currentMatchScoreRed
 let currentMatchScoreBlue
 
+// Player Details
+let playerCardPlayerProfilePictureRed = $("#playerCardPlayerProfilePictureRed")
+let playerCardPlayerNameRed = $("#playerCardPlayerNameRed")
+let playerCardPlayerCountryFlagRed = $("#playerCardPlayerCountryFlagRed")
+let playerCardPlayerRankRed = $("#playerCardPlayerRankRed")
+let playerCardPlayerProfilePictureBlue = $("#playerCardPlayerProfilePictureBlue")
+let playerCardPlayerNameBlue = $("#playerCardPlayerNameBlue")
+let playerCardPlayerCountryFlagBlue = $("#playerCardPlayerCountryFlagBlue")
+let playerCardPlayerRankBlue = $("#playerCardPlayerRankBlue")
+let currentPlayerRedID
+let currentPlayerRedName
+let currentPlayerRedCountry
+let currentPlayerRedRank
+let currentPlayerBlueID
+let currentPlayerBlueName
+let currentPlayerBlueCountry
+let currentPlayerBlueRank
+
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
     console.log(data)
+
+    // Player Details Update
+    // Profile Picture
+    if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
+        currentPlayerRedID = data.tourney.ipcClients[0].spectating.userID
+        playerCardPlayerProfilePictureRed.attr("src",`https://a.ppy.sh/${currentPlayerRedID}`)
+        if (currentPlayerRedID == 0) playerCardPlayerProfilePictureRed.css("display", "none")
+        else playerCardPlayerProfilePictureRed.css("display", "block")
+    }
+    if (currentPlayerBlueID != data.tourney.ipcClients[1].spectating.userID) {
+        currentPlayerBlueID = data.tourney.ipcClients[1].spectating.userID
+        playerCardPlayerProfilePictureBlue.attr("src",`https://a.ppy.sh/${currentPlayerBlueID}`)
+        if (currentPlayerBlueID == 0) playerCardPlayerProfilePictureBlue.css("display", "none")
+        else playerCardPlayerProfilePictureBlue.css("display", "block")
+    }
 
     // Star Generation
     if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
