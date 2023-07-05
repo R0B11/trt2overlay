@@ -53,7 +53,15 @@ socket.onmessage = event => {
         if (currentPlayerBlueID == 0) playerCardPlayerProfilePictureBlue.css("display", "none")
         else playerCardPlayerProfilePictureBlue.css("display", "block")
     }
-
+    // Player Name
+    if (currentPlayerRedName != data.tourney.ipcClients[0].spectating.name) {
+        currentPlayerRedName = data.tourney.ipcClients[0].spectating.name
+        playerCardPlayerNameRed.text(currentPlayerRedName)
+    }
+    if (currentPlayerBlueName != data.tourney.ipcClients[1].spectating.name) {
+        currentPlayerBlueName = data.tourney.ipcClients[1].spectating.name
+        playerCardPlayerNameBlue.text(currentPlayerBlueName)
+    }
     // Star Generation
     if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
         currentMatchScoreRed != data.tourney.manager.stars.left ||
