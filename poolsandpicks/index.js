@@ -1,7 +1,7 @@
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 
 // START
-let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
+// let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
 let user = {};
 
 // // NOW PLAYING
@@ -53,41 +53,49 @@ const teams = {
     }
 };
 
-socket.onopen = async () => {
-    console.log('Successfully Connected');
-};
+// socket.onopen = async () => {
+//     console.log('Successfully Connected');
+// };
 
-socket.onclose = (event) => {
-    console.log('Socket Closed Connection: ', event);
-    socket.send('Client Closed!');
-};
+// socket.onclose = (event) => {
+//     console.log('Socket Closed Connection: ', event);
+//     socket.send('Client Closed!');
+// };
 
-socket.onerror = (error) => {
-    console.log('Socket Error: ', error);
-};
+// socket.onerror = (error) => {
+//     console.log('Socket Error: ', error);
+// };
 
+function removeTiles() {
+    $(".mapCard").remove();
+}
 
 function setRound(round){
     switch (round) {
         case "R16":
             banNum = 1;
             bestOf = 9;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
         case "QF":
             banNum = 1;
             bestOf = 9;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
         case "SF":
             banNum = 2;
             bestOf = 13;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
         case "F":
             banNum = 2;
             bestOf = 13;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
         case "GF":
             banNum = 2;
             bestOf = 13;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;           
         default:
             break;
@@ -99,11 +107,13 @@ function banOrder(ban){
     if (ban == "blue") {
         $("#redFirstBanText").css("color","var(--grayPickBanTextColour)");
         $("#blueFirstBanText").css("color","var(--bluePlayerCardColour)");
+        $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
         return;
     }
 
     $("#blueFirstBanText").css("color","var(--grayPickBanTextColour)");
     $("#redFirstBanText").css("color","var(--redPlayerCardColour)");
+    $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
 }
 
 function pickOrder(pick){
@@ -111,13 +121,19 @@ function pickOrder(pick){
     if (pick == "blue") {
         $("#redFirstPickText").css("color","var(--grayPickBanTextColour)");
         $("#blueFirstPickText").css("color","var(--bluePlayerCardColour)");
+
+        $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`);
         return;
     } 
     $("#blueFirstPickText").css("color","var(--grayPickBanTextColour)");
     $("#redFirstPickText").css("color","var(--redPlayerCardColour)");
+
+    $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`)
+
 }
 
-function generateTiles(pick, ban, banNum, bestOf) {
+function generateTiles() {
+    $(".mapCard").remove();
     for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
@@ -255,7 +271,7 @@ function generateTiles(pick, ban, banNum, bestOf) {
     }
 
     // Placing the correct ban card first based on first ban
-    if ( ban == 'blue' ){
+    if ( firstBan == 'blue' ){
         // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {
             $("#blueBanArea").css({
@@ -281,7 +297,8 @@ function generateTiles(pick, ban, banNum, bestOf) {
         }
     }
     // Do the same, but red bans first
-    else if ( ban == 'red' ){
+    else {
+        console.log("working")
         // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {  
             $("#blueBanArea").css({
@@ -298,6 +315,7 @@ function generateTiles(pick, ban, banNum, bestOf) {
         }
         // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
+            $(".banArea").css("width","var(--two-bans-width)");
             $("#redBanArea").css("justify-content","space-between");
             $("#blueBanArea").css("justify-content","center");
             // Hide Bans until they need to be shown
@@ -321,19 +339,22 @@ function generateTiles(pick, ban, banNum, bestOf) {
         $("#redPicksBans").css("justify-content", "center");
         $("#bluePicksBans").css("justify-content", "center");
         // Better margins for less picks
-        if (pick == "blue") { $(`.pickCardRed`).css("left","65px"); }
-        else if (pick == "red") { $(`.pickCardBlue`).css("left","65px"); }
+        if (firstPick == "blue") { $(`.pickCardRed`).css("left","65px"); }
+        else if (firstPick == "red") { $(`.pickCardBlue`).css("left","65px"); }
         // Change TB position
         $("#tiebreakerCard").css("right", "120px");
         // Adjust line as well
         $(".whiteLine").css("width", "1700px");
     }
     else {
+        $(".whiteLine").css("width","1700px");
+        $("#tiebreakerCard").css("right","40px");
+        $(".pickArea").css("width","1000px");
         $(".pickCardBlue").css("left", "0px");
         $(".pickCardRed").css("left", "0px");
         // Placing the first pick properly in the timeline
-        if (pick == "blue") { $(`.pickCardRed`).css("left","55px"); }
-        else if (pick == "red") { $(`.pickCardBlue`).css("left","55px"); }
+        if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
+        else if (firstPick == "red") { $(`.pickCardBlue`).css("left","55px"); }
     }
     
 }
@@ -351,10 +372,6 @@ function mapBan(){
         "background-color": "var(--red)"
     });
     $("#redBan0 #map-slot-block #mapslottext").html("HR1");
-}
-
-function mapPick(){
-
 }
 
 class Beatmap {
@@ -422,7 +439,7 @@ class Beatmap {
     }
 }
 
-socket.onmessage = async (event) => {
+// socket.onmessage = async (event) => {
     // let data = JSON.parse(event.data);
 
     // if (!hasSetup) setupBeatmaps();
@@ -451,7 +468,7 @@ socket.onmessage = async (event) => {
     //     tempHP = data.menu.bm.stats.HP;
     //     tempSR = data.menu.bm.stats.fullSR;
     // }
-};
+// };
 
 async function setupBeatmaps() {
     hasSetup = true;
@@ -581,9 +598,34 @@ function getDataSet(stored_beatmaps, beatmap_id) {
     return beatmap || null;
 };
 
+function viewMappool () {
+    $("#pickBans").animate({
+        opacity: '0',
+        left: '-1920px'
+    }, 1000, 'easeInOutQuart');
+    $("#mappoolDisplay").animate({
+        right: '40px',
+        opacity: '1'
+    }, 1000, 'easeInOutQuart'); 
 
-pickOrder("blue");
-banOrder("blue");
-setRound("QF");
-generateTiles(firstPick, firstBan, banNum, bestOf);
+    
+}
 
+function viewPicks () {
+    $("#mappoolDisplay").animate({
+        right: '-1340px',
+        opacity: '0'
+    }, 1000, 'easeInOutQuart');
+
+    $("#pickBans").animate({
+        left: '0px',
+        opacity: '1'
+    }, 1000, 'easeInOutQuart');
+    // $("#pickBans").animate({
+    //     opacity: '1'
+    // }, 500, 'easeInOutQuart');
+    
+
+}
+
+setupBeatmaps();

@@ -11,10 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
     <div id="main">
-        <video  id="main" autoplay loop src="./static/mappoolscene.webm"></video>
+        <!-- <video  id="main" autoplay loop src="./static/mappoolscene.webm"></video> -->
         <!-- Left side -->
         <section id="leftSide">
             <!-- Top Side -->
@@ -91,8 +92,7 @@
                 </div>
             </section>
         </section>
-        <button onclick="mapBan()">Ban Map</button>
-        <button onclick="mapPick()">Pick Map</button>
+
         <img class="circle" src="https://a.ppy.sh/12455868">
         <!-- Right Side -->
         <section id="rightSide">
@@ -131,7 +131,33 @@
         </section>
         <!-- Control Panel -->
         <section id="controlPanel">
+            <section class="buttonBox">
+               <div id="ctrlRoundText" class="boxText">Select round:</div> 
+               <button onclick="setRound('R16')" class="button defaultButton">R16</button>
+               <button onclick="setRound('QF')" class="button defaultButton">QF</button>
+               <button onclick="setRound('SF')" class="button defaultButton">SF</button>
+               <button onclick="setRound('F')" class="button defaultButton">F</button>
+               <button onclick="setRound('GF')" class="button defaultButton">GF</button>
+            </section>
+            <section class="buttonBox">
+                <div id="ctrlBanText" class="boxText">Select 1st Ban:</div>
+                <button onclick="banOrder('red')" class="button redButton">Red</button>
+                <button onclick="banOrder('blue')" class="button blueButton">Blue</button>
 
+                <div id="ctrlPickText" class="boxText">Select 1st Pick:</div>
+                <button onclick="pickOrder('red')" class="button redButton">Red</button>
+                <button onclick="pickOrder('blue')" class="button blueButton">Blue</button>
+            </section>
+            <section id="secondColumn" class="buttonBox">
+                <div id="ctrlGentileText" class="boxText">Generate Tiles:</div>
+                <button onclick="generateTiles()" class="button greenButton">GO</button>
+                <div id="ctrlGentileText" class="boxText">REMOVE ALL TILES:</div>
+                <button onclick="removeTiles()" class="button redButton">DELETE</button>
+            </section>
+            <section class="bigButton">
+                <button class="button bigButton" onclick="viewMappool()">Mappool</button>
+                <button id="picksButton" class="button bigButton" onclick="viewPicks()">Picks</button>
+            </section>
         </section>
     </div>
 </body>
