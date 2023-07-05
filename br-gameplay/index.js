@@ -169,7 +169,6 @@ socket.onmessage = event => {
                     case "TB": mapModSlot.css("background-color","#ff1df5")
                 }
                 
-                // Need to see metadata format before adding it in
                 // AR
                 currentBaseAR = allMaps[i].metadata.diff_approach
                 animation.mapStatNumberAR.update(currentAR)
@@ -204,8 +203,8 @@ socket.onmessage = event => {
     }
 
     if (!poolMapFound) {
-            // SR
-        if (!poolMapFound && currentSR != data.menu.bm.stats.SR) {
+        // SR
+        if (currentSR != data.menu.bm.stats.SR) {
             currentSR = data.menu.bm.stats.SR
             animation.SRStat.update(currentSR)
         }
