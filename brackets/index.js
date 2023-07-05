@@ -280,7 +280,7 @@ const playerArray = [
 // Player Table workaround
 let playerObjects
 let playersRequest = new XMLHttpRequest()
-playersRequest.open("GET", "http://localhost:5280/api/players/all",false)
+playersRequest.open("GET", "https://trt2.btmc.live/api/players/all")
 playersRequest.onload = function() {
     if (this.status == 404) return
     if (this.status == 200) playerObjects = JSON.parse(this.responseText)
@@ -292,7 +292,7 @@ const pullResultsFromDatabase = () => {
     
     // Pull Matches from API
     let matchesRequest = new XMLHttpRequest()
-    matchesRequest.open("GET", "http://localhost:5280/api/matches/all",false)
+    matchesRequest.open("GET", "https://trt2.btmc.live/api/matches/all",false)
     matchesRequest.onload = function() {
         if (this.status == 404) return
         if (this.status == 200) matchObjects = JSON.parse(this.responseText)
@@ -301,14 +301,6 @@ const pullResultsFromDatabase = () => {
     matchObjects.sort((a,b) => a.match.bracketMatchId - b.match.bracketMatchId)
 
     for (let i = 0; i < matchObjects.length; i++)  {
-        // let matchPlayersRequest = new XMLHttpRequest()
-        // let matchPlayers = []
-        // matchPlayersRequest.open("GET", `http://localhost:5280/api/matches/${matchObjects[i].match.id}/players`,false)
-        // matchPlayersRequest.onload = function() {
-        //     if (this.status == 404) return
-        //     if (this.status == 200) matchPlayers = JSON.parse(this.responseText)
-        // }
-        // matchPlayersRequest.send()
 
         let bracketMatchID = matchObjects[i].match.bracketMatchId
         let currentMatch = document.getElementById(`match${bracketMatchID}`)
@@ -413,12 +405,9 @@ const pullResultsFromDatabase = () => {
         }
         // Draw Lines and set names on new tiles
         if (player1Win && bracketMatchID == 30) return
-        if (bracketMatchID == 30) console.log(playerWin)
         if (playerWin) {
-            console.log(currentMatch.hasAttribute("winnerTo"))
             if (currentMatch.hasAttribute("winnerTo")) {
                 let winnerMatch = document.getElementById(currentMatch.getAttribute("winnerTo"))
-                console.log(bracketMatchID)
                 winnerMatch.children[1].innerText = 0
                 winnerMatch.children[2].innerHTML = ""
                 winnerMatch.children[2].style.backgroundImage = getComputedStyle(winnerPlayerElement.children[2]).getPropertyValue("background-image")

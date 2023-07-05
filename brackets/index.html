@@ -16,6 +16,9 @@
 <body>
     <div id="main">
         <section class="bracketWhole" id="upperBracket">
+            <video id="winnerBracket" width="1920" height="1080" autoplay loop muted>
+                <source src="static/Winners_bracket.webm" type="video/webm">
+            </video>
             <!-- Winner Bracket Round 1 -->
             <section class="roundDisplayType display-flex-column-space-between" id="winnerBracketRound1">
                 <div class="winnerBracketRound1Matches display-flex-column-space-between" id="match1" winnerTo="match13Player1" loserTo="match9Player1">
@@ -334,6 +337,9 @@
             </section>
         </section>
         <section class="bracketWhole" id="lowerBracket">
+            <video id="lowerBracketVideo" width="1920" height="1080" autoplay loop muted>
+                <source src="static/losers_bracket.webm" type="video/webm">
+            </video>
             <!-- Lower Bracket Round 1 -->
             <section class="roundDisplayType display-flex-column-space-between lowerBracketRound lowerBracketRounds1And2" id="lowerBracketRound1">
                 <div class="lowerBracketRound1Match" id="match9" winnerTo="match20Player2">
@@ -605,6 +611,7 @@
                 <div id="nowPlayingDivider">|</div>
                 <div id="nowPlayingText">NOW PLAYING</div>
             </section>
+
         </section>
     </div>
     <div id="controlPanel">

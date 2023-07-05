@@ -9,6 +9,10 @@
     --textAndLineGold: rgba(255,226,146,1);
 }
 
+video {
+    position: absolute; left: 0; top: 0;
+}
+
 #main {
     position: absolute; left: 0; top: 0;
     width: 1920px; height: 1080px;
@@ -19,11 +23,7 @@
     background-size: cover;
     transition: 750ms ease-in-out;
 }
-#upperBracket { background-image: url("../static/roundtableBracketPNG.png");  }
-#lowerBracket { 
-    background-image: url("../static/roundtableLoserBracketPNG.png"); 
-    opacity: 0;
-}
+#lowerBracket { opacity: 0; }
 
 /* For everything */
 .display-flex-column-space-between { display: flex; flex-direction: column; justify-content: space-between; }
@@ -426,6 +426,7 @@
     width: inherit; height: 78px;
     font-family: 'Lexend', sans-serif; font-size: 24px; font-weight: 700;
     line-height: 78px;
+    z-index: 2;
 }
 #nowPlayingDivider { 
     position: absolute; right: 227px;
