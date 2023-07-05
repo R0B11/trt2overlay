@@ -382,3 +382,32 @@ const setCookieToWinScreen = (id, name, team, round) => {
     cookieValue = ` winscreenRoundName=${round}; path=/`
     document.cookie = cookieValue
 }
+
+let playerLeftMapPickText = $("#playerLeftMapPickText")
+let playerRightMapPickText = $("#playerRightMapPickText")
+
+// Cookie Setting for this screen
+window.setInterval(() => {
+    let cookieName = "roundName"
+    let match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match && currentRoundName != match[1]) {
+        switch (currentRoundName) {
+            case "RO16": changeRoundInformation(currentRoundName, "ROUND OF 16")
+            case "QF": changeRoundInformation(currentRoundName, "QUARTERFINALS")
+            case "SF": changeRoundInformation(currentRoundName, "SEMIFINALS")
+            case "F": changeRoundInformation(currentRoundName, "FINALS")
+            case "GF": changeRoundInformation(currentRoundName, "GRAND FINALS")
+            case "BR1v1": changeRoundInformation(currentRoundName, "BR GRAND FINALS")
+        }
+    }
+
+    cookieName = "mapPicker"
+    match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match[1] == "redPick") {
+        playerLeftMapPickText.csS("display","block")
+        playerRightMapPickText.csS("display","none")
+    } else if (match[1] == "bluePick") {
+        playerLeftMapPickText.csS("display","none")
+        playerRightMapPickText.csS("display","block")
+    }
+}, 500)
