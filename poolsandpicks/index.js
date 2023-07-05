@@ -86,7 +86,15 @@ socket.onmessage = event => {
         currentPlayerBlueCountry = data.tourney.ipcClients[1].spectating.country
         displayPlayerFlag(currentPlayerBlueCountry, playerCardPlayerCountryFlagBlue)
     }
-
+    // Player Rank
+    if (currentPlayerRedRank != data.tourney.ipcClients[0].spectating.globalRank) {
+        currentPlayerRedRank = data.tourney.ipcClients[0].spectating.globalRank
+        playerCardPlayerRankRed.text(`#${currentPlayerRedRank}`)
+    }
+    if (currentPlayerBlueRank != data.tourney.ipcClients[1].spectating.globalRank) {
+        currentPlayerBlueRank = data.tourney.ipcClients[1].spectating.globalRank
+        playerCardPlayerRankBlue.text(`#${currentPlayerBlueRank}`)
+    }
 
     // Star Generation
     if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
