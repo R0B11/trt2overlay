@@ -232,7 +232,7 @@ html {
 
 .mapCardContent {
     position: absolute;
-    background-image:;
+    /* background-image:; */
     background-position: center;
     background-size: cover;
     opacity: 1;
