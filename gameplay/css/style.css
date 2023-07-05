@@ -49,6 +49,7 @@ video { position: absolute; top: 0; left: 0; }
     font-family: 'IBM Plex Mono', monospace; font-size: 20px;
     position: absolute; top: 17px;
     letter-spacing: 1.2px;
+    display: none;
 }
 #playerLeftMapPickText { 
     color: var(--red); 

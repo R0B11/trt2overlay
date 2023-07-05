@@ -163,32 +163,32 @@ socket.onmessage = event => {
                 
                 // AR
                 currentBaseAR = allMaps[i].metadata.diff_approach
-                animation.mapStatNumberAR.update(currentAR)
+                animation.mapStatsAR.update(currentAR)
                 // OD
                 currentBaseOD = allMaps[i].metadata.diff_overall
-                animation.mapStatNumberOD.update(currentOD)
+                animation.mapStatsOD.update(currentOD)
                 // CS
                 currentBaseCS = allMaps[i].metadata.diff_size
-                animation.mapStatNumberCS.update(currentCS)
+                animation.mapStatsCS.update(currentCS)
                 // BPM
                 currentBaseBPM = allMaps[i].metadata.bpm
-                animation.mapStatNumberBPM.update(currentBPM)
+                animation.mapStatsBPM.update(currentBPM)
                 // Song Title and Artist
                 currentSongArtist = allMaps[i].metadata.artist
                 currentSongName = allMaps[i].metadata.title
-                currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
+                mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
                 
-                if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
-                else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
+                if (mapArtistAndName.width() >= 375) mapArtistAndName.addClass("mapArtistAndNameWrap")
+                else mapArtistAndName.removeClass("mapArtistAndNameWrap")
                 // Difficulty
                 currentSongDifficulty = allMaps[i].metadata.version
-                currentMapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+                mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
                 // Set Creator
                 currentSongSetCreator = allMaps[i].metadata.creator
-                currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+                mapSetCreator.innerText = currentSongSetCreator.toUpperCase()
                 // Set / BG
                 currentSongSetID = allMaps[i].metadata.beatmapset_id
-                topBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
+                bottomBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
                 break
             }
         }
@@ -204,50 +204,50 @@ socket.onmessage = event => {
         if (currentBaseAR != data.menu.bm.stats.AR) {
             currentBaseAR = data.menu.bm.stats.AR
             currentAR = calculateARandOD(currentBaseAR, currentMapMod)   
-            animation.mapStatNumberAR.update(currentAR)
+            animation.mapStatsAR.update(currentAR)
         }
         // OD
         if ( currentBaseOD != data.menu.bm.stats.OD) {
             currentBaseOD = data.menu.bm.stats.OD
             currentOD = calculateARandOD(currentBaseOD, currentMapMod)   
-            animation.mapStatNumberOD.update(currentOD)
+            animation.mapStatsOD.update(currentOD)
         }
         // CS
         if (currentBaseCS != data.menu.bm.stats.CS) {
             currentBaseCS = data.menu.bm.stats.CS
             if (currentMapMod.toLowerCase().includes("hr")) currentBaseCS *= 1.3
             else currentCS = currentBaseCS
-            animation.mapStatNumberCS.update(currentCS)
+            animation.mapStatsCS.update(currentCS)
         }
         // BPM
         if (!poolMapFound && currentBaseBPM != data.menu.bm.stats.BPM.min) {
             currentBaseBPM = data.menu.bm.stats.BPM.min
             currentBPM = (currentMapMod.toLowerCase().includes("dt"))? currentBaseBPM *= 1.5 : currentBaseBPM
-            animation.mapStatNumberBPM.update(currentBPM)
+            animation.mapStatsBPM.update(currentBPM)
         }
         // Song Title and Artist
         if (currentSongArtist != data.menu.bm.metadata.artist || currentSongName != data.menu.bm.metadata.title) {
             currentSongArtist = data.menu.bm.metadata.artist
             currentSongName = data.menu.bm.metadata.title
-            currentSongArtistandName.text(currentSongArtist + " - " + currentSongName)
-
-            if (currentSongArtistandName.width() >= 375) currentSongArtistandName.addClass("currentSongArtistandNameWrap")
-            else currentSongArtistandName.removeClass("currentSongArtistandNameWrap")
+            mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
+            
+            if (mapArtistAndName.width() >= 375) mapArtistAndName.addClass("mapArtistAndNameWrap")
+            else mapArtistAndName.removeClass("mapArtistAndNameWrap")
         }
         // Diff Name
         if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
             currentSongDifficulty = data.menu.bm.metadata.difficulty
-            currentMapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+            mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
         }
         // Set Creator Name
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
             currentSongSetCreator = data.menu.bm.metadata.mapper
-            currentMapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+            mapSetCreator.innerText = currentSongSetCreator.toUpperCase()
         }
         // Set / BG
         if (currentSongSetID != data.menu.bm.set) {
             currentSongSetID = data.menu.bm.set
-            topBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
+            bottomBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
         }
     }
 
@@ -434,11 +434,13 @@ window.setInterval(() => {
 
     cookieName = "mapPicker"
     match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
-    if (match[1] == "redPick") {
-        playerLeftMapPickText.csS("display","block")
-        playerRightMapPickText.csS("display","none")
-    } else if (match[1] == "bluePick") {
-        playerLeftMapPickText.csS("display","none")
-        playerRightMapPickText.csS("display","block")
+    if (match != null) {
+        if (match[1] == "redPick") {
+            playerLeftMapPickText.csS("display","block")
+            playerRightMapPickText.csS("display","none")
+        } else if (match[1] == "bluePick") {
+            playerLeftMapPickText.csS("display","none")
+            playerRightMapPickText.csS("display","block")
+        }
     }
 }, 500)
