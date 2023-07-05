@@ -9,10 +9,9 @@
     --textGold: rgba(255,226,146,1);
 }
 
+video { position: absolute; top: 0; left: 0; }
 #main {
     position: absolute; top: 0; left: 0;
-    background-size: cover;
-    background-image: url("../static/BRBracketPNG.png");
     width: 1920px; height: 1080px; 
 }
 
@@ -111,6 +110,7 @@
     font-family: 'Lexend', sans-serif; font-size: 24px;
     font-weight: 600;
     line-height: 78px;
+    background-color: var(--borderRed)
 }
 #nowPlayingText { position: absolute; right: 28px; }
 #nowPlayingDivider { 
