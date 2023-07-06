@@ -10,9 +10,30 @@ socket.onclose = (event) => {
 }
 socket.onerror = (error) => console.log('Socket Error: ', error)
 
+
+let poolInformationRequest = new XMLHttpRequest()
+poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+poolInformationRequest.onreadystatechange = function() {
+    if (this.status == 404) return
+    if (this.readyState != 4) return
+    allMaps = JSON.parse(this.responseText)
+    console.log(allMaps)
+}
+poolInformationRequest.send()
+
+let firstPick;
+let firstBan;
+let banNum; 
+let bestOf;
+let currentRound;
+
+const beatmaps = new Set(); // Store beatmapID;
+const load_maps = async () => await $.getJSON('../_data/beatmap_data.json');
+
 // Match scores
 matchScoresRed = $("#matchScoresRed")
 matchScoresBlue = $("#matchScoresBlue")
+
 let currentBestOf
 let currentMatchScoreRed
 let currentMatchScoreBlue
@@ -48,6 +69,35 @@ function displayPlayerFlag(country, element) {
         case "United States": element.attr("src","static/flags/US.png"); break;
         default: element.attr("src","static/flags/blank.png"); break;
     }
+
+let currentBestOf;
+let currentMatchScoreRed;
+let currentMatchScoreBlue;
+let starVisibility;
+let currentPicker;
+
+function setRound(round){
+    switch (round) {
+        case "RO16": case "QF": case "SF":
+            banNum = 1;
+            bestOf = 9;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
+            break;
+        case "F": case "GF": case "BR1v1":
+            banNum = 2;
+            bestOf = 13;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
+            break;
+        default:
+            break;
+    }
+
+    if (currentRound != round) {
+        currentRound = round
+    }
+
+    document.cookie = `roundName=${round}; path=/`
+
 }
 
 socket.onmessage = event => {
@@ -134,6 +184,14 @@ socket.onmessage = event => {
             matchScoresBlue.append(imgStar)
         }
     }
+    if (tempMapID !== data.menu.bm.id && data.menu.bm.id != 0) {
+        if (tempMapID == 0) tempMapID = data.menu.bm.id;
+        else {
+            tempMapID = data.menu.bm.id;
+            let pickedMap = Array.from(beatmaps).find(b => b.beatmapID == tempMapID);
+            if (pickedMap && enableAutoPick && !selectedMaps.includes(tempMapID)) pickMap(Array.from(beatmaps).find(b => b.beatmapID == tempMapID),currentPicker == 'Red' ? redName : blueName, currentPicker);
+    }
+}
 }
 
 let user = {};
@@ -472,6 +530,7 @@ function generateTiles() {
         $(".pickArea").css("width","1000px");
         $(".pickCardBlue").css("left", "0px");
         $(".pickCardRed").css("left", "0px");
+        $(".banArea").css("width", "var(--two-bans-width)");
         // Placing the first pick properly in the timeline
         if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
         else if (firstPick == "red") { $(`.pickCardBlue`).css("left","55px"); }
@@ -747,6 +806,43 @@ function getDataSet(stored_beatmaps, beatmap_id) {
     let beatmap = stored_beatmaps.find(b => b.beatmap_id == beatmap_id);
     return beatmap || null;
 };
+
+function banOrder(ban){
+    firstBan = ban;
+    if (ban == "blue") {
+        $("#redFirstBanText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstBanText").css("color","var(--bluePlayerCardColour)");
+        $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
+        return;
+    }
+
+    $("#blueFirstBanText").css("color","var(--grayPickBanTextColour)");
+    $("#redFirstBanText").css("color","var(--redPlayerCardColour)");
+    $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
+}
+
+function pickOrder(pick){
+    firstPick = pick;
+    if (pick == "blue") {
+        $("#redFirstPickText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstPickText").css("color","var(--bluePlayerCardColour)");
+
+        $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`);
+        return;
+    } 
+    $("#blueFirstPickText").css("color","var(--grayPickBanTextColour)");
+    $("#redFirstPickText").css("color","var(--redPlayerCardColour)");
+
+    $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`)
+
+}
+
+function removeTiles() {
+    $(".mapCard").remove();
+
+    $("#ctrlRemtileText").html("Remove Tiles: Removed!");
+    $("#ctrlGentileText").html("Generate Tiles:");
+}
 
 function viewMappool () {
     $("#pickBans").animate({

@@ -40,7 +40,7 @@ html {
     position: absolute; top: 0; left: 0;
     width: 1920px; height: 1080px;
     z-index: -1;
-    background-image: url("../static/picksBansPNG3.png");
+    /* background-image: url("../static/picksBansPNG3.png"); */
     background-size: cover;
 }
 
