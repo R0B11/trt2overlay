@@ -624,28 +624,31 @@ html {
 }
 
 .boxText {
+    font-size: 32px;
     left: 0px;
 }
 
 .button {
-    min-width: 60px;
+    min-width: 120px;
     width: auto;
-    height: 45px;
-    margin: 1px 1px;
+    height: 90px;
+    margin: 5px 5px;
     border-radius: 5px;
     font-family: 'Lexend';
-    font-size: 15px;
+    font-size: 30px;
 }
 
 .buttonBox {
     border: white solid;
-    width: 210px;
-    height: 130px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    border-width: 3px;
+    width: 420px;
+    height: 260px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    border-width: 6px;
 }
+#controlPanelFirstBanAndPick { position: absolute; left: 480px; top: 0; }
+#controlPanelGenerateAndRemoveTiles { position: absolute; left: 900px; top: 0;}
 
 .bigButton {
     position: absolute;
@@ -676,5 +679,5 @@ html {
 #secondColumn {
     position: absolute;
     top: 0px;
-    left: 250px;
+    left: 960px;
 }

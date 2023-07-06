@@ -107,7 +107,7 @@ let resetScores
 // Current Pool
 let allMaps
 let poolInformationRequest = new XMLHttpRequest()
-poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all", false)
 poolInformationRequest.onreadystatechange = function() {
     if (this.status >= 400) { console.error(this.statusText); return;}
     if (this.readyState != 4) return
