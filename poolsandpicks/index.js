@@ -198,6 +198,9 @@ window.setInterval(() => {
 
 function removeTiles() {
     $(".mapCard").remove();
+
+    $("#ctrlRemtileText").html("Remove Tiles: Removed!");
+    $("#ctrlGentileText").html("Generate Tiles:");
 }
 
 function setRound(round){
@@ -477,7 +480,8 @@ function generateTiles() {
         if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
         else if (firstPick == "red") { $(`.pickCardBlue`).css("left","55px"); }
     }
-    
+    $("#ctrlRemtileText").html("Remove Tiles:");
+    $("#ctrlGentileText").html("Generate Tiles: Generated!");
 }
 
 // TODO: Add map bg addition functionality 

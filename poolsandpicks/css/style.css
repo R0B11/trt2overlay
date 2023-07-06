@@ -583,13 +583,13 @@ html {
     height: 45px;
     margin: 1px 1px;
     border-radius: 5px;
-    font-family: Lexend;
+    font-family: 'Lexend';
     font-size: 15px;
 }
 
 .buttonBox {
     border: white solid;
-    width: 200px;
+    width: 210px;
     height: 130px;
     padding: 10px;
     margin: 10px;
