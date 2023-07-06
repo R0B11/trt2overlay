@@ -551,10 +551,17 @@ class Beatmap {
         // Map Mapper
         this.mapper = document.createElement("div")
         this.mapper.classList.add("mapMapper")
+        // Blink Overlay
+        this.blinkoverlay = document.createElement('div');
+        this.blinkoverlay.classList.add("blinkoverlay")
+        // Picked Status
+        this.pickedStatus = document.createElement('div');
+        this.pickedStatus.classList.add("pickingStatus")
         // Append Everything
         clickerObj.appendChild(this.border)
         this.border.appendChild(this.background)
         this.border.appendChild(this.backgroundOverlay)
+        
         this.border.appendChild(this.modID)
         this.border.appendChild(this.mapTextList)
         this.mapTextList.appendChild(this.mapTextContainer)
@@ -567,16 +574,17 @@ class Beatmap {
         this.mapTextList.appendChild(this.mapperContainer)
         this.mapperContainer.appendChild(this.mapperText)
         this.mapperContainer.appendChild(this.mapper)
+        clickerObj.appendChild(this.blinkoverlay)
+        clickerObj.appendChild(this.pickedStatus)
+        
         // this.bg = document.createElement('div');
         // this.map = document.createElement('div');
         // this.overlay = document.createElement('div');
-        // this.blinkoverlay = document.createElement('div');
         // this.artist = document.createElement('div');
         // this.title = document.createElement('div');
         // this.difficulty = document.createElement('div');
         // this.stats = document.createElement('div');
         // this.modIcon = document.createElement('div');
-        // this.pickedStatus = document.createElement('div');
 
         // this.bg.id = this.layerName;
         // this.map.id = `${this.layerName}BG`;
@@ -658,28 +666,27 @@ async function setupBeatmaps() {
         }
         lastPicked = bm;
         bm.pickedStatus.style.color = '#f5f5f5';
-        bm.overlay.style.opacity = event.ctrlKey ? '0.95' : '0.85';
         bm.blinkoverlay.style.animation = event.ctrlKey
             ? 'none'
             : 'blinker 1s cubic-bezier(.36,.06,.01,.57) 300ms 8, slowPulse 5000ms ease-in-out 8000ms 18'; // 36 * 5s -> 180s of slow pulse (+8s), enough to run down 120s countdown but short enough to reset before next time mappool is shown
         bm.artist.style.opacity = '0.3';
-        bm.title.style.opacity = '0.3';
-        bm.difficulty.style.opacity = '0.3';
-        bm.modIcon.style.opacity = '0.3';
-        bm.bg.style.opacity = '0';
+        bm.songAndDiff.style.opacity = '0.3';
+        bm.modID.style.opacity = '0.3';
+        bm.mapper.style.opacity = '0.3';
+        bm.mapperText.style.opacity = '0.3';
+        bm.backgroundOverlay.style.color = "rgba(0,0,0,1)"
     }
 
     function resetMapPick(bm) {
-        bm.overlay.style.opacity = '0.5';
+        bm.backgroundOverlay.style.color = "rgba(0,0,0,0.5)"
         bm.blinkoverlay.style.animation = 'none';
         bm.artist.style.opacity = '1';
-        bm.title.style.opacity = '1';
-        bm.difficulty.style.opacity = '1';
-        bm.modIcon.style.opacity = '1';
-        bm.bg.style.opacity = '1';
+        bm.songAndDiff.style.opacity = '1';
+        bm.modID.style.opacity = '1';
+        bm.mapper.style.opacity = '1';
+        bm.mapperText.style.opacity = '1';
         bm.pickedStatus.style.opacity = '0';
         bm.pickedStatus.style.boxShadow = 'none';
-        bm.pickedStatus.style.outline = 'none';
     }
 
     bms.map(async (beatmap, index) => {
@@ -697,7 +704,6 @@ async function setupBeatmaps() {
                     document.cookie = `lastPick=${bm.beatmapID}-red;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.style.outline = bm.mods.includes("TB") ? "3px solid #FFF" : event.ctrlKey ? 'none' : '3px solid #ff8d8d';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                     }, 300);
                 } else {
@@ -715,7 +721,6 @@ async function setupBeatmaps() {
                     document.cookie = `lastPick=${bm.beatmapID}-blue;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.style.outline = bm.mods.includes("TB") ? "3px solid #FFF" : event.ctrlKey ? 'none' : '3px solid #93b5ff';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
                     }, 150);
                 } else {
@@ -734,7 +739,6 @@ async function setupBeatmaps() {
         bm.songAndDiff.innerText = `${mapData.title} [${mapData.version}]`
         bm.artist.innerText = mapData.artist
         bm.mapper.innerText = mapData.creator
-        console.log(bm)
         beatmaps.add(bm);
     });
 }
