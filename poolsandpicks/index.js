@@ -1,11 +1,14 @@
-// Connecting to server
-let socket = new ReconnectingWebSocket("ws://" + location.host + "/ws")
-socket.onopen = () => console.log("Successfully Connected")
-socket.onclose = event => {
-    console.log("Socket Closed Connection: ", event)
-    socket.send("Client Closed!")
-};
-socket.onerror = error => console.log("Socket Error: ", error)
+window.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// START
+let socket = new ReconnectingWebSocket('ws://127.0.0.1:24050/ws');
+
+socket.onopen = async () => console.log('Successfully Connected')
+socket.onclose = (event) => {
+    console.log('Socket Closed Connection: ', event);
+    socket.send('Client Closed!');
+}
+socket.onerror = (error) => console.log('Socket Error: ', error)
 
 // Match scores
 matchScoresRed = $("#matchScoresRed")
@@ -13,11 +16,84 @@ matchScoresBlue = $("#matchScoresBlue")
 let currentBestOf
 let currentMatchScoreRed
 let currentMatchScoreBlue
-let starVisibility
+
+// Player Details
+let playerCardPlayerProfilePictureRed = $("#playerCardPlayerProfilePictureRed")
+let playerCardPlayerNameRed = $("#playerCardPlayerNameRed")
+let playerCardPlayerCountryFlagRed = $("#playerCardPlayerCountryFlagRed")
+let playerCardPlayerRankRed = $("#playerCardPlayerRankRed")
+let playerCardPlayerProfilePictureBlue = $("#playerCardPlayerProfilePictureBlue")
+let playerCardPlayerNameBlue = $("#playerCardPlayerNameBlue")
+let playerCardPlayerCountryFlagBlue = $("#playerCardPlayerCountryFlagBlue")
+let playerCardPlayerRankBlue = $("#playerCardPlayerRankBlue")
+let currentPlayerRedID
+let currentPlayerRedName
+let currentPlayerRedCountry
+let currentPlayerRedRank
+let currentPlayerBlueID
+let currentPlayerBlueName
+let currentPlayerBlueCountry
+let currentPlayerBlueRank
+
+function displayPlayerFlag(country, element) {
+    switch (country) {
+        case "Australia": element.attr("src","static/flags/AU.png"); break;
+        case "Canada": element.attr("src","static/flags/CA.png"); break;
+        case "China": element.attr("src","static/flags/CN.png"); break;
+        case "Hong Kong": element.attr("src","static/flags/HK.png"); break;
+        case "South Korea": element.attr("src","static/flags/KR.png"); break;
+        case "Poland": element.attr("src","static/flags/PL.png"); break;
+        case "United Kingdom": element.attr("src","static/flags/UK.png"); break;
+        case "Great Britain": element.attr("src","static/flags/UK.png"); break;
+        case "United States": element.attr("src","static/flags/US.png"); break;
+        default: element.attr("src","static/flags/blank.png"); break;
+    }
+}
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
+
+    // Player Details Update
+    // Profile Picture
+    if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
+        currentPlayerRedID = data.tourney.ipcClients[0].spectating.userID
+        playerCardPlayerProfilePictureRed.attr("src",`https://a.ppy.sh/${currentPlayerRedID}`)
+        if (currentPlayerRedID == 0) playerCardPlayerProfilePictureRed.css("display", "none")
+        else playerCardPlayerProfilePictureRed.css("display", "block")
+    }
+    if (currentPlayerBlueID != data.tourney.ipcClients[1].spectating.userID) {
+        currentPlayerBlueID = data.tourney.ipcClients[1].spectating.userID
+        playerCardPlayerProfilePictureBlue.attr("src",`https://a.ppy.sh/${currentPlayerBlueID}`)
+        if (currentPlayerBlueID == 0) playerCardPlayerProfilePictureBlue.css("display", "none")
+        else playerCardPlayerProfilePictureBlue.css("display", "block")
+    }
+    // Player Name
+    if (currentPlayerRedName != data.tourney.ipcClients[0].spectating.name) {
+        currentPlayerRedName = data.tourney.ipcClients[0].spectating.name
+        playerCardPlayerNameRed.text(currentPlayerRedName)
+    }
+    if (currentPlayerBlueName != data.tourney.ipcClients[1].spectating.name) {
+        currentPlayerBlueName = data.tourney.ipcClients[1].spectating.name
+        playerCardPlayerNameBlue.text(currentPlayerBlueName)
+    }
+    // Player Flag
+    if (currentPlayerRedCountry != data.tourney.ipcClients[0].spectating.country) {
+        currentPlayerRedCountry = data.tourney.ipcClients[0].spectating.country
+        displayPlayerFlag(currentPlayerRedCountry, playerCardPlayerCountryFlagRed)
+    }
+    if (currentPlayerBlueCountry != data.tourney.ipcClients[1].spectating.country) {
+        currentPlayerBlueCountry = data.tourney.ipcClients[1].spectating.country
+        displayPlayerFlag(currentPlayerBlueCountry, playerCardPlayerCountryFlagBlue)
+    }
+    // Player Rank
+    if (currentPlayerRedRank != data.tourney.ipcClients[0].spectating.globalRank) {
+        currentPlayerRedRank = data.tourney.ipcClients[0].spectating.globalRank
+        playerCardPlayerRankRed.text(`#${currentPlayerRedRank}`)
+    }
+    if (currentPlayerBlueRank != data.tourney.ipcClients[1].spectating.globalRank) {
+        currentPlayerBlueRank = data.tourney.ipcClients[1].spectating.globalRank
+        playerCardPlayerRankBlue.text(`#${currentPlayerBlueRank}`)
+    }
 
     // Star Generation
     if (currentBestOf != Math.ceil(data.tourney.manager.bestOF / 2) ||
@@ -60,13 +136,125 @@ socket.onmessage = event => {
     }
 }
 
-let pickOrder = "blue";
-let banOrder = "red"
-let banNum = 2;
-let bestOf = 13;
+let user = {};
 
-function generateTiles(firstPick, firstBan, banNum, bestOf) {
-    for (let i = 0; i < ((bestOf+1) / 2) + banNum; i++) {
+let currentRound
+
+// // NOW PLAYING
+// let mapContainer = document.getElementById('mapContainer');
+// let mapArtist = document.getElementById('mapName');
+// let mapInfo = document.getElementById('mapInfo');
+// let mapper = document.getElementById('mapper');
+// let stars = document.getElementById('stars');
+// let stats = document.getElementById('stats');
+
+const beatmaps = new Set(); // Store beatmapID;
+const load_maps = async () => await $.getJSON('../_data/beatmap_data.json');
+
+let tempMapID, tempImg, tempMapArtist, tempMapTitle, tempMapDiff, tempMapper;
+
+let tempSR, tempCS, tempAR, tempOD, tempHP;
+
+let gameState;
+
+let hasSetup = false;
+
+let redName = 'Red Team', blueName = 'Blue Team';
+
+let firstPick;
+let firstBan;
+let banNum;
+let bestOf;
+
+let banCount = 0;
+let pickCount = 0;
+
+const mods = {
+    NM: 0,
+    HD: 1,
+    HR: 2,
+    DT: 3,
+    FM: 4,
+    TB: 5,
+};
+
+const teams = {
+    'redTeam': {
+        'bans': [],
+        'score': 0
+    },
+    'blueTeam': {
+        'bans': [],
+        'score': 0
+    }
+};
+
+window.setInterval(() => {
+    let cookieName = "roundName"
+    let match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
+    if (match && currentRound != match[1]) setRound(match[1])
+}, 500)
+
+function removeTiles() {
+    $(".mapCard").remove();
+}
+
+function setRound(round){
+    switch (round) {
+        case "RO16": case "QF": case "SF":
+            banNum = 1;
+            bestOf = 9;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
+            break;
+        case "F": case "GF": case "BR1v1":
+            banNum = 2;
+            bestOf = 13;
+            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
+            break
+        default:
+            break;
+    }
+
+    if (currentRound != round) {
+        currentRound = round
+    }
+
+    document.cookie = `roundName=${round}; path=/`
+}
+
+function banOrder(ban){
+    firstBan = ban;
+    if (ban == "blue") {
+        $("#redFirstBanText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstBanText").css("color","var(--bluePlayerCardColour)");
+        $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
+        return;
+    }
+
+    $("#blueFirstBanText").css("color","var(--grayPickBanTextColour)");
+    $("#redFirstBanText").css("color","var(--redPlayerCardColour)");
+    $("#controlPanel .buttonBox #ctrlBanText").html(`Select 1st Ban: ${ban}`);
+}
+
+function pickOrder(pick){
+    firstPick = pick;
+    if (pick == "blue") {
+        $("#redFirstPickText").css("color","var(--grayPickBanTextColour)");
+        $("#blueFirstPickText").css("color","var(--bluePlayerCardColour)");
+
+        $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`);
+        return;
+    } 
+    $("#blueFirstPickText").css("color","var(--grayPickBanTextColour)");
+    $("#redFirstPickText").css("color","var(--redPlayerCardColour)");
+
+    $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`)
+
+}
+
+function generateTiles() {
+    $(".mapCard").remove();
+    for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
         if (i < banNum) {
             // Red Side
@@ -288,8 +476,7 @@ function generateTiles(firstPick, firstBan, banNum, bestOf) {
         if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
         else if (firstPick == "red") { $(`.pickCardBlue`).css("left","55px"); }
     }
-    $("#ctrlRemtileText").html("Remove Tiles:");
-    $("#ctrlGentileText").html("Generate Tiles: Generated!");
+    
 }
 
 // TODO: Add map bg addition functionality 
@@ -321,87 +508,93 @@ class Beatmap {
 
         mappoolContainer.appendChild(this.clicker);
         let clickerObj = document.getElementById(this.clicker.id);
+        // Border
+        this.border = document.createElement("div")
+        this.border.classList.add(`icon-${this.mods.toLowerCase()}`)
+        this.border.classList.add("mapBorder")
+        // Black Background
+        this.background = document.createElement("div")
+        this.background.classList.add("mapBackground")
+        // Overlay
+        this.backgroundOverlay = document.createElement("div")
+        this.backgroundOverlay.classList.add("mapBackgroundOverlay")
+        // Mod ID
+        this.modID = document.createElement("div")
+        this.modID.classList.add(`icon-${this.mods.toLowerCase()}`)
+        this.modID.classList.add("mapModID")
+        // Map Text List
+        this.mapTextList = document.createElement("div")
+        this.mapTextList.classList.add("mapTextList")
+        // Map Artist
+        this.artist = document.createElement("div")
+        this.artist.innerText = "COLDPLAY"
+        this.artist.classList.add("mapTextArtist")
+        // Map Title
+        this.title = document.createElement("div")
+        this.title.innerText = "COLDPLAY"
+        this.title.classList.add("mapTextTitle")
+        // Map Difficulty
+        this.difficulty = document.createElement("div")
+        this.difficulty.innerText = "COLDPLAY"
+        this.difficulty.classList.add("mapTextDifficulty")
+        // Append Everything
+        this.border.appendChild(this.background)
+        this.border.appendChild(this.backgroundOverlay)
+        this.border.appendChild(this.modID)
+        this.border.appendChild(this.mapTextList)
+        this.mapTextList.appendChild(this.artist)
+        this.mapTextList.appendChild(this.title)
+        this.mapTextList.appendChild(this.difficulty)
+        clickerObj.appendChild(this.border)
+        // this.bg = document.createElement('div');
+        // this.map = document.createElement('div');
+        // this.overlay = document.createElement('div');
+        // this.blinkoverlay = document.createElement('div');
+        // this.artist = document.createElement('div');
+        // this.title = document.createElement('div');
+        // this.difficulty = document.createElement('div');
+        // this.stats = document.createElement('div');
+        // this.modIcon = document.createElement('div');
+        // this.pickedStatus = document.createElement('div');
 
-        this.bg = document.createElement('div');
-        this.map = document.createElement('div');
-        this.overlay = document.createElement('div');
-        this.blinkoverlay = document.createElement('div');
-        this.artist = document.createElement('div');
-        this.title = document.createElement('div');
-        this.difficulty = document.createElement('div');
-        this.stats = document.createElement('div');
-        this.modIcon = document.createElement('div');
-        this.pickedStatus = document.createElement('div');
+        // this.bg.id = this.layerName;
+        // this.map.id = `${this.layerName}BG`;
+        // this.overlay.id = `${this.layerName}Overlay`;
+        // this.blinkoverlay.id = `${this.layerName}BlinkOverlay`;
+        // this.artist.id = `${this.layerName}ARTIST`;
+        // this.title.id = `${this.layerName}TITLE`;
+        // this.difficulty.id = `${this.layerName}DIFF`;
+        // this.stats.id = `${this.layerName}Stats`;
+        // this.modIcon.id = `${this.layerName}ModIcon`;
+        // this.pickedStatus.id = `${this.layerName}STATUS`;
 
-        this.bg.id = this.layerName;
-        this.map.id = `${this.layerName}BG`;
-        this.overlay.id = `${this.layerName}Overlay`;
-        this.blinkoverlay.id = `${this.layerName}BlinkOverlay`;
-        this.artist.id = `${this.layerName}ARTIST`;
-        this.title.id = `${this.layerName}TITLE`;
-        this.difficulty.id = `${this.layerName}DIFF`;
-        this.stats.id = `${this.layerName}Stats`;
-        this.modIcon.id = `${this.layerName}ModIcon`;
-        this.pickedStatus.id = `${this.layerName}STATUS`;
-
-        this.artist.setAttribute('class', 'mapInfo artist');
-        this.title.setAttribute('class', 'mapInfo title');
-        this.difficulty.setAttribute('class', 'mapInfo diff');
-        this.map.setAttribute('class', 'map');
-        this.pickedStatus.setAttribute('class', 'pickingStatus');
-        this.overlay.setAttribute('class', 'overlay');
-        this.blinkoverlay.setAttribute('class', 'blinkoverlay');
-        this.bg.setAttribute('class', 'statBG');
-        this.modIcon.setAttribute('class', `modIcon icon-${this.mods.toLowerCase()}`);
-        this.modIcon.innerHTML = `${this.mods}`;
+        // this.artist.setAttribute('class', 'mapInfo artist');
+        // this.title.setAttribute('class', 'mapInfo title');
+        // this.difficulty.setAttribute('class', 'mapInfo diff');
+        // this.map.setAttribute('class', 'map');
+        // this.pickedStatus.setAttribute('class', 'pickingStatus');
+        // this.overlay.setAttribute('class', 'overlay');
+        // this.blinkoverlay.setAttribute('class', 'blinkoverlay');
+        // this.bg.setAttribute('class', 'statBG');
+        // this.modIcon.setAttribute('class', `modIcon icon-${this.mods.toLowerCase()}`);
+        // this.modIcon.innerHTML = `${this.mods}`;
         this.clicker.setAttribute('class', 'clicker');
         clickerObj.appendChild(this.map);
-        document.getElementById(this.map.id).appendChild(this.overlay);
-        document.getElementById(this.map.id).appendChild(this.blinkoverlay);
-        document.getElementById(this.map.id).appendChild(this.artist);
-        document.getElementById(this.map.id).appendChild(this.title);
-        document.getElementById(this.map.id).appendChild(this.difficulty);
-        clickerObj.appendChild(this.pickedStatus);
-        clickerObj.appendChild(this.bg);
-        clickerObj.appendChild(this.modIcon);
+        // document.getElementById(this.map.id).appendChild(this.overlay);
+        // document.getElementById(this.map.id).appendChild(this.blinkoverlay);
+        // document.getElementById(this.map.id).appendChild(this.artist);
+        // document.getElementById(this.map.id).appendChild(this.title);
+        // document.getElementById(this.map.id).appendChild(this.difficulty);
+        // clickerObj.appendChild(this.pickedStatus);
+        // clickerObj.appendChild(this.bg);
+        // clickerObj.appendChild(this.modIcon);
 
-        this.clicker.style.transform = 'translateY(0)';
+        // this.clicker.style.transform = 'translateY(0)';
     }
     grayedOut() {
         this.overlay.style.opacity = '1';
     }
 }
-
-// socket.onmessage = async (event) => {
-    // let data = JSON.parse(event.data);
-
-    // if (!hasSetup) setupBeatmaps();
-
-    // if (blueName !== data.tourney.manager.teamName.right && data.tourney.manager.teamName.right) {
-    //     blueName = data.tourney.manager.teamName.right || 'Blue';
-    // }
-    // if (redName !== data.tourney.manager.teamName.left && data.tourney.manager.teamName.left) {
-    //     redName = data.tourney.manager.teamName.left || 'Red';
-    // }
-
-    // if (tempImg !== data.menu.bm.path.full) {
-    //     tempImg = data.menu.bm.path.full;
-    //     data.menu.bm.path.full = data.menu.bm.path.full.replace(/#/g, '%23').replace(/%/g, '%25').replace(/\\/g, '/');
-    // }
-    // if (tempMapID !== data.menu.bm.id || tempSR !== data.menu.bm.stats.fullSR) {
-    //     tempMapID = data.menu.bm.id;
-    //     tempMapArtist = data.menu.bm.metadata.artist;
-    //     tempMapTitle = data.menu.bm.metadata.title;
-    //     tempMapDiff = '[' + data.menu.bm.metadata.difficulty + ']';
-    //     tempMapper = data.menu.bm.metadata.mapper;
-
-    //     tempCS = data.menu.bm.stats.CS;
-    //     tempAR = data.menu.bm.stats.AR;
-    //     tempOD = data.menu.bm.stats.OD;
-    //     tempHP = data.menu.bm.stats.HP;
-    //     tempSR = data.menu.bm.stats.fullSR;
-    // }
-// };
 
 async function setupBeatmaps() {
     hasSetup = true;
@@ -415,6 +608,7 @@ async function setupBeatmaps() {
         FM: 0,
         TB: 0,
     };
+
 
     const bms = [];
     try {
@@ -540,14 +734,6 @@ function viewMappool () {
         right: '40px',
         opacity: '1'
     }, 1000, 'easeInOutQuart'); 
-    $(".whileLine").animate({
-        opacity: '0'
-    }, 1000, 'easeInOutQuart');
-    $("#tiebreakerCard").animate({
-        opacity: '0'
-    }, 1000, 'easeInOutQuart');
-
-    
 }
 
 function viewPicks () {
@@ -563,12 +749,6 @@ function viewPicks () {
     // $("#pickBans").animate({
     //     opacity: '1'
     // }, 500, 'easeInOutQuart');
-    $(".whiteLine").animate({
-        opacity: '1'
-    }, 1000, 'easeInOutQuart');
-    $("#tiebreakerCard").animate({
-        opacity: '1'
-    }, 1000, 'easeInOutQuart');
     
 
 }
