@@ -69,10 +69,8 @@ function displayPlayerFlag(country, element) {
         case "United States": element.attr("src","static/flags/US.png"); break;
         default: element.attr("src","static/flags/blank.png"); break;
     }
+}
 
-let currentBestOf;
-let currentMatchScoreRed;
-let currentMatchScoreBlue;
 let starVisibility;
 let currentPicker;
 
@@ -196,19 +194,6 @@ socket.onmessage = event => {
 
 let user = {};
 
-let currentRound
-
-// // NOW PLAYING
-// let mapContainer = document.getElementById('mapContainer');
-// let mapArtist = document.getElementById('mapName');
-// let mapInfo = document.getElementById('mapInfo');
-// let mapper = document.getElementById('mapper');
-// let stars = document.getElementById('stars');
-// let stats = document.getElementById('stats');
-
-const beatmaps = new Set(); // Store beatmapID;
-const load_maps = async () => await $.getJSON('../_data/beatmap_data.json');
-
 let tempMapID, tempImg, tempMapArtist, tempMapTitle, tempMapDiff, tempMapper;
 
 let tempSR, tempCS, tempAR, tempOD, tempHP;
@@ -218,11 +203,6 @@ let gameState;
 let hasSetup = false;
 
 let redName = 'Red Team', blueName = 'Blue Team';
-
-let firstPick;
-let firstBan;
-let banNum;
-let bestOf;
 
 let banCount = 0;
 let pickCount = 0;
