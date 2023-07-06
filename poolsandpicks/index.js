@@ -495,10 +495,11 @@ function mapBan(){
 }
 
 class Beatmap {
-    constructor(mods, beatmapID, layerName) {
+    constructor(mods, beatmapID, layerName, identifier) {
         this.mods = mods;
         this.beatmapID = beatmapID;
         this.layerName = layerName;
+        this.identifier = identifier
     }
     generate() {
         let mappoolContainer = document.getElementById(`${this.mods}`);
@@ -520,32 +521,52 @@ class Beatmap {
         this.backgroundOverlay.classList.add("mapBackgroundOverlay")
         // Mod ID
         this.modID = document.createElement("div")
+        this.modID.innerText = this.identifier
         this.modID.classList.add(`icon-${this.mods.toLowerCase()}`)
         this.modID.classList.add("mapModID")
         // Map Text List
         this.mapTextList = document.createElement("div")
         this.mapTextList.classList.add("mapTextList")
+        // Map Text Container
+        this.mapTextContainer = document.createElement("div")
+        this.mapTextContainer.classList.add("mapTextContainer")
         // Map Artist
         this.artist = document.createElement("div")
         this.artist.innerText = "COLDPLAY"
         this.artist.classList.add("mapTextArtist")
+        // Map Song and Diff
+        this.songAndDiff = document.createElement("div")
+        this.songAndDiff.classList.add("mapSongAndDiff")
         // Map Title
-        this.title = document.createElement("div")
-        this.title.innerText = "COLDPLAY"
-        this.title.classList.add("mapTextTitle")
+        this.title = document.createElement("span")
         // Map Difficulty
-        this.difficulty = document.createElement("div")
-        this.difficulty.innerText = "COLDPLAY"
-        this.difficulty.classList.add("mapTextDifficulty")
+        this.difficulty = document.createElement("span")
+        // Map Mapper Container
+        this.mapperContainer = document.createElement("div")
+        this.mapperContainer.classList.add("mapMapperContainer")
+        // Map Mapper Text
+        this.mapperText = document.createElement("div")
+        this.mapperText.innerText = "MAPPER"
+        this.mapperText.classList.add("mapMapperText")
+        // Map Mapper
+        this.mapper = document.createElement("div")
+        this.mapper.classList.add("mapMapper")
         // Append Everything
+        clickerObj.appendChild(this.border)
         this.border.appendChild(this.background)
         this.border.appendChild(this.backgroundOverlay)
         this.border.appendChild(this.modID)
         this.border.appendChild(this.mapTextList)
-        this.mapTextList.appendChild(this.artist)
-        this.mapTextList.appendChild(this.title)
-        this.mapTextList.appendChild(this.difficulty)
-        clickerObj.appendChild(this.border)
+        this.mapTextList.appendChild(this.mapTextContainer)
+        this.mapTextContainer.appendChild(this.artist)
+        this.mapTextContainer.appendChild(this.songAndDiff)
+        this.songAndDiff.appendChild(this.title)
+        this.songAndDiff.innerHTML += " ["
+        this.songAndDiff.appendChild(this.difficulty)
+        this.songAndDiff.innerHTML += "]"
+        this.mapTextList.appendChild(this.mapperContainer)
+        this.mapperContainer.appendChild(this.mapperText)
+        this.mapperContainer.appendChild(this.mapper)
         // this.bg = document.createElement('div');
         // this.map = document.createElement('div');
         // this.overlay = document.createElement('div');
@@ -579,7 +600,6 @@ class Beatmap {
         // this.modIcon.setAttribute('class', `modIcon icon-${this.mods.toLowerCase()}`);
         // this.modIcon.innerHTML = `${this.mods}`;
         this.clicker.setAttribute('class', 'clicker');
-        clickerObj.appendChild(this.map);
         // document.getElementById(this.map.id).appendChild(this.overlay);
         // document.getElementById(this.map.id).appendChild(this.blinkoverlay);
         // document.getElementById(this.map.id).appendChild(this.artist);
@@ -668,9 +688,7 @@ async function setupBeatmaps() {
             colIndex = 0;
             row++;
         }
-        let oddRow = Math.round(modsCount[beatmap.mods] / 3) + 1;
-        let leftCol = modsCount[beatmap.mods] % 3;
-        const bm = new Beatmap(beatmap.mods, beatmap.beatmap_id, `map${index}`);
+        const bm = new Beatmap(beatmap.mods, beatmap.beatmap_id, `map${index}`, beatmap.identifier);
         bm.generate();
         bm.clicker.addEventListener('mousedown', function () {
             bm.clicker.addEventListener('click', function (event) {
@@ -712,10 +730,11 @@ async function setupBeatmaps() {
         });
         const stored_beatmaps = await load_maps();
         const mapData = await getDataSet(stored_beatmaps, beatmap.beatmap_id);
-        bm.map.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.beatmapset_id}/covers/cover.jpg')`;
-        bm.artist.innerHTML = `${mapData.artist}`;
-        bm.title.innerHTML = `${mapData.title}`;
-        bm.difficulty.innerHTML = `[${mapData.version}] mapped by ${mapData.creator}`;
+        bm.background.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.beatmapset_id}/covers/cover.jpg')`;
+        bm.songAndDiff.innerText = `${mapData.title} [${mapData.version}]`
+        bm.artist.innerText = mapData.artist
+        bm.mapper.innerText = mapData.creator
+        console.log(bm)
         beatmaps.add(bm);
     });
 }

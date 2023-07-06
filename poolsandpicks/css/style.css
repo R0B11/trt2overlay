@@ -345,38 +345,27 @@ html {
 
 #mappoolDisplay {
     opacity: 1;
-    height: 835px;
-    width: 1395px;
-    position: absolute;
-    top: 191px;
-    right: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 1395px; height: 100%;
+    position: absolute; right: 0px;
+    display: flex; justify-content: center; align-items: center;
     font-family: 'Lexend';
     transition: ease-in-out;
 }
-
 #mappoolContainer {
-    /* position: absolute;
-    top: 20px; */
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
     margin-bottom: 0;
 }
 
-
 .mapContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: flex; justify-content: center; flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 25px;
 }
 .mapBorder {
+    position: relative;
     width: var(--map-width);
-    height: 64px;
+    height: 69px;
     background-color: white;
     background-size: 100%;
     background-position: center;
@@ -385,24 +374,85 @@ html {
 }
 .mapBackground {
     position: relative; top: 2.5px; left: 2px;
-    width: 426px; height: 62px;
+    width: 426px; height: 67px;
     background-color: black;
     clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 95%, 8.25% 95%, 0% 44%);
 }
 .mapBackgroundOverlay {
-    position: relative; top: -60px; left: 2px;
-    width: 426px; height: 62px;
+    position: relative; top: -65px; left: 2px;
+    width: 426px; height: 67px;
     background-color: rgba(0,0,0,0.6);
     clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 95%, 8.25% 95%, 0% 44%);
 }
 .mapModID {
-    position: relative; top: -118px; left: 6px;
-    width: 104px; height: 51px;
+    position: relative; top: -128px; left: 6px;
+    width: 104px; height: 57px;
     background-color: white;
     clip-path: polygon(0% 0%, 0% 43%, 32% 100%, 100% 100%, 100% 57%, 64% 0%);
     color: white;
-    font-family: 'IBM PLEX MONO';
-    line-height: 51px;
+    font-family: 'IBM PLEX MONO'; font-size: 25px;
+    line-height: 57px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.mapTextList {
+    position: absolute;
+    top: 2px;
+    width: calc(100% - 118px);
+    right: 1px;
+    height: calc(100% - 4px);
+    display: flex;
+}
+.mapTextContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    flex: 6;
+    align-items: center;
+    justify-content: center;
+}
+.mapTextArtist {
+    font-family: 'IBM Plex Mono';
+    font-size: 16px;
+    color: #F9DDA7;
+    letter-spacing: 0.7px;
+    line-height: 19px;
+    width: 100%;
+}
+.mapSongAndDiff {
+    color: white;
+    font-family: 'IBM Plex Mono';
+    font-size: 13px;
+    letter-spacing: -1px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    line-height: 14px;
+}
+.mapMapperContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 3;
+    padding: 0px 8px;
+    gap: 5px;
+}
+.mapMapperText {
+    color: black;
+    font-family: 'Lexend';
+    background: white;
+    display: inline-block;
+    padding: 0px 7px;
+    width: 49px;
+    font-size: 12px;
+}
+.mapMapper {
+    font-family: 'Lexend';
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
 }
 
 .artist {
@@ -528,8 +578,7 @@ html {
 }
 
 .clicker {
-    margin: 0 6px;
-    margin-bottom: 12px;
+    margin: 7px 10px;
     width: var(--map-width);
     transition: ease-in-out 300ms;
 }
