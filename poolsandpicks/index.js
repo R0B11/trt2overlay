@@ -796,7 +796,7 @@ function viewMappool () {
         left: '-1920px'
     }, 1000, 'easeInOutQuart');
     $("#mappoolDisplay").animate({
-        right: '40px',
+        right: '0px',
         opacity: '1'
     }, 1000, 'easeInOutQuart'); 
 }
@@ -806,15 +806,10 @@ function viewPicks () {
         right: '-1340px',
         opacity: '0'
     }, 1000, 'easeInOutQuart');
-
     $("#pickBans").animate({
         left: '0px',
         opacity: '1'
     }, 1000, 'easeInOutQuart');
-    // $("#pickBans").animate({
-    //     opacity: '1'
-    // }, 500, 'easeInOutQuart');
-
 }
 
 function tileAdd(color, action, identifier, mapID, mapSlot){
