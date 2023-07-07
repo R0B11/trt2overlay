@@ -282,9 +282,6 @@ window.setInterval(() => {
     if (match && currentRound != match[1]) setRound(match[1])
 }, 500)
 
-function removeTiles() {
-    $(".mapCard").remove();
-}
 
 function setRound(round){
     switch (round) {
@@ -801,6 +798,12 @@ async function setupBeatmaps() {
                         }
                     }, 300);
                 } else {
+                    // 3 things we need
+                    let team = bm.clicker.children[2].textContent.split(" ")[0].toLowerCase()
+                    let action = bm.clicker.children[2].textContent.split(" ")[2].toLowerCase()
+                    let identifier = bm.identifier
+
+                    tileRemove(team, action, identifier)
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -831,6 +834,12 @@ async function setupBeatmaps() {
                         }
                     }, 150);
                 } else {
+                    // 3 things we need
+                    let team = bm.clicker.children[2].children[0].textContent.split(" ")[0].toLowerCase()
+                    let action = bm.clicker.children[2].textContent
+                    let identifier = bm.identifier
+
+                    tileRemove(team, action, identifier)
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -916,7 +925,6 @@ function viewPicks () {
 
 function tileAdd(color, action, identifier, background, mapSlot){
     // Adding selected map to correct tile
-    console.log(color, action, identifier, background, mapSlot)
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
         "background-image": `url(${background})`,
         "clip-path": "var(--map-clip-path)",
@@ -933,8 +941,6 @@ function tileAdd(color, action, identifier, background, mapSlot){
         $(`#${color}${action}${identifier} #map-slot-block`).css("backgroundColor", "var(--purple)");
     }
     $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html(`${mapSlot}`);
-
-    
 
     // Check to see if next tile needs to be revealed for bans and first pick
     // TODO: If last ban, show first pick card
@@ -1026,21 +1032,39 @@ function tileAdd(color, action, identifier, background, mapSlot){
     }
 }
 
-function tileRemove(color, action, identifier){
-    identifier -= 1; // this doesnt work
+function tileRemove(color, action, mapMod){
+    let searchArray = []
+    if (color == "red" && action == "ban") searchArray = redBanElementArray
+    else if (color == "red" && action == "pick") searchArray = redPickElementArray
+    else if (color == "blue" && action == "ban") searchArray = blueBanElementArray
+    else if (color == "blue" && action == "pick") searchArray = bluePickElementArray
 
-    // resets the look of the selected tile
-    $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
-        "background-image": ``,
-        "clip-path": "",
-        "opacity": 1
-    });
-    $(`#${color}Ban${identifier} #map-slot-block`).css({
-        "opacity": 0,
-        "background-color": `var(--${color})`
-    });
-    $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html('');
+    let foundElement
+
+    for (let i = 0; i < searchArray.length; i++) {
+        for (let j = 0; j < searchArray[i][0].children.length; j++) {
+            
+            if (searchArray[i][0].children[j].innerText == mapMod) {
+                foundElement = searchArray[i][0]
+                console.log(foundElement)
+                break;
+            }
+        }
+    }
+    console.log(foundElement)
+    for (let i = 0; i < foundElement.children.length; i++) {
+        if (foundElement.children[i].classList.contains("mapCardContent")) {
+            foundElement.children[i].style.backgroundImage = ""
+            foundElement.children[i].style.clipPath = ""
+            foundElement.children[i].style.opacity = 1
+            foundElement.children[i].innerHTML = ""
+
+            if (foundElement.children[i].className.includes("tile-picking")) foundElement.children[i].classList.remove("tile-picking")
+            else foundElement.children[i].classList.add("tile-picking")
+        } else if (foundElement.children[i].classList.contains("circle")) {
+            foundElement.children[i].style.opacity = 0
+        } else if (foundElement.children[i].id == "map-slot-block") {
+            foundElement.children[i].style.opacity = 0
+        }
+    }
 }
-
-
-setupBeatmaps();
