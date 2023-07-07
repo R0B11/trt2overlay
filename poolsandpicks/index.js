@@ -28,7 +28,6 @@ const getPoolInfo = async function() {
             allMaps[i].identifier = allMaps[i].mod
             allMaps[i].mod = allMaps[i].mod.slice(0,2).toUpperCase()
         }
-        console.log(allMaps)
     }
     await poolInformationRequest.send()
 }
@@ -41,11 +40,14 @@ let bestOf = null;
 let currentRound;
 
 let currentBanAmnt = 1;
-
 let blueActionStatus = 0;
 let redActionStatus = 0;
 
 let lastPick;
+let redBanElementArray = []
+let blueBanElementArray = []
+let redPickElementArray = []
+let bluePickElementArray = []
 
 
 const beatmaps = new Set(); // Store beatmapID;
@@ -77,6 +79,10 @@ let currentPlayerBlueName
 let currentPlayerBlueCountry
 let currentPlayerBlueRank
 
+// Current Score
+let currentPlayerRedScore
+let currentPlayerBlueScore
+
 function displayPlayerFlag(country, element) {
     switch (country) {
         case "Australia": element.attr("src","static/flags/AU.png"); break;
@@ -94,17 +100,20 @@ function displayPlayerFlag(country, element) {
 
 let starVisibility;
 let currentPicker;
+let ipcState
+let nextMapShown = false
 
 // Team Name
 let redName = 'Red Team', blueName = 'Blue Team';
 
-
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
+    // Player Scores
+    if (currentPlayerRedScore != data.tourney.manager.gameplay.score.left) currentPlayerRedScore = data.tourney.manager.gameplay.score.left
+    else if (currentPlayerBlueScore != data.tourney.manager.gameplay.score.right) currentPlayerBlueScore = data.tourney.manager.gameplay.score.right
     // Team Name Update
-    if (redName != data.tourney.manager.teamName.left) redName = data.tourney.manager.teamName.left
-    if (blueName != data.tourney.manager.teamName.right) blueName = data.tourney.manager.teamName.right
+    if (redName != data.tourney.manager.teamName.left && data.tourney.manager.teamName.left != "") redName = data.tourney.manager.teamName.left
+    if (blueName != data.tourney.manager.teamName.right && data.tourney.manager.teamName.right != "") blueName = data.tourney.manager.teamName.right
     // Player Details Update
     // Profile Picture
     if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
@@ -186,6 +195,53 @@ socket.onmessage = event => {
             matchScoresBlue.append(imgStar)
         }
     }
+
+    // IPC state
+    if (ipcState != data.tourney.manager.ipcState) {
+        ipcState = data.tourney.manager.ipcState
+        if (ipcState == 3) {
+            nextMapShown = false
+        } else if (ipcState == 4) {
+            if (!nextMapShown) {
+                // Check for if there is a winner
+                if (!(currentMatchScoreRed == currentBestOf || currentMatchScoreBlue == currentBestOf)) {
+                    // Check for if there is a tb
+                    if (currentMatchScoreRed == currentBestOf - 1 || currentMatchScoreBlue == currentBestOf - 1) {
+                        $("#tiebreakerCard").css("opacity", "1")
+                    } else {
+                        // Check the last picked
+                        if (lastPick == "red") {
+                            $(`#blueBan${blueActionStatus + 1}`).css("opacity","1");
+                            for (let i = redPickElementArray.length; i >= 0; i--) {
+                                if (redPickElementArray[i].children[1].children[0].children[0].textContent != "") {
+                                    if (currentPlayerRedScore > currentPlayerBlueScore) {
+                                        redPickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`)
+                                    } else if (currentPlayerBlueScore > currentPlayerRedScore) {
+                                        redPickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`)
+                                    }
+                                    break
+                                }
+                            }
+                        }
+                        else if (lastPick == "blue") {
+                            $(`#redBan${redActionStatus + 1}`).css("opacity","1");
+                            for (let i = bluePickElementArray.length; i >= 0; i--) {
+                                if (bluePickElementArray[i].children[1].children[0].children[0].textContent != "") {
+                                    if (currentPlayerRedScore > currentPlayerBlueScore) {
+                                        bluePickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`)
+                                    } else if (currentPlayerBlueScore > currentPlayerRedScore) {
+                                        bluePickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`)
+                                    }
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                nextMapShown = true
+            } 
+        }
+    }
     if (tempMapID !== data.menu.bm.id && data.menu.bm.id != 0) {
         if (tempMapID == 0) tempMapID = data.menu.bm.id;
         else {
@@ -199,15 +255,6 @@ socket.onmessage = event => {
 let user = {};
 
 let tempMapID, tempImg, tempMapArtist, tempMapTitle, tempMapDiff, tempMapper;
-
-let tempSR, tempCS, tempAR, tempOD, tempHP;
-
-let gameState;
-
-let hasSetup = false;
-
-let banCount = 0;
-let pickCount = 0;
 
 const mods = {
     NM: 0,
@@ -312,6 +359,10 @@ function pickOrder(pick){
 }
 
 function generateTiles() {
+    redBanElementArray = []
+    blueBanElementArray = []
+    redPickElementArray = []
+    bluePickElementArray = []
     if (firstPick == null || firstBan == null || bestOf == null) {
         $("#ctrlGentileText").html("Generate Tiles: Missing Selection");
         return;
@@ -347,10 +398,15 @@ function generateTiles() {
 
             mapslotBlock.append(mapBlockText);
 
+            $('<div/>', {
+                class: 'circle circleRed circleRedBackground'
+            }).appendTo(redOuterDiv)
+
             redOuterDiv.append(mapslotBlock);
 
             // Append outer div to body
             $('#redBanArea').append(redOuterDiv);
+            redBanElementArray.push(redOuterDiv)
 
             // Blue Side
             // Create and combine all elements before adding it to the div
@@ -358,6 +414,7 @@ function generateTiles() {
                 id: `blueBan${i}`,
                 class: 'mapCard banCardBlue',
             })
+
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
                 text: 'BANNING'
@@ -380,8 +437,13 @@ function generateTiles() {
 
             blueOuterDiv.append(mapslotBlock);
 
+            $('<div/>', {
+                class: 'circle circleBlue circleBlueBackground'
+            }).appendTo(blueOuterDiv)
+
             // Append outer div to body
             $('#blueBanArea').append(blueOuterDiv);
+            blueBanElementArray.push(blueOuterDiv)
         }
         // If a ban card does not need to be made anymore, pick cards will be generated
         else {
@@ -392,10 +454,6 @@ function generateTiles() {
                 class: 'mapCard pickCardRed',
                 style: 'opacity: 0'
             })
-
-            $('<img/>', {
-                class: 'circle'
-            }).appendTo(redOuterDiv)
 
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
@@ -419,8 +477,13 @@ function generateTiles() {
 
             redOuterDiv.append(mapslotBlock);
 
+            $('<img/>', {
+                class: 'circle circleRed'
+            }).appendTo(redOuterDiv)
+
             // Append outer div to body
             $('#redPickArea').append(redOuterDiv);
+            redPickElementArray.push(redOuterDiv)
 
             // Blue Side 
             // Create and combine all elements before adding it to the div
@@ -452,8 +515,13 @@ function generateTiles() {
 
             blueOuterDiv.append(mapslotBlock);
 
+            $('<img/>', {
+                class: 'circle circleBlue'
+            }).appendTo(blueOuterDiv)
+
             // Append outer div to body
             $('#bluePickArea').append(blueOuterDiv);
+            bluePickElementArray.push(blueOuterDiv)
         }
     }
 
@@ -724,12 +792,10 @@ async function setupBeatmaps() {
                         if (bm.mods.includes("TB")) {
                             // here onion
                             return; // remove this when done
-                        }
-                        else if (event.ctrlKey) {
+                        } else if (event.ctrlKey) {
                             tileAdd("red", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
                             redActionStatus += 1
-                        }
-                        else {
+                        } else {
                             tileAdd("red", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
                             redActionStatus += 1
                         }
@@ -776,7 +842,6 @@ async function setupBeatmaps() {
         });
         const stored_beatmaps = bms
         const mapData = await getDataSet(stored_beatmaps, beatmap.osuMapId);
-        console.log(`https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg`)
         bm.backgroundURL = `https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg`
         bm.background.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg')`;
         bm.songAndDiff.innerText = `${mapData.metadata.title} [${mapData.metadata.version}]`
@@ -851,6 +916,7 @@ function viewPicks () {
 
 function tileAdd(color, action, identifier, background, mapSlot){
     // Adding selected map to correct tile
+    console.log(color, action, identifier, background, mapSlot)
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
         "background-image": `url(${background})`,
         "clip-path": "var(--map-clip-path)",
@@ -885,6 +951,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
             else if (currentBanAmnt == 2) {
                 $(`#${firstPick}Pick1`).css("opacity", 1);
             }
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         else if (firstBan == "blue") {
             if (currentBanAmnt == 1){
@@ -894,6 +961,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
             else if (currentBanAmnt == 2) {
                 $(`#${firstPick}Pick1`).css("opacity", 1);
             }
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         return;
     }
@@ -902,16 +970,23 @@ function tileAdd(color, action, identifier, background, mapSlot){
         if (currentBanAmnt == 1) {
             $(`#blueBan0`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         else if (currentBanAmnt == 2) {
             $(`#blueBan1`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         else if (currentBanAmnt == 3) {
             $(`#redBan1`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
-        else {
+        else if (currentBanAmnt == 4) {
+            currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
+        }
+        if (currentBanAmnt > 3) {
             if (firstPick == "red") {
                 $(`#redPick2`).css("opacity", 1);
             }
@@ -924,16 +999,23 @@ function tileAdd(color, action, identifier, background, mapSlot){
         if (currentBanAmnt == 1) {
             $(`#redBan0`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         else if (currentBanAmnt == 2) {
             $(`#redBan1`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
         else if (currentBanAmnt == 3) {
             $(`#blueBan1`).css("opacity", 1);
             currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
-        else {
+        else if (currentBanAmnt == 4) {
+            currentBanAmnt += 1;
+            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
+        }
+        if (currentBanAmnt > 3) {
             if (firstPick == "red") {
                 $(`#redPick2`).css("opacity", 1);
             }

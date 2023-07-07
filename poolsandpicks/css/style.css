@@ -338,12 +338,23 @@ html {
 
 .circle {
     position: absolute;
-    top: 70px;
-    left: 975px;
+    top: 223px;
+    left: 9.5px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 3px solid var(--red);
+    border: 3px solid;
+    opacity: 0;
+}
+.circleRed {border-color: var(--red); }
+.circleRedBackground {
+    background-size: cover;
+    background-image: url('../static/redCross.png')
+}
+.circleBlue {border-color: var(--blue)}
+.circleBlueBackground {
+    background-size: cover;
+    background-image: url('../static/blueCross.png')
 }
 
 /* ---------- Mappool Display ---------- */
