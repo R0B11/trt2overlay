@@ -220,7 +220,7 @@ function generateTiles() {
             var blueOuterDiv = $('<div/>', {
                 id: `bluePick${i}`,
                 class: 'mapCard pickCardBlue',
-                style: 'opacity: 1'
+                style: 'opacity: 0'
             })
             
             $('<div/>', {
@@ -264,21 +264,20 @@ function generateTiles() {
             });
             $(".banCardRed").css("left","40px");
             // Hide Bans until they need to be shown
-            // $("#redBan1").css("opacity","0");
+            $("#redBan0").css("opacity","0");
         }
         // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
             $("#blueBanArea").css("justify-content","space-between");
             $("#redBanArea").css("justify-content","center");
             // Hide Bans until they need to be shown
-            // $("#redBan1").css("opacity","0");
-            // $("#redBan2").css("opacity","0");
-            // $("#blueBan2").css("opacity","0");
+            $("#redBan0").css("opacity","0");
+            $("#redBan1").css("opacity","0");
+            $("#blueBan1").css("opacity","0");
         }
     }
     // Do the same, but red bans first
     else {
-        console.log("working")
         // If there is only one ban, make the ban box smaller and center the ban tiles
         if (banNum == 1) {  
             $("#blueBanArea").css({
@@ -291,7 +290,7 @@ function generateTiles() {
             });
             $(".banCardBlue").css("left","40px");
             // Hide Bans until they need to be shown
-            // $("#blueBan1").css("opacity","0");
+            $("#blueBan0").css("opacity","0");
         }
         // If there is two bans, space the correct color ban cards apart bc of ABBA
         else if (banNum == 2){
@@ -299,9 +298,9 @@ function generateTiles() {
             $("#redBanArea").css("justify-content","space-between");
             $("#blueBanArea").css("justify-content","center");
             // Hide Bans until they need to be shown
-            // $("#blueBan1").css("opacity","0");
-            // $("#blueBan2").css("opacity","0");
-            // $("#redBan2").css("opacity","0");
+            $("#blueBan0").css("opacity","0");
+            $("#blueBan1").css("opacity","0");
+            $("#redBan1").css("opacity","0");
         } 
     }
     // Lower amount of picks so it doesnt look like complete garbage
@@ -330,8 +329,14 @@ function generateTiles() {
         $(".whiteLine").css("width","1700px");
         $("#tiebreakerCard").css("right","40px");
         $(".pickArea").css("width","1000px");
-        $(".pickCardBlue").css("left", "0px");
-        $(".pickCardRed").css("left", "0px");
+        $(".pickCardBlue").css({
+            "left":"0px",
+            "opacity": 0
+        });
+        $(".pickCardRed").css({
+            "left":"0px",
+            "opacity": 0
+        });
         $(".banArea").css("width", "var(--two-bans-width)");
         // Placing the first pick properly in the timeline
         if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
