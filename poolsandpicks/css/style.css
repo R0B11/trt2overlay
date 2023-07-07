@@ -22,6 +22,9 @@
     --grey: #959595;
     --yellow: #ffc728;
 
+    /* --mappoolRed: #ed426d; */
+    --mappoolRed: #ff003e;
+
     --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 86%,45% 100%, 0% 100%);
     --two-bans-width: 350px;
     --one-ban-width: 175px;
@@ -490,15 +493,15 @@ html {
     user-select: none;
     transition: ease-in 200ms;
     opacity: 0;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.70);
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
 }
 
 .pickRed {
-	color: #ff8d8d;
+	color: var(--mappoolRed);
 }
 
 .pickBlue {
-	color: #93b5ff;
+	color: var(--blue);
 }
 
 .overlay {

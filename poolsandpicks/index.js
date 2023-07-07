@@ -85,9 +85,16 @@ function displayPlayerFlag(country, element) {
 let starVisibility;
 let currentPicker;
 
+// Team Name
+let redName = 'Red Team', blueName = 'Blue Team';
+
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-
+    console.log(data)
+    // Team Name Update
+    if (redName != data.tourney.manager.teamName.left) redName = data.tourney.manager.teamName.left
+    if (blueName != data.tourney.manager.teamName.right) blueName = data.tourney.manager.teamName.right
+    
     // Player Details Update
     // Profile Picture
     if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
@@ -188,8 +195,6 @@ let tempSR, tempCS, tempAR, tempOD, tempHP;
 let gameState;
 
 let hasSetup = false;
-
-let redName = 'Red Team', blueName = 'Blue Team';
 
 let banCount = 0;
 let pickCount = 0;
@@ -678,11 +683,11 @@ async function setupBeatmaps() {
         bm.modID.style.opacity = '0.3';
         bm.mapper.style.opacity = '0.3';
         bm.mapperText.style.opacity = '0.3';
-        bm.backgroundOverlay.style.color = "rgba(0,0,0,1)"
+        bm.backgroundOverlay.style.backgroundColor = "rgba(0,0,0,0.8)"
     }
 
     function resetMapPick(bm) {
-        bm.backgroundOverlay.style.color = "rgba(0,0,0,0.5)"
+        bm.backgroundOverlay.style.backgroundColor = "rgba(0,0,0,0.5)"
         bm.blinkoverlay.style.animation = 'none';
         bm.artist.style.opacity = '1';
         bm.songAndDiff.style.opacity = '1';
