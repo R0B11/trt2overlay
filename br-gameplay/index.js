@@ -143,7 +143,6 @@ let playerScoreAnimation = {}
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
 
     if (currentSongID != data.menu.bm.id) {
         currentSongID = data.menu.bm.id
@@ -159,14 +158,15 @@ socket.onmessage = event => {
                 animation.SRStat.update(currentSR)
 
                 // Map Mod Slot Color
-                currentMapMod = currentPool[i].mod.toUpperCase().slice(0,2)
+                currentMapMod = allMaps[i].mod.toUpperCase().slice(0,2)
+                console.log(currentMapMod)
                 switch (currentMapMod.toUpperCase()) {
-                    case "NM": mapModSlot.css("background-color","#919191")
-                    case "HD": mapModSlot.css("background-color","#ffc728")
-                    case "HR": mapModSlot.css("background-color","#f4154b")
-                    case "DT": mapModSlot.css("background-color","#b013f2")
-                    case "FM": mapModSlot.css("background-color","#17b7ff")
-                    case "TB": mapModSlot.css("background-color","#ff1df5")
+                    case "NM": mapModSlot.css("background-color","#919191"); break;
+                    case "HD": mapModSlot.css("background-color","#ffc728"); break;
+                    case "HR": mapModSlot.css("background-color","#f4154b"); break;
+                    case "DT": mapModSlot.css("background-color","#b013f2"); break;
+                    case "FM": mapModSlot.css("background-color","#17b7ff"); break;
+                    case "TB": mapModSlot.css("background-color","#ff1df5"); break;
                 }
                 
                 // AR

@@ -86,17 +86,24 @@ let roundName = $("#roundName")
 let currentRoundName
 
 // Current Pool
-let allMaps
-let currentPool = []
-let poolInformationRequest = new XMLHttpRequest()
-poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
-poolInformationRequest.onreadystatechange = function() {
-    if (this.status == 404) return
-    if (this.readyState != 4) return
-    allMaps = JSON.parse(this.responseText)
-    console.log(allMaps)
+let allMaps = []
+const getPoolInfo = async function() {
+    let poolInformationRequest = new XMLHttpRequest()
+    poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+    poolInformationRequest.onreadystatechange = function() {
+        if (this.status == 404) return
+        if (this.readyState != 4) return
+        allMaps = JSON.parse(this.responseText)
+
+        for (let i = 0; i < allMaps.length; i++) {
+            allMaps[i].metadata = JSON.parse(allMaps[i].metadata)
+        }
+        console.log(allMaps)
+    }
+    await poolInformationRequest.send()
 }
-poolInformationRequest.send()
+
+getPoolInfo()
 
 let animation = {
     SRStat: new CountUp('SRStat', 0, 0, 2, .5, {useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "*"}),
@@ -142,23 +149,26 @@ socket.onmessage = event => {
         poolMapFound = false
         mapModSlot.css("display", "none")
 
-        for (let i = 0; i < currentPool.length; i++) {
-            if (currentPool[i].osuMapId == currentSongID) {
+        for (let i = 0; i < allMaps.length; i++) {
+            console.log(allMaps[i].osuMapId == currentSongID, currentSongID)
+            if (allMaps[i].osuMapId == currentSongID) {
                 poolMapFound = true
                 mapModSlot.css("display","block")
                 mapModSlot.text(allMaps[i].mod)
-                currentSR = currentPool[i].postModSr
+                console.log(mapModSlot)
+                currentSR = allMaps[i].postModSr
                 animation.SRStat.update(currentSR)
 
                 // Map Mod Slot Color
-                currentMapMod = currentPool[i].mod.toUpperCase().slice(0,2)
+                currentMapMod = allMaps[i].mod.toUpperCase().slice(0,2)
+                console.log(currentMapMod)
                 switch (currentMapMod) {
-                    case "NM": mapModSlot.css("background-color","#919191")
-                    case "HD": mapModSlot.css("background-color","#ffc728")
-                    case "HR": mapModSlot.css("background-color","#f4154b")
-                    case "DT": mapModSlot.css("background-color","#b013f2")
-                    case "FM": mapModSlot.css("background-color","#17b7ff")
-                    case "TB": mapModSlot.css("background-color","#ff1df5")
+                    case "NM": mapModSlot.css("background-color","#919191"); break;
+                    case "HD": mapModSlot.css("background-color","#ffc728"); break;
+                    case "HR": mapModSlot.css("background-color","#f4154b"); break;
+                    case "DT": mapModSlot.css("background-color","#b013f2"); break;
+                    case "FM": mapModSlot.css("background-color","#17b7ff"); break;
+                    case "TB": mapModSlot.css("background-color","#ff1df5"); break;
                 }
                 
                 // AR
@@ -175,6 +185,7 @@ socket.onmessage = event => {
                 animation.mapStatsBPM.update(currentBPM)
                 // Song Title and Artist
                 currentSongArtist = allMaps[i].metadata.artist
+                console.log(allMaps[i].metadata.title)
                 currentSongName = allMaps[i].metadata.title
                 mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
                 
@@ -185,7 +196,7 @@ socket.onmessage = event => {
                 mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
                 // Set Creator
                 currentSongSetCreator = allMaps[i].metadata.creator
-                mapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+                mapSetCreator.text(currentSongSetCreator.toUpperCase())
                 // Set / BG
                 currentSongSetID = allMaps[i].metadata.beatmapset_id
                 bottomBackground.css("backgroundImage",`url("https://assets.ppy.sh/beatmaps/${currentSongSetID}/covers/cover.jpg")`)
@@ -242,7 +253,7 @@ socket.onmessage = event => {
         // Set Creator Name
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {
             currentSongSetCreator = data.menu.bm.metadata.mapper
-            mapSetCreator.innerText = currentSongSetCreator.toUpperCase()
+            mapSetCreator.text(currentSongSetCreator.toUpperCase())
         }
         // Set / BG
         if (currentSongSetID != data.menu.bm.set) {
@@ -398,8 +409,6 @@ const changeRoundInformation = (roundAbbreviation, roundText) => {
 
     let cookieValue = `roundName=${roundAbbreviation}; path=/`
     document.cookie = cookieValue
-
-    currentPool = allMaps.filter(map => map.round == roundAbbreviation)
 }
 
 // Cookie to Win Screen
@@ -432,15 +441,15 @@ window.setInterval(() => {
         }
     }
 
-    cookieName = "mapPicker"
+    cookieName = "lastPick"
     match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
     if (match != null) {
-        if (match[1] == "redPick") {
-            playerLeftMapPickText.csS("display","block")
-            playerRightMapPickText.csS("display","none")
-        } else if (match[1] == "bluePick") {
-            playerLeftMapPickText.csS("display","none")
-            playerRightMapPickText.csS("display","block")
+        if (match[1] == "red") {
+            playerLeftMapPickText.css("display","block")
+            playerRightMapPickText.css("display","none")
+        } else if (match[1] == "blue") {
+            playerLeftMapPickText.css("display","none")
+            playerRightMapPickText.css("display","block")
         }
     }
 }, 500)
