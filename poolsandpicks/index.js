@@ -94,7 +94,6 @@ socket.onmessage = event => {
     // Team Name Update
     if (redName != data.tourney.manager.teamName.left) redName = data.tourney.manager.teamName.left
     if (blueName != data.tourney.manager.teamName.right) blueName = data.tourney.manager.teamName.right
-    
     // Player Details Update
     // Profile Picture
     if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
