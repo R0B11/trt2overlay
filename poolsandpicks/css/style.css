@@ -344,65 +344,115 @@ html {
 /* ---------- Mappool Display ---------- */
 
 #mappoolDisplay {
-    /* background-color: green; */
     opacity: 1;
-    height: 660px;
-    width: 1340px;
-    position: absolute;
-    top: 210px;
-    right: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 1395px; height: 100%;
+    position: absolute; right: 0px;
+    display: flex; justify-content: center; align-items: center;
     font-family: 'Lexend';
     transition: ease-in-out;
 }
-
 #mappoolContainer {
-    /* position: absolute;
-    top: 20px; */
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
     margin-bottom: 0;
 }
 
 .mapContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: flex; justify-content: center; flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 12px;
 }
-.map {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 5px;
+.mapBorder {
+    position: relative;
     width: var(--map-width);
-    height: 54px;
-    background-color: #161616;
+    height: 69px;
+    background-color: white;
     background-size: 100%;
-    background-position: center center;
-    color: #161616;
+    background-position: center;
     transition: ease-in-out 200ms;
+    clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 100%, 8.25% 100%, 0% 50%)
 }
-
-.mapInfo {
+.mapBackground {
+    position: relative; top: 2.5px; left: 2px;
+    width: 426px; height: 67px;
+    background-color: black;
+    clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 95%, 8.25% 95%, 0% 44%);
+}
+.mapBackgroundOverlay {
+    position: relative; top: -65px; left: 2px;
+    width: 426px; height: 67px;
+    background-color: rgba(0,0,0,0.6);
+    clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 95%, 8.25% 95%, 0% 44%);
+}
+.mapModID {
+    position: relative; top: -128px; left: 6px;
+    width: 104px; height: 57px;
+    background-color: white;
+    clip-path: polygon(0% 0%, 0% 43%, 32% 100%, 100% 100%, 100% 57%, 64% 0%);
+    color: white;
+    font-family: 'IBM PLEX MONO'; font-size: 25px;
+    line-height: 57px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.mapTextList {
+    position: absolute;
+    top: 2px;
+    width: calc(100% - 118px);
+    right: 1px;
+    height: calc(100% - 4px);
+    display: flex;
+}
+.mapTextContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    flex: 6;
+    align-items: center;
+    justify-content: center;
+}
+.mapTextArtist {
+    font-family: 'IBM Plex Mono';
+    font-size: 16px;
+    color: #F9DDA7;
+    letter-spacing: 0.7px;
+    line-height: 19px;
     width: 100%;
-    margin-left: 7px;
-    margin-right: 75px;
-    transform: translateY(2px);
-    color: #fff;
-    font-size: 17px;
-    /* text-transform: uppercase; */
-    letter-spacing: 1px;
-    user-select: none;
-    transition: ease-in-out 200ms;
-    white-space: nowrap;
-    overflow: hidden;
+}
+.mapSongAndDiff {
+    color: white;
+    font-family: 'IBM Plex Mono';
+    font-size: 13px;
+    letter-spacing: -1px;
     text-overflow: ellipsis;
-    text-shadow: 2px 2px 1px rgba(30, 30, 30, 0.8);
+    overflow: hidden;
+    width: 100%;
+    line-height: 14px;
+}
+.mapMapperContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 3;
+    padding: 0px 8px;
+    gap: 5px;
+}
+.mapMapperText {
+    color: black;
+    font-family: 'Lexend';
+    background: white;
+    display: inline-block;
+    padding: 0px 7px;
+    width: 49px;
+    font-size: 12px;
+}
+.mapMapper {
+    font-family: 'Lexend';
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
 }
 
 .artist {
@@ -427,11 +477,11 @@ html {
     font-family: 'Lexend';
     top: 0;
     left: 0;
-    height: 54px;
+    height: 69px;
     width: var(--map-width);
     box-sizing: border-box;
     color: #ffffff;
-    line-height: 54px;
+    line-height: 69px;
     font-size: 25px;
     text-align: center;
     user-select: none;
@@ -458,11 +508,12 @@ html {
 }
 
 .blinkoverlay {
-    position: absolute;
+    position: absolute; top: 0; left: 0;
     width: 100%;
-    height: 54px;
+    height: 100%;
     background-color: #FFF;
     opacity: 0.0;
+    clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 100%, 8.25% 100%, 0% 50%);
 }
 
 @keyframes blinker {
@@ -522,17 +573,16 @@ html {
 }
 
 .icon-tb {
-    background-color: #0f4132;
+    background-color: #FF1CF4;
     /* color: #e2ffef; */
     /* border: 2px solid #6de2a7; */
 }
 
 .clicker {
-    margin: 0 6px;
-    margin-bottom: 12px;
+    position: relative;
+    margin: 7px 10px;
     width: var(--map-width);
     transition: ease-in-out 300ms;
-    box-shadow: 0 0 12px rgba(10, 10, 10, 0.8);
 }
 
 #overlay {
@@ -574,28 +624,31 @@ html {
 }
 
 .boxText {
+    font-size: 32px;
     left: 0px;
 }
 
 .button {
-    min-width: 60px;
+    min-width: 120px;
     width: auto;
-    height: 45px;
-    margin: 1px 1px;
+    height: 90px;
+    margin: 5px 5px;
     border-radius: 5px;
     font-family: 'Lexend';
-    font-size: 15px;
+    font-size: 30px;
 }
 
 .buttonBox {
     border: white solid;
-    width: 210px;
-    height: 130px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    border-width: 3px;
+    width: 420px;
+    height: 260px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    border-width: 6px;
 }
+#controlPanelFirstBanAndPick { position: absolute; left: 480px; top: 0; }
+#controlPanelGenerateAndRemoveTiles { position: absolute; left: 900px; top: 0;}
 
 .bigButton {
     position: absolute;
@@ -626,5 +679,5 @@ html {
 #secondColumn {
     position: absolute;
     top: 0px;
-    left: 250px;
+    left: 960px;
 }
