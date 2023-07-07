@@ -10,7 +10,6 @@ socket.onclose = (event) => {
 }
 socket.onerror = (error) => console.log('Socket Error: ', error)
 
-
 let poolInformationRequest = new XMLHttpRequest()
 poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
 poolInformationRequest.onreadystatechange = function() {
@@ -21,11 +20,12 @@ poolInformationRequest.onreadystatechange = function() {
 }
 poolInformationRequest.send()
 
-let firstPick;
-let firstBan;
+let firstPick = null;
+let firstBan = null;
 let banNum; 
-let bestOf;
+let bestOf = null;
 let currentRound;
+
 
 const beatmaps = new Set(); // Store beatmapID;
 const load_maps = async () => await $.getJSON('../_data/beatmap_data.json');
@@ -73,6 +73,9 @@ function displayPlayerFlag(country, element) {
 
 let starVisibility;
 let currentPicker;
+
+document.cookie = `roundName=; path=/`
+
 
 function setRound(round){
     switch (round) {
@@ -291,6 +294,10 @@ function pickOrder(pick){
 }
 
 function generateTiles() {
+    if (firstPick == null || firstBan == null || bestOf == null) {
+        $("#ctrlGentileText").html("Generate Tiles: Missing Selection");
+        return;
+    }
     $(".mapCard").remove();
     for (let i = 0; i < ((bestOf-1) / 2) + banNum; i++) {
         // Checking if a ban card needs to be made
@@ -520,23 +527,12 @@ function generateTiles() {
         if (firstPick == "blue") { $(`.pickCardRed`).css("left","55px"); }
         else if (firstPick == "red") { $(`.pickCardBlue`).css("left","55px"); }
     }
-    
+    $("#ctrlGentileText").html("Generate Tiles: DONE");
+    $("#ctrlRemtileText").html("Remove Tiles:");
 }
 
 // TODO: Add map bg addition functionality 
 // TODO: 
-function mapBan(){
-    $("#redBan0 .mapCardContent").html("").toggleClass("tile-picking").css({
-        "background-image": "url(./static/test-map.png)",
-        "clip-path": "var(--map-clip-path)",
-        "opacity": 0.4
-    });
-    $("#redBan0 #map-slot-block").css({
-        "opacity": 1,
-        "background-color": "var(--red)"
-    });
-    $("#redBan0 #map-slot-block #mapslottext").html("HR1");
-}
 
 class Beatmap {
     constructor(mods, beatmapID, layerName, identifier) {
@@ -743,14 +739,17 @@ async function setupBeatmaps() {
         bm.generate();
         bm.clicker.addEventListener('mousedown', function () {
             bm.clicker.addEventListener('click', function (event) {
+                // Event if a left click happens
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=${bm.beatmapID}-red;path=/`;
+                    document.cookie = `lastPick=red;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                     }, 300);
-                } else {
+                } 
+                // Event if a left click happens
+                else {
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -762,7 +761,7 @@ async function setupBeatmaps() {
             bm.clicker.addEventListener('contextmenu', function (event) {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=${bm.beatmapID}-blue;path=/`;
+                    document.cookie = `lastPick=blue;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
@@ -819,7 +818,6 @@ function pickOrder(pick){
     $("#redFirstPickText").css("color","var(--redPlayerCardColour)");
 
     $("#controlPanel .buttonBox #ctrlPickText").html(`Select 1st Pick: ${pick}`)
-
 }
 
 function removeTiles() {
@@ -856,5 +854,32 @@ function viewPicks () {
     
 
 }
+
+function tileAdd(color, action, identifier, mapID, mapSlot){
+    $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
+        "background-image": `url(https://assets.ppy.sh/beatmaps/${mapID}/covers/cover.jpg)`,
+        "clip-path": "var(--map-clip-path)",
+        "opacity": 0.4
+    });
+    $(`#${color}${action}${identifier} #map-slot-block`).css({
+        "opacity": 1,
+        "background-color": `var(--${color})`
+    });
+    $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html(`${mapSlot}`);
+}
+
+function tileRemove(color, action, identifier){
+    $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
+        "background-image": ``,
+        "clip-path": "",
+        "opacity": 1
+    });
+    $(`#${color}Ban${identifier} #map-slot-block`).css({
+        "opacity": 0,
+        "background-color": `var(--${color})`
+    });
+    $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html('');
+}
+
 
 setupBeatmaps();
