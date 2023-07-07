@@ -40,6 +40,8 @@ let banNum;
 let bestOf = null;
 let currentRound;
 
+let currentBanAmnt = 1;
+
 let blueActionStatus = 0;
 let redActionStatus = 0;
 
@@ -388,7 +390,7 @@ function generateTiles() {
             var redOuterDiv = $('<div/>', {
                 id: `redPick${i}`,
                 class: 'mapCard pickCardRed',
-                style: 'opacity: 1'
+                style: 'opacity: 0'
             })
 
             $('<img/>', {
@@ -720,13 +722,16 @@ async function setupBeatmaps() {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                         if (bm.mods.includes("TB")) {
-                            return;
+                            // here onion
+                            return; // remove this when done
                         }
                         else if (event.ctrlKey) {
                             tileAdd("red", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
+                            redActionStatus += 1
                         }
                         else {
                             tileAdd("red", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
+                            redActionStatus += 1
                         }
                     }, 300);
                 } else {
@@ -747,13 +752,16 @@ async function setupBeatmaps() {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
                         if (bm.mods.includes("TB")) {
-                            return;
+                            //here onion
+                            return; // remove this when done
                         }
                         else if (event.ctrlKey) {
-                            tileAdd("blue", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
+                            tileAdd("blue", "Ban", blueActionStatus, bm.backgroundURL, bm.identifier)
+                            blueActionStatus += 1
                         }
                         else {
-                            tileAdd("blue", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
+                            tileAdd("blue", "Pick", blueActionStatus, bm.backgroundURL, bm.identifier)
+                            blueActionStatus += 1
                         }
                     }, 150);
                 } else {
@@ -842,6 +850,7 @@ function viewPicks () {
 }
 
 function tileAdd(color, action, identifier, background, mapSlot){
+    // Adding selected map to correct tile
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
         "background-image": `url(${background})`,
         "clip-path": "var(--map-clip-path)",
@@ -859,11 +868,86 @@ function tileAdd(color, action, identifier, background, mapSlot){
     }
     $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html(`${mapSlot}`);
 
-    identifier += 1;
+    
+
+    // Check to see if next tile needs to be revealed for bans and first pick
+    // TODO: If last ban, show first pick card
+    if (action == "pick"){
+        return;
+    }
+    
+    if (banNum == 1){
+        if (firstBan == "red") {
+            if (currentBanAmnt == 1){
+                $(`#blueBan0`).css("opacity", 1);
+                currentBanAmnt += 1;
+            }
+            else if (currentBanAmnt == 2) {
+                $(`#${firstPick}Pick1`).css("opacity", 1);
+            }
+        }
+        else if (firstBan == "blue") {
+            if (currentBanAmnt == 1){
+                $(`#redBan0`).css("opacity", 1);
+                currentBanAmnt += 1;
+            }
+            else if (currentBanAmnt == 2) {
+                $(`#${firstPick}Pick1`).css("opacity", 1);
+            }
+        }
+        return;
+    }
+
+    if (firstBan == "red"){
+        if (currentBanAmnt == 1) {
+            $(`#blueBan0`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else if (currentBanAmnt == 2) {
+            $(`#blueBan1`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else if (currentBanAmnt == 3) {
+            $(`#redBan1`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else {
+            if (firstPick == "red") {
+                $(`#redPick2`).css("opacity", 1);
+            }
+            else {
+                $(`#bluePick2`).css("opacity", 1);
+            }
+        }
+    }
+    else if (firstBan == "blue"){
+        if (currentBanAmnt == 1) {
+            $(`#redBan0`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else if (currentBanAmnt == 2) {
+            $(`#redBan1`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else if (currentBanAmnt == 3) {
+            $(`#blueBan1`).css("opacity", 1);
+            currentBanAmnt += 1;
+        }
+        else {
+            if (firstPick == "red") {
+                $(`#redPick2`).css("opacity", 1);
+            }
+            else {
+                $(`#bluePick2`).css("opacity", 1);
+            }
+        }
+    }
 }
 
 function tileRemove(color, action, identifier){
-    identifier -= 1;
+    identifier -= 1; // this doesnt work
+
+    // resets the look of the selected tile
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
         "background-image": ``,
         "clip-path": "",
