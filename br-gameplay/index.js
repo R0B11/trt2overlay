@@ -112,6 +112,11 @@ poolInformationRequest.onreadystatechange = function() {
     if (this.status >= 400) { console.error(this.statusText); return;}
     if (this.readyState != 4) return
     allMaps = JSON.parse(this.responseText)
+
+    for (let i = 0; i < allMaps.length; i++) {
+        allMaps[i].metadata = JSON.parse(allMaps[i].metadata)
+    }
+    console.log(allMaps)
 }
 poolInformationRequest.send()
 
