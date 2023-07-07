@@ -480,7 +480,8 @@ function generateTiles() {
 
             // Append outer div to body
             $('#redPickArea').append(redOuterDiv);
-            redPickElementArray.push(redOuterDiv)
+            redPickElementArray.push(redOuterDiv);
+            console.log(redPickElementArray)
 
             // Blue Side 
             // Create and combine all elements before adding it to the div
@@ -521,7 +522,6 @@ function generateTiles() {
             bluePickElementArray.push(blueOuterDiv)
         }
     }
-
     // Placing the correct ban card first based on first ban
     if ( firstBan == 'blue' ){
         // If there is only one ban, make the ban box smaller and center the ban tiles
@@ -988,11 +988,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
             currentBanAmnt += 1;
             $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
-        else if (currentBanAmnt == 4) {
-            currentBanAmnt += 1;
-            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
-        }
-        if (currentBanAmnt > 3) {
+        else if (currentBanAmnt >= 4) {
             if (firstPick == "red") {
                 $(`#redPick2`).css("opacity", 1);
             }
@@ -1017,11 +1013,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
             currentBanAmnt += 1;
             $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
-        else if (currentBanAmnt == 4) {
-            currentBanAmnt += 1;
-            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
-        }
-        if (currentBanAmnt > 3) {
+        else if (currentBanAmnt >= 4) {
             if (firstPick == "red") {
                 $(`#redPick2`).css("opacity", 1);
             }
