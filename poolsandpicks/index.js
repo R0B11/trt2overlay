@@ -10,6 +10,8 @@ socket.onclose = (event) => {
 }
 socket.onerror = (error) => console.log('Socket Error: ', error)
 
+document.cookie = `roundName=; path=/`
+
 let allMaps
 let currentPool
 const getPoolInfo = async function() {
