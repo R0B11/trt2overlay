@@ -386,6 +386,10 @@ function generateTiles() {
                 style: 'opacity: 1'
             })
 
+            $('<img/>', {
+                class: 'circle'
+            }).appendTo(redOuterDiv)
+
             $('<div/>', {
                 class: 'mapCardContent tile-picking',
                 text: 'PICKING'
