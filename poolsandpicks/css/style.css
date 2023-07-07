@@ -27,6 +27,8 @@
     --one-ban-width: 175px;
 
     --map-width: 430px;
+
+    --mappoolRed: #ff003e;
 }
 
 body,
@@ -487,15 +489,16 @@ html {
     user-select: none;
     transition: ease-in 200ms;
     opacity: 0;
+    font-family: 'IBM Plex Mono';
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.70);
 }
 
 .pickRed {
-	color: #ff8d8d;
+	color: var(--mappoolRed);
 }
 
 .pickBlue {
-	color: #93b5ff;
+	color: var(--blue);
 }
 
 .overlay {
