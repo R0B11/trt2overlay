@@ -112,6 +112,11 @@ poolInformationRequest.onreadystatechange = function() {
     if (this.status >= 400) { console.error(this.statusText); return;}
     if (this.readyState != 4) return
     allMaps = JSON.parse(this.responseText)
+
+    for (let i = 0; i < allMaps.length; i++) {
+        allMaps[i].metadata = JSON.parse(allMaps[i].metadata)
+    }
+    console.log(allMaps)
 }
 poolInformationRequest.send()
 
@@ -274,42 +279,42 @@ socket.onmessage = event => {
         player1.userID = userID1
         player1.username = data.tourney.ipcClients[1].spectating.name
     }
-    // if (userID2 != data.tourney.ipcClients[2].spectating.userID) {
-    //     userID2 = data.tourney.ipcClients[2].spectating.userID
-    //     arrayOfIDs[2] = userID2
-    //     player2.userID = userID2
-    //     player2.username = data.tourney.ipcClients[2].spectating.name
-    // }
-    // if (userID3 != data.tourney.ipcClients[3].spectating.userID) {
-    //     userID3 = data.tourney.ipcClients[3].spectating.userID
-    //     arrayOfIDs[3] = userID3
-    //     player3.userID = userID3
-    //     player3.username = data.tourney.ipcClients[3].spectating.name
-    // }
-    // if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
-    //     userID4 = data.tourney.ipcClients[4].spectating.userID
-    //     arrayOfIDs[4] = userID4
-    //     player4.userID = userID4
-    //     player4.username = data.tourney.ipcClients[4].spectating.name
-    // }
-    // if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
-    //     userID5 = data.tourney.ipcClients[5].spectating.userID
-    //     arrayOfIDs[5] = userID5
-    //     player5.userID = userID5
-    //     player5.username = data.tourney.ipcClients[5].spectating.name
-    // }
-    // if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
-    //     userID6 = data.tourney.ipcClients[6].spectating.userID
-    //     arrayOfIDs[6] = userID6
-    //     player6.userID = userID6
-    //     player6.username = data.tourney.ipcClients[6].spectating.name
-    // }
-    // if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
-    //     userID7 = data.tourney.ipcClients[7].spectating.userID
-    //     arrayOfIDs[7] = userID7
-    //     player7.userID = userID7
-    //     player7.username = data.tourney.ipcClients[7].spectating.name
-    // }
+    if (userID2 != data.tourney.ipcClients[2].spectating.userID) {
+        userID2 = data.tourney.ipcClients[2].spectating.userID
+        arrayOfIDs[2] = userID2
+        player2.userID = userID2
+        player2.username = data.tourney.ipcClients[2].spectating.name
+    }
+    if (userID3 != data.tourney.ipcClients[3].spectating.userID) {
+        userID3 = data.tourney.ipcClients[3].spectating.userID
+        arrayOfIDs[3] = userID3
+        player3.userID = userID3
+        player3.username = data.tourney.ipcClients[3].spectating.name
+    }
+    if (userID4 != data.tourney.ipcClients[4].spectating.userID) {
+        userID4 = data.tourney.ipcClients[4].spectating.userID
+        arrayOfIDs[4] = userID4
+        player4.userID = userID4
+        player4.username = data.tourney.ipcClients[4].spectating.name
+    }
+    if (userID5 != data.tourney.ipcClients[5].spectating.userID) {
+        userID5 = data.tourney.ipcClients[5].spectating.userID
+        arrayOfIDs[5] = userID5
+        player5.userID = userID5
+        player5.username = data.tourney.ipcClients[5].spectating.name
+    }
+    if (userID6 != data.tourney.ipcClients[6].spectating.userID) {
+        userID6 = data.tourney.ipcClients[6].spectating.userID
+        arrayOfIDs[6] = userID6
+        player6.userID = userID6
+        player6.username = data.tourney.ipcClients[6].spectating.name
+    }
+    if (userID7 != data.tourney.ipcClients[7].spectating.userID) {
+        userID7 = data.tourney.ipcClients[7].spectating.userID
+        arrayOfIDs[7] = userID7
+        player7.userID = userID7
+        player7.username = data.tourney.ipcClients[7].spectating.name
+    }
 
     // Count number of players from the list
     previousNumberOfPlayers = currentNumberOfPlayers

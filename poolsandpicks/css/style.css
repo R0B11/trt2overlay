@@ -20,7 +20,10 @@
     --red: #ed144a;
     --purple: #8815f4;
     --grey: #959595;
-    --yellow: #ffd75f;
+    --yellow: #ffc728;
+
+    /* --mappoolRed: #ed426d; */
+    --mappoolRed: #ff003e;
 
     --map-clip-path: polygon(0% 13%, 51% 0%, 100% 0%, 100% 86%,45% 100%, 0% 100%);
     --two-bans-width: 350px;
@@ -382,12 +385,12 @@ html {
 }
 .mapBackgroundOverlay {
     position: relative; top: -65px; left: 2px;
-    width: 426px; height: 67px;
+    width: 426px; height: 67.5px;
     background-color: rgba(0,0,0,0.6);
     clip-path: polygon(0% 0%, 92.5% 0%, 100% 50%, 100% 95%, 8.25% 95%, 0% 44%);
 }
 .mapModID {
-    position: relative; top: -128px; left: 6px;
+    position: relative; top: -128.5px; left: 6px;
     width: 104px; height: 57px;
     background-color: white;
     clip-path: polygon(0% 0%, 0% 43%, 32% 100%, 100% 100%, 100% 57%, 64% 0%);
@@ -412,6 +415,8 @@ html {
     flex: 6;
     align-items: center;
     justify-content: center;
+    max-width: 200px;
+    overflow-wrap: break-word
 }
 .mapTextArtist {
     font-family: 'IBM Plex Mono';
@@ -455,6 +460,7 @@ html {
     font-weight: 600;
     color: white;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .artist {
@@ -476,7 +482,7 @@ html {
 
 .pickingStatus {
     position: absolute;
-    font-family: 'Lexend';
+    font-family: 'IBM Plex Mono';
     top: 0;
     left: 0;
     height: 69px;
@@ -489,8 +495,7 @@ html {
     user-select: none;
     transition: ease-in 200ms;
     opacity: 0;
-    font-family: 'IBM Plex Mono';
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.70);
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
 }
 
 .pickRed {

@@ -10,15 +10,27 @@ socket.onclose = (event) => {
 }
 socket.onerror = (error) => console.log('Socket Error: ', error)
 
-let poolInformationRequest = new XMLHttpRequest()
-poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
-poolInformationRequest.onreadystatechange = function() {
-    if (this.status == 404) return
-    if (this.readyState != 4) return
-    allMaps = JSON.parse(this.responseText)
-    console.log(allMaps)
+let allMaps
+let currentPool
+const getPoolInfo = async function() {
+    let poolInformationRequest = new XMLHttpRequest()
+    poolInformationRequest.open("GET","https://trt2.btmc.live/api/maps/all")
+    poolInformationRequest.onreadystatechange = function() {
+        if (this.status == 404) return
+        if (this.readyState != 4) return
+        allMaps = JSON.parse(this.responseText)
+
+        for (let i = 0; i < allMaps.length; i++) {
+            allMaps[i].metadata = JSON.parse(allMaps[i].metadata)
+            if (allMaps[i].mod.length == 3) allMaps[i].order = parseInt(allMaps[i].mod.charAt(2))
+            allMaps[i].identifier = allMaps[i].mod
+            allMaps[i].mod = allMaps[i].mod.slice(0,2).toUpperCase()
+        }
+        console.log(allMaps)
+    }
+    await poolInformationRequest.send()
 }
-poolInformationRequest.send()
+getPoolInfo()
 
 let firstPick = null;
 let firstBan = null;
@@ -74,36 +86,16 @@ function displayPlayerFlag(country, element) {
 let starVisibility;
 let currentPicker;
 
-document.cookie = `roundName=; path=/`
+// Team Name
+let redName = 'Red Team', blueName = 'Blue Team';
 
-
-function setRound(round){
-    switch (round) {
-        case "RO16": case "QF": case "SF":
-            banNum = 1;
-            bestOf = 9;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        case "F": case "GF": case "BR1v1":
-            banNum = 2;
-            bestOf = 13;
-            $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break;
-        default:
-            break;
-    }
-
-    if (currentRound != round) {
-        currentRound = round
-    }
-
-    document.cookie = `roundName=${round}; path=/`
-
-}
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-
+    console.log(data)
+    // Team Name Update
+    if (redName != data.tourney.manager.teamName.left) redName = data.tourney.manager.teamName.left
+    if (blueName != data.tourney.manager.teamName.right) blueName = data.tourney.manager.teamName.right
     // Player Details Update
     // Profile Picture
     if (currentPlayerRedID != data.tourney.ipcClients[0].spectating.userID) {
@@ -205,8 +197,6 @@ let gameState;
 
 let hasSetup = false;
 
-let redName = 'Red Team', blueName = 'Blue Team';
-
 let banCount = 0;
 let pickCount = 0;
 
@@ -247,20 +237,39 @@ function setRound(round){
             bestOf = 9;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
             break;
-        case "F": case "GF": case "BR1v1":
+        case "F": case "GF": case "BR1":
             banNum = 2;
             bestOf = 13;
             $("#controlPanel .buttonBox #ctrlRoundText").html(`Select round: ${round}`);
-            break
+            break;
         default:
             break;
     }
 
-    if (currentRound != round) {
-        currentRound = round
-    }
-
+    if (currentRound != round) currentRound = round
     document.cookie = `roundName=${round}; path=/`
+
+    currentPool = allMaps.filter(map => map.round == round)
+    let NMPool = currentPool.filter(map => map.mod == "NM")
+    let HDPool = currentPool.filter(map => map.mod == "HD")
+    let HRPool = currentPool.filter(map => map.mod == "HR")
+    let DTPool = currentPool.filter(map => map.mod == "DT")
+    let TBPool = currentPool.filter(map => map.mod == "TB")
+
+    NMPool.sort((mapA, mapB) => mapA.order - mapB.order)
+    HDPool.sort((mapA, mapB) => mapA.order - mapB.order)
+    HRPool.sort((mapA, mapB) => mapA.order - mapB.order)
+    DTPool.sort((mapA, mapB) => mapA.order - mapB.order)
+    TBPool.sort((mapA, mapB) => mapA.order - mapB.order)
+    let currentPoolTemp = [NMPool, HDPool, HRPool, DTPool, TBPool]
+    currentPool = []
+    
+    for (let i = 0; i < currentPoolTemp.length; i++) {
+        for (let j = 0; j < currentPoolTemp[i].length; j++) {
+            currentPool.push(currentPoolTemp[i][j])
+        }
+    }
+    setupBeatmaps()
 }
 
 function banOrder(ban){
@@ -544,11 +553,12 @@ class Beatmap {
     generate() {
         let mappoolContainer = document.getElementById(`${this.mods}`);
 
+        // Clicker
         this.clicker = document.createElement('div');
         this.clicker.id = `${this.layerName}Clicker`;
+        this.clicker.setAttribute('class', 'clicker');
 
-        mappoolContainer.appendChild(this.clicker);
-        let clickerObj = document.getElementById(this.clicker.id);
+        
         // Border
         this.border = document.createElement("div")
         this.border.classList.add(`icon-${this.mods.toLowerCase()}`)
@@ -598,10 +608,10 @@ class Beatmap {
         this.pickedStatus = document.createElement('div');
         this.pickedStatus.classList.add("pickingStatus")
         // Append Everything
-        clickerObj.appendChild(this.border)
+        mappoolContainer.appendChild(this.clicker);
+        this.clicker.appendChild(this.border)
         this.border.appendChild(this.background)
         this.border.appendChild(this.backgroundOverlay)
-        
         this.border.appendChild(this.modID)
         this.border.appendChild(this.mapTextList)
         this.mapTextList.appendChild(this.mapTextContainer)
@@ -614,50 +624,8 @@ class Beatmap {
         this.mapTextList.appendChild(this.mapperContainer)
         this.mapperContainer.appendChild(this.mapperText)
         this.mapperContainer.appendChild(this.mapper)
-        clickerObj.appendChild(this.blinkoverlay)
-        clickerObj.appendChild(this.pickedStatus)
-        
-        // this.bg = document.createElement('div');
-        // this.map = document.createElement('div');
-        // this.overlay = document.createElement('div');
-        // this.artist = document.createElement('div');
-        // this.title = document.createElement('div');
-        // this.difficulty = document.createElement('div');
-        // this.stats = document.createElement('div');
-        // this.modIcon = document.createElement('div');
-
-        // this.bg.id = this.layerName;
-        // this.map.id = `${this.layerName}BG`;
-        // this.overlay.id = `${this.layerName}Overlay`;
-        // this.blinkoverlay.id = `${this.layerName}BlinkOverlay`;
-        // this.artist.id = `${this.layerName}ARTIST`;
-        // this.title.id = `${this.layerName}TITLE`;
-        // this.difficulty.id = `${this.layerName}DIFF`;
-        // this.stats.id = `${this.layerName}Stats`;
-        // this.modIcon.id = `${this.layerName}ModIcon`;
-        // this.pickedStatus.id = `${this.layerName}STATUS`;
-
-        // this.artist.setAttribute('class', 'mapInfo artist');
-        // this.title.setAttribute('class', 'mapInfo title');
-        // this.difficulty.setAttribute('class', 'mapInfo diff');
-        // this.map.setAttribute('class', 'map');
-        // this.pickedStatus.setAttribute('class', 'pickingStatus');
-        // this.overlay.setAttribute('class', 'overlay');
-        // this.blinkoverlay.setAttribute('class', 'blinkoverlay');
-        // this.bg.setAttribute('class', 'statBG');
-        // this.modIcon.setAttribute('class', `modIcon icon-${this.mods.toLowerCase()}`);
-        // this.modIcon.innerHTML = `${this.mods}`;
-        this.clicker.setAttribute('class', 'clicker');
-        // document.getElementById(this.map.id).appendChild(this.overlay);
-        // document.getElementById(this.map.id).appendChild(this.blinkoverlay);
-        // document.getElementById(this.map.id).appendChild(this.artist);
-        // document.getElementById(this.map.id).appendChild(this.title);
-        // document.getElementById(this.map.id).appendChild(this.difficulty);
-        // clickerObj.appendChild(this.pickedStatus);
-        // clickerObj.appendChild(this.bg);
-        // clickerObj.appendChild(this.modIcon);
-
-        // this.clicker.style.transform = 'translateY(0)';
+        this.clicker.appendChild(this.blinkoverlay)
+        this.clicker.appendChild(this.pickedStatus)
     }
     grayedOut() {
         this.overlay.style.opacity = '1';
@@ -665,6 +633,10 @@ class Beatmap {
 }
 
 async function setupBeatmaps() {
+    let mapContainer = document.getElementsByClassName("mapContainer")
+    for (let i = 0; i < mapContainer.length; i++) {
+        mapContainer[i].innerHTML = ""
+    }
     hasSetup = true;
     let lastPicked = null;
 
@@ -677,24 +649,15 @@ async function setupBeatmaps() {
         TB: 0,
     };
 
+    let bms = currentPool;
 
-    const bms = [];
-    try {
-        $.ajaxSetup({ cache: false });
-        const jsonData = await $.getJSON(`../_data/beatmaps.json`);
-        console.log(jsonData.beatmaps.map(b => b.beatmap_id));
-        jsonData.beatmaps.map((beatmap) => {
-            bms.push(beatmap);
+    function countMods() {
+        currentPool.map((beatmap) => {
+            modsCount[beatmap.mod]++;
         });
-    } catch (error) {
-        console.error('Could not read JSON file', error);
-    }
-
-    (function countMods() {
-        bms.map((beatmap) => {
-            modsCount[beatmap.mods]++;
-        });
-    })();
+    };
+    countMods()
+    console.log(modsCount)
 
     let row = -1;
     let preMod = 0;
@@ -714,11 +677,11 @@ async function setupBeatmaps() {
         bm.modID.style.opacity = '0.3';
         bm.mapper.style.opacity = '0.3';
         bm.mapperText.style.opacity = '0.3';
-        bm.backgroundOverlay.style.color = "rgba(0,0,0,1)"
+        bm.backgroundOverlay.style.backgroundColor = "rgba(0,0,0,0.8)"
     }
 
     function resetMapPick(bm) {
-        bm.backgroundOverlay.style.color = "rgba(0,0,0,0.5)"
+        bm.backgroundOverlay.style.backgroundColor = "rgba(0,0,0,0.5)"
         bm.blinkoverlay.style.animation = 'none';
         bm.artist.style.opacity = '1';
         bm.songAndDiff.style.opacity = '1';
@@ -730,12 +693,12 @@ async function setupBeatmaps() {
     }
 
     bms.map(async (beatmap, index) => {
-        if (beatmap.mods !== preMod || colIndex % 3 === 0) {
-            preMod = beatmap.mods;
+        if (beatmap.mod !== preMod || colIndex % 3 === 0) {
+            preMod = beatmap.mod;
             colIndex = 0;
             row++;
         }
-        const bm = new Beatmap(beatmap.mods, beatmap.beatmap_id, `map${index}`, beatmap.identifier);
+        const bm = new Beatmap(beatmap.mod, beatmap.beatmap_id, `map${index}`, beatmap.identifier);
         bm.generate();
         bm.clicker.addEventListener('mousedown', function () {
             bm.clicker.addEventListener('click', function (event) {
@@ -776,18 +739,19 @@ async function setupBeatmaps() {
                 }
             });
         });
-        const stored_beatmaps = await load_maps();
-        const mapData = await getDataSet(stored_beatmaps, beatmap.beatmap_id);
-        bm.background.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.beatmapset_id}/covers/cover.jpg')`;
-        bm.songAndDiff.innerText = `${mapData.title} [${mapData.version}]`
-        bm.artist.innerText = mapData.artist
-        bm.mapper.innerText = mapData.creator
+        const stored_beatmaps = bms
+        const mapData = await getDataSet(stored_beatmaps, beatmap.osuMapId);
+        console.log(`https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg`)
+        bm.background.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg')`;
+        bm.songAndDiff.innerText = `${mapData.metadata.title} [${mapData.metadata.version}]`
+        bm.artist.innerText = mapData.metadata.artist
+        bm.mapper.innerText = mapData.metadata.creator
         beatmaps.add(bm);
     });
 }
 
 function getDataSet(stored_beatmaps, beatmap_id) {
-    let beatmap = stored_beatmaps.find(b => b.beatmap_id == beatmap_id);
+    let beatmap = stored_beatmaps.find(b => b.osuMapId == beatmap_id);
     return beatmap || null;
 };
 
@@ -851,7 +815,6 @@ function viewPicks () {
     // $("#pickBans").animate({
     //     opacity: '1'
     // }, 500, 'easeInOutQuart');
-    
 
 }
 
