@@ -40,6 +40,11 @@ let banNum;
 let bestOf = null;
 let currentRound;
 
+let blueActionStatus = 0;
+let redActionStatus = 0;
+
+let lastPick;
+
 
 const beatmaps = new Set(); // Store beatmapID;
 const load_maps = async () => await $.getJSON('../_data/beatmap_data.json');
@@ -659,7 +664,6 @@ async function setupBeatmaps() {
         });
     };
     countMods()
-    console.log(modsCount)
 
     let row = -1;
     let preMod = 0;
@@ -707,9 +711,19 @@ async function setupBeatmaps() {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
                     document.cookie = `lastPick=red;path=/`;
+                    lastPick = 'red';
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
+                        if (bm.mods.includes("TB")) {
+                            return;
+                        }
+                        else if (event.ctrlKey) {
+                            tileAdd("red", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
+                        }
+                        else {
+                            tileAdd("red", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
+                        }
                     }, 300);
                 } else {
                     resetMapPick(bm);
@@ -724,9 +738,19 @@ async function setupBeatmaps() {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
                     document.cookie = `lastPick=blue;path=/`;
+                    lastPick = 'blue';
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
+                        if (bm.mods.includes("TB")) {
+                            return;
+                        }
+                        else if (event.ctrlKey) {
+                            tileAdd("blue", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
+                        }
+                        else {
+                            tileAdd("blue", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
+                        }
                     }, 150);
                 } else {
                     resetMapPick(bm);
@@ -741,6 +765,7 @@ async function setupBeatmaps() {
         const stored_beatmaps = bms
         const mapData = await getDataSet(stored_beatmaps, beatmap.osuMapId);
         console.log(`https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg`)
+        bm.backgroundURL = `https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg`
         bm.background.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.metadata.beatmapset_id}/covers/cover.jpg')`;
         bm.songAndDiff.innerText = `${mapData.metadata.title} [${mapData.metadata.version}]`
         bm.artist.innerText = mapData.metadata.artist
@@ -812,20 +837,29 @@ function viewPicks () {
     }, 1000, 'easeInOutQuart');
 }
 
-function tileAdd(color, action, identifier, mapID, mapSlot){
+function tileAdd(color, action, identifier, background, mapSlot){
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
-        "background-image": `url(https://assets.ppy.sh/beatmaps/${mapID}/covers/cover.jpg)`,
+        "background-image": `url(${background})`,
         "clip-path": "var(--map-clip-path)",
         "opacity": 0.4
     });
-    $(`#${color}${action}${identifier} #map-slot-block`).css({
-        "opacity": 1,
-        "background-color": `var(--${color})`
-    });
+    $(`#${color}${action}${identifier} #map-slot-block`).css("opacity", 1);
+    if (mapSlot.includes("NM")) {
+        $(`#${color}${action}${identifier} #map-slot-block`).css("backgroundColor", "var(--grey)");
+    } else if (mapSlot.includes("HD")) {
+        $(`#${color}${action}${identifier} #map-slot-block`).css("backgroundColor", "var(--yellow)");
+    } else if (mapSlot.includes("HR")) {
+        $(`#${color}${action}${identifier} #map-slot-block`).css("backgroundColor", "var(--red)");
+    } else if (mapSlot.includes("DT")) {
+        $(`#${color}${action}${identifier} #map-slot-block`).css("backgroundColor", "var(--purple)");
+    }
     $(`#${color}${action}${identifier} #map-slot-block #mapslottext`).html(`${mapSlot}`);
+
+    identifier += 1;
 }
 
 function tileRemove(color, action, identifier){
+    identifier -= 1;
     $(`#${color}${action}${identifier} .mapCardContent`).html("").toggleClass("tile-picking").css({
         "background-image": ``,
         "clip-path": "",
