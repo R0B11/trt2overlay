@@ -704,10 +704,10 @@ async function setupBeatmaps() {
             bm.clicker.addEventListener('click', function (event) {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=${bm.beatmapID}-red;path=/`;
+                    document.cookie = `lastPick=red;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
+                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                     }, 300);
                 } else {
                     resetMapPick(bm);
@@ -721,10 +721,10 @@ async function setupBeatmaps() {
             bm.clicker.addEventListener('contextmenu', function (event) {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=${bm.beatmapID}-blue;path=/`;
+                    document.cookie = `lastPick=blue;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
+                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
                     }, 150);
                 } else {
                     resetMapPick(bm);
