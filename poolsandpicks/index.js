@@ -702,17 +702,14 @@ async function setupBeatmaps() {
         bm.generate();
         bm.clicker.addEventListener('mousedown', function () {
             bm.clicker.addEventListener('click', function (event) {
-                // Event if a left click happens
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=red;path=/`;
+                    document.cookie = `lastPick=${bm.beatmapID}-red;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
+                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                     }, 300);
-                } 
-                // Event if a left click happens while holding down shift
-                else {
+                } else {
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -724,10 +721,10 @@ async function setupBeatmaps() {
             bm.clicker.addEventListener('contextmenu', function (event) {
                 if (!event.shiftKey) {
                     setPickedMap(bm, event);
-                    document.cookie = `lastPick=blue;path=/`;
+                    document.cookie = `lastPick=${bm.beatmapID}-blue;path=/`;
                     setTimeout(function () {
                         bm.pickedStatus.style.opacity = '1';
-                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
+                        bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker triggered" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
                     }, 150);
                 } else {
                     resetMapPick(bm);
