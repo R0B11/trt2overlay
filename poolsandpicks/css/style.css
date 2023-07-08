@@ -94,10 +94,9 @@ html {
     font-size: 15px;
 }
 .playerCardPlayerCountryFlag {
-    position: absolute; top: 117px;
-    background-color: black;
-    width: 67px; height: 33px;
-    border-radius: 7px;
+    top: 117px; left: 198px;
+    width: 46px; height: 33px;
+    border-radius: 6px;
 }
 
 /* Player Rank */

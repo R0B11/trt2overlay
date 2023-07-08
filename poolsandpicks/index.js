@@ -100,6 +100,35 @@ function displayPlayerFlag(country, element) {
     }
 }
 
+const AUFlagURL = "static/flags/AU.png"
+const CAFlagURl = "static/flags/CA.png"
+const CNFlagURL = "static/flags/CN.png"
+const HKFlagURL = "static/flags/HK.png"
+const PLFlagURL = "static/flags/PL.png"
+const KRFlagURL = "static/flags/KR.png"
+const UKFlagURL = "static/flags/UK.png"
+const USFlagURL = "static/flags/US.png"
+
+const playerArray = [
+    {playerID: "9362231", playerFlag: KRFlagURL},
+    {playerID: "12408961", playerFlag: PLFlagURL},
+    {playerID: "4945688", playerFlag: AUFlagURL},
+    {playerID: "2558286", playerFlag: PLFlagURL},
+    {playerID: "7813296", playerFlag: USFlagURL},
+    {playerID: "6114695", playerFlag: USFlagURL},
+    {playerID: "4733121", playerFlag: USFlagURL},
+    {playerID: "5791401", playerFlag: CNFlagURL},
+    {playerID: "4175698", playerFlag: USFlagURL},
+    {playerID: "4908650", playerFlag: USFlagURL},
+    {playerID: "7562902", playerFlag: AUFlagURL},
+    {playerID: "9501251", playerFlag: USFlagURL},
+    {playerID: "3717598", playerFlag: CAFlagURl},
+    {playerID: "6304246", playerFlag: CAFlagURl},
+    {playerID: "5033077", playerFlag: CAFlagURl},
+    {playerID: "9224078", playerFlag: KRFlagURL},
+    {playerID: "5182050", playerFlag: UKFlagURL}
+]
+
 let starVisibility;
 let currentPicker;
 let ipcState
@@ -110,6 +139,7 @@ let redName = 'Red Team', blueName = 'Blue Team';
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
+    console.log(data)
     // Player Scores
     if (currentPlayerRedScore != data.tourney.manager.gameplay.score.left) currentPlayerRedScore = data.tourney.manager.gameplay.score.left
     else if (currentPlayerBlueScore != data.tourney.manager.gameplay.score.right) currentPlayerBlueScore = data.tourney.manager.gameplay.score.right
@@ -141,12 +171,20 @@ socket.onmessage = event => {
     }
     // Player Flag
     if (currentPlayerRedCountry != data.tourney.ipcClients[0].spectating.country) {
-        currentPlayerRedCountry = data.tourney.ipcClients[0].spectating.country
-        displayPlayerFlag(currentPlayerRedCountry, playerCardPlayerCountryFlagRed)
+        for (let i = 0; i < playerArray.length; i++) {
+            if (currentPlayerRedID == playerArray[i].playerID) {
+                playerCardPlayerCountryFlagRed.attr("src", playerArray[i].playerFlag)
+            }
+        }
+        // currentPlayerRedCountry = data.tourney.ipcClients[0].spectating.country
+        // displayPlayerFlag(currentPlayerRedCountry, playerCardPlayerCountryFlagRed)
     }
     if (currentPlayerBlueCountry != data.tourney.ipcClients[1].spectating.country) {
-        currentPlayerBlueCountry = data.tourney.ipcClients[1].spectating.country
-        displayPlayerFlag(currentPlayerBlueCountry, playerCardPlayerCountryFlagBlue)
+        for (let i = 0; i < playerArray.length; i++) {
+            if (currentPlayerBlueID == playerArray[i].playerID) {
+                playerCardPlayerCountryFlagBlue.attr("src", playerArray[i].playerFlag)
+            }
+        }
     }
     // Player Rank
     if (currentPlayerRedRank != data.tourney.ipcClients[0].spectating.globalRank) {
