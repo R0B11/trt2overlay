@@ -23,7 +23,7 @@ socket.onmessage = event => {
     }
 }
 
-let baseAddress = "http://localhost:5280"
+let baseAddress = "https://trt2.btmc.live"
 
 // Brackets
 let upperBracket = $("#upperBracket")
