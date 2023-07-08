@@ -84,6 +84,7 @@ let commentatorName2 = document.getElementById("commentatorName2")
 // Round Name
 let roundName = $("#roundName")
 let currentRoundName
+let currentRoundNameExtended
 
 // Current Pool
 let allMaps = []
@@ -129,17 +130,18 @@ let calculateARandOD = (baseNumber, mod) => {
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
+    console.log(data)
 
     // Player Details
-    if (currentPlayerID0 != data.tourney.ipcClients[0].userID) {
-        currentPlayerID0 = data.tourney.ipcClients[0].userID
-        playerLeftName.text(data.tourney.ipcClients[0].name)
-        playerLeftRank.text(`#${data.tourney.ipcClients[0].globalRank}`)
+    if (currentPlayerID0 != data.tourney.ipcClients[0].spectating.userID) {
+        currentPlayerID0 = data.tourney.ipcClients[0].spectating.userID
+        playerLeftName.text(data.tourney.ipcClients[0].spectating.name)
+        playerLeftRank.text(`#${data.tourney.ipcClients[0].spectating.globalRank}`)
     }
-    if (currentPlayerID1 != data.tourney.ipcClients[1].userID) {
-        currentPlayerID1 = data.tourney.ipcClients[1].userID
-        playerRightName.text(data.tourney.ipcClients[1].name)
-        playerRightRank.text(`#${data.tourney.ipcClients[1].globalRank}`)
+    if (currentPlayerID1 != data.tourney.ipcClients[1].spectating.userID) {
+        currentPlayerID1 = data.tourney.ipcClients[1].spectating.userID
+        playerRightName.text(data.tourney.ipcClients[1].spectating.name)
+        playerRightRank.text(`#${data.tourney.ipcClients[1].spectating.globalRank}`)
     }
 
     // Song Details
@@ -315,8 +317,8 @@ socket.onmessage = event => {
         }
 
         // If win, submit to winscreen
-        if (currentMatchScoreRed == currentBestOf) setCookieToWinScreen(currentPlayerID0, playerLeftName.innerText, "red", currentRoundName)
-        else if (currentMatchScoreRed == currentBestOf) setCookieToWinScreen(currentPlayerID1, playerRightName.innerText, "red", currentRoundName)
+        if (currentMatchScoreRed == currentBestOf) setCookieToWinScreen(currentPlayerID0, data.tourney.ipcClients[0].spectating.name, "red", currentRoundNameExtended)
+        else if (currentMatchScoreBlue == currentBestOf) setCookieToWinScreen(currentPlayerID1, data.tourney.ipcClients[1].spectating.name, "blue", currentRoundNameExtended)
     }
   
       if (scoreVisibility != data.tourney.manager.bools.scoreVisible) scoreVisibility = data.tourney.manager.bools.scoreVisible
@@ -407,6 +409,7 @@ const changeCommentatorNames = () => {
 const changeRoundInformation = (roundAbbreviation, roundText) => {
     roundName.text(roundText)
     currentRoundName = roundAbbreviation
+    currentRoundNameExtended = roundText
 
     let cookieValue = `roundName=${roundAbbreviation}; path=/`
     document.cookie = cookieValue
@@ -433,12 +436,12 @@ window.setInterval(() => {
     let match = document.cookie.match(`(?:^|.*)${cookieName}=(.+?)(?:$|[|;].*)`)
     if (match && currentRoundName != match[1]) {
         switch (currentRoundName) {
-            case "RO16": changeRoundInformation(currentRoundName, "ROUND OF 16")
-            case "QF": changeRoundInformation(currentRoundName, "QUARTERFINALS")
-            case "SF": changeRoundInformation(currentRoundName, "SEMIFINALS")
-            case "F": changeRoundInformation(currentRoundName, "FINALS")
-            case "GF": changeRoundInformation(currentRoundName, "GRAND FINALS")
-            case "BR1v1": changeRoundInformation(currentRoundName, "BR GRAND FINALS")
+            case "RO16": changeRoundInformation(currentRoundName, "ROUND OF 16"); break;
+            case "QF": changeRoundInformation(currentRoundName, "QUARTERFINALS"); break;
+            case "SF": changeRoundInformation(currentRoundName, "SEMIFINALS"); break;
+            case "F": changeRoundInformation(currentRoundName, "FINALS"); break;
+            case "GF": changeRoundInformation(currentRoundName, "GRAND FINALS"); break;
+            case "BR1v1": changeRoundInformation(currentRoundName, "BR GRAND FINALS"); break;
         }
     }
 
