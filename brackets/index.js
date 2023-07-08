@@ -23,7 +23,7 @@ socket.onmessage = event => {
     }
 }
 
-let baseAddress = "https://trt2.btmc.live"
+let baseAddress = "http://localhost:5280"
 
 // Brackets
 let upperBracket = $("#upperBracket")
@@ -365,12 +365,12 @@ const pullResultsFromDatabase = async () => {
         // Enter in details for match        
         for (let j = 0; j < playerArray.length; j++) {
             if (playerArray[j].playerID == player1osuID) {
-
                 // Write Player Names
                 player1.children[3].innerText = playerArray[j].playerName.toUpperCase()
                 player1.children[3].style.color = "white"
                 // Write Player Score
-                player1.children[1].innerText = matchObjects[i].matchPlayers[0].score
+                if (player1ID == matchObjects[i].matchPlayers[0].playerId) player1.children[1].innerText = matchObjects[i].matchPlayers[0].score
+                else if (player1ID == matchObjects[i].matchPlayers[1].playerId) player1.children[1].innerText = matchObjects[i].matchPlayers[1].score
                 player1.children[1].style.color = "white"
                 // Write Player Flag
                 player1.children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
@@ -383,7 +383,8 @@ const pullResultsFromDatabase = async () => {
                 player2.children[3].innerText = playerArray[j].playerName.toUpperCase()
                 player2.children[3].style.color = "white"
                 // Write Player Score
-                player2.children[1].innerText = matchObjects[i].matchPlayers[1].score
+                if (player2ID == matchObjects[i].matchPlayers[0].playerId) player2.children[1].innerText = matchObjects[i].matchPlayers[0].score
+                else if (player2ID == matchObjects[i].matchPlayers[1].playerId) player2.children[1].innerText = matchObjects[i].matchPlayers[1].score                
                 player2.children[1].style.color = "white"
                 // Write Player Flag
                 player2.children[2].style.backgroundImage = `url("${playerArray[j].playerFlag}")`
