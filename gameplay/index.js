@@ -129,7 +129,6 @@ let calculateARandOD = (baseNumber, mod) => {
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data)
-    console.log(data)
 
     // Player Details
     if (currentPlayerID0 != data.tourney.ipcClients[0].userID) {
@@ -150,18 +149,15 @@ socket.onmessage = event => {
         mapModSlot.css("display", "none")
 
         for (let i = 0; i < allMaps.length; i++) {
-            console.log(allMaps[i].osuMapId == currentSongID, currentSongID)
             if (allMaps[i].osuMapId == currentSongID) {
                 poolMapFound = true
                 mapModSlot.css("display","block")
                 mapModSlot.text(allMaps[i].mod)
-                console.log(mapModSlot)
                 currentSR = allMaps[i].postModSr
                 animation.SRStat.update(currentSR)
 
                 // Map Mod Slot Color
                 currentMapMod = allMaps[i].mod.toUpperCase().slice(0,2)
-                console.log(currentMapMod)
                 switch (currentMapMod) {
                     case "NM": mapModSlot.css("background-color","#919191"); break;
                     case "HD": mapModSlot.css("background-color","#ffc728"); break;
@@ -185,7 +181,6 @@ socket.onmessage = event => {
                 animation.mapStatsBPM.update(currentBaseBPM)
                 // Song Title and Artist
                 currentSongArtist = allMaps[i].metadata.artist
-                console.log(allMaps[i].metadata.title)
                 currentSongName = allMaps[i].metadata.title
                 mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
                 
