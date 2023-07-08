@@ -173,16 +173,16 @@ socket.onmessage = event => {
                 
                 // AR
                 currentBaseAR = allMaps[i].metadata.diff_approach
-                animation.mapStatsAR.update(currentAR)
+                animation.mapStatsAR.update(currentBaseAR)
                 // OD
                 currentBaseOD = allMaps[i].metadata.diff_overall
-                animation.mapStatsOD.update(currentOD)
+                animation.mapStatsOD.update(currentBaseOD)
                 // CS
                 currentBaseCS = allMaps[i].metadata.diff_size
-                animation.mapStatsCS.update(currentCS)
+                animation.mapStatsCS.update(currentBaseCS)
                 // BPM
                 currentBaseBPM = allMaps[i].metadata.bpm
-                animation.mapStatsBPM.update(currentBPM)
+                animation.mapStatsBPM.update(currentBaseBPM)
                 // Song Title and Artist
                 currentSongArtist = allMaps[i].metadata.artist
                 console.log(allMaps[i].metadata.title)
