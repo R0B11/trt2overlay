@@ -329,15 +329,34 @@ const pullResultsFromDatabase = async () => {
         for (let j = 0; j < matchObjects[i].matchPlayers.length; j++) if (!matchObjects[i].matchPlayers[j].playerId) playerEmpty = true
         if (playerEmpty) continue
 
+        // Get player objects through player ids
+        let playerIDs = [matchObjects[i].matchPlayers[0].playerId, matchObjects[i].matchPlayers[1].playerId]
+        let playerPairObjects = []
         for (let j = 0; j < playerObjects.length; j++) {
-            if (matchObjects[i].matchPlayers[0].playerId == playerObjects[j].id) {
-                player1 = currentMatch.children[0]
-                player1ID = playerObjects[j].id
-                player1osuID = playerObjects[j].osuPlayerId
-            } else if (matchObjects[i].matchPlayers[1].playerId == playerObjects[j].id) {
-              player2 = currentMatch.children[1]
-              player2ID = playerObjects[j].id
-              player2osuID = playerObjects[j].osuPlayerId
+            if (playerIDs.includes(playerObjects[j].id)) playerPairObjects.push(playerObjects[j])
+        }
+
+        if (bracketMatchID <= 8) {
+            // Sort player object via seeding
+            playerPairObjects.sort((a,b) => a.seeding - b.seeding)
+
+            player1 = currentMatch.children[0]
+            player1ID = playerPairObjects[0].id
+            player1osuID = playerPairObjects[0].osuPlayerId
+            player2 = currentMatch.children[1]
+            player2ID = playerPairObjects[1].id
+            player2osuID = playerPairObjects[1].osuPlayerId
+        } else {
+            for (let j = 0; j < playerPairObjects.length; j++) {
+                if (currentMatch.children[0].children[3].innerText == playerPairObjects[j].name.toUpperCase()) {
+                    player1 = currentMatch.children[0]
+                    player1ID = playerPairObjects[0].id
+                    player1osuID = playerPairObjects[0].osuPlayerId
+                } else if (currentMatch.children[1].children[3].innerText == playerPairObjects[j].name.toUpperCase()) {
+                    player2 = currentMatch.children[1]
+                    player2ID = playerPairObjects[1].id
+                    player2osuID = playerPairObjects[1].osuPlayerId
+                }
             }
         }
 

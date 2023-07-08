@@ -463,3 +463,7 @@ video {
     color: black;
     background-color: white;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
