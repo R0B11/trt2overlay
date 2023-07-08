@@ -117,6 +117,7 @@ poolInformationRequest.onreadystatechange = function() {
         allMaps[i].metadata = JSON.parse(allMaps[i].metadata)
     }
     console.log(allMaps)
+    currentSongID = 0
 }
 poolInformationRequest.send()
 

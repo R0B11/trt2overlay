@@ -329,10 +329,10 @@ socket.onmessage = event => {
 
     // Scores
     if (scoreVisibility) {
-        chatDisplay.style.opacity = 0
-        mapStats.style.opacity = 1
-        mapScores.style.opacity = 1
-        mapDetails.style.opacity = 1
+        // chatDisplay.style.opacity = 0
+        // mapStats.style.opacity = 1
+        // mapScores.style.opacity = 1
+        // mapDetails.style.opacity = 1
 
         currentMapScoreRed = data.tourney.manager.gameplay.score.left
         currentMapScoreBlue = data.tourney.manager.gameplay.score.right
@@ -354,10 +354,10 @@ socket.onmessage = event => {
     }
     // Chat messages
     if (!scoreVisibility) {
-        chatDisplay.style.opacity = 1
-        mapStats.style.opacity = 0
-        mapScores.style.opacity = 0
-        mapDetails.style.opacity = 0
+        // chatDisplay.style.opacity = 1
+        // mapStats.style.opacity = 0
+        // mapScores.style.opacity = 0
+        // mapDetails.style.opacity = 0
 
         // Only happens if there are no new chats messages, or the chat length is the same
         if (chatLen !== data.tourney.manager.chat.length) {
