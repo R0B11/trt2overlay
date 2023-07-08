@@ -68,16 +68,14 @@ video { position: absolute; top: 0; left: 0; }
     display: flex;
     transition: 500ms ease-in-out;   
 }
-#playerLeftMatchScore { left: 6px; }
-#playerRightMatchScore {
-    right: -8px;
-    flex-direction: row-reverse
+#playerRightMatchScore { 
+    flex-direction: row-reverse;
+    right: 0;
 }
 /* Match Score Containers */
-.playerMatchScoreSword {
-    width: 34px;
-    margin-right: 14.7px;
-}
+.playerMatchScoreSword { width: 34px; }
+.playerMatchScoreSwordLeft { margin-right: 14.7px; }
+.playerMatchScoreSwordRight { margin-left: 14.7px; }
 
 /* Round Name */
 #roundName {

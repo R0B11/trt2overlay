@@ -292,12 +292,14 @@ socket.onmessage = event => {
         for (i; i < currentMatchScoreRed; i++) {
             let imgStar = document.createElement("img")
             imgStar.classList.add("playerMatchScoreSword")
+            imgStar.classList.add("playerMatchScoreSwordLeft")   
             imgStar.setAttribute("src", "static/whiteStar.png")
             playerLeftMatchScore.append(imgStar)
         }
         for (i; i < currentBestOf; i++) {
             let imgStar = document.createElement("img")
             imgStar.classList.add("playerMatchScoreSword")
+            imgStar.classList.add("playerMatchScoreSwordLeft")    
             imgStar.setAttribute("src", "static/redStar.png")
             playerLeftMatchScore.append(imgStar)
         }
@@ -306,12 +308,14 @@ socket.onmessage = event => {
         for (i; i < currentMatchScoreBlue; i++) {
             let imgStar = document.createElement("img")
             imgStar.classList.add("playerMatchScoreSword")
+            imgStar.classList.add("playerMatchScoreSwordRight")            
             imgStar.setAttribute("src", "static/whiteStar.png")
             playerRightMatchScore.append(imgStar)
         }
         for (i; i < currentBestOf; i++) {
             let imgStar = document.createElement("img")
             imgStar.classList.add("playerMatchScoreSword")
+            imgStar.classList.add("playerMatchScoreSwordRight")
             imgStar.setAttribute("src", "static/blueStar.png")
             playerRightMatchScore.append(imgStar)
         }
