@@ -184,11 +184,14 @@ socket.onmessage = event => {
                 currentSongName = allMaps[i].metadata.title
                 mapArtistAndName.text(currentSongArtist + " - " + currentSongName)
                 
-                if (mapArtistAndName.width() >= 375) mapArtistAndName.addClass("mapArtistAndNameWrap")
+                if (mapArtistAndName.width() >= 425) mapArtistAndName.addClass("mapArtistAndNameWrap")
                 else mapArtistAndName.removeClass("mapArtistAndNameWrap")
                 // Difficulty
                 currentSongDifficulty = allMaps[i].metadata.version
                 mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+
+                if (mapDifficulty.width() >= 375) mapDifficulty.addClass("mapDifficultyWrap")
+                else mapDifficulty.removeClass("mapDifficultyWrap")
                 // Set Creator
                 currentSongSetCreator = allMaps[i].metadata.creator
                 mapSetCreator.text(currentSongSetCreator.toUpperCase())
@@ -244,6 +247,9 @@ socket.onmessage = event => {
         if (currentSongDifficulty != data.menu.bm.metadata.difficulty) {
             currentSongDifficulty = data.menu.bm.metadata.difficulty
             mapDifficulty.text(`[${currentSongDifficulty.toUpperCase()}]`)
+
+            if (mapDifficulty.width() >= 375) mapDifficulty.addClass("mapDifficultyWrap")
+            else mapDifficulty.removeClass("mapDifficultyWrap")
         }
         // Set Creator Name
         if (currentSongSetCreator != data.menu.bm.metadata.mapper) {

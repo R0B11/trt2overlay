@@ -268,18 +268,34 @@ video { position: absolute; top: 0; left: 0; }
     animation: mapArtistAndNameWrap 15s linear infinite;
 }
 @keyframes mapArtistAndNameWrap {
-    0% {transform: translateX(0px);}
-    11% {transform: translateX(0px);}
+    0% { transform: translateX(0px); }
+    11% {transform: translateX(0px); }
     80% { transform: translateX(calc(-100% + 425px)); }
     100% { transform: translateX(calc(-100% + 425px)); }
 }
-#mapDifficulty {
+#mapDifficultyWrapper {
     top: 58px;
-    color: var(--mapDifficultyYellow);
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 16px;
     letter-spacing: 1.5px;
-    width: 375px;
+    width: 375px; height: 20px;
     text-align: right;
+}
+#mapDifficulty {
+    color: var(--mapDifficultyYellow);
+    display: inline-block;
+	width: max-content;
+}
+.mapDifficultyWrap {
+    animation: mapDifficultyWrap 15s linear infinite;
+}
+@keyframes mapDifficultyWrap {
+    0% { transform: translateX(0px); }
+    11% {transform: translateX(0px); }
+    80% { transform: translateX(calc(-100% + 375px)); }
+    100% { transform: translateX(calc(-100% + 375px)); }
 }
 #mapSetCreator {
     top: 78px;
