@@ -39,6 +39,8 @@ let banNum;
 let bestOf = null;
 let currentRound;
 
+let playedTB = false;
+
 let currentBanAmnt = 1;
 let blueActionStatus = 0;
 let redActionStatus = 0;
@@ -206,36 +208,56 @@ socket.onmessage = event => {
                 // Check for if there is a winner
                 if (!(currentMatchScoreRed == currentBestOf || currentMatchScoreBlue == currentBestOf)) {
                     // Check for if there is a tb
-                    if (currentMatchScoreRed == currentBestOf - 1 || currentMatchScoreBlue == currentBestOf - 1) {
+                    if (currentMatchScoreRed == currentBestOf - 1 && currentMatchScoreBlue == currentBestOf - 1) {
                         $("#tiebreakerCard").css("opacity", "1")
+                        $(".whiteLine").css("opacity", "1")
                     } else {
                         // Check the last picked
                         if (lastPick == "red") {
-                            $(`#blueBan${blueActionStatus + 1}`).css("opacity","1");
-                            for (let i = redPickElementArray.length; i >= 0; i--) {
-                                if (redPickElementArray[i].children[1].children[0].children[0].textContent != "") {
-                                    if (currentPlayerRedScore > currentPlayerBlueScore) {
-                                        redPickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`)
-                                    } else if (currentPlayerBlueScore > currentPlayerRedScore) {
-                                        redPickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`)
-                                    }
-                                    break
+                            console.log(redActionStatus - 3);
+                            console.log(blueActionStatus - 3);
+                            $(`#bluePick${blueActionStatus}`).css("opacity","1");
+                            if ($("#redPickArea").children().eq(redActionStatus - 3).children().eq(2).textContent != "") {
+                                console.log($("#redPickArea").children().eq(redActionStatus - 3).children().eq(2))
+                                if (currentPlayerRedScore > currentPlayerBlueScore - 3) {
+                                    $("#redPickArea").children().eq(redActionStatus  - 3).children().eq(2).attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`).addClass("circleRed").css("opacity",1)
+                                } else if (currentPlayerBlueScore > currentPlayerRedScore) {
+                                    $("#redPickArea").children().eq(redActionStatus - 3).children().eq(2).attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`).addClass("circleBlue").css("opacity",1)
                                 }
                             }
                         }
                         else if (lastPick == "blue") {
-                            $(`#redBan${redActionStatus + 1}`).css("opacity","1");
-                            for (let i = bluePickElementArray.length; i >= 0; i--) {
-                                if (bluePickElementArray[i].children[1].children[0].children[0].textContent != "") {
-                                    if (currentPlayerRedScore > currentPlayerBlueScore) {
-                                        bluePickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`)
-                                    } else if (currentPlayerBlueScore > currentPlayerRedScore) {
-                                        bluePickElementArray[i].children[2].attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`)
-                                    }
-                                    break
+                            console.log(blueActionStatus)
+                            $(`#redPick${redActionStatus}`).css("opacity","1");
+                            if ($("#bluePickArea").children().eq(blueActionStatus - 3).children().eq(2).textContent != "") {
+                                console.log($("#bluePickArea").children().eq(blueActionStatus - 3).children().eq(2))
+                                console.log(blueActionStatus - 3)
+                                console.log("blue side working")
+                                if (currentPlayerRedScore > currentPlayerBlueScore) {
+                                    console.log("last pick was blue and red wins")
+                                    console.log(redActionStatus - 3)
+                                    $("#bluePickArea").children().eq(blueActionStatus - 3).children().eq(2).attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`).addClass("circleRed").css("opacity",1)
+                                } else if (currentPlayerBlueScore > currentPlayerRedScore) {
+                                    console.log("last pick was blue and blue wins")
+                                    $("#bluePickArea").children().eq(blueActionStatus - 3).children().eq(2).attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`).addClass("circleBlue").css("opacity",1)
+                                    console.log($("#bluePickArea").children().eq(blueActionStatus - 3).children().eq(2))
                                 }
                             }
                         }
+                    }
+                }
+                if (playedTB == true) {
+                    if (currentPlayerRedScore > currentPlayerBlueScore) {
+                        const newImg = $('<img>')
+                        newImg.addClass('circle circleRed')
+                        newImg.attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[0].spectating.userID}`)
+                        $("#tiebreakerCard").append(newImg)
+                    }
+                    else if (currentPlayerBlueScore > currentPlayerRedScore){
+                        const newImg = $('<img>')
+                        newImg.addClass('circle circleBlue')
+                        newImg.attr("src", `https://a.ppy.sh/${data.tourney.ipcClients[1].spectating.userID}`)
+                        $("#tiebreakerCard").append(newImg)
                     }
                 }
                 nextMapShown = true
@@ -475,7 +497,7 @@ function generateTiles() {
             redOuterDiv.append(mapslotBlock);
 
             $('<img/>', {
-                class: 'circle circleRed'
+                class: 'circle'
             }).appendTo(redOuterDiv)
 
             // Append outer div to body
@@ -514,7 +536,7 @@ function generateTiles() {
             blueOuterDiv.append(mapslotBlock);
 
             $('<img/>', {
-                class: 'circle circleBlue'
+                class: 'circle'
             }).appendTo(blueOuterDiv)
 
             // Append outer div to body
@@ -787,11 +809,22 @@ async function setupBeatmaps() {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickRed">${redName}</b> ban` : `<b class="pickRed">${redName}</b> pick`;
                         if (bm.mods.includes("TB")) {
-                            // here onion
-                            return; // remove this when done
-                        } else if (event.ctrlKey) {
+                            $("#tiebreakerCard").css("opacity", "1")
+                            $(".whiteLine").css("opacity", "1")
+                            $(`#tiebreakerCard .mapCardContent`).html("").css({
+                                "background-image": `url(${bm.backgroundURL})`,
+                                "clip-path": "var(--map-clip-path)",
+                                "opacity": 0.4
+                            });
+                            $(`#tiebreakerCard #map-slot-block`).css("opacity", 1);
+                            $(`#tiebreakerCard #map-slot-block`).css("backgroundColor", "#FF1CF4");
+                            $(`#tiebreakerCard #map-slot-block #mapslottext`).html(`TB`);
+                            playedTB = true;
+                        } 
+                        else if (event.ctrlKey) {
                             tileAdd("red", "Ban", redActionStatus, bm.backgroundURL, bm.identifier)
                             redActionStatus += 1
+                            console.log(redActionStatus)
                         } else {
                             tileAdd("red", "Pick", redActionStatus, bm.backgroundURL, bm.identifier)
                             redActionStatus += 1
@@ -803,7 +836,7 @@ async function setupBeatmaps() {
                     let action = bm.clicker.children[2].textContent.split(" ")[2].toLowerCase()
                     let identifier = bm.identifier
 
-                    tileRemove(team, action, identifier)
+                    // tileRemove(team, action, identifier)
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -821,12 +854,22 @@ async function setupBeatmaps() {
                         bm.pickedStatus.style.opacity = '1';
                         bm.pickedStatus.innerHTML = bm.mods.includes("TB") ? "Tiebreaker" : event.ctrlKey ? `<b class="pickBlue">${blueName}</b> ban` : `<b class="pickBlue">${blueName}</b> pick`;
                         if (bm.mods.includes("TB")) {
-                            //here onion
-                            return; // remove this when done
+                            $("#tiebreakerCard").css("opacity", "1")
+                            $(".whiteLine").css("opacity", "1")
+                            $(`#tiebreakerCard .mapCardContent`).html("").css({
+                                "background-image": `url(${bm.backgroundURL})`,
+                                "clip-path": "var(--map-clip-path)",
+                                "opacity": 0.4
+                            });
+                            $(`#tiebreakerCard #map-slot-block`).css("opacity", 1);
+                            $(`#tiebreakerCard #map-slot-block`).css("backgroundColor", "#FF1CF4");
+                            $(`#tiebreakerCard #map-slot-block #mapslottext`).html(`TB`);
+                            playedTB = true;
                         }
                         else if (event.ctrlKey) {
                             tileAdd("blue", "Ban", blueActionStatus, bm.backgroundURL, bm.identifier)
                             blueActionStatus += 1
+                            console.log(blueActionStatus)
                         }
                         else {
                             tileAdd("blue", "Pick", blueActionStatus, bm.backgroundURL, bm.identifier)
@@ -839,7 +882,7 @@ async function setupBeatmaps() {
                     let action = bm.clicker.children[2].textContent
                     let identifier = bm.identifier
 
-                    tileRemove(team, action, identifier)
+                    // tileRemove(team, action, identifier)
                     resetMapPick(bm);
                     document.cookie = `lastPick=;path=/`;
                     setTimeout(function () {
@@ -952,22 +995,27 @@ function tileAdd(color, action, identifier, background, mapSlot){
         if (firstBan == "red") {
             if (currentBanAmnt == 1){
                 $(`#blueBan0`).css("opacity", 1);
+                $(`#blueBan0 .circle`).css("opacity", 1);
                 currentBanAmnt += 1;
             }
             else if (currentBanAmnt == 2) {
                 $(`#${firstPick}Pick1`).css("opacity", 1);
+
+                $(`#${firstPick}Pick1 .circle`).css("opacity", 0);
             }
-            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
+            $(`#redBan0 .circle`).css("opacity", 1);
         }
         else if (firstBan == "blue") {
             if (currentBanAmnt == 1){
                 $(`#redBan0`).css("opacity", 1);
+                $(`#redBan0 .circle`).css("opacity", 1);
                 currentBanAmnt += 1;
             }
             else if (currentBanAmnt == 2) {
                 $(`#${firstPick}Pick1`).css("opacity", 1);
+                $(`#${firstPick}Pick1 .circle`).css("opacity", 0);
             }
-            $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
+            $(`#blueBan0 .circle`).css("opacity", 1);
         }
         return;
     }
@@ -985,6 +1033,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
         }
         else if (currentBanAmnt == 3) {
             $(`#redBan1`).css("opacity", 1);
+            $(`#redBan1 .circle`).css("opacity", 1);
             currentBanAmnt += 1;
             $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
@@ -1010,6 +1059,7 @@ function tileAdd(color, action, identifier, background, mapSlot){
         }
         else if (currentBanAmnt == 3) {
             $(`#blueBan1`).css("opacity", 1);
+            $(`#blueBan1 .circle`).css("opacity", 1);
             currentBanAmnt += 1;
             $(`#${color}${action}${identifier} .circle`).css("opacity", 1)
         }
